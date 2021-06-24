@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+	.left{ float: left; width: 25%; }
+	
+	.sideTitle{
+		background: rgb(212, 129, 91);
+		color: white;
+		align-items: center;
+		margin: 30px 30px 15px 30px;
+		padding: 30px 30px;
+	}
+	
+	.sideButton{
+		background: lightgray;
+		color: black;
+		text-align: center;
+		margin: 15px 30px 15px 30px;
+		padding: 10px 25px;
+	}
+	
+	.main{ float: right; width: 75%; text-align: center; }
+	
+	.mainTitle{
+		font-weight: 900;
+		border-bottom: 2px solid lightgray;
+		font-size: 30px;
+		margin: 25px 60px 0px 60px;
+		padding: 0px 0px 13px 0px;
+	}
+	
+	.mainTitle p{ text-align: left; width: 70%; margin: 0;}
+
+	#titleImg1{ 
+		width: 30px; height: auto; vertical-align:middle;
+		padding-bottom: 7px;
+		margin-right: 10px;
+	}
+	
+	.sideButton{
+		text-align: left;
+		padding-left : 30px;
+		cursor: pointer;
+	}
+	
+	.sideButton a{ color: black; }
+	
+	.sideButton img{
+		width: auto; height: 30px; vertical-align:middle;
+		padding-bottom: 7px;
+		margin-right: 5px;
+	}
+	
+	.sideButton a{
+		display:block;
+		color: black;
+		padding: 17px 20px;
+	}
+	
+	.sideButton:hover{ background: gray; }
+	
+	.level{
+		display:flex; justify-content: space-between;
+		margin: 25px 60px 0px 60px;
+		border-bottom: 1px solid lightgray;
+	}
+	
+	#level1, #level2, #level3{
+		font-size: 20px; font-weight: 700;
+		margin: 3px 10px 0px 10px;
+	}
+	
+	.seat{ 
+		display: flex; font-size: 10px; font-weight: 700;
+		text-align: center; margin-bottom: 10px;
+		margin-right: 20px; width: 130px;
+	}
+	
+	.seat div{flex-direction: column; margin-left: 5px;}
+	
+	#fullSeat{ 
+		background: lightgray;
+		width: 60px; height: 30px;
+		border: 1px solid lightgray;
+	}
+	#emptySeat{ 
+		width: 60px; height: 30px;
+		border: 1px solid lightgray;
+	}
+	
+	.seat p{ margin:0;}
+	
+	#outstanding{ 
+		text-align: right; font-size: 13px; font-weight: 700;
+		margin: 15px 60px 0px 60px; 
+	}
+	
+	#seatView{ 
+		display: flex;
+		margin: 45px 60px 20px 60px; 
+		justify-content: center;
+	}
+	
+	#seatView table{ 
+		width: 100%;
+		text-align: center;
+		border: none;
+		border-spacing: 5px 20px;
+	}
+	
+	#seatView table td{
+		border: 1px solid lightgray;
+		padding: 4% 5%;
+		cursor: pointer;
+	}
+	
+	#seatView table td:hover{ background: rgb(94, 94, 94);}
+	
+	#seatView1{margin-right: 2%;}
+	#seatView2{margin-left: 2%;}
+	
+	#full{ background: rgba(224, 224, 224);}
+	
+@media screen and (max-width: 1035px){
+
+}

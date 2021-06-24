@@ -29,5 +29,141 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- board 관련 -->
+	<servlet>
+		<servlet-name>boardServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/board-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>boardServlet</servlet-name>
+		<url-pattern>*.bo</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 도서 관련 -->
+	<servlet>
+		<servlet-name>booksServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/books-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>booksServlet</servlet-name>
+		<url-pattern>*.bk</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 문화마당 관련 -->
+	<servlet>
+		<servlet-name>cultureServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/culture-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>cultureServlet</servlet-name>
+		<url-pattern>*.cu</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 열람실 관련 -->
+	<servlet>
+		<servlet-name>roomServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/room-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>roomServlet</servlet-name>
+		<url-pattern>*.ro</url-pattern>
+	</servlet-mapping>	
+
+	
+	
+	<!-- 멤버 관련 -->
+	<servlet>
+		<servlet-name>memberServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/member-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>memberServlet</servlet-name>
+		<url-pattern>*.me</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 열람실 관련 -->
+	<servlet>
+		<servlet-name>bkgroupServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/bkgroup-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bkgroupServlet</servlet-name>
+		<url-pattern>*.bg</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 관리자 관련 -->
+	<servlet>
+		<servlet-name>adminServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/admin-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminServlet</servlet-name>
+		<url-pattern>*.ad</url-pattern>
+	</servlet-mapping>
+
+	
+	
+	<!-- info 관련 -->
+	<servlet>
+		<servlet-name>infoServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/info-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>infoServlet</servlet-name>
+		<url-pattern>*.in</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<!-- 관리자 관련 -->
+	<servlet>
+		<servlet-name>customerServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/customerService-context.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>customerServlet</servlet-name>
+		<url-pattern>*.cm</url-pattern>
+	</servlet-mapping>	
 
 </web-app>

@@ -1,0 +1,114 @@
+@charset "UTF-8";
+
+	.left{ float: left; width: 25%; }
+	
+	.sideTitle{
+		background: rgb(212, 129, 91);
+		color: white;
+		align-items: center;
+		margin: 30px 30px 15px 30px;
+		padding: 30px 30px;
+	}
+	
+	.sideButton{
+		background: lightgray;
+		color: black;
+		text-align: center;
+		margin: 15px 30px 15px 30px;
+		padding: 10px 25px;
+	}
+	
+	.main{ float: right; width: 75%; text-align: center; }
+	
+	.programInfoTable{ float: left; width: 50%;}
+	.programImageTable{ float: right; width: 50%;}
+
+	#programDetailTable{
+		margin-top: 20px;
+		margin-bottom: 10px;
+		margin-left: 10%;
+		border-top: 2px solid lightgray;
+		border-bottom: 2px solid lightgray;
+		border-left: none;
+		border-right: none;
+		border-collapse: collapse;
+		width: 80%;
+		font-size:10px;
+	}
+	
+	td{
+		border: 1px solid lightgray;
+		border-left: none;
+		border-right: none;
+		border-collapse: collapse;
+		padding: 20px 25px;
+	}
+	
+	#signBtn, #listBtn{
+		background: rgb(212, 129, 91); color: white;
+		border: none;
+		font-weight: 700;
+		padding: 5px 5%;
+		border-radius: 5px;
+	}
+	
+	#signBtn{ margin-right: 3px; }
+	#listBtn{ margin-left: 3px;}
+		
+	.sideButton{
+		text-align: left;
+		padding-left : 30px;
+		cursor: pointer;
+	}
+	
+	.sideButton a{ color: black; }
+
+	#title{ 
+		font-size: 25px; font-weight: 900;
+		margin-top: 40px; text-align: left;
+		margin-bottom: 20px; margin-left: 10%;
+	}
+	.titleSub{
+		font-size: 15px; font-weight: 600;
+		margin-top: 5px; text-align: left; margin-left: 10%;
+	}
+	
+	#cultureImg { 
+		width: 80%; height: auto; 
+		display: block; margin: 0px auto;
+		margin-top: 40px;
+		margin-bottom: 30px;
+	}
+	
+	#programEx{ 
+		font-size: 20px; font-weight: 600;
+		text-align: left; margin-left: 10%;
+		margin-bottom: 10px;
+	}
+	
+	#programExDetail{
+		font-size: 10px; margin-left: 10%; margin-right: 10%;
+		text-align: left; white-space: pre-line;
+	}
+	
+	#programExDetail pre{ word-wrap: break-word; }
+	
+	.sideButton img{
+		width: auto; height: 30px; vertical-align:middle;
+		padding-bottom: 7px;
+		margin-right: 5px;
+	}
+	
+	.sideButton a{
+		display:block;
+		color: black;
+		padding: 17px 20px;
+	}
+	
+	.sideButton:hover{
+		background: gray;
+	}
+	
+@media screen and (max-width: 1035px){
+
+}

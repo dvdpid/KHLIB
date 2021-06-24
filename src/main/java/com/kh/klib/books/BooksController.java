@@ -10,4 +10,10 @@ public class BooksController {
 	public String bookMain() {
 		return "bookMain";
 	}
+	
+	@RequestMapping("detail.bk")
+	public String bookDetail() {
+		// bookDetail에 넘겨줄 데이터를 가져올 서비스 선언
+		return "bookDetail";
+	}
 }

@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="resources/css/bkGroupList.css" type="text/css">
 </head>
 <body>
+<!-- list 주석 추가 -->
+<!-- 추가2 -->
 	<c:import url="../common/menubar.jsp"/>
 	<div class="left">
 		<div class="sideTitle">

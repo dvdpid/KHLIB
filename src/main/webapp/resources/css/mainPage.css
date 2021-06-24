@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+.leftArea{ float: left; width: 60%; text-align: center;}
+.rightArea{ float: right; width: 40%; text-align: center;}
+
+.searchArea{
+	display: flex; justify-content: center;
+	margin: 25px 40px; padding: 20px;
+	background:rgb(236, 223, 207);
+}
+
+.searchArea input{ width: 70%; height: 30px;}
+
+#searchBtn{
+	background: rgb(212, 129, 91); border: none; margin-left: 5px;
+	color: white; width: 50px; font-weight: 700;
+}
+
+.noticeArea, .bookArea, .groupArea{
+	display: flex; justify-content: center;
+	flex-direction: column;
+	margin: 40px 40px 25px 40px;
+}
+
+#noticeTitle, #bookTitle, #groupTitle{ 
+	width: 100%; border-bottom: 1px solid lightgray;
+	margin-bottom: 20px;
+}
+
+#noticeTitle span, #bookTitle span, #groupTitle span{ float: left; font-weight: 700;}
+#noticeTitle button, #bookTitle button, #groupTitle button{
+	float: right; border: none; background: none;
+	padding: 5px; cursor: pointer;
+}
+
+#noticeTable, #groupTable{ width: 100%;}
+
+#noticeTable table, #groupTable table{
+	width: 100%;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	border-left: none;
+	border-right: none;
+	text-align: center;
+	border-collapse: collapse;
+}
+
+
+#noticeTable td, #groupTable td{
+	border: 1px solid lightgray;
+	border-left: none;
+	border-right: none;
+	border-collapse: collapse;
+	padding: 5px 0px; font-size: 13px;
+}
+
+#bookList{ 
+	display: table; table-layout: fixed; 
+	width: 100%;
+}
+
+.bookListIMG{ display: table-cell; text-align: center;}
+
+.bookListIMG img{ 
+	width: 70%; height: auto; border: none; 
+	display: inline-block; 
+}
+
+.bookListIMG p{ font-size: 13px; }
+
+
+.Mainbutton{ 
+	display: flex; justify-content: center;
+	text-align: center; margin-top: 25px; width: 100%; 
+}
+
+.Mainbutton button{ 
+	height: 80px; padding: 0px 44px; border: none;
+	font-size: 15px; font-weight: 700; border-radius: 5px;
+}
+
+#button1{background:rgb(143, 220, 204);}
+#button2{background:rgb(159, 203, 232);}
+#button3{background:rgb(197, 158, 214);}
+#button1:hover{background:rgb(0, 220, 204);}
+#button2:hover{background:rgb(0, 203, 232);}
+#button3:hover{background:rgb(197, 70, 214);}
+
+.buttonViewArea{
+	display: inline-block; text-align: center;
+	margin-top: 40px; width: 85%; height: 190px;
+	background: lightgray;
+}
+
+@media screen and (max-width: 1035px){
+	.leftArea{ width: 100%; }
+	.rightArea{ width: 100%; }
+	
+}

@@ -7,17 +7,6 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-<!-- 주석 -->
-<!-- 테스트용 주석 -->
-<!-- 주석 -->
-<!-- 테스트용 주석 2 -->
-<!-- view 너무 어렵고 -->
-<!-- 아니 너무한거 아니오 -->
-<!-- 테스트용 주석 -->
+	<c:import url="mainPage.jsp"></c:import> 
 </body>
 </html>

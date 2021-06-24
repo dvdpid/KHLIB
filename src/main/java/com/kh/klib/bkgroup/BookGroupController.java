@@ -9,4 +9,19 @@ public class BookGroupController {
 	public String bkgroupListForm() {
 		return "bkGroupList";
 	}
+	
+	@RequestMapping("bkgroupInsertForm.bg")
+	public String bkgroupInsertForm() {
+		return "bkGroupInsertForm";
+	}
+	
+	@RequestMapping("bkgroupUpdateForm.bg")
+	public String bkgroupUpdateForm() {
+		return "bkGroupUpdateForm";
+	}
+	
+	@RequestMapping("bkgroupMyPage.bg")
+	public String bkgroupMyPage() {
+		return "bkGroupMyPage";
+	}
 }

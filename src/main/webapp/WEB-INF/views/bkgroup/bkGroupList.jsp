@@ -17,19 +17,19 @@
 			<h2 id="sideMainTitle">독서 모임</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='bkgroup.bg';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				독서 모임
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='bkgroupInsertForm.bg';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				독서 모임 등록
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='bkgroupMyPage.bg';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				신청 내역
@@ -66,8 +66,10 @@
 			<table class="list">
             <tr>
                <td style="vertical-align: bottom;">모임명(AA)</td>
-               <td width="167px;" height="220px;">
-                  <img class="bkImg" src="resources/images/book1.jpg" >
+               <td width="165px;" height="220px;">
+                  <div class="img">
+                     <img class="bkImg" src="resources/images/book1.jpg" >
+                  </div>
                </td>
             </tr>
             <tr>
@@ -86,7 +88,7 @@
          <table class="list">
             <tr>
                <td style="vertical-align: bottom;">모임명(AA)</td>
-               <td width="167px;" height="220px;">
+               <td width="165px;" height="220px;">
                <em>마감</em>
                   <div class="img">
                      <img class="bkImg" src="resources/images/book1.jpg" >

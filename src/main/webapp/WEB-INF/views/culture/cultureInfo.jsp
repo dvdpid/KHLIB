@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
-	<!-- 테스트용 주석 -->
+	<!-- 테스트용 주석 수정 -->
 <!-- 사이드 부분 -->
 	<div class="left">
 		<div class="sideTitle">

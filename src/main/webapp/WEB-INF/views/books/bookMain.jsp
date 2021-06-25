@@ -19,19 +19,19 @@
 			<h2 id="sideMainTitle">도서게시판</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookSearch.bk';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				도서검색
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				신착도서
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				추천도서
@@ -48,28 +48,28 @@
             </div>
 		<div id="bookList">
                     <div class="bookItem">
-                        <img src="../../../../resources/images/10대와통하는법과재판이야기.jpg" class="bookImage">
+                        <img src="resources/images/book/book13.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/어쩌면스무번.jpg" class="bookImage">
+                        <img src="resources/images/book/book14.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/더이상한수학책.jpg" class="bookImage">
+                        <img src="resources/images/book/book15.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/무기가되는토론의기술.jpg" class="bookImage">
+                        <img src="resources/images/book/book11.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/뮤직숍.jpg" class="bookImage">
+                        <img src="resources/images/book/book12.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/서점탐정유동인.jpg" class="bookImage">
+                        <img src="resources/images/book/book13.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/신성함의상징.jpg" class="bookImage">
+                        <img src="resources/images/book/book9.jpg" class="bookImage">
                     </div>
                     <div class="bookItem">
-                        <img src="../../../../resources/images/화학의기초.jpg" class="bookImage">
+                        <img src="resources/images/book/book8.jpg" class="bookImage">
                     </div>
             </div>
             <div id="searchArea">
@@ -79,7 +79,7 @@
                     <option value="publisher">출판사</option>
                 </select>
                 <input type="text" name="searchText" />
-                <img src="../../../resources/images/돋보기.png" style="width:20px;;" alt="돋보기">
+                <img src="resources/images/magnifying-glass.png" style="width:20px; display: block; margin-top: auto; margin-bottom: auto;" alt="돋보기">
             </div>
 	</div>
 </body>

@@ -16,4 +16,10 @@ public class BooksController {
 		// bookDetail에 넘겨줄 데이터를 가져올 서비스 선언
 		return "bookDetail";
 	}
+	
+	@RequestMapping("bookSearch.bk")
+	public String bookSearch() {
+		// bookDetail에 넘겨줄 데이터를 가져올 서비스 선언
+		return "bookSearch";
+	}
 }

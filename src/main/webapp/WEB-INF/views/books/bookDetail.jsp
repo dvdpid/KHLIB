@@ -20,19 +20,19 @@
 			<h2 id="sideMainTitle">도서게시판</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookSearch.bk';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				도서검색
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				신착도서
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				추천도서
@@ -45,7 +45,7 @@
 		<div class="title">도서정보</div>
 		<div class="bookSumWrapper">
 			<div class="bookImage">
-				<img src="../../../../resources/images/10대와통하는법과재판이야기.jpg" />
+				<img src="resources/images/book/book16.jpg" />
 			</div>
 			<div class="infoArea">
 			<div class="titleArea">

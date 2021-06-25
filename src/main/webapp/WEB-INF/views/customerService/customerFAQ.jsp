@@ -49,13 +49,13 @@
         <h2 id="sideMainTitle">고객센터</h2>
         <h4 id="sideSubTitle" style="color: lightgray">Kh Library</h4>
       </div>
-      <div class="sideButton" onclick="location.href='';">
+      <div class="sideButton" onclick="location.href='${contextPath}/customer.cm';">
         <h3 id="sideButton1">
           <img id="sideImg1" src="resources/images/laptop-solid.svg" />
           자주하는 질문
         </h3>
       </div>
-      <div class="sideButton" onclick="location.href='';">
+      <div class="sideButton" onclick="location.href='${contextPath}/qna.cm';">
         <h3 id="sideButton2">
           <img id="sideImg2" src="resources/images/user-check-solid.svg" />
           묻고답하기

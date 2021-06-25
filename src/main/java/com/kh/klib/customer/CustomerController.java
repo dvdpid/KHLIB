@@ -11,4 +11,9 @@ public class CustomerController {
 		return "customerFAQ";
 	}
 	
+	@RequestMapping("qna.cm")
+	public String CustomerService() {
+		return "customerService";
+	}
+	
 }

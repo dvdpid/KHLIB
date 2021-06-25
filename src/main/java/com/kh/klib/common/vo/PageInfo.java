@@ -1,4 +1,4 @@
-package com.kh.klib.common;
+package com.kh.klib.common.vo;
 
 public class PageInfo {
 	private int currentPage;

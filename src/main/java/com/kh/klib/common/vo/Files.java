@@ -1,4 +1,4 @@
-package com.kh.klib.common;
+package com.kh.klib.common.vo;
 
 import java.sql.Date;
 
@@ -10,16 +10,16 @@ public class Files {
 	private Date uploadDate;
 	private int fileLevel;
 	private String fStatus;
-	private int boardNo;
-	private int groupNo;
-	private int curtureNo;
-	private int bookNo;
-	private int qNo;
+	private int bNo;	// boardNo
+	private int gNo;	// groupNo
+	private int cNo;	// cultureNo
+	private int bkNo;	// booksNo
+	private int qNo;	// qNo
 	
 	public Files() {}
-	
+
 	public Files(int fNo, String originName, String changeName, String filePath, Date uploadDate, int fileLevel,
-			String fStatus, int boardNo, int groupNo, int curtureNo, int bookNo, int qNo) {
+			String fStatus, int bNo, int gNo, int cNo, int bkNo, int qNo) {
 		super();
 		this.fNo = fNo;
 		this.originName = originName;
@@ -28,10 +28,10 @@ public class Files {
 		this.uploadDate = uploadDate;
 		this.fileLevel = fileLevel;
 		this.fStatus = fStatus;
-		this.boardNo = boardNo;
-		this.groupNo = groupNo;
-		this.curtureNo = curtureNo;
-		this.bookNo = bookNo;
+		this.bNo = bNo;
+		this.gNo = gNo;
+		this.cNo = cNo;
+		this.bkNo = bkNo;
 		this.qNo = qNo;
 	}
 
@@ -91,36 +91,36 @@ public class Files {
 		this.fStatus = fStatus;
 	}
 
-	public int getBoardNo() {
-		return boardNo;
+	public int getbNo() {
+		return bNo;
 	}
 
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
+	public void setbNo(int bNo) {
+		this.bNo = bNo;
 	}
 
-	public int getGroupNo() {
-		return groupNo;
+	public int getgNo() {
+		return gNo;
 	}
 
-	public void setGroupNo(int groupNo) {
-		this.groupNo = groupNo;
+	public void setgNo(int gNo) {
+		this.gNo = gNo;
 	}
 
-	public int getCurtureNo() {
-		return curtureNo;
+	public int getcNo() {
+		return cNo;
 	}
 
-	public void setCurtureNo(int curtureNo) {
-		this.curtureNo = curtureNo;
+	public void setcNo(int cNo) {
+		this.cNo = cNo;
 	}
 
-	public int getBookNo() {
-		return bookNo;
+	public int getBkNo() {
+		return bkNo;
 	}
 
-	public void setBookNo(int bookNo) {
-		this.bookNo = bookNo;
+	public void setBkNo(int bkNo) {
+		this.bkNo = bkNo;
 	}
 
 	public int getqNo() {
@@ -135,9 +135,9 @@ public class Files {
 	public String toString() {
 		return "Files [fNo=" + fNo + ", originName=" + originName + ", changeName=" + changeName + ", filePath="
 				+ filePath + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel + ", fStatus=" + fStatus
-				+ ", boardNo=" + boardNo + ", groupNo=" + groupNo + ", curtureNo=" + curtureNo + ", bookNo=" + bookNo
-				+ ", qNo=" + qNo + "]";
+				+ ", bNo=" + bNo + ", gNo=" + gNo + ", cNo=" + cNo + ", bkNo=" + bkNo + ", qNo=" + qNo + "]";
 	}
+	
 	
 	
 	

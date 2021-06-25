@@ -9,4 +9,14 @@ public class CultureController {
 	public String cultureListForm() {
 		return "cultureList";
 	}
+	
+	@RequestMapping("cultureMypage.cu")
+	public String cultureMypageForm() {
+		return"cultureMypage";
+	}
+	
+	@RequestMapping("cultureInfo.cu")
+	public String cultureInfoForm() {
+		return"cultureInfo";
+	}
 }

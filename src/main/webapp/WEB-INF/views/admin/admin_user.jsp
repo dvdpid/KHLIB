@@ -13,11 +13,11 @@
 </head>
 <body>
 <!-- 헤더부분 -->
-<c:import url="../common/admin_header.jsp"></c:import>
+<c:import url="common/admin_header.jsp"></c:import>
 	
 	
 <!-- 사이드 부분 -->
-<c:import url="../common/admin_side.jsp"></c:import>
+<c:import url="common/admin_side.jsp"></c:import>
 	
 <!-- 메인 부분 -->	
 	<div class="main">

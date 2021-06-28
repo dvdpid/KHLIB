@@ -69,41 +69,27 @@
 		</div>
 		<div style="height: 30px;"></div>
 		<div class="programList">
-		<%-- <c:if test="${ empty cList || empty fList }">
-			등록된 프로그램이 없습니다.
+		<c:if test="${ empty cList || empty fList }">
+			<div id="emptyList">등록된 프로그램이 없습니다.</div>
 		</c:if>
 		<c:if test="${ !empty cList || !empty fList }">
-			<c:forEach var="c" items="${ list }"> --%>
+			<c:forEach var="c" items="${ cList }">
 				<div class="thumbList" align="center">
-					<%-- <c:url var="cDetail" value="cdetail.co"> --%>
 					<div class="cultureListIMG">
-						<img src="resources/images/cultureListImg1.jpg">
-						<p class="thumbTitle">도시공간 상상하기</p>
+						<c:forEach var="f" items="${ fList }">
+							<c:if test="${ c.getcNo() == f.getcNo() }">
+								<img src="${ contextPath }/resources/buploadFiles/${ f.changeName }">
+							</c:if>
+						</c:forEach>
+						<p class="thumbTitle">${ c.cTitle }</p>
 							<p class="thumbInfo">
-								<span>일시 :</span> 2021년 6월 25일 19시 30분<br>
-								<span>장소 :</span> 브링크 삼덕 아지트
+								<span>일시 :</span> ${ c.lDate } ${ c.Time }<br>
+								<span>장소 :</span> ${ c.cPlace }
 							</p>					
 					</div>
-					<div class="cultureListIMG">
-						<img src="resources/images/cultureListImg2.jpg">
-						<p class="thumbTitle">스스로에 대한 정확한 말 찾아내기</p>
-							<p class="thumbInfo">
-								<span>일시 :</span> 2021년 6월 21일 19시 30분<br>
-								<span>장소 :</span> 브링크 삼덕 아지트
-							</p>
-					</div>
-					<div class="cultureListIMG">
-						<img src="resources/images/cultureListImg3.jpg">
-						<p class="thumbTitle">알아두면 쓸데없는 솔직한 영화 이야기</p>
-							<p class="thumbInfo">
-								<span>일시 :</span> 2021년 4월 18일 14시 00분<br>
-								<span>장소 :</span> 브링크 삼덕 아지트
-							</p>					
-					</div>
-					<%-- </c:url> --%>
 				</div>
-			<%-- </c:forEach>
-		</c:if> --%>
+			</c:forEach>
+		</c:if>
 		</div>
 	</div>
 </body>

@@ -60,7 +60,7 @@
 				</tr>
 			</table>
 			<br>
-			<img id="infoImg1" src="resources/images/culture.jpg"/>
+			<img id="infoImg1" src="resources/images/culture/cultureInfo.jpg"/>
 		</div>
 	</div>
 </body>

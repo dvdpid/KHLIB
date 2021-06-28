@@ -36,7 +36,7 @@
 			</h3>
 		</div>
 	</div>
-	
+
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
@@ -60,7 +60,7 @@
 				</tr>
 			</table>
 			<br>
-			<img id="infoImg1" src="resources/images/culture.jpg"/>
+			<img id="infoImg1" src="resources/images/culture/cultureInfo.jpg"/>
 		</div>
 	</div>
 </body>

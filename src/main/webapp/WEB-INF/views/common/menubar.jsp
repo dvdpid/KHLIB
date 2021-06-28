@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,36 +17,19 @@
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 	
 <!-- 헤더부분 -->
-	
 	<section id="header">
-	
 		<div class="wrapper">
-		<c:if test="${ empty sessionScope.loginUser }">
 		<div></div>
 			<ul class="lists">
 				<li><a href="">홈</a></li>
-				<li><a href="loginForm.me">로그인</a></li>
-				<li><a href="enrollView.me">회원가입</a></li>
+				<li><a href="">로그인</a></li>
+				<li><a href="">회원가입</a></li>
 			</ul>
-		</c:if>	
 		</div>
-	
-		<c:if test="${ !empty sessionScope.loginUser }">
-		<div class="wrapper">
-			<div></div>
-			<ul class="lists">
-				<c:out value="${ loginUser.name }님 환영합니다."/> 
-				<li><a href="logout.me">로그아웃</a></li>
-				<li><a href="">내 정보보기</a></li>
-						
-			</ul>
-			
-		</div>			
-		</c:if>
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
-			<div class="logo"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </div>
+			<div class="logo" onclick="location.href='${ contextPath }'"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </div>
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>
@@ -60,5 +44,7 @@
 				</ul>
 		</div>
 	</section>
+
 </body>
 </html>
+

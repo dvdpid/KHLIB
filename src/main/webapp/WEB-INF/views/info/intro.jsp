@@ -16,33 +16,33 @@
 <!-- 사이드 부분 -->
 	<div class="left">
 		<div class="sideTitle">
-			<h2 id="sideMainTitle">열람실</h2>
+			<h2 id="sideMainTitle">도서관 소개</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='intro.in';">
 			<h3 id="sideButton1">
-				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
-				열람실 현황
+				<img id="sideImg1" src="resources/images/info/hi.png"/>
+				인사말
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='map.in';">
 			<h3 id="sideButton2">
-				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
-				내 자리
+				<img id="sideImg2" src="resources/images/info/maps.png"/>
+				오시는 길
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='guide.in';">
 			<h3 id="sideButton3">
-				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
+				<img id="sideImg3" src="resources/images/info/time.png"/>
 				이용 안내
 			</h3>
 		</div>
 	</div>
-	
+	<!-- 테스트 주석 -->
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p><img id="titleImg1" src="resources/images/goodbye.png"/>
+			<p><img id="titleImg1" src="resources/images/info/goodbye.png"/>
 			인사말</p>
 		</div>
 		<div class="empty" style="height:140px;"></div>
@@ -70,7 +70,7 @@
 						</b>
 			</table>
 			<br>
-			<img id="infoImg1" src="resources/images/introimages.jpg"/>
+			<img id="infoImg1" src="resources/images/info/introimages.jpg"/>
 		</div>
 	</div>
 </body>

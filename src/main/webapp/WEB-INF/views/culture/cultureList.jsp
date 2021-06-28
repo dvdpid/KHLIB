@@ -16,19 +16,19 @@
 			<h2 id="sideMainTitle">문화마당</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='culture.cu';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				프로그램
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='cultureMypage.cu';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				신청 내역
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='cultureInfo.cu';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				이용 안내

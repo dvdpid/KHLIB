@@ -7,60 +7,18 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
+
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/admin.js" defer></script>
 </head>
 <body>
 <!-- 헤더부분 -->
-<c:import url="common/admin_header.jsp"></c:import>
+<c:import url="../common/admin_header.jsp"></c:import>
 	
 	
 <!-- 사이드 부분 -->
-	<div class="left">
-		<div class="sideTitle">
-			<h2>admin</h2>
-			<h1 id="sideMainTitle">관리자 페이지</h1>
-			<h3 id="sideSubTitle" style="color:lightgray;">Kh Library</h3>
-		</div>
-		<div class="sideButton" onclick="location.href='';">
-			<h3 id="sideButton1">
-				<img id="sideImg1" src="resources/images/icon1.png"/>
-				회원 관리
-			</h3>
-		</div>
-		<div class="sideButton" onclick="location.href='';">
-			<h3 id="sideButton2">
-				<img id="sideImg2" src="resources/images/icon2.png"/>
-				게시글/댓글 관리
-			</h3>
-		</div>
-		<div class="sideButton" onclick="location.href='';">
-			<h3 id="sideButton3">
-				<img id="sideImg3" src="resources/images/icon3.png"/>
-				열람실 관리
-			</h3>
-		</div>
-		<div class="sideButton" onclick="location.href='';">
-			<h3 id="sideButton3">
-				<img id="sideImg3" src="resources/images/icon4.png"/>
-				도서 관리
-			</h3>
-		</div>
-		<div class="sideButton" onclick="location.href='';">
-			<h3 id="sideButton3">
-				<img id="sideImg3" src="resources/images/icon5.png"/>
-				문화 마당
-			</h3>
-		</div>
-		<div class="sideButton" onclick="location.href='';">
-			<h3 id="sideButton3">
-				<img id="sideImg3" src="resources/images/icon6.png"/>
-				독서 모임
-			</h3>
-		</div>
-		
-	</div>
+	<c:import url="../common/admin_side.jsp"></c:import>
 	
 <!-- 메인 부분 -->	
 	<div class="main">
@@ -71,37 +29,40 @@
 		<div class="empty" style="height:50px;"></div>
 		
 		<div>
+		<form action="bkinsert.ad" method="post" encType="multipart/form-data">
 			<table style="width: 80%; border-spacing: 5px 30px;">
-			<tr>
-				<td style=" font-size: 20px;"><b>책 제목</b></td>
-				<td><input type="text" name="name"></td>
-				<td style="font-size: 20px;"><b>저자</b></td>
-				<td><input type="text" name="price"></td>
-			</tr>
-			<tr>
-				<td style="font-size: 20px;"><b>청구 기호</b></td>
-				<td><input type="text" name="price"></td>
-				<td style="font-size: 20px;"><b>출판년도</b></td>
-				<td><input type="date" name="stock"></td>
-			</tr>
-			<tr>
-				<td style="font-size: 20px;"><b>책 줄거리</b></td>
-				<td><textarea name="detail" rows="15" cols="90"></textarea></td>
-			</tr>
-					<tr>
-						<td style="font-size: 20px;"><b>책 표지</td>
-						<td colspan="3">
-							<div id="titleImgArea" style="width: 350px; height: 200px;">
-								<img id="titleImg" width="350" height="200">
-							</div>
-						</td>
+				<tr>
+					<td style=" font-size: 20px;"><b>책 제목</b></td>
+					<td><input type="text" name="bTitle" ></td>
+					<td style="font-size: 20px;"><b>저자</b></td>
+					<td><input type="text" name="bWriter"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>출판사</b></td>
+					<td><input type="text" name="bCompany"></td>
+					<td style="font-size: 20px;"><b>출판년도</b></td>
+					<td><input type="date" name="bDate"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>책 줄거리</b></td>
+					<td><textarea name="bContent" rows="15" cols="90"></textarea></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>책 표지</b></td>
+					<td colspan="3">
+						<div id="titleImgArea" style="width: 350px; height: 200px;">
+							<img id="titleImg" width="350" height="200">
+						</div>
+					</td>
 					</tr>
-		</table>
-					<input type="submit" value="도서 등록">
-					<input type="reset" value="새로 입력" onclick="resetInsertData()">
-		<div id="fileArea">
-				<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
-		</div>
+				<tr class="btn">
+					<td><input type="submit" id="add_btn" value="도서 등록">	</td>
+					<td><input type="reset" value="새로 입력" onclick="resetInsertData()"></td>
+				</tr>
+			</table>
+				<div id="fileArea">
+					<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
+				</div>
 			<script>
 				$(function(){
 						$("#fileArea").hide();
@@ -128,6 +89,7 @@
 						}
 					}
 			</script>
+		</form>
 		</div>
 	</div>
 </body>

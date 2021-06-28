@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+
+
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from books
+		where b_Status='Y'
+	</select>
+	
+	<select id="selectList" resultMap="booksResultSet">
+		select *
+		from books
+		where b_status='Y'
+		order by books_no desc
+	</select>
+	<resultMap type="com.kh.klib.books.model.vo.Books" id="booksResultSet">
+		<id column="BOOKS_NO" property="bNo"/>
+		<result column="BOOK_TITLE" property="bTitle"/>
+		<result column="BOOKS_WRITER" property="bWriter"/>
+		<result column="BOOKS_COMPANY" property="bCompany"/>
+		<result column="BOOKS_DATE" property="bDate"/>
+		<result column="BOOKS_CONTENT" property="bContent"/>
+		<result column="B_STATUS" property="bStatus"/>
+		<result column="B_RECOMMEND" property="bRecommend"/>
+		<result column="ENTRY_DATE" property="entryDate"/>
+		<result column="USER_NO" property="uNo"/>
+	</resultMap>
+	
+<!-- 	<insert id="insertBook"> -->
+<!-- 		insert into books -->
+<!-- 		values(seq_bkno.nextval, #{bTitle), #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate) -->
+		
+<!-- 	</insert> -->
+	
+</mapper>

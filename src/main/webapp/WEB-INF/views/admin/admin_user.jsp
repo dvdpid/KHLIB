@@ -15,6 +15,7 @@
 <!-- 헤더부분 -->
 <c:import url="common/admin_header.jsp"></c:import>
 	
+	
 <!-- 사이드 부분 -->
 <c:import url="common/admin_side.jsp"></c:import>
 	

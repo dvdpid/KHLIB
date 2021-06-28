@@ -20,13 +20,13 @@
 			<h2 id="sideMainTitle">도서게시판</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookSearch.bk';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				도서검색
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				신착도서

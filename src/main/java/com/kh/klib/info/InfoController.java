@@ -9,4 +9,16 @@ public class InfoController {
 	public String Info() {
 		return "intro";
 	}
+	@RequestMapping("intro.in")
+	public String Intro() {
+		return "intro";
+	}
+	@RequestMapping("map.in")
+	public String MapInfo() {
+		return "mapinfo";
+	}
+	@RequestMapping("guide.in")
+	public String Opguide() {
+		return "opguide";
+	}
 }

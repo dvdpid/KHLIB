@@ -15,19 +15,19 @@
 			<h2 id="sideMainTitle">독서 모임</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='bkgroup.bg';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				독서 모임
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='bkgroupInsertForm.bg';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				독서 모임 등록
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='bkgroupMyPage.bg';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				신청 내역
@@ -44,7 +44,7 @@
 			</p>
 		</div>
 		<br>
-		<form action="" enctype="Multipart/form-data">
+		<form action="bkgroupInsert.bg" enctype="Multipart/form-data">
 			<table id="bkInsertTable">
 				<tr>
 					<th>모임명</th>

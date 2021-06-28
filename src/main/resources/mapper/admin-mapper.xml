@@ -28,10 +28,10 @@
 		<result column="USER_NO" property="uNo"/>
 	</resultMap>
 	
-	<insert id="insertBook">
-		insert into books
-		values(seq_bkno.nextval, #{bTitle), #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate)
+<!-- 	<insert id="insertBook"> -->
+<!-- 		insert into books -->
+<!-- 		values(seq_bkno.nextval, #{bTitle), #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate) -->
 		
-	</insert>
+<!-- 	</insert> -->
 	
 </mapper>

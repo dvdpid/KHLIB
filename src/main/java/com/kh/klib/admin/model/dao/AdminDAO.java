@@ -25,8 +25,8 @@ public class AdminDAO {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectList", null, rowBounds);
 	}
 
-	public int insertBook(SqlSessionTemplate sqlSession, Books b) {
-		return sqlSession.insert("adminMapper.insertBook", b);
-	}
-	
+//	public int insertBook(SqlSessionTemplate sqlSession, Books b) {
+//		return sqlSession.insert("adminMapper.insertBook", b);
+//	}
+//	
 }

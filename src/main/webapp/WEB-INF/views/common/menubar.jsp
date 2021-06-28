@@ -60,6 +60,5 @@
 				</ul>
 		</div>
 	</section>
-
 </body>
 </html>

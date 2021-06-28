@@ -36,7 +36,7 @@
 			</h3>
 		</div>
 	</div>
-	
+
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">

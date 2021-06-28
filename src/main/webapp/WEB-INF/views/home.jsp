@@ -7,6 +7,6 @@
 	<title>Home</title>
 </head>
 <body>
-	<c:import url="mainPage.jsp"></c:import> 
+	<c:import url="admin/admin_user.jsp"></c:import> 
 </body>
 </html>

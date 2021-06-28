@@ -3,17 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>홈페이지</title>
 
-
-<link rel="stylesheet" href="resources/css/common/mainPage.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/common/mainPage.css" type="text/css">
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <!-- <script src="resources/js/jquery-3.6.0.min.js"></script> -->
-<!-- <script src="resources/js/lightslider.js"></script> -->
+<script src="resources/js/lightslider.js"></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="resources/js/lightslider.js"></script>
 <body>
@@ -146,7 +145,7 @@
 			</div>
 		</div>
 		<br><br>
-  <c:import url="common/footer.jsp"/>
+<%--   <c:import url="common/footer.jsp"/> --%>
   <script>
 $(document).ready(function() {
     $('#autoWidth').lightSlider({

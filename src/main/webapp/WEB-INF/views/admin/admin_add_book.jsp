@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
+
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/admin.js" defer></script>
@@ -28,37 +29,40 @@
 		<div class="empty" style="height:50px;"></div>
 		
 		<div>
+		<form action="bkinsert.ad" method="post" encType="multipart/form-data">
 			<table style="width: 80%; border-spacing: 5px 30px;">
-			<tr>
-				<td style=" font-size: 20px;"><b>책 제목</b></td>
-				<td><input type="text" name="name"></td>
-				<td style="font-size: 20px;"><b>저자</b></td>
-				<td><input type="text" name="price"></td>
-			</tr>
-			<tr>
-				<td style="font-size: 20px;"><b>청구 기호</b></td>
-				<td><input type="text" name="price"></td>
-				<td style="font-size: 20px;"><b>출판년도</b></td>
-				<td><input type="date" name="stock"></td>
-			</tr>
-			<tr>
-				<td style="font-size: 20px;"><b>책 줄거리</b></td>
-				<td><textarea name="detail" rows="15" cols="90"></textarea></td>
-			</tr>
-					<tr>
-						<td style="font-size: 20px;"><b>책 표지</td>
-						<td colspan="3">
-							<div id="titleImgArea" style="width: 350px; height: 200px;">
-								<img id="titleImg" width="350" height="200">
-							</div>
-						</td>
+				<tr>
+					<td style=" font-size: 20px;"><b>책 제목</b></td>
+					<td><input type="text" name="bTitle" ></td>
+					<td style="font-size: 20px;"><b>저자</b></td>
+					<td><input type="text" name="bWriter"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>출판사</b></td>
+					<td><input type="text" name="bCompany"></td>
+					<td style="font-size: 20px;"><b>출판년도</b></td>
+					<td><input type="date" name="bDate"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>책 줄거리</b></td>
+					<td><textarea name="bContent" rows="15" cols="90"></textarea></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>책 표지</b></td>
+					<td colspan="3">
+						<div id="titleImgArea" style="width: 350px; height: 200px;">
+							<img id="titleImg" width="350" height="200">
+						</div>
+					</td>
 					</tr>
-		</table>
-					<input type="submit" value="도서 등록">
-					<input type="reset" value="새로 입력" onclick="resetInsertData()">
-		<div id="fileArea">
-				<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
-		</div>
+				<tr class="btn">
+					<td><input type="submit" id="add_btn" value="도서 등록">	</td>
+					<td><input type="reset" value="새로 입력" onclick="resetInsertData()"></td>
+				</tr>
+			</table>
+				<div id="fileArea">
+					<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
+				</div>
 			<script>
 				$(function(){
 						$("#fileArea").hide();
@@ -85,6 +89,7 @@
 						}
 					}
 			</script>
+		</form>
 		</div>
 	</div>
 </body>

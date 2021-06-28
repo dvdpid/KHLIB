@@ -12,6 +12,6 @@ public interface AdminService {
 
 	ArrayList<Books> selectList(PageInfo pi);
 
-	int insertBook(Books b);
+//	int insertBook(Books b);
 
 }

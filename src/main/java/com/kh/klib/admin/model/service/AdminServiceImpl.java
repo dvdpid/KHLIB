@@ -27,10 +27,10 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Books> selectList(PageInfo pi) {
 		return aDAO.selectList(sqlSession, pi);
 	}
-
-	@Override
-	public int insertBook(Books b) {
-		return aDAO.insertBook(sqlSession, b);
-	}
+//
+//	@Override
+//	public int insertBook(Books b) {
+//		return aDAO.insertBook(sqlSession, b);
+//	}
 	
 }

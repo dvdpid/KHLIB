@@ -75,47 +75,47 @@ public class AdminController {
 	public String bookInsertForm() {
 		return "admin_add_book";
 	}
-	@RequestMapping("bkinsert.ad")
-	public String insertBook(@ModelAttribute Books b, @RequestParam("thumbnailImg1") MultipartFile thumbnailImg1, HttpServletRequest request) {
-		Files f = new Files();
-		if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
-			String renameFileName = saveFile(thumbnailImg1, request);
-			
-			if(renameFileName != null) {
-				f.setOriginName(thumbnailImg1.getOriginalFilename());
-				f.setChangeName(renameFileName);
-			}
-		}
-		int result = aService.insertBook(b);
-		
-		if(result > 0) {
-			return "redirect:book.ad";
-		} else {
-			throw new BooksException("도서 등록에 실패");
-		}
-		
-	}
-	public String saveFile(MultipartFile thumbnailImg1, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "/bkuploadFiles";
-		
-		File folder = new File(savePath);
-		if(!folder.exists()) {
-			folder.mkdir();
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-		String originFileName = thumbnailImg1.getOriginalFilename();
-		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))
-								+ "." + originFileName.substring(originFileName.lastIndexOf(".") +1);
-		String renamePath = folder + "/" + renameFileName;
-		try {
-			thumbnailImg1.transferTo(new File(renamePath));
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("파일 전송 에러 : " + e.getMessage());
-		}
-		return renameFileName;
-	}							
+//	@RequestMapping("bkinsert.ad")
+//	public String insertBook(@ModelAttribute Books b, @RequestParam("thumbnailImg1") MultipartFile thumbnailImg1, HttpServletRequest request) {
+//		Files f = new Files();
+//		if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
+//			String renameFileName = saveFile(thumbnailImg1, request);
+//			
+//			if(renameFileName != null) {
+//				f.setOriginName(thumbnailImg1.getOriginalFilename());
+//				f.setChangeName(renameFileName);
+//			}
+//		}
+//		int result = aService.insertBook(b);
+//		
+//		if(result > 0) {
+//			return "redirect:book.ad";
+//		} else {
+//			throw new BooksException("도서 등록에 실패");
+//		}
+//		
+//	}
+//	public String saveFile(MultipartFile thumbnailImg1, HttpServletRequest request) {
+//		String root = request.getSession().getServletContext().getRealPath("resources");
+//		String savePath = root + "/bkuploadFiles";
+//		
+//		File folder = new File(savePath);
+//		if(!folder.exists()) {
+//			folder.mkdir();
+//		}
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+//		String originFileName = thumbnailImg1.getOriginalFilename();
+//		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))
+//								+ "." + originFileName.substring(originFileName.lastIndexOf(".") +1);
+//		String renamePath = folder + "/" + renameFileName;
+//		try {
+//			thumbnailImg1.transferTo(new File(renamePath));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("파일 전송 에러 : " + e.getMessage());
+//		}
+//		return renameFileName;
+//	}							
 	
 	
 	

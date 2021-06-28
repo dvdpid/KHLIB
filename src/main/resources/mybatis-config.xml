@@ -21,6 +21,7 @@
 <!-- 		<mapper resource="mapper/room-mapper.xml"/> -->
 <!-- 		<mapper resource="mapper/culture-mapper.xml"/> -->
 		<mapper resource="mapper/admin-mapper.xml"/>
+		<mapper resource="mapper/member-mapper.xml"/>
 	</mappers>
 	
 </configuration>

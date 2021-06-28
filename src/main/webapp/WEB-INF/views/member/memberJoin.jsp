@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +109,7 @@
 						<th>우편번호</th>
 						<td>
 							<input type="text" name="post" class="postcodify_postcode5" value="" size="6">
-							<button type="button" id="postcodify_search_button">검색</button>
+							<button type="button" onclick="openZipSearch"id="postcodify_search_button">검색</button>
 						</td>
 						<td></td>
 				</tr>
@@ -122,13 +123,21 @@
 					<td><input type="text" name="address2" class="postcodify_extra_info" value="" style="width: 100%;"></td>
 					<td></td>
 				</tr>
-				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 				<script>
-					// 검색 단추를 누르면 팝업 레이어가 열리도록 설정한다.
-					$(function(){
-						$("#postcodify_search_button").postcodifyPopUp();
-					});
+
+				function openZipSearch() {
+					new daum.Postcode({
+						oncomplete: function(data) {
+							$('[name=zip]').val(data.zonecode); // 우편번호 (5자리)
+							$('[name=addr1]').val(data.address);
+							$('[name=addr2]').val(data.buildingName);
+						}
+					}).open();
+				}
+				
 				</script>
+				<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+				<script src="/resources/js/addressapi.js"></script>
 				<tr>
 					<td colspan="3" align="center">
 						<button id="joinBtn" onclick="validate();">가입하기</button>
@@ -142,6 +151,6 @@
 		
 		<br>
 		
-		<c:import url="common/footer.jsp"/>
+		<c:import url="../common/footer.jsp"/>
 </body>
 </html>

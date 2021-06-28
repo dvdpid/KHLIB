@@ -16,15 +16,32 @@
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
 	
 <!-- 헤더부분 -->
+	
 	<section id="header">
+	
 		<div class="wrapper">
+		<c:if test="${ empty sessionScope.loginUser }">
 		<div></div>
 			<ul class="lists">
 				<li><a href="">홈</a></li>
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
+				<li><a href="loginForm.me">로그인</a></li>
+				<li><a href="enrollView.me">회원가입</a></li>
 			</ul>
+		</c:if>	
 		</div>
+	
+		<c:if test="${ !empty sessionScope.loginUser }">
+		<div class="wrapper">
+			<div></div>
+			<ul class="lists">
+				<c:out value="${ loginUser.name }님 환영합니다."/> 
+				<li><a href="logout.me">로그아웃</a></li>
+				<li><a href="">내 정보보기</a></li>
+						
+			</ul>
+			
+		</div>			
+		</c:if>
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
@@ -45,4 +62,3 @@
 	</section>
 
 </body>
-</html>

@@ -22,7 +22,7 @@
 	
 	<div align="center" class="loginArea">
 		<h1><span  style="color:rgb(212, 129, 91);">KH</span> 도서관</h1>
-		<form action="login.me" method="">
+		<form action="login.me" method="post">
 			<table id="loginTable" style="text-align:center;">
 				<tr>
 					<th width="100px">아이디</th>
@@ -47,6 +47,6 @@
 	
 	<br>
 	
-	<c:import url="common/footer.jsp"/>
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

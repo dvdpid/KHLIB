@@ -169,8 +169,19 @@
 		<url-pattern>*.cm</url-pattern>
 	</servlet-mapping>	
 	
+
+	 <context-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>
+      		classpath:root-context.xml
+      		/WEB-INF/spring/spring-security.xml
+      </param-value>
+   </context-param>
+   
+    <filter>
+
 	 <filter>
-      <filter-name>encodingFilter</filter-name>
+ <filter-name>encodingFilter</filter-name>
       <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
       <init-param>
       <param-name>encoding</param-name>

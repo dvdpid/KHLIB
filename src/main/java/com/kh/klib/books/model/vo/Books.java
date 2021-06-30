@@ -12,12 +12,11 @@ public class Books {
 	private String bStatus;		// 도서 상태
 	private String bRecommend;	// 추천
 	private Date entryDate;		// 입고 일자
-	private String uNo;			// 계정 번호
 	
 	public Books() {}
 
 	public Books(int bNo, String bTitle, String bWriter, String bCompany, Date bDate, String bContent, String bStatus,
-			String bRecommend, Date entryDate, String uNo) {
+			String bRecommend, Date entryDate) {
 		super();
 		this.bNo = bNo;
 		this.bTitle = bTitle;
@@ -28,7 +27,6 @@ public class Books {
 		this.bStatus = bStatus;
 		this.bRecommend = bRecommend;
 		this.entryDate = entryDate;
-		this.uNo = uNo;
 	}
 
 	public int getbNo() {
@@ -103,19 +101,11 @@ public class Books {
 		this.entryDate = entryDate;
 	}
 
-	public String getuNo() {
-		return uNo;
-	}
-
-	public void setuNo(String uNo) {
-		this.uNo = uNo;
-	}
-
 	@Override
 	public String toString() {
 		return "books [bNo=" + bNo + ", bTitle=" + bTitle + ", bWriter=" + bWriter + ", bCompany=" + bCompany
 				+ ", bDate=" + bDate + ", bContent=" + bContent + ", bStatus=" + bStatus + ", bRecommend=" + bRecommend
-				+ ", entryDate=" + entryDate + ", uNo=" + uNo + "]";
+				+ ", entryDate=" + entryDate + "]";
 	}
 	
 }

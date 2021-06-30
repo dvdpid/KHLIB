@@ -6,7 +6,6 @@ public class Files {
 	private int fNo;
 	private String originName;
 	private String changeName;
-	private String filePath;
 	private Date uploadDate;
 	private int fileLevel;
 	private String fStatus;
@@ -18,13 +17,12 @@ public class Files {
 	
 	public Files() {}
 
-	public Files(int fNo, String originName, String changeName, String filePath, Date uploadDate, int fileLevel,
+	public Files(int fNo, String originName, String changeName, Date uploadDate, int fileLevel,
 			String fStatus, int bNo, int gNo, int cNo, int bkNo, int qNo) {
 		super();
 		this.fNo = fNo;
 		this.originName = originName;
 		this.changeName = changeName;
-		this.filePath = filePath;
 		this.uploadDate = uploadDate;
 		this.fileLevel = fileLevel;
 		this.fStatus = fStatus;
@@ -59,13 +57,6 @@ public class Files {
 		this.changeName = changeName;
 	}
 
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
 
 	public Date getUploadDate() {
 		return uploadDate;
@@ -133,8 +124,7 @@ public class Files {
 
 	@Override
 	public String toString() {
-		return "Files [fNo=" + fNo + ", originName=" + originName + ", changeName=" + changeName + ", filePath="
-				+ filePath + ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel + ", fStatus=" + fStatus
+		return "Files [fNo=" + fNo + ", originName=" + originName + ", changeName=" + changeName +  ", uploadDate=" + uploadDate + ", fileLevel=" + fileLevel + ", fStatus=" + fStatus
 				+ ", bNo=" + bNo + ", gNo=" + gNo + ", cNo=" + cNo + ", bkNo=" + bkNo + ", qNo=" + qNo + "]";
 	}
 	

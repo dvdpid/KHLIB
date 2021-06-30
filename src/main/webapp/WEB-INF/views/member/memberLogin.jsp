@@ -38,7 +38,7 @@
 				<tr>
 					<td colspan="3">
 						<a href="memberFind.me">아이디 / 비밀번호 찾기</a>  |  
-						<a href="memberJoin.me">회원가입</a>
+						<a href="joinMember.me">회원가입</a>
 					</td>
 				</tr>
 			</table>

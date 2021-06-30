@@ -11,7 +11,7 @@
 	<h1>Error</h1>
 	<h2 style="color:red">1. ${ msg } </h2>
 	<h2 style="color:red">2. ${ requestScope['javax.servlet.error.message']  }</h2>
-	<a href="home.do">시작페이지로 돌아가기</a>
+	<a href="../home">시작페이지로 돌아가기</a>
 	</div>
 </body>
 </html>

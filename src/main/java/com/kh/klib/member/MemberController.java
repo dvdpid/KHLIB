@@ -66,8 +66,7 @@ public class MemberController {
 		
 		m.setBirthday(d);
 		
-		// bcrypt 방식 : 스프링 시큐리티 모듈에서 제공하는 암호화 방식
-		// 		1차 암호화 메세지 + 추가 연산(salt값 : 랜덤한 값 이용)
+		
 		
 		String encPwd = bcrypPasswordEncoder.encode(m.getPwd());
 		m.setPwd(encPwd);
@@ -95,23 +94,9 @@ public class MemberController {
 			return "../home";
 			
 		} else {
-			throw new MemberException("로그인에 실패하였습니다.");
+			return "../common/errorPage";
 		}
 	}
-//	@RequestMapping(value ="login.me", method=RequestMethod.POST )
-//	public String login(Member m ) {	
-//		
-//		Member loginUser = mService.memberLogin(m);
-//		
-//		if(loginUser != null) {
-//			model.addAttribute("loginUser", loginUser);	
-//			return "../home";
-//			
-//		} else {
-//			model.addAttribute("msg", "로그인 실패!");
-//			return "../common/errorPage";
-//		}	
-//	}
-//	
+
 	
 }

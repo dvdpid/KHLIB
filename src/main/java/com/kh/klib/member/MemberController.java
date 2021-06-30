@@ -1,9 +1,10 @@
 package com.kh.klib.member;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.service.MemberService;
@@ -42,46 +42,76 @@ public class MemberController {
 	}
 
 	
-	@RequestMapping(value ="login.me", method=RequestMethod.POST )
-	public String login(Member m, HttpSession session, Model model) {	
-		
-		Member loginUser = mService.memberLogin(m);
-		
-		if(loginUser != null) {
-			model.addAttribute("loginUser", loginUser);	
-			return "../home";
-			
-		} else {
-			model.addAttribute("msg", "로그인 실패!");
-			return "../common/errorPage";
-		}	
-	}
-	
+
 	@RequestMapping("logout.me")
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		return "../home";
 	}
-	@RequestMapping("minsert.me")
-	public String insertMember(@ModelAttribute Member m, @RequestParam("post") String post,
-														 @RequestParam("address1") String address1,
-														 @RequestParam("address1") String address2) {
+	@RequestMapping("joinMember.me")
+	public String insertMember(@ModelAttribute Member m, @RequestParam("address1") String address1,
+														 @RequestParam("address2") String address2,
+														 @RequestParam("address3") String address3,
+														 @RequestParam("year") String year,
+														 @RequestParam("month") String month,
+														 @RequestParam("day") String day						
+			) {
 		
+	
 		
-		String address = post + "/" + address1 + "/" + address2;
+		String address = address1 + "/" + address2 + "/" + address3;
 		m.setAddress(address);
-
+		String date = year + "-"+ month + "-"+ day;
+		Date d = Date.valueOf(date);
+		
+		m.setBirthday(d);
+		
 		// bcrypt 방식 : 스프링 시큐리티 모듈에서 제공하는 암호화 방식
 		// 		1차 암호화 메세지 + 추가 연산(salt값 : 랜덤한 값 이용)
 		
 		String encPwd = bcrypPasswordEncoder.encode(m.getPwd());
 		m.setPwd(encPwd);
+		
+		
 		int result = mService.insertMember(m);
 		
-		if(result > 0) { // commit 생략 가능 자동으로 해줌
+		
+		if(result > 0) { 
 			return "../home";
 		} else {
 			return "../common/errorPage";
 		}
 	}
+	@RequestMapping(value = "login.me", method=RequestMethod.POST )
+	public String login(Member m, Model model) {
+		
+		Member loginUser = mService.memberLogin(m);
+		
+		
+		
+		if(bcrypPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+			model.addAttribute("loginUser", loginUser);
+			System.out.println(m);
+			return "../home";
+			
+		} else {
+			throw new MemberException("로그인에 실패하였습니다.");
+		}
+	}
+//	@RequestMapping(value ="login.me", method=RequestMethod.POST )
+//	public String login(Member m ) {	
+//		
+//		Member loginUser = mService.memberLogin(m);
+//		
+//		if(loginUser != null) {
+//			model.addAttribute("loginUser", loginUser);	
+//			return "../home";
+//			
+//		} else {
+//			model.addAttribute("msg", "로그인 실패!");
+//			return "../common/errorPage";
+//		}	
+//	}
+//	
+	
 }

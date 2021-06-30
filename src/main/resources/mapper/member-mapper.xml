@@ -5,7 +5,7 @@
  	<select id="login" resultMap="memberResultSet">
  		select *
  		from users
- 		where user_id=#{id} and user_pwd=#{pwd} and u_status='Y'
+ 		where user_id=#{id} and u_status='Y'
  		
  	</select>
  	<resultMap type="com.kh.klib.member.model.vo.Member" id="memberResultSet">
@@ -25,9 +25,9 @@
  	
  	
  	<insert id="insertMember">
- 		insert into member
- 		values(#{id}, #{pwd}, #{name}, #{nickname},#{birthday}, #{gender}, #{phone}, ,#{email}
- 				#{address}, default)
+ 		insert into users
+ 		values(seq_uno.nextval,#{id}, #{pwd}, #{name}, #{nickname},#{birthday}, #{gender}, #{phone},#{email},
+ 			#{address}, default,default)
  	</insert>
  	
 </mapper>

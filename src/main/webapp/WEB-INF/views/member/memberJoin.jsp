@@ -40,7 +40,7 @@
 	
 		<div class="joinArea" align="center">
 			<h1><span  style="color:rgb(212, 129, 91);">KH</span> 도서관</h1>
-			<form aciton="joinMember.me" method="post">
+			<form action="joinMember.me" method="post">
 				<table id="joinMemberTable">
 					<tr>
 						<th><label class="must">*</label> 아이디 </th>
@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 </th>
-						<td><input type="password" name="pwd1" placeholder="비밀번호" required style="width: 100%;"></td>
+						<td><input type="password" name="pwd" placeholder="비밀번호" required style="width: 100%;"></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -108,41 +108,43 @@
 					<tr>
 						<th>우편번호</th>
 						<td>
-							<input type="text" name="post" class="postcodify_postcode5" value="" size="6">
-							<button type="button" onclick="openZipSearch"id="postcodify_search_button">검색</button>
+							<input type="text" name="address1" class="postcodify_postcode5" value="" size="6">
+							<button type="button" id="postcodify_search_button">검색</button>
 						</td>
-						<td></td>
-				</tr>
+						<td>
+						
+						<!-- jQuery와 Postcodify를 로딩한다. -->
+							<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+							<script>
+								// 검색 단추를 누르면 팝업 레이어가 열리도록 설정한다.
+								$(function(){
+									$("#postcodify_search_button").postcodifyPopUp();
+								});
+							</script>
+
+						</td>
+					</tr>
 				<tr>
 					<th>도로명 주소</th>
-					<td><input type="text" name="address1" class="postcodify_address" value="" style="width: 100%;"></td>
+					<td><input type="text" name="address2" class="postcodify_address" value="" style="width: 100%;"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>상세 주소</th>
-					<td><input type="text" name="address2" class="postcodify_extra_info" value="" style="width: 100%;"></td>
+					<td><input type="text" name="address3" class="postcodify_extra_info" value="" style="width: 100%;"></td>
 					<td></td>
 				</tr>
-				<script>
+			
 
-				function openZipSearch() {
-					new daum.Postcode({
-						oncomplete: function(data) {
-							$('[name=zip]').val(data.zonecode); // 우편번호 (5자리)
-							$('[name=addr1]').val(data.address);
-							$('[name=addr2]').val(data.buildingName);
-						}
-					}).open();
-				}
 				
-				</script>
-				<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-				<script src="/resources/js/addressapi.js"></script>
+				
+			
+				
 				<tr>
-					<td colspan="3" align="center">
-						<button id="joinBtn" onclick="validate();">가입하기</button>
-						<button type="button" id="homeBtn" onclick="location.href='home.do'">메인메뉴로</button>
-						<input type="reset" id="reset" value="취소하기">
+					<td colspan="2" align="center">
+						<button onclick="return validate();">가입하기</button>
+						<input type="reset" value="취소하기">
+						<button type="button" onclick="location.href='home.do'">시작 페이지로 이동</button>
 					</td>
 				</tr>
 				</table>

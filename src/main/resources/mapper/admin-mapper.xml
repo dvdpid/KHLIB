@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper">
 
-
+	<!-- 도서 관련 -->
 	<select id="getListCount" resultType="_int">
 		select count(*)
 		from books
@@ -15,7 +15,7 @@
 		where b_status='Y'
 		order by books_no desc
 	</select>
-	<resultMap type="com.kh.klib.books.model.vo.Books" id="booksResultSet">
+	<resultMap type="Books" id="booksResultSet">
 		<id column="BOOKS_NO" property="bNo"/>
 		<result column="BOOK_TITLE" property="bTitle"/>
 		<result column="BOOKS_WRITER" property="bWriter"/>
@@ -25,13 +25,57 @@
 		<result column="B_STATUS" property="bStatus"/>
 		<result column="B_RECOMMEND" property="bRecommend"/>
 		<result column="ENTRY_DATE" property="entryDate"/>
+	</resultMap>
+	
+	<insert id="insertBook">
+		insert into books
+		values(seq_bkno.nextval, #{bTitle}, #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate)
+	</insert>
+	<insert id="insertAttachment">
+		insert into files
+		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 0, default, 0, 0, 0, seq_bkno.CURRVAL, 0)
+	</insert>
+	
+	
+	<!-- 문화마당 -->
+	<select id="getcListCount" resultType="_int">
+		select count(*)
+		from culture
+		where c_Status='Y'
+	</select>
+	<select id="selectCList" resultMap="cultureResultSet">
+		select *
+		from culture
+		where c_status='Y'
+		order by culture_no desc
+	</select>
+	<resultMap type="Culture" id="cultureResultSet">
+		<id column="CULTURE_NO" property="cNo"/>
+		<result column="CULTURE_TITLE" property="cTitle"/>
+		<result column="CULTURE_CONTENT" property="cContent"/>
+		<result column="CULTURE_TOTAL" property="cTotal"/>
+		<result column="CULTURE_START_DATE" property="cStartDate"/>
+		<result column="CULTURE_END_DATE" property="cEndDate"/>
+		<result column="LECTURE_DATE" property="lDate"/>
+		<result column="LECTURE_TIME" property="lTime"/>
+		<result column="CULTURE_PLACE" property="cPlace"/>
+		<result column="CULTURE_INSTRUCTOR" property="cInstructor"/>
+		<result column="CULTURE_TARGET" property="cTarget"/>
+		<result column="C_DEADLINE" property="cDateLine"/>
+		<result column="C_STATUS" property="cStatus"/>
 		<result column="USER_NO" property="uNo"/>
 	</resultMap>
 	
-<!-- 	<insert id="insertBook"> -->
-<!-- 		insert into books -->
-<!-- 		values(seq_bkno.nextval, #{bTitle), #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate) -->
-		
-<!-- 	</insert> -->
-	
+	<insert id="insertCulture">
+		insert into culture
+		values(seq_cno.nextval, #{cTitle}, #{cContent}, #{cTotal}, #{cStartDate}, #{cEndDate}, #{lDate}, #{lTime}, #{cPlace}, #{cInstructor}, #{cTarget}, default, default)
+	</insert>
+	<insert id="insertCultureAttachment">
+		insert into files
+		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 0, default, 0, 0, seq_cno.CURRVAL, 0, 0)
+	</insert>
+	<insert id="insertCultureFile">
+		insert into files
+		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 0, default, 0, 0, seq_cno.CURRVAL, 0, 0)
+	</insert>
 </mapper>

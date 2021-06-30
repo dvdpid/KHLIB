@@ -1,16 +1,14 @@
 package com.kh.klib.culture.model.vo;
 
-import java.util.Date;
-
 public class Culture {
 	private int cNo;			// 문화마당 번호 
 	private String cTitle;		// 제목
 	private String cContent;	// 내용
 	private int cTotal;			// 모집 인원
-	private Date cStartDate;	// 시작 일자
-	private Date cEndDate;		// 마감 일자
-	private Date lDate;			// 강의 시간
-	private Date lTime;			// 강의 날짜
+	private	String cStartDate;	// 시작 일자
+	private String cEndDate;		// 마감 일자
+	private String lDate;			// 강의 날짜
+	private String lTime;			// 강의 시간
 	private String cPlace;		// 장소
 	private String cInstructor;	// 강사
 	private String cTarget;		// 대상
@@ -20,8 +18,9 @@ public class Culture {
 	
 	public Culture() {}
 
-	public Culture(int cNo, String cTitle, String cContent, int cTotal, Date cStartDate, Date cEndDate, Date lDate,
-			Date lTime, String cPlace, String cInstructor, String cTarget, String cDateLine, String cStatus, int uNo) {
+	public Culture(int cNo, String cTitle, String cContent, int cTotal, String cStartDate, String cEndDate,
+			String lDate, String lTime, String cPlace, String cInstructor, String cTarget, String cDateLine,
+			String cStatus, int uNo) {
 		super();
 		this.cNo = cNo;
 		this.cTitle = cTitle;
@@ -71,35 +70,35 @@ public class Culture {
 		this.cTotal = cTotal;
 	}
 
-	public Date getcStartDate() {
+	public String getcStartDate() {
 		return cStartDate;
 	}
 
-	public void setcStartDate(Date cStartDate) {
+	public void setcStartDate(String cStartDate) {
 		this.cStartDate = cStartDate;
 	}
 
-	public Date getcEndDate() {
+	public String getcEndDate() {
 		return cEndDate;
 	}
 
-	public void setcEndDate(Date cEndDate) {
+	public void setcEndDate(String cEndDate) {
 		this.cEndDate = cEndDate;
 	}
 
-	public Date getlDate() {
+	public String getlDate() {
 		return lDate;
 	}
 
-	public void setlDate(Date lDate) {
+	public void setlDate(String lDate) {
 		this.lDate = lDate;
 	}
 
-	public Date getlTime() {
+	public String getlTime() {
 		return lTime;
 	}
 
-	public void setlTime(Date lTime) {
+	public void setlTime(String lTime) {
 		this.lTime = lTime;
 	}
 
@@ -158,6 +157,5 @@ public class Culture {
 				+ ", cPlace=" + cPlace + ", cInstructor=" + cInstructor + ", cTarget=" + cTarget + ", cDateLine="
 				+ cDateLine + ", cStatus=" + cStatus + ", uNo=" + uNo + "]";
 	}
-	
 	
 }

@@ -3,10 +3,9 @@ package com.kh.klib.admin.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,7 @@ import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.Pagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
+import com.kh.klib.culture.model.vo.Culture;
 
 @Controller
 public class AdminController {
@@ -58,7 +58,6 @@ public class AdminController {
 			currentPage = page;
 		}
 		int listCount = aService.getListCount();
-		System.out.println(listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
@@ -75,54 +74,157 @@ public class AdminController {
 	public String bookInsertForm() {
 		return "admin_add_book";
 	}
-//	@RequestMapping("bkinsert.ad")
-//	public String insertBook(@ModelAttribute Books b, @RequestParam("thumbnailImg1") MultipartFile thumbnailImg1, HttpServletRequest request) {
-//		Files f = new Files();
-//		if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
-//			String renameFileName = saveFile(thumbnailImg1, request);
-//			
-//			if(renameFileName != null) {
-//				f.setOriginName(thumbnailImg1.getOriginalFilename());
-//				f.setChangeName(renameFileName);
-//			}
-//		}
-//		int result = aService.insertBook(b);
-//		
-//		if(result > 0) {
-//			return "redirect:book.ad";
-//		} else {
-//			throw new BooksException("도서 등록에 실패");
-//		}
-//		
-//	}
-//	public String saveFile(MultipartFile thumbnailImg1, HttpServletRequest request) {
-//		String root = request.getSession().getServletContext().getRealPath("resources");
-//		String savePath = root + "/bkuploadFiles";
-//		
-//		File folder = new File(savePath);
-//		if(!folder.exists()) {
-//			folder.mkdir();
-//		}
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-//		String originFileName = thumbnailImg1.getOriginalFilename();
-//		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))
-//								+ "." + originFileName.substring(originFileName.lastIndexOf(".") +1);
-//		String renamePath = folder + "/" + renameFileName;
-//		try {
-//			thumbnailImg1.transferTo(new File(renamePath));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("파일 전송 에러 : " + e.getMessage());
-//		}
-//		return renameFileName;
-//	}							
+	
+	@RequestMapping("bkinsert.ad")
+	public String insertBook(@ModelAttribute Books b, @RequestParam("thumbnailImg1") MultipartFile thumbnailImg1, HttpServletRequest request) {
+		Files f = new Files();
+		if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
+			String renameFileName = bookSaveFile(thumbnailImg1, request);
+			
+			if(renameFileName != null) {
+				f.setOriginName(thumbnailImg1.getOriginalFilename());
+				f.setChangeName(renameFileName);
+			}
+		}
+		
+		int result1 = aService.insertBook(b);
+		int result2 = aService.insertAttachment(f);
+		
+		if(result1 > 0 && result2 > 0) {
+			return "redirect:book.ad";
+		} else {
+			throw new BooksException("도서 등록에 실패");
+		}
+	}
+	public String bookSaveFile(MultipartFile thumbnailImg1, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/bkuploadFiles";
+		
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String originFileName = thumbnailImg1.getOriginalFilename();
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))
+								+ "." + originFileName.substring(originFileName.lastIndexOf(".") +1);
+		String renamePath = folder + "/" + renameFileName;
+		try {
+			thumbnailImg1.transferTo(new File(renamePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+		return renameFileName;
+	}							
 	
 	
 	
 	@RequestMapping("culture.ad")
-	public String adminCultureForm() {
-		return "admin_culture";
+	public ModelAndView adminCultureList(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int clistCount = aService.getcListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, clistCount);
+		
+		ArrayList<Culture> list = aService.selectCList(pi);
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("pi", pi).setViewName("admin_culture");
+		} else {
+			throw new BooksException("도서 조회 실패!");
+		}
+		return mv;
 	}
+	@RequestMapping("cultureInsertForm.ad")
+	public String insertCultureForm() {
+		return "admin_add_culture";
+	}
+	@RequestMapping("cinsert.ad")
+	public String insertCulture(@ModelAttribute Culture c, @RequestParam("uploadFile") MultipartFile uploadFile,
+								@RequestParam("thumbnailImg1") MultipartFile thumbnailImg1, HttpServletRequest request) {
+		System.out.println(c);
+		
+		int result1 = aService.insertCulture(c);
+		
+		
+		Files f = new Files();
+		if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
+			String renameFileName = cultureImgSaveFile(thumbnailImg1, request);
+			
+			if(renameFileName != null) {
+				f.setOriginName(thumbnailImg1.getOriginalFilename());
+				f.setChangeName(renameFileName);
+			}
+		}
+		
+		int result2 = aService.insertCultureAttachment(f);
+		
+		if(uploadFile != null && !uploadFile.isEmpty()) {
+			String renameFileName = cultureSaveFile(uploadFile, request);
+			
+			if(renameFileName != null) {
+				f.setOriginName(uploadFile.getOriginalFilename());
+				f.setChangeName(renameFileName);
+			}
+		}
+		int result3 = aService.insertCultureFile(f);
+		
+		if(result1 > 0 && result2 > 0 && result3 >0) {
+			return "redirect:culture.ad";
+		} else {
+			throw new BooksException("문화 등록에 실패");
+		}
+	}
+	// culture 이미지 saveFile
+	public String cultureImgSaveFile(MultipartFile thumbnailImg1, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/CultureUploadFiles";
+		
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String originFileName = thumbnailImg1.getOriginalFilename();
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))
+								+ "." + originFileName.substring(originFileName.lastIndexOf(".") +1);
+		String renamePath = folder + "/" + renameFileName;
+		try {
+			thumbnailImg1.transferTo(new File(renamePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+		return renameFileName;
+	}
+	
+	
+	// culture 파일 saveFile
+	public String cultureSaveFile(MultipartFile uploadFile, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/CultureUploadFiles";
+		
+		File folder = new File(savePath);
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		String originFileName = uploadFile.getOriginalFilename();
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis()))
+								+ "." + originFileName.substring(originFileName.lastIndexOf(".") +1);
+		String renamePath = folder + "/" + renameFileName;
+		try {
+			uploadFile.transferTo(new File(renamePath));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("파일 전송 에러 : " + e.getMessage());
+		}
+		return renameFileName;
+	}	
 	
 	
 	@RequestMapping("bkgroup.ad")

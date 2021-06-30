@@ -28,32 +28,39 @@
 		<div class="empty" style="height:50px;"></div>
 		
 		<div>
+		<form action="cinsert.ad"  method="post" encType="multipart/form-data">
 			<table style="width: 80%; border-spacing: 5px 30px;">
 			<tr>
 				<td style="font-size: 20px;"><b>문화 제목</b></td>
-				<td><input type="text" name="name"></td>
+				<td><input type="text" name="cTitle"></td>
 				<td style="font-size: 20px;"><b>모집 인원</b></td>
-				<td><input type="text" name="price"></td>
+				<td><input type="text" name="cTotal"></td>
 			</tr>
 			<tr>
-				<td style="font-size: 20px;"><b>접수 기간</b></td>
-				<td><input type="text" name="price"></td>
-				<td style="font-size: 20px;"><b>장소</b></td>
-				<td><input type="text" name="stock"></td>
+				<td style="font-size: 20px;"><b>모집 시작 일자</b></td>
+				<td><input type="datetime-local" name="cStartDate"></td>
+				<td style="font-size: 20px;"><b>모집 마감 일자</b></td>
+				<td><input type="datetime-local" name="cEndDate"></td>
 			</tr>
 			<tr>
 				<td style="font-size: 20px;"><b>강의 시간</b></td>
-				<td><input type="text" name="price"></td>
-				<td style="font-size: 20px;"><b>강사</b></td>
-				<td><input type="text" name="stock"></td>
+				<td><input type="text" name="lTime"></td>
+				<td style="font-size: 20px;"><b>강의 날짜</b></td>
+				<td><input type="datetime-local" name="lDate"></td>
 			</tr>
 			<tr>
+				<td style="font-size: 20px;"><b>강사</b></td>
+				<td><input type="text" name="cInstructor"></td>
 				<td style="font-size: 20px;"><b>대상</b></td>
-				<td><input type="text" name="stock"></td>
+				<td><input type="text" name="cTarget"></td>
+			</tr>
+			<tr>
+				<td style="font-size: 20px;"><b>장소</b></td>
+				<td><input type="text" name="cPlace">
 			</tr>
 			<tr>
 				<td style="font-size: 20px;"><b>프로그램 설명</b></td>
-				<td><textarea name="detail" rows="15" cols="90"></textarea></td>
+				<td><textarea name="cContent" rows="15" cols="90"></textarea></td>
 			</tr>
 		<tr>
 			<td style="font-size: 20px;"><b>책 표지</b></td>
@@ -63,9 +70,15 @@
 				</div>
 				</td>
 		</tr>
+		<tr>
+				<th>첨부파일</th>
+				<td><input type="file" name="uploadFile"></td>
+		</tr>
+		<tr class="btn">
+				<td><input type="submit" value="문화 등록"></td>
+				<td><input type="reset" value="새로 입력" onclick="resetInsertData()"></td>
+		</tr>
 		</table>
-					<input type="submit" value="도서 등록">
-					<input type="reset" value="새로 입력" onclick="resetInsertData()">
 		<div id="fileArea">
 				<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" onchange="LoadImg(this,1)">
 		</div>
@@ -94,6 +107,7 @@
 						}
 					}
 			</script>
+			</form>
 		</div>
 	</div>
 </body>

@@ -275,7 +275,7 @@
 	<div align="center" class="loginArea">
 		<h3>비밀번호 재확인</h3>
 		<p>회원 정보를 안전하게 보호하기 위해 회원 비밀번호를 다시 확인 합니다</p>
-		<form action="login.me" method="">
+		<form action="login.me" method="post">
 			<table id="loginTable" style="text-align:center;">
 					<th>비밀번호</th>
 					<td colspan="2"><input type="password" name="pwd">

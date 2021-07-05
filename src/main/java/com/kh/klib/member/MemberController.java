@@ -40,6 +40,19 @@ public class MemberController {
 	public String enrollView() {
 		return "memberJoin";
 	}
+	@RequestMapping("home.do")
+	public String errorpage() {
+		return "home";
+	}
+	@RequestMapping("mypageForm.me")
+	public String mypageForm() {
+		return "memberMypage";
+	}
+	
+	@RequestMapping("mupdateView.me")
+	public String memberUpdateForm() {		
+		return "memberUpdate";
+	}
 
 	
 

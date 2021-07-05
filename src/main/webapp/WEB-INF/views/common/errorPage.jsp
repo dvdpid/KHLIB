@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 	<h1>Error</h1>
 	<h2 style="color:red">1. ${ msg } </h2>
 	<h2 style="color:red">2. ${ requestScope['javax.servlet.error.message']  }</h2>
-	<a href="../home">½ÃÀÛÆäÀÌÁö·Î µ¹¾Æ°¡±â</a>
+	<a href="home.do">ì‹œì‘í˜ì´ì§€ë¡œ ëŒì•„ê°€ê¸°</a>
 	</div>
 </body>
 </html>

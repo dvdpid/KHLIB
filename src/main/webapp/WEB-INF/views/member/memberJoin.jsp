@@ -45,7 +45,9 @@
 					<tr>
 						<th><label class="must">*</label> 아이디 </th>
 						<td width="200px"><input type="text" name="id" placeholder="아이디" required style="width: 100%;"></td>
+						<td width="100px"><input type="button" id="nickCheck" value="중복확인"></td>
 						<td width="100px"><label id="idResult"></label></td>
+						
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 </th>
@@ -65,7 +67,6 @@
 					<tr>
 						<th><label class="must">*</label> 닉네임 </th>
 						<td><input type="text" name="nickname" placeholder="닉네임" required style="width: 100%;"></td>
-						<td width="100px"><input type="button" id="nickCheck" value="중복확인"></td>
 					</tr>
 					<tr>
 						<th>생일</th>

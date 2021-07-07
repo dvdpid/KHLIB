@@ -11,10 +11,22 @@
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<!-- <script src="resources/js/jquery-3.6.0.min.js"></script> -->
-<script src="resources/js/lightslider.js"></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="resources/js/lightslider.js"></script>
+<script src="resources/js/lightslider.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<!-- <script type="text/javascript" src="resources/js/lightslider.js"></script> -->
+<script>
+	$(document).ready(function() {
+	    $('#autoWidth').lightSlider({
+	        autoWidth:true,
+	        loop:true,
+	        onSliderLoad: function() {
+	            $('#autoWidth').removeClass('cS-hidden');
+	        } 
+	    });  
+	  });
+</script>
+</head>
 <body>
 	<c:import url="common/menubar.jsp"></c:import>
 	
@@ -145,17 +157,7 @@
 			</div>
 		</div>
 		<br><br>
-<%--   <c:import url="common/footer.jsp"/> --%>
-  <script>
-$(document).ready(function() {
-    $('#autoWidth').lightSlider({
-        autoWidth:true,
-        loop:true,
-        onSliderLoad: function() {
-            $('#autoWidth').removeClass('cS-hidden');
-        } 
-    });  
-  });
-</script>
+  <c:import url="common/footer.jsp"/>
+
 </body>
 </html>

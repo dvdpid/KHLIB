@@ -72,5 +72,15 @@ public class AdminServiceImpl implements AdminService {
 	public Member adminLogin(Member m) {
 		return aDAO.adminLogin(sqlSession, m);
 	}
+
+	@Override
+	public int insertAdmin(Member m) {
+		return aDAO.insertAdmin(sqlSession, m);
+	}
+
+	@Override
+	public int dupId(String id) {
+		return aDAO.dupId(sqlSession, id);
+	}
 	
 }

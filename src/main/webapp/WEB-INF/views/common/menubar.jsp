@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>열람실 상세설명</title>
-<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link rel="stylesheet" href="resources/css/common/menubar.css?ver=1.0" type="text/css">
 <script src="resources/js/menubar.js" defer></script>
 </head>
@@ -34,7 +33,7 @@
 			<c:if test="${ sessionScope.loginUser.admin == 'Y' }">
 				<li><a href="user.ad">관리자 페이지</a></li>
 			</c:if>
-				<c:out value="${ loginUser.name }님 환영합니다."/> 
+				<li><c:out value="${ loginUser.name }님 환영합니다."/></li> 
 				<li><a href="logout.me">로그아웃</a></li>
 				<li><a href="mypageForm.me">내 정보보기</a></li>						
 			</ul>					

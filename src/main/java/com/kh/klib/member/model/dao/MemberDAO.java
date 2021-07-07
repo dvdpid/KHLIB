@@ -17,4 +17,8 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
+	public int dupId(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("memberMapper.dupId", id);
+	}
+
 }

@@ -24,4 +24,9 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member m) {
 		return mDAO.insertMember(sqlSession, m);
 	}
+
+	@Override
+	public int dupId(String id) {
+		return mDAO.dupId(sqlSession, id);
+	}
 }

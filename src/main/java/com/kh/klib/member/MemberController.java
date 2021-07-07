@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -110,6 +111,11 @@ public class MemberController {
 			return "../common/errorPage";
 		}
 	}
-
-	
+	@RequestMapping("dupId.me")
+	@ResponseBody
+	public String dupId(@RequestParam("id") String id) {
+		
+		int result = mService.dupId(id);
+		return result + "";
+	}
 }

@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>열람실 상세설명</title>
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <link rel="stylesheet" href="resources/css/common/menubar.css?ver=1.0" type="text/css">
 <script src="resources/js/menubar.js" defer></script>
 </head>

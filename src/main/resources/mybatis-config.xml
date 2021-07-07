@@ -22,6 +22,8 @@
 <!-- 		<mapper resource="mapper/culture-mapper.xml"/> -->
 		<mapper resource="mapper/admin-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>
+		<mapper resource="mapper/books-mapper.xml" />
+		<mapper resource="mapper/customer-mapper.xml" />
 	</mappers>
 	
 </configuration>

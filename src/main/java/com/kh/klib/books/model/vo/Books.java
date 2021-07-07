@@ -4,6 +4,9 @@ import java.sql.Date;
 
 public class Books {
 	private int bNo;			// 도서 번호
+	// 사진등록을 위한 파일 필드 추가
+	private String originFileName;
+	private String renameFileName;
 	private String bTitle;		// 책 제목
 	private String bWriter;		// 저자
 	private String bCompany;	// 출판사
@@ -19,6 +22,22 @@ public class Books {
 			String bRecommend, Date entryDate) {
 		super();
 		this.bNo = bNo;
+		this.bTitle = bTitle;
+		this.bWriter = bWriter;
+		this.bCompany = bCompany;
+		this.bDate = bDate;
+		this.bContent = bContent;
+		this.bStatus = bStatus;
+		this.bRecommend = bRecommend;
+		this.entryDate = entryDate;
+	}
+
+	public Books(int bNo, String originFileName, String renameFileName, String bTitle, String bWriter, String bCompany,
+			Date bDate, String bContent, String bStatus, String bRecommend, Date entryDate) {
+		super();
+		this.bNo = bNo;
+		this.originFileName = originFileName;
+		this.renameFileName = renameFileName;
 		this.bTitle = bTitle;
 		this.bWriter = bWriter;
 		this.bCompany = bCompany;
@@ -100,12 +119,33 @@ public class Books {
 	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
+	
+	
+
+	public String getOriginFileName() {
+		return originFileName;
+	}
+
+	public void setOriginFileName(String originFileName) {
+		this.originFileName = originFileName;
+	}
+
+	public String getRenameFileName() {
+		return renameFileName;
+	}
+
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
+	}
 
 	@Override
 	public String toString() {
-		return "books [bNo=" + bNo + ", bTitle=" + bTitle + ", bWriter=" + bWriter + ", bCompany=" + bCompany
-				+ ", bDate=" + bDate + ", bContent=" + bContent + ", bStatus=" + bStatus + ", bRecommend=" + bRecommend
-				+ ", entryDate=" + entryDate + "]";
+		return "Books [bNo=" + bNo + ", originFileName=" + originFileName + ", renameFileName=" + renameFileName
+				+ ", bTitle=" + bTitle + ", bWriter=" + bWriter + ", bCompany=" + bCompany + ", bDate=" + bDate
+				+ ", bContent=" + bContent + ", bStatus=" + bStatus + ", bRecommend=" + bRecommend + ", entryDate="
+				+ entryDate + "]";
 	}
+
+	
 	
 }

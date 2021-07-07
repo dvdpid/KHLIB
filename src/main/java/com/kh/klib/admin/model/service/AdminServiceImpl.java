@@ -11,6 +11,7 @@ import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.member.model.vo.Member;
 
 @Service("aService")
 public class AdminServiceImpl implements AdminService {
@@ -65,6 +66,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int insertCultureFile(Files f) {
 		return aDAO.insertCultureFile(sqlSession, f);
+	}
+
+	@Override
+	public Member adminLogin(Member m) {
+		return aDAO.adminLogin(sqlSession, m);
 	}
 	
 }

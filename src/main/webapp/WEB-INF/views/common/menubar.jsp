@@ -28,8 +28,11 @@
 				<li><a href="enrollView.me">회원가입</a></li>
 			</ul>
 		</c:if>	
-				<c:if test="${ !empty sessionScope.loginUser }">
+		<c:if test="${ !empty sessionScope.loginUser }">
 			<ul class="lists">
+			<c:if test="${ sessionScope.loginUser.admin == 'Y' }">
+				<li><a href="user.ad">관리자 페이지</a></li>
+			</c:if>
 				<c:out value="${ loginUser.name }님 환영합니다."/> 
 				<li><a href="logout.me">로그아웃</a></li>
 				<li><a href="mypageForm.me">내 정보보기</a></li>						

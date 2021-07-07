@@ -26,13 +26,13 @@
 				도서검색
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
+		<div class="sideButton" onclick="location.href='${contextPath}/book.bk';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				신착도서
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='${contextPath}/bookMain.bk';">
+		<div class="sideButton" onclick="location.href='${contextPath}/recommend.bk';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				추천도서
@@ -45,12 +45,12 @@
 		<div class="title">도서정보</div>
 		<div class="bookSumWrapper">
 			<div class="bookImage">
-				<img src="resources/images/book/book16.jpg" />
+				<img src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}" />
 			</div>
 			<div class="infoArea">
 			<div class="titleArea">
 				<div id="bookCategory">도서</div>
-				<div id="bookTitle">(10와 통하는) 법과 재판 이야기</div>
+				<div id="bookTitle">${ book.bTitle }</div>
 			</div>
 			<div>
 				<table>
@@ -60,8 +60,9 @@
 					</tr>
 					<tr>
 						<td>발행사항</td>
-						<td>서울: 철수와 영희, 2021</td>
+						<td>${ book.bCompany }, ${ book.bDate }</td>
 					</tr>
+					<!-- 이부분을 어떻게 해야 좋을지 모르겠다. -->
 					<tr>
 						<td>형태사항</td>
 						<td>204p.: 삽화; 22cm</td>
@@ -75,12 +76,14 @@
 						<td>청소년용</td>
 					</tr>
 					
+					<!--  -->
 				</table>
 			</div>
 			</div>
 			<div class="detailWrapper">
 				<div id="bookDetailTitle">상세정보</div>
-				<div id="bookDetail">평화를 사랑하고 약자를 보호하는 법 이야기정의의 여신은 왜 눈을 가리고 있을까요? 형법에 처벌 조항이 없으면 범죄가 아닌가요? 국민 참여 재판은 어떻게 할까요? 인공 지능 판사가 더 공정한 재판을 할 수 있을까요? 사형 제도는 유지해야 하나요? 악법도 법이니까 지켜야 할까요? 이 책은 청소년들이 어렵고...
+				<div id="bookDetail">
+				${ book.bContent }
 				</div>
 			</div>
 		</div>

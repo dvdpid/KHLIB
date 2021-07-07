@@ -10,6 +10,7 @@ import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.member.model.vo.Member;
 
 @Repository("aDAO")
 public class AdminDAO {
@@ -56,6 +57,10 @@ public class AdminDAO {
 
 	public int insertCultureFile(SqlSessionTemplate sqlSession, Files f) {
 		return sqlSession.insert("adminMapper.insertCultureFile" ,f);
+	}
+
+	public Member adminLogin(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("adminMapper.adminLogin", m);
 	}
 
 	

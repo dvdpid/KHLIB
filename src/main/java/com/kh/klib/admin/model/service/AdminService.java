@@ -6,6 +6,7 @@ import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.member.model.vo.Member;
 
 public interface AdminService {
 
@@ -27,6 +28,8 @@ public interface AdminService {
 	int insertCultureAttachment(Files f);
 
 	int insertCultureFile(Files f);
+
+	Member adminLogin(Member m);
 
 
 }

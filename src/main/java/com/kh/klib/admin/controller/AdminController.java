@@ -1,17 +1,23 @@
 package com.kh.klib.admin.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,12 +28,49 @@ import com.kh.klib.common.Pagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.member.model.vo.Member;
 
+@SessionAttributes("loginUser") 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	private AdminService aService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcrypPasswordEncoder;
+	
+	@RequestMapping("loginForm.ad")
+	public String adminLoginForm() {
+		return "admin_login";
+	}
+	
+	@RequestMapping(value = "login.ad", method=RequestMethod.POST)
+	public String adminLogin(Member m, Model model) {
+		
+		Member loginUser = aService.adminLogin(m);
+		
+		if(bcrypPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+			model.addAttribute("loginUser", loginUser);
+			System.out.println(m);
+			
+			return "admin_user";
+			
+		} else {
+			return "../common/errorPage";
+		}
+	}
+	@RequestMapping("logout.ad")
+	public String adminLogout(SessionStatus status) {
+		status.setComplete();
+		return "admin_user";
+	}
+	
+	
+	@RequestMapping("signupForm.ad")
+	public String adminSignUpForm() {
+		return "admin_SignUp";
+	}
 	
 	
 	@RequestMapping("user.ad")

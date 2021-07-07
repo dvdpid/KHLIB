@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,6 +71,35 @@ public class AdminController {
 	@RequestMapping("signupForm.ad")
 	public String adminSignUpForm() {
 		return "admin_SignUp";
+	}
+	@RequestMapping("signup.ad")
+	public String adminSignUp(@ModelAttribute Member m, @RequestParam("address1") String address1,
+														 @RequestParam("address2") String address2,
+														 @RequestParam("address3") String address3,
+														 @RequestParam("year") String year,
+														 @RequestParam("month") String month,
+														 @RequestParam("day") String day	) {
+		String address = address1 + "/" + address2 + "/" + address3;
+		m.setAddress(address);
+		String date = year + "-"+ month + "-"+ day;
+		Date d = Date.valueOf(date);
+		
+		m.setBirthday(d);
+		
+		
+		
+		String encPwd = bcrypPasswordEncoder.encode(m.getPwd());
+		m.setPwd(encPwd);
+		
+		
+		int result = aService.insertAdmin(m);
+		
+		
+		if(result > 0) { 
+			return "../home";
+		} else {
+			return "../common/errorPage";
+		}
 	}
 	
 	
@@ -274,6 +304,12 @@ public class AdminController {
 	public String adminBgroupForm() {
 		return "admin_bGroup";
 	}
-	
+	@RequestMapping("dupId.ad")
+	@ResponseBody
+	public String dupId(@RequestParam("id") String id) {
+		
+		int result = aService.dupId(id);
+		return result + "";
+	}
 	
 }

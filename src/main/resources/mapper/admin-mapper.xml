@@ -100,5 +100,17 @@
  		<result column="ADMIN_YN" property="admin"/>
  	</resultMap>
 	
+	<!-- 관리자 회원가입 -->
+	<insert id="insertAdmin">
+		insert into users
+ 		values(seq_uno.nextval,#{id}, #{pwd}, #{name}, #{nickname},#{birthday}, #{gender}, #{phone},#{email},
+ 			#{address}, default, 'Y')
+	</insert>
+	<select id="dupId" resultType="_int">
+		SELECT count(*)
+		from users
+		where user_id = #{id}
+	</select>
+	
 	
 </mapper>

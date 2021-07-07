@@ -63,5 +63,13 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.adminLogin", m);
 	}
 
+	public int insertAdmin(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.insert("adminMapper.insertAdmin", m);
+	}
+
+	public int dupId(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("adminMapper.dupId", id);
+	}
+
 	
 }

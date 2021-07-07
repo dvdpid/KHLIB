@@ -31,5 +31,9 @@ public interface AdminService {
 
 	Member adminLogin(Member m);
 
+	int insertAdmin(Member m);
+
+	int dupId(String id);
+
 
 }

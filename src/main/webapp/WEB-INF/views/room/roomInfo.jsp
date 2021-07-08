@@ -17,19 +17,19 @@
 			<h2 id="sideMainTitle">열람실</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='room.ro';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				열람실 현황
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='roomMypage.ro';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				내 자리
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='roomInfo.ro';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				이용 안내
@@ -63,5 +63,7 @@
 			<img id="infoImg1" src="resources/images/libraryImg1.jpg"/>
 		</div>
 	</div>
+	
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

@@ -12,13 +12,14 @@
 		<typeAlias type="com.kh.klib.culture.model.vo.Culture" alias="Culture"/>
 <!-- 		<typeAlias type="com.kh.klib.customer.model.vo.Customer" alias="Customer"/> -->
 <!-- 		<typeAlias type="com.kh.klib.info.model.vo.Info" alias="Info"/> -->
-<!-- 		<typeAlias type="com.kh.klib.room.model.vo.Room" alias="Room"/> -->
+		<typeAlias type="com.kh.klib.room.model.vo.Room" alias="Room"/>
+ 		<typeAlias type="com.kh.klib.room.model.vo.RoomSign" alias="RoomSign"/>
 <!-- 		<typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/> -->
 	</typeAliases>
 	
 	<mappers>
 <!-- 		<mapper resource="mapper/group-mapper.xml"/> -->
-<!-- 		<mapper resource="mapper/room-mapper.xml"/> -->
+ 		<mapper resource="mapper/room-mapper.xml"/>
 <!-- 		<mapper resource="mapper/culture-mapper.xml"/> -->
 		<mapper resource="mapper/admin-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>

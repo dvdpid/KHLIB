@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="roomMapper">
+
+	<select id="selectrList" resultMap="roomResultSet">
+		select *
+		from room
+		order by room_no
+	</select>
+	<resultMap type="Room" id="roomResultSet">
+		<id column="ROOM_NO" property="rNo"/>
+		<result column="ROOM_STATUS" property="rStatus"/>
+	</resultMap>
+	<update id="updateRoom">
+		update room
+		set room_status='Y'
+		where room_no=#{rNo} and room_status='N'
+	</update>
+	<insert id="insertRoomSign">
+		insert into room_sign
+		values (seq_rsno.nextval, sysdate, null, #{nickName},
+				#{rNo}, #{uNo})
+	</insert>
+	
+	<select id="getAllListCount" resultType="_int">
+		select count(*)
+		from room
+	</select>
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from room
+		where room_status='Y'
+	</select>
+	
+	<select id="getChk" resultType="_int">
+		select count(*) 
+		from room_sign
+		    join room using(room_no)
+		where user_no=#{uNo} and ((room_status='Y' and out_time is not null) or room_status='Y')
+	</select>
+	
+	<select id="selectrsList" resultMap="roomSignResultSet">
+		<![CDATA[
+			select * 
+			from (select *
+					from room_sign
+					where user_no=#{uNo} and out_time is null
+					order by rs_no desc)
+			where rownum = 1
+		   ]]>
+	</select>
+	
+	<select id="selectrsBeforeList" resultMap="roomSignResultSet">
+		<![CDATA[
+			select * 
+			from (select *
+					from room_sign
+					where user_no=#{uNo} and out_time is not null
+					order by rs_no desc)
+			where rownum = 1
+		   ]]>
+	</select>
+	<resultMap type="RoomSign" id="roomSignResultSet">
+		<id column="RS_NO" property="rsNo"/>
+		<result column="IN_TIME" property="inTime"/>
+		<result column="OUT_TIME" property="outTime"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="ROOM_NO" property="rNo"/>
+		<result column="USER_NO" property="uNo"/>
+	</resultMap>
+	
+	<update id="cancelRoom" >
+		update room_sign
+		set out_time=sysdate
+		where user_no=#{uNo} and out_time is null
+	</update>
+	
+	<update id="updateStatus">
+		update room
+		set room_status='N'
+		where room_no=#{rNo}
+	</update>
+	
+</mapper>

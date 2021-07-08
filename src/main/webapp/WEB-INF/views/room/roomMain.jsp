@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>열람실 현황</title>
-<link rel="stylesheet" href="resources/css/roomMain.css" type="text/css">
+<link rel="stylesheet" href="resources/css/roomMain.css?ver=1.0" type="text/css">
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"></c:import>
@@ -17,19 +18,19 @@
 			<h2 id="sideMainTitle">열람실</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='room.ro';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
 				열람실 현황
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='roomMypage.ro';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
 				내 자리
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='roomInfo.ro';">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				이용 안내
@@ -56,85 +57,57 @@
 				</div>
 			</div>
 		</div>
-		<div id="outstanding">잔여석(13/48)</div>
+		<div id="outstanding">예약석(${ listCount }/${ allListCount })</div>
 		<div id="seatView">
-			<table id="seatView1">
-				<tr>
-					<td id="full">1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td id="full">8</td>
-				</tr>
-				<tr>
-					<td>9</td>
-					<td id="full">10</td>
-					<td>11</td>
-					<td>12</td>
-				</tr>
-				<tr>
-					<td>13</td>
-					<td>14</td>
-					<td>15</td>
-					<td>16</td>
-				</tr>
-				<tr>
-					<td>17</td>
-					<td>18</td>
-					<td id="full">19</td>
-					<td>20</td>
-				</tr>
-				<tr>
-					<td>21</td>
-					<td>22</td>
-					<td>23</td>
-					<td>24</td>
-				</tr>
-			</table>
-			<table id="seatView2">
-				<tr>
-					<td>25</td>
-					<td id="full">26</td>
-					<td>27</td>
-					<td id="full">28</td>
-				</tr>
-				<tr>
-					<td id="full">29</td>
-					<td>30</td>
-					<td>31</td>
-					<td>32</td>
-				</tr>
-				<tr>
-					<td>33</td>
-					<td>34</td>
-					<td id="full">35</td>
-					<td>36</td>
-				</tr>
-				<tr>
-					<td id="full">37</td>
-					<td>38</td>
-					<td>39</td>
-					<td>40</td>
-				</tr>
-				<tr>
-					<td>41</td>
-					<td>42</td>
-					<td id="full">43</td>
-					<td id="full">44</td>
-				</tr>
-				<tr>
-					<td id="full">45</td>
-					<td id="full">46</td>
-					<td>47</td>
-					<td>48</td>
-				</tr>
-			</table>
+			<div id="seatView1">
+				<c:forEach var="r" items="${ rlist }" begin="0" end="23">
+					<c:if test="${ r.rStatus == 'N' }">
+						<c:if test="${ check == 0 }">
+							<div class="empty" onclick="window.open('rSign.ro?rNo='+${ r.rNo }, 'roomSignPage', 'width=800, height=500, top=100, left=300,location=no');">
+							${ r.rNo }</div>
+						</c:if>
+						<c:if test="${ check > 0 }">
+							<div class="empty" onclick="alert('중복 예약이 불가능합니다.');">
+							${ r.rNo }</div>
+						</c:if>
+					</c:if>
+					<c:if test="${ r.rStatus == 'Y' }">
+						<div class="full" onclick="alert('예약된 좌석입니다. 다른 좌석을 예약해주시기 바랍니다.');">${ r.rNo }</div>
+					</c:if>
+				</c:forEach>
+			</div>
+			<div id="seatView2">
+				<c:forEach var="r" items="${ rlist }" begin="24" end="47">
+					<c:if test="${ r.rStatus == 'N' }">
+						<c:if test="${ check == 0 }">
+							<div class="empty" onclick="window.open('rSign.ro?rNo='+${ r.rNo }, 'roomSignPage', 'width=800, height=500, top=100, left=300,location=no');">
+							${ r.rNo }</div>
+						</c:if>
+						<c:if test="${ check > 0 }">
+							<div class="empty" onclick="alert('중복 예약이 불가능합니다.');">
+							${ r.rNo }</div>
+						</c:if>
+					</c:if>
+					<c:if test="${ r.rStatus == 'Y' }">
+						<div class="full" onclick="alert('예약된 좌석입니다. 다른 좌석을 예약해주시기 바랍니다.');">${ r.rNo }</div>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
+	
+	<c:import url="../common/footer.jsp"/>
+	
+	<c:if test="${ empty loginUser }">
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#seatView div').removeAttr('onclick');
+				$("#seatView").click(function(){
+					alert("로그인 후 이용 가능합니다.");
+					document.location.href="loginForm.me";
+				});
+			});
+		</script>
+	</c:if>
 </body>
 </html>

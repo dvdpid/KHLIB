@@ -76,7 +76,7 @@
 	</insert>
 	<insert id="insertCultureFile">
 		insert into files
-		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 0, default, 0, 0, seq_cno.CURRVAL, 0, 0)
+		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 2, default, 0, 0, seq_cno.CURRVAL, 0, 0)
 	</insert>
 	
 	<!-- 관리자 로그인 -->

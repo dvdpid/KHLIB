@@ -6,7 +6,11 @@
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>홈페이지</title>
-
+<style>
+	.groupArea a{
+		pointer-events:none;
+	}
+</style>
 <link rel="stylesheet" href="resources/css/common/mainPage.css" type="text/css">
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>
@@ -120,40 +124,7 @@
 				<div id="viewArea">열람실 현황 페이지</div>
 			</div>
 			<div class="groupArea">
-				<div id="groupTitle"><span>독서 모임</span><button id="groupBtn">+ 더보기</button></div>
-				<div id="groupTable">
-					<table>
-						<thead style="background:rgba(224, 224, 224, 0.5); font-weight: 700;">
-							<tr>
-								<td>No.</td>
-								<td>Name</td>
-								<td>Value</td>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>최신 4개 게시글</td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>4</td>
-								<td></td>
-								<td></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<c:import url="test.jsp"></c:import>
 			</div>
 		</div>
 		<br><br>

@@ -6,11 +6,6 @@
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>홈페이지</title>
-<style>
-	.groupArea a{
-		pointer-events:none;
-	}
-</style>
 <link rel="stylesheet" href="resources/css/common/mainPage.css" type="text/css">
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>

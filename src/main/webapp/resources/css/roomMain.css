@@ -100,25 +100,30 @@
 		justify-content: center;
 	}
 	
-	#seatView table{ 
+	#seatView1, #seatView2{ 
 		width: 100%;
 		text-align: center;
-		border: none;
 		border-spacing: 5px 20px;
 	}
 	
-	#seatView table td{
+	#seatView1>div, #seatView2>div{
+		display: flex;
 		border: 1px solid lightgray;
-		padding: 4% 5%;
+		float:left;
+		width: 5%;
+		padding: 4% 7%;
+		margin: 2% 1% 2% 2%;
 		cursor: pointer;
+		justify-content: center;
 	}
 	
-	#seatView table td:hover{ background: rgb(94, 94, 94);}
+	#seatView1>div:hover, #seatView2>div:hover{ background: rgb(94, 94, 94);}
 	
 	#seatView1{margin-right: 2%;}
 	#seatView2{margin-left: 2%;}
 	
-	#full{ background: rgba(224, 224, 224);}
+	.full{ background: rgb(224, 224, 224);}
+	.empty{ background: none; }
 	
 @media screen and (max-width: 1035px){
 

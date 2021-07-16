@@ -12,6 +12,8 @@ import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.room.model.vo.Room;
+import com.kh.klib.room.model.vo.RoomSign;
 
 @Service("aService")
 public class AdminServiceImpl implements AdminService {
@@ -25,6 +27,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.getListCount(sqlSession);
 	}
 
+	@Override
+	public int getListUserCount() {
+		return aDAO.getListUserCount(sqlSession);
+	}
+	
 	@Override
 	public ArrayList<Books> selectList(PageInfo pi) {
 		return aDAO.selectList(sqlSession, pi);
@@ -82,5 +89,68 @@ public class AdminServiceImpl implements AdminService {
 	public int dupId(String id) {
 		return aDAO.dupId(sqlSession, id);
 	}
+
+	@Override
+	public ArrayList<Member> selectUserList(PageInfo pi) {
+		return aDAO.selectUserList(sqlSession, pi);
+	}
+
+	@Override
+	public int getListadminUserCount() {
+		return aDAO.getListadminUserCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Member> selectadminUserList(PageInfo api) {
+		return aDAO.selectadminUserList(sqlSession, api);
+	}
+
+	@Override
+	public int deleteUser(Integer no) {
+		return aDAO.deleteUser(sqlSession, no);
+	}
+
+	@Override
+	public int deleteAdmin(Integer no) {
+		return aDAO.deleteAdmin(sqlSession, no);
+	}
+
+	@Override
+	public ArrayList<Room> selectrList() {
+		return aDAO.selectrList(sqlSession);
+	}
+
+	@Override
+	public int getAllListCount() {
+		return aDAO.getAllListCount(sqlSession);
+	}
+
+	@Override
+	public int getrlistCount() {
+		return aDAO.getrlistCount(sqlSession);
+	}
+
+	@Override
+	public int getChk(int uNo) {
+		return aDAO.getChk(sqlSession, uNo);
+	}
+
+	@Override
+	public ArrayList<RoomSign> selectNick(Integer rNo) {
+		return aDAO.selectNick(sqlSession, rNo);
+	}
+
+	@Override
+	public int cancelRoom(Integer rNo) {
+		return aDAO.cancelRoom(sqlSession, rNo);
+	}
+
+	@Override
+	public int outTime(Integer rsNo) {
+		return aDAO.outTime(sqlSession, rsNo);
+	}
+
+
+
 	
 }

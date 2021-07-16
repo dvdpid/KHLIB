@@ -33,6 +33,9 @@
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>
+			<ul class="topLists">
+				<li><a href="home.do">사용자 화면</a></li>
+			</ul>
 		</div>
 	</section>
 </body>

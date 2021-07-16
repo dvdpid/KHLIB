@@ -11,6 +11,8 @@ import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.room.model.vo.Room;
+import com.kh.klib.room.model.vo.RoomSign;
 
 @Repository("aDAO")
 public class AdminDAO {
@@ -70,6 +72,65 @@ public class AdminDAO {
 	public int dupId(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.selectOne("adminMapper.dupId", id);
 	}
+
+	public int getListUserCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListUserCount");
+	}
+
+	public ArrayList<Member> selectUserList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectUserList", null, rowBounds);
+	}
+
+	public int getListadminUserCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListadminUserCount");
+	}
+
+	public ArrayList<Member> selectadminUserList(SqlSessionTemplate sqlSession, PageInfo api) {
+		int offset = (api.getCurrentPage() - 1) * api.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, api.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectadminUserList", null, rowBounds);
+	}
+
+	public int deleteUser(SqlSessionTemplate sqlSession, Integer no) {
+		return sqlSession.update("adminMapper.deleteUser", no);
+	}
+
+	public int deleteAdmin(SqlSessionTemplate sqlSession, Integer no) {
+		return sqlSession.update("adminMapper.deleteAdmin", no);
+	}
+
+	public ArrayList<Room> selectrList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectrList");
+	}
+
+	public int getAllListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getAllListCount");
+	}
+
+	public int getrlistCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getrlistCount");
+	}
+
+	public int getChk(SqlSessionTemplate sqlSession, int uNo) {
+		return sqlSession.selectOne("adminMapper.getChk", uNo);
+	}
+
+	public ArrayList<RoomSign> selectNick(SqlSessionTemplate sqlSession, Integer rNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectNick", rNo);
+	}
+
+	public int cancelRoom(SqlSessionTemplate sqlSession, Integer rNo) {
+		return sqlSession.update("adminMapper.cancelRoom", rNo);
+	}
+
+	public int outTime(SqlSessionTemplate sqlSession, Integer rsNo) {
+		return sqlSession.update("adminMapper.outTime", rsNo);
+	}
+
 
 	
 }

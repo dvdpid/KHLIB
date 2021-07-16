@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.popup{
+	display: flex; justify-content: center; align-items: center;
+	flex-direction: column; margin: 20px 40px;
+}
+
+.popup #title{ border-bottom: 2px solid lightgray; width: 100%;}
+
+.form{
+	margin-top: 20px;
+}
+
+.form {
+	border: 1px dotted black; padding: 25px 50px; flex-direction: column;
+	display: flex; justify-content: center; align-items: center; margin-top: 50px;
+}
+
+.formTable td{ padding: 10px 10px;}
+
+.agree{ padding: 10px 10px; }
+
+.seatArea{ 
+	border: 4px solid lightgray; padding: 20px 35px; 
+	font-size: 20px; margin-left: 10px;
+}
+
+#btnArea{ display: flex; flex-direction: row;}
+
+.btnArea{
+	margin-top: 10px;
+	padding : 7px 30px;
+	cursor: pointer;
+	background: rgb(212, 129, 91);
+	color: white;
+	border: none;
+	border-radius: 5px;
+	margin-left: 3px;
+	margin-right: 3px;
+}

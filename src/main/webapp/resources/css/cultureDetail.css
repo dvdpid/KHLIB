@@ -20,8 +20,8 @@
 	
 	.main{ float: right; width: 75%; text-align: center; }
 	
-	.programInfoTable{ float: left; width: 50%;}
-	.programImageTable{ float: right; width: 50%;}
+	.programInfoTable{ float: left; width: 50%; margin-bottom: 30px;}
+	.programImageTable{ float: right; width: 50%; margin-bottom: 30px;}
 
 	#programDetailTable{
 		margin-top: 20px;
@@ -51,6 +51,8 @@
 		padding: 5px 5%;
 		border-radius: 5px;
 	}
+	
+	#signBtn:hover, #listBtn:hover{ background: rgb(159, 101, 74); cursor: pointer; }
 	
 	#signBtn{ margin-right: 3px; }
 	#listBtn{ margin-left: 3px;}

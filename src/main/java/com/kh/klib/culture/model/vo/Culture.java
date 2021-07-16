@@ -12,15 +12,14 @@ public class Culture {
 	private String cPlace;		// 장소
 	private String cInstructor;	// 강사
 	private String cTarget;		// 대상
-	private String cDateLine;	// 마감 상태
+	private String cDeadLine;	// 마감 상태
 	private String cStatus;		// 문화 상태
-	private int uNo;			// 계정 번호
 	
 	public Culture() {}
 
 	public Culture(int cNo, String cTitle, String cContent, int cTotal, String cStartDate, String cEndDate,
-			String lDate, String lTime, String cPlace, String cInstructor, String cTarget, String cDateLine,
-			String cStatus, int uNo) {
+			String lDate, String lTime, String cPlace, String cInstructor, String cTarget, String cDeadLine,
+			String cStatus) {
 		super();
 		this.cNo = cNo;
 		this.cTitle = cTitle;
@@ -33,9 +32,8 @@ public class Culture {
 		this.cPlace = cPlace;
 		this.cInstructor = cInstructor;
 		this.cTarget = cTarget;
-		this.cDateLine = cDateLine;
+		this.cDeadLine = cDeadLine;
 		this.cStatus = cStatus;
-		this.uNo = uNo;
 	}
 
 	public int getcNo() {
@@ -126,12 +124,12 @@ public class Culture {
 		this.cTarget = cTarget;
 	}
 
-	public String getcDateLine() {
-		return cDateLine;
+	public String getcDeadLine() {
+		return cDeadLine;
 	}
 
-	public void setcDateLine(String cDateLine) {
-		this.cDateLine = cDateLine;
+	public void setcDeadLine(String cDeadLine) {
+		this.cDeadLine = cDeadLine;
 	}
 
 	public String getcStatus() {
@@ -142,20 +140,14 @@ public class Culture {
 		this.cStatus = cStatus;
 	}
 
-	public int getuNo() {
-		return uNo;
-	}
-
-	public void setuNo(int uNo) {
-		this.uNo = uNo;
-	}
-
 	@Override
 	public String toString() {
 		return "Culture [cNo=" + cNo + ", cTitle=" + cTitle + ", cContent=" + cContent + ", cTotal=" + cTotal
 				+ ", cStartDate=" + cStartDate + ", cEndDate=" + cEndDate + ", lDate=" + lDate + ", lTime=" + lTime
-				+ ", cPlace=" + cPlace + ", cInstructor=" + cInstructor + ", cTarget=" + cTarget + ", cDateLine="
-				+ cDateLine + ", cStatus=" + cStatus + ", uNo=" + uNo + "]";
+				+ ", cPlace=" + cPlace + ", cInstructor=" + cInstructor + ", cTarget=" + cTarget + ", cDeadLine="
+				+ cDeadLine + ", cStatus=" + cStatus + "]";
 	}
+
+	
 	
 }

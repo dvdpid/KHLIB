@@ -63,5 +63,7 @@
 			<img id="infoImg1" src="resources/images/culture/cultureInfo.jpg"/>
 		</div>
 	</div>
+	
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

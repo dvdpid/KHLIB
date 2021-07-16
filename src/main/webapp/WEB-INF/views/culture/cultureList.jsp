@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문화마당 이용안내</title>
-<link rel="stylesheet" href="resources/css/cultureList.css?ver=2.0" type="text/css">
+<link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <c:import url="../common/menubar.jsp"></c:import>
@@ -45,52 +47,104 @@
 		<div id="searchDiv">
 			<table id="searchTable">
 				<tr>
-					<td>강좌명</td>
-					<td><input type="text" placeholder="강좌명을 입력해주세요"></td>
-				</tr>
-				<tr>
-					<td>강사명</td>
-					<td><input type="text" placeholder="강사명을 입력해주세요"></td>
-				</tr>
-				<tr>
-					<td>일시</td>
-					<td><input type="datetime-local"></td>
-				</tr>
-				<tr>
-					<td>장소</td>
-					<td><input type="text" placeholder="장소를 입력해주세요"></td>
-				</tr>
-				<tr>
-					<td>교육 대상</td>
-					<td><input type="text" placeholder="교육 대상을 입력해주세요"></td>
+					<td>
+						<select id="searchCondition" name="searchCondition">
+							<option value="title">강좌명</option>
+							<option value="instructor">강사명</option>
+							<option value="place">장소</option>
+							<option value="target">교육 대상</option>
+						</select>
+					</td>
+					<td><input type="search" id="searchValue" placeholder="입력해주세요"></td>
 				</tr>
 			</table>
-			<button id="searchBtn">조회</button>
+			<button id="searchBtn" onclick="searchCulture();">조회</button>
 		</div>
 		<div style="height: 30px;"></div>
 		<div class="programList">
-		<c:if test="${ empty cList || empty fList }">
-			<div id="emptyList">등록된 프로그램이 없습니다.</div>
-		</c:if>
-		<c:if test="${ !empty cList || !empty fList }">
-			<c:forEach var="c" items="${ cList }">
-				<div class="thumbList" align="center">
+			<c:if test="${ empty cList || empty fList }">
+				<div id="emptyList">등록된 프로그램이 없습니다.</div>
+			</c:if>
+			<c:if test="${ !empty cList || !empty fList }">
+					<c:forEach var="c" items="${ cList }">
+				<div class="thumbList" align="center" onclick="location.href='${ contextPath }/cDetail.cu?cNo=' + ${c.cNo} + '&page=' + ${ pi.currentPage }">
 					<div class="cultureListIMG">
 						<c:forEach var="f" items="${ fList }">
-							<c:if test="${ c.getcNo() == f.getcNo() }">
-								<img src="${ contextPath }/resources/buploadFiles/${ f.changeName }">
+							<c:if test="${ c.cNo == f.cNo}">
+								<img src="${ contextPath }/resources/CultureUploadFiles/${ f.changeName }">
 							</c:if>
 						</c:forEach>
 						<p class="thumbTitle">${ c.cTitle }</p>
 							<p class="thumbInfo">
-								<span>일시 :</span> ${ c.lDate } ${ c.Time }<br>
+								<span>일시 :</span> <fmt:parseDate value="${ c.lDate }" var="clDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ clDate }"/><br>
 								<span>장소 :</span> ${ c.cPlace }
 							</p>					
 					</div>
 				</div>
-			</c:forEach>
-		</c:if>
+					</c:forEach>
+			</c:if>
 		</div>
+		
+		<c:if test="${ !empty cList || !empty fList }">
+		<!-- 페이징 부분 -->
+		<div class="pagingArea" align="center">
+			<!-- [이전] -->
+			<c:if test="${ pi.currentPage <= 1 }">[이전] &nbsp;</c:if>
+			<c:if test="${ pi.currentPage > 1 }">
+				<c:url value="${ loc }" var="blistBack"> <!-- loc : 현재 내 주소 -->
+            		<c:param name="page" value="${ pi.currentPage - 1 }"/>
+            		<c:if test="${ searchValue ne null }">
+            			<c:param name="searchCondition" value="${ searchCondition }"/>
+            			<c:param name="searchValue" value="${ searchValue }"/>
+            		</c:if>
+            	</c:url>
+            	<a href="${ blistBack }">[이전]</a>
+			</c:if>
+			
+			<!-- 페이지 -->
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:if test="${ p eq pi.currentPage }">
+					<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
+				</c:if>
+				
+				<c:if test="${ p ne pi.currentPage }">
+					<c:url var="blistCheck" value="${ loc }">
+            			<c:param name="page" value="${ p }"/>
+            			<c:if test="${ searchValue ne null }">
+	            			<c:param name="searchCondition" value="${ searchCondition }"/>
+	            			<c:param name="searchValue" value="${ searchValue }"/>
+	            		</c:if>
+            		</c:url>
+            		<a href="${ blistCheck }">${ p }</a>
+				</c:if>
+			</c:forEach>
+			
+			<!-- [다음] -->
+			<c:if test="${ pi.currentPage >= pi.maxPage }">[다음]</c:if>
+			<c:if test="${ pi.currentPage < pi.maxPage }">
+				<c:url value="${ loc }" var="blistNext"> <!-- loc : 현재 내 주소 -->
+            		<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+            		<c:if test="${ searchValue ne null }">
+            			<c:param name="searchCondition" value="${ searchCondition }"/>
+            			<c:param name="searchValue" value="${ searchValue }"/>
+            		</c:if>
+            	</c:url>
+            	<a href="${ blistNext }">[다음]</a>
+			</c:if>
+		</div>
+	</c:if>
 	</div>
+	
+	<script type="text/javascript">
+		function searchCulture(){
+			var searchCondition = $("#searchCondition").val();
+			var searchValue = $("#searchValue").val();
+			
+			location.href="search.cu?searchCondition="+searchCondition+"&searchValue="+searchValue;
+		}
+	</script>
+	
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,12 @@
 					<th width="30%">좌석 예약</th>
 					<th width="70%">${ loginUser.nickname }님</th>
 				</tr>
-				<c:if test="${ empty rsList }">
+				<c:if test="${ empty loginUser }">
+					<tr>
+						<td colspan="2">로그인 후 이용 가능합니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${ empty rsList && !empty loginUser }">
 					<tr>
 						<td colspan="2">현재 예약된 좌석이 없습니다.</td>
 					</tr>
@@ -79,7 +85,12 @@
 					<th width="30%">이전 좌석</th>
 					<th width="70%">${ loginUser.nickname }님</th>
 				</tr>
-				<c:if test="${ empty rsBeforeList }">
+				<c:if test="${ empty loginUser }">
+					<tr>
+						<td colspan="2">로그인 후 이용 가능합니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${ empty rsBeforeList && !empty loginUser }">
 					<tr>
 						<td colspan="2">이전 예약된 내역이 없습니다.</td>
 					</tr>
@@ -96,17 +107,30 @@
 						</tr>
 						<tr>
 							<td>입실 시간</td>
-							<td>${ rsbf.inTime }</td>
+							<td>
+								<fmt:setLocale value="en_US" scope="session"/>
+								<fmt:parseDate value="${ rsbf.inTime }" var="inT" pattern="EEE MMM dd HH:mm:ss z yyyy" />
+								<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${ inT }"/>
+							</td>
 						</tr>
 						<tr>
 							<td>퇴실 시간</td>
-							<td>${ rsbf.outTime }</td>
+							<td>
+								<fmt:setLocale value="en_US" scope="session"/>
+								<fmt:parseDate value="${ rsbf.outTime }" var="outT" pattern="EEE MMM dd HH:mm:ss z yyyy"/>
+								<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${ outT }"/>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:if>
 			</table>
 		</div>
 		<br>
+		
+		
+		
+		
+		
 		<br>
 	</div>
 	<c:import url="../common/footer.jsp"/>

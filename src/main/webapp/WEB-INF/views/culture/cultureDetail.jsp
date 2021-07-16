@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>문화마당 프로그램 상세정보</title>
-<link rel="stylesheet" href="resources/css/cultureDetail.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/cultureDetail.css?ver=2.0" type="text/css">
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -40,73 +42,117 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="programInfoTable">
-			<div id="title">도시공간 상상하기</div>
-			<div class="titleSub">일시 : 2021년 6월 25일 19시 30분</div>
-			<div class="titleSub">장소 : 브링크 삼덕 아지트</div>
+			<div id="title">${ culture.cTitle }</div>
+			<div class="titleSub">일시 : 
+				<fmt:parseDate value="${ culture.lDate }" var="cLDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ cLDate }"/>
+			</div>
+			<div class="titleSub">장소 : ${ culture.cPlace }</div>
 			<table id="programDetailTable">
 				<tr>
 					<td>접수 기간</td>
 					<td>
-						6월 4일 금요일 오후 2시 ~ 6월 18일 오후 8시
+						<fmt:parseDate value="${ culture.cStartDate }" var="cSDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:parseDate value="${ culture.cEndDate }" var="cEDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ cSDate }"/>
+						 ~ <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ cEDate }"/>
 					</td>
 				</tr>
 				<tr>
 					<td>강연자</td>
 					<td>
-						박신우
+						${ culture.cInstructor }
 					</td>
 				</tr>
 				<tr>
 					<td>강의 시간</td>
 					<td>
-						6월25일 금요일 19시 30분 ~ 22시 30분
+						${ culture.lTime }
 					</td>
 				</tr>
 				<tr>
 					<td>교육 대상</td>
 					<td>
-						성인
+						${ culture.cTarget }
 					</td>
 				</tr>
 				<tr>
 					<td>신청/정원</td>
 					<td>
-						21/30
+						${ approvalCount }/${ culture.cTotal }
 					</td>
 				</tr>
 				<tr>
-					<td>문의</td>
+					<td>마감 여부</td>
 					<td>
-						독서문화진흥과
+						<c:if test="${ culture.cDeadLine == 'N' }">진행중</c:if>
+						<c:if test="${ culture.cDeadLine == 'Y' }">마감</c:if>
 					</td>
 				</tr>
 				<tr>
-					<td>첨부파일</td>
+					<td>첨부 파일</td>
 					<td>
-						Go to the link
+						<c:if test="${ files[0].fileLevel == 0 }">  
+							<a href="${ contextPath }/resources/CultureUploadFiles/${ files[1].changeName }" download="${ files[1].originName }">
+								${ files[1].originName }
+							</a>
+						</c:if>
+						<c:if test="${ files[0].fileLevel == 2 }">
+							<a href="${ contextPath }/resources/CultureUploadFiles/${ files[0].changeName }" download="${ files[0].originName }">
+								${ files[0].originName }
+							</a>
+						</c:if>
 					</td>
 				</tr>
 			</table>
 			<button id="signBtn">프로그램 신청</button>
-			<button id="listBtn">목록으로</button>
+			<button id="listBtn" onclick="location.href='${contextPath}/culture.cu?page='+${page}">목록으로</button>
 		</div>
 		<div class="programImageTable">
-			<img id="cultureImg" src="resources/images/cDetailImg.jpg">
+		 	<c:if test="${ files[0].fileLevel == 0 }">  
+				<img id="cultureImg" src="${ contextPath }/resources/CultureUploadFiles/${ files[0].changeName }">
+			</c:if>
+			<c:if test="${ files[0].fileLevel == 2 }">
+				<img id="cultureImg" src="${ contextPath }/resources/CultureUploadFiles/${ files[1].changeName }">
+			</c:if>
 			<div id="programEx">프로그램 설명</div>
 			<div id="programExDetail">
-피부가 얼마나 생생하며 그들의 눈에 무엇이 타오르고 있는가? 
-우리 눈이 그것을 보는 때에 우리의 귀는 생의
-
-주며 그들을 행복스럽고 평화스러운 곳으로 인도하겠다는 커다란 이상을 품었기 때문이다 
-그러므로 그들은 길지 아니한 목숨을 사는가 싶이 살았으며 
-그들의 그림자는 천고에 사라지지 않는 것이다 이것은 현저하게 일월과 같은 예가 되려니와 
-그와 같지 못하다 할지라도 창공에 반짝이는 뭇 별과 같이 산야에 피어나는 군영과
-
-운다사랑의 풀이 없으면 인간은 사막이다 오아이스도 없는 사막이다 보이는 끝까지 찾아다녀도 
-목숨이 있는 때까지 방황하여도 보이는 것은 거친 모래뿐일 것이다 이상의 꽃이 없으면 
-쓸쓸한 인간에 남는 것은 영락과
+				${ culture.cContent }
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="CNO" name="CNO" value="${ culture.cNo }">
+	<input type="hidden" id="uNo" name="uNo" value="${ loginUser.no }">
+	<c:forEach var="cs" items="${ csList }">
+		<input type="hidden" id="csListcNo" name="csListcNo" value="${ cs.cNo }">
+	 	<input type="hidden" id="csListuNo" name="csListuNo" value="${ cs.uNo }">
+		<input type="hidden" id="csListStatus" name="csListStatus" value="${ cs.csStatus }">
+	</c:forEach>
+	
+	<c:import url="../common/footer.jsp"/>
+	<c:if test="${ empty loginUser }">
+		<script type="text/javascript">
+		$('#signBtn').click(function(){
+			alert("로그인 후 수강 신청이 가능합니다.");
+			document.location.href="loginForm.me";
+		});
+		</script>
+	</c:if>
+	<c:if test="${ !empty loginUser }">
+		<script type="text/javascript">
+			$('#signBtn').click(function(){
+				var csListcNo = $('#csListcNo').val();
+				var cNo = $('#CNO').val();
+				var csListuNo = $('#csListuNo').val();
+				var uNo = $('#uNo').val();
+				var csListStatus = $('#csListStatus').val();
+				if(csListcNo == cNo && csListuNo == uNo && csListStatus=='Y'){
+					alert('중복 신청은 불가능합니다.');
+				} else{
+					window.open('cSign.cu?cNo='+${ culture.cNo }, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
+				}
+			});
+		</script>
+	</c:if>
 </body>
 </html>

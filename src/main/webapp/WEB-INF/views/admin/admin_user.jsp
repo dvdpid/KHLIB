@@ -10,6 +10,12 @@
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
 <script src="resources/js/admin.js" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+	.ubtn{
+		align-content: right;
+	}
+</style>
 </head>
 <body>
 <!-- 헤더부분 -->
@@ -44,43 +50,166 @@
 				</tr>
 				</thead>
 				<tbody>
+				<c:if test="${ not list.isEmpty() }">
+				<c:forEach var="u" items="${list }">
 				<tr>
-					<td>25</td>
-					<td class="subject"><a href="#a">user01</a></td>
-					<td><a href="#a">남나눔</a></td>
-					<td>아무개</td>
-					<td>2011.08.22</td>
-					<td>남</td>
-					<td>010-1111-2222</td>
-					<td>de@dd.dd</td>
-					<td>서울시 역삼동</td>
-					<td><input type="checkbox"></td>
-					
+					<td>${u.no }</td>
+					<td class="subject"><a href="#a">${u.id }</a></td>
+					<td><a href="#a">${u.name }</a></td>
+					<td>${u.nickname }</td>
+					<td>${u.birthday }</td>
+					<td>${u.gender }</td>
+					<td>${u.phone }</td>
+					<td>${u.email }</td>
+					<td>${u.address }</td>
+					<td><input type="radio" name="userCk" value="${u.no }"></td>
 				</tr>
+				</c:forEach>
+				</c:if>
+				<c:if test="${ list.isEmpty() }">
 				<tr>
-					<td>25</td>
-					<td class="subject"><a href="#a">user02</a></td>
-					<td><a href="#a">도대담</a></td>
-					<td>아무개</td>
-					<td>2011.08.22</td>
-					<td>남</td>
-					<td>010-2222-3333</td>
-					<td>dd@dd.dd</td>
-					<td>경기도 군포시</td>
-					<td><input type="checkbox"></td>
+					<td colspan="10"> 회원이 없습니다. </td>
+				</tr>
+				</c:if>
+				<tr align="center" height="20" id="buttonTab">
+				<td colspan="6">
+				<!-- [이전] -->
+					<c:if test="${ pi.currentPage <= 1 }">
+						[이전] &nbsp;
+					</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<c:url var="before" value="user.ad">
+							<c:param name="page" value="${ pi.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ before }">[이전]</a> &nbsp;
+					</c:if>
+					
+					<!-- 페이지 -->
+					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						<c:if test="${ p eq pi.currentPage }">
+							<font color="red" size="4"><b>[${ p }]</b></font>
+						</c:if>
+						
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url var="pagination" value="user.ad">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<a href="${ pagination }">${ p }</a> &nbsp;
+						</c:if>
+					</c:forEach>
+					
+					<!-- [다음] -->
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						[다음]
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<c:url var="after" value="user.ad">
+							<c:param name="page" value="${ pi.currentPage + 1 }"/>
+						</c:url> 
+						<a href="${ after }">[다음]</a>
+					</c:if>
+					</td>
 				</tr>
 				</tbody>
 			</table>
-<!-- 			    <ol class="paging"> -->
-<!-- 				    <li class="first"><a href="#a">첫페이지</a></li> -->
-<!-- 				    <li class="prev"><a href="#a">이전페이지</a></li> -->
-<!-- 				    <li class="on"><a href="#a">1</a></li> -->
-<!-- 				    <li><a href="#a">2</a></li> -->
-<!-- 				    <li><a href="#a">3</a></li> -->
-<!-- 				    <li class="next"><a href="#a">다음페이지</a></li> -->
-<!-- 				    <li class="last"><a href="#a">마지막페이지</a></li> -->
-<!-- 			    </ol> -->
+			<div class="ubtn">
+				<input type="submit" class="btn1" value="회원 삭제" style="float:right; margin-right: 75px;">
+			</div>
+		</div>
+		<h3 align="left">관리자 목록</h3><br>
+		<div>
+			<table class="type1">
+				<thead>
+				<tr>
+					<th>번호</th>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>닉네임</th>
+					<th>생일</th>
+					<th>성별</th>
+					<th>연락처</th>
+					<th>이메일</th>
+					<th>주소</th>
+					<th>체크</th>
+				</tr>
+				</thead>
+				<tbody>
+				<c:if test="${ not alist.isEmpty() }">
+				<c:forEach var="au" items="${alist }">
+				<tr>
+					<td>${au.no }</td>
+					<td class="subject"><a href="#a">${au.id }</a></td>
+					<td><a href="#a">${au.name }</a></td>
+					<td>${au.nickname }</td>
+					<td>${au.birthday }</td>
+					<td>${au.gender }</td>
+					<td>${au.phone }</td>
+					<td>${au.email }</td>
+					<td>${au.address }</td>
+					<td><input type="radio" name="adminCk" value="${ au.no }"></td>
+				</tr>
+				</c:forEach>
+				</c:if>
+				<c:if test="${ alist.isEmpty() }">
+					<td colspan="10">관리자가 없습니다.</td>
+				</c:if>
+				<tr align="center" height="20" id="buttonTab">
+				<td colspan="6">
+				<!-- [이전] -->
+					<c:if test="${ api.currentPage <= 1 }">
+						[이전] &nbsp;
+					</c:if>
+					<c:if test="${ api.currentPage > 1 }">
+						<c:url var="before" value="user.ad">
+							<c:param name="page" value="${ api.currentPage - 1 }"/>
+						</c:url>
+						<a href="${ before }">[이전]</a> &nbsp;
+					</c:if>
+					
+					<!-- 페이지 -->
+					<c:forEach var="p" begin="${ api.startPage }" end="${ api.endPage }">
+						<c:if test="${ p eq api.currentPage }">
+							<font color="red" size="4"><b>[${ p }]</b></font>
+						</c:if>
+						
+						<c:if test="${ p ne api.currentPage }">
+							<c:url var="pagination" value="user.ad">
+								<c:param name="page" value="${ p }"/>
+							</c:url>
+							<a href="${ pagination }">${ p }</a> &nbsp;
+						</c:if>
+					</c:forEach>
+					
+					<!-- [다음] -->
+					<c:if test="${ api.currentPage >= api.maxPage }">
+						[다음]
+					</c:if>
+					<c:if test="${ api.currentPage < api.maxPage }">
+						<c:url var="after" value="user.ad">
+							<c:param name="page" value="${ api.currentPage + 1 }"/>
+						</c:url> 
+						<a href="${ after }">[다음]</a>
+					</c:if>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="ubtn">
+				<input type="submit" class="btn2" value="관리자 삭제" style="float:right; margin-right: 75px;">
 		</div>
 	</div>
+		<script>
+	        $('.btn1').on('click', function () {
+	        	var no = $('input:radio[name=userCk]:checked').val();
+				location.href="userDelete.ad?no="+no;
+			});
+        </script>
+        <script>
+	        $('.btn2').on('click', function () {
+	        	var no = $('input:radio[name=adminCk]:checked').val();
+				location.href="adminDelete.ad?no="+no;
+			});
+        </script>
 </body>
 </html>

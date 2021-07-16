@@ -29,7 +29,11 @@ import com.kh.klib.common.Pagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.room.exception.RoomException;
+import com.kh.klib.room.model.vo.Room;
+import com.kh.klib.room.model.vo.RoomSign;
 
 @SessionAttributes("loginUser") 
 @Controller
@@ -104,8 +108,53 @@ public class AdminController {
 	
 	
 	@RequestMapping("user.ad")
-	public String adminUserForm() {
-		return "admin_user";
+	public ModelAndView adminUserForm(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int listCount = aService.getListUserCount();
+		int alistCount = aService.getListadminUserCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo api = Pagination.getPageInfo(currentPage, alistCount);
+		
+		
+		ArrayList<Member> list = aService.selectUserList(pi);
+		ArrayList<Member> alist = aService.selectadminUserList(api);
+		
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("pi", pi).addObject("alist", alist).addObject("api", api).setViewName("admin_user");
+		} else {
+			throw new BooksException("회원 조회 실패!");
+		}
+		return mv;
+	}
+	@RequestMapping("userDelete.ad")
+	public String userDelete(@RequestParam(value="no") Integer no, HttpServletRequest request) {
+		
+		int result = aService.deleteUser(no);
+		String referer = request.getHeader("Referer");
+		
+		if(result > 0) {
+			return "redirect:"+ referer;
+		} else {
+			throw new MemberException("회원 삭제 실패");
+		}
+		
+	}
+	@RequestMapping("adminDelete.ad")
+	public String adminDelete(@RequestParam(value="no") Integer no, HttpServletRequest request) {
+		
+		int result = aService.deleteAdmin(no);
+		String referer = request.getHeader("Referer");
+		if(result > 0) {
+			return "redirect:"+ referer;
+		} else {
+			throw new MemberException("관리자 삭제 실패");
+		}
+		
 	}
 	
 	
@@ -117,10 +166,50 @@ public class AdminController {
 	
 	
 	@RequestMapping("room.ad")
-	public String adminRoomForm() {
-		return "admin_room";
+	public ModelAndView adminRoomForm(ModelAndView mv, HttpSession session) {
+	ArrayList<Room> rlist = aService.selectrList();
+		
+		int allListCount = aService.getAllListCount();
+		int listCount = aService.getrlistCount();
+		
+		int check = 0;
+		if( session.getAttribute("loginUser") == null ) {
+			check = 0;
+		} else {			
+			int uNo = ((Member)session.getAttribute("loginUser")).getNo();
+			check = aService.getChk(uNo);
+		}
+		
+		mv.addObject("rlist", rlist).addObject("allListCount", allListCount).addObject("check", check).addObject("listCount", listCount).setViewName("admin_room");
+		
+		
+		return mv;
 	}
-	
+	@RequestMapping("rSign.ad")
+	public ModelAndView rSignForm(@RequestParam Integer rNo, ModelAndView mv) {
+		
+		
+		ArrayList<RoomSign> list = aService.selectNick(rNo);
+		mv.addObject("rNo", rNo);
+		mv.addObject("list", list);
+		mv.setViewName("adminRoomSign");
+		
+		return mv;
+	}
+	@RequestMapping("cancelRoom.ad")
+	public String cancelRoom(@RequestParam("rNo") Integer rNo, @RequestParam("rsNo") Integer rsNo) {
+		System.out.println(rNo);
+		System.out.println(rsNo);
+		
+		int result1 = aService.cancelRoom(rNo);
+		int result2 = aService.outTime(rsNo);
+		
+		if(result1 > 0 && result2 > 0) {
+			return "room_ok";
+		} else {
+			throw new RoomException("퇴실 처리 실패");
+		}
+	}
 	
 	
 	@RequestMapping("book.ad")
@@ -169,6 +258,7 @@ public class AdminController {
 			throw new BooksException("도서 등록에 실패");
 		}
 	}
+	
 	public String bookSaveFile(MultipartFile thumbnailImg1, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "/bkuploadFiles";

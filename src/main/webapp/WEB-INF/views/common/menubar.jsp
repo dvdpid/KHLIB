@@ -44,7 +44,7 @@
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
-			<div class="logo"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </div>
+			<div class="logo"><a href="home.do" style="color: black;"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </a></div>
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>

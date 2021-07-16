@@ -48,13 +48,13 @@
 	#mpTable td{
 		border: 1px solid rgb(204, 204, 204);
 		border-collapse: collapse;
-		padding: 40px 25px;
+		padding: 10px 5px;
 	}
 	
 	#mpTable th{
 		border: 1px solid lightgray;
 		border-collapse: collapse;
-		padding: 40px 25px;
+		padding: 10px 5px;
 		background: rgb(224, 224, 224);
 	}
 	
@@ -82,14 +82,14 @@
 	
 	.sideButton:hover{ background: gray; }
 	
-	#cancelBtn { 
+	.cancelBtn { 
 		background: rgb(94, 94, 94); color: white;
 		border: none;
 		font-weight: 700;
-		padding: 5px 8px;
+		padding: 5px 6%;
 		border-radius: 5px;
 	}
-	#cancelBtn:hover {
+	.cancelBtn:hover {
 		background: rgba(94, 94, 94, 0.5); color: white;
 		cursor:pointer;
 	}

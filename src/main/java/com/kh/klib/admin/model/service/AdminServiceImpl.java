@@ -150,6 +150,31 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.outTime(sqlSession, rsNo);
 	}
 
+	@Override
+	public ArrayList<Books> selectBlist(Integer bNo) {
+		return aDAO.selectBlist(sqlSession, bNo);
+	}
+
+	@Override
+	public int deleteBook(Integer bNo) {
+		return aDAO.deleteBook(sqlSession, bNo);
+	}
+
+	@Override
+	public ArrayList<Files> selectBFileName(Integer bNo) {
+		return aDAO.selectBFileName(sqlSession, bNo);
+	}
+
+	@Override
+	public int updateBook(Books b) {
+		return aDAO.updateBook(sqlSession, b);
+	}
+
+	@Override
+	public int updateBAttachment(Files f) {
+		return aDAO.updateBAttachment(sqlSession, f);
+	}
+
 
 
 	

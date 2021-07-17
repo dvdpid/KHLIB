@@ -10,6 +10,8 @@
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
 <script src="resources/js/admin.js" defer></script>
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+
 <style>
 	#buttonTab{border-left: hidden; border-right: hidden;}
 </style>
@@ -41,7 +43,7 @@
 					<th>출판년도</th>
 					<th>상태</th>
 					<th>입고일</th>
-					<th><input type="checkbox"></th>
+					<th>체크</th>
 
 				</tr>
 				</thead>
@@ -55,7 +57,7 @@
 					<td>${b.bDate }</td>
 					<td>${b.bStatus }</td>
 					<td>${b.entryDate }</td>
-					<td><input type="checkbox"></td>
+					<td><input type="radio" name="bNo" value="${b.bNo  }"></td>
 				</tr>
 				</c:forEach>
 				
@@ -103,9 +105,24 @@
 				</tbody>
 			</table>
 			<br>
+			<input type="button" class="btn2" value="도서 삭제"  style="float:right; margin-right: 75px;" >
+			<input type="button" class="btn3" value="도서 수정"  style="float:right; margin-right: 75px;" >
 			<input type="button" class="btn1" value="도서 등록"  onclick="location.href='bookInsertForm.ad'" style="float:right; margin-right: 75px;">
-			<input type="button" class="btn1" value="도서 삭제" style="float:right; margin-right: 75px;">
 		</div>
 	</div>
+	<script>
+	        $('.btn2').on('click', function () {
+	        	var bNo = $('input:radio[name=bNo]:checked').val();
+				window.open("bkDelete.ad?bNo="+bNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
+			});
+     </script>
+	<script>
+	        $('.btn3').on('click', function () {
+	        	var bNo = $('input:radio[name=bNo]:checked').val();
+				location.href="bkUpdateForm.ad?bNo="+bNo;
+			});
+     </script>
+	
+	
 </body>
 </html>

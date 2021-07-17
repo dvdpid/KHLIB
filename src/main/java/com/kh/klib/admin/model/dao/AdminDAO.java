@@ -131,6 +131,26 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.outTime", rsNo);
 	}
 
+	public ArrayList<Books> selectBlist(SqlSessionTemplate sqlSession, Integer bNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectBlist", bNo);
+	}
+
+	public int deleteBook(SqlSessionTemplate sqlSession, Integer bNo) {
+		return sqlSession.update("adminMapper.deleteBook", bNo);
+	}
+
+	public ArrayList<Files> selectBFileName(SqlSessionTemplate sqlSession, Integer bNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectBFileName", bNo);
+	}
+
+	public int updateBook(SqlSessionTemplate sqlSession, Books b) {
+		return sqlSession.update("adminMapper.updateBook", b);
+	}
+
+	public int updateBAttachment(SqlSessionTemplate sqlSession, Files f) {
+		return sqlSession.update("adminMapper.updateBAttachment", f);
+	}
+
 
 	
 }

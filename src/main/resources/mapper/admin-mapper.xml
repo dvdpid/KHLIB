@@ -27,6 +27,13 @@
 		<result column="ENTRY_DATE" property="entryDate"/>
 	</resultMap>
 	
+	<select id="selectBlist" resultMap="booksResultSet">
+		select *
+		from books
+		where books_no = #{bNo}
+	</select>
+	
+	
 	<insert id="insertBook">
 		insert into books
 		values(seq_bkno.nextval, #{bTitle}, #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate)
@@ -61,7 +68,7 @@
 		<result column="CULTURE_PLACE" property="cPlace"/>
 		<result column="CULTURE_INSTRUCTOR" property="cInstructor"/>
 		<result column="CULTURE_TARGET" property="cTarget"/>
-		<result column="C_DEADLINE" property="cDateLine"/>
+		<result column="C_DEADLINE" property="cDeadLine"/>
 		<result column="C_STATUS" property="cStatus"/>
 		<result column="USER_NO" property="uNo"/>
 	</resultMap>
@@ -217,5 +224,44 @@
 		set out_time = sysdate
 		where rs_no = #{rsNo}
 	</update>
+	
+	<update id="deleteBook">
+		update books	
+		set b_status = 'N'
+		where books_no = #{bNo}
+	</update>
+	
+	<select id="selectBFileName" resultMap="FilesResultSet" >
+		select *
+		from files
+		where BOOKS_NO = #{bNo}
+	</select>
+		<resultMap type="Files" id="FilesResultSet">
+		<id column="FILE_NO" property="fNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="UPLOAD_DATE" property="uploadDate"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
+		<result column="F_STATUS" property="fStatus"/>
+		<result column="BOARD_NO" property="bNo"/>
+		<result column="GROUP_NO" property="gNo"/>
+		<result column="CULTURE_NO" property="cNo"/>
+		<result column="BOOKS_NO" property="bkNo"/>
+		<result column="Q_NO" property="qNo"/>
+	</resultMap>
+	
+	<update id="updateBook">
+		update books
+		set BOOK_TITLE = #{bTitle}, BOOKS_WRITER = #{bWriter}, BOOKS_COMPANY=#{bCompany}, BOOKS_DATE = #{bDate}
+						 , BOOKS_CONTENT = #{bContent}
+		where books_no = #{bNo}
+	</update>
+	<update id="updateBAttachment">
+		update files
+		set ORIGIN_NAME= #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
+		where books_no = #{bkNo}
+	</update>
+	
+	
 	
 </mapper>

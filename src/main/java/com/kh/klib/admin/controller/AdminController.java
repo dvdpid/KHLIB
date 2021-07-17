@@ -279,7 +279,79 @@ public class AdminController {
 			System.out.println("파일 전송 에러 : " + e.getMessage());
 		}
 		return renameFileName;
-	}							
+	}			
+	
+	@RequestMapping("bkDelete.ad")
+	public ModelAndView bkDeleteForm(@RequestParam("bNo") Integer bNo, ModelAndView mv) {
+		
+		ArrayList<Books> bList = aService.selectBlist(bNo);
+		mv.addObject("bList", bList);
+		mv.setViewName("booksSign");
+		return mv;
+	}
+	@RequestMapping("booksDelete.ad")
+	public String bkDelete(@RequestParam("bNo") Integer bNo) {
+		
+		int result = aService.deleteBook(bNo);
+		
+		if(result > 0) {
+			return "book_ok";
+		} else {
+			throw new BooksException("도서 삭제 실패!");
+		}
+	}
+	
+	@RequestMapping("bkUpdateForm.ad")
+	public ModelAndView bkUpdateForm(@RequestParam("bNo") Integer bNo,  ModelAndView mv) {
+		
+		ArrayList<Books> bList = aService.selectBlist(bNo);
+		ArrayList<Files> fList = aService.selectBFileName(bNo);
+		
+		System.out.println(bList);
+		System.out.println(fList);
+		
+		mv.addObject("bList", bList);
+		mv.addObject("fList", fList);
+		mv.setViewName("admin_update_book");
+		return mv;
+	}
+	@RequestMapping("bkUpdate.ad")
+	public String bkUpdate(@ModelAttribute Books b, @RequestParam("thumbnailImg1") MultipartFile thumbnailImg1,@RequestParam("img") String img,@RequestParam("bNo") Integer bNo,  HttpServletRequest request) {
+		Files f = new Files();
+		if(thumbnailImg1.getOriginalFilename() != "") { // 이미지를 수정했으면
+			if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
+				String renameFileName = bookSaveFile(thumbnailImg1, request);
+				
+				if(renameFileName != null) {
+					f.setOriginName(thumbnailImg1.getOriginalFilename());
+					f.setChangeName(renameFileName);
+				}
+			}
+			
+			f.setBkNo(bNo);
+			
+			int result1 = aService.updateBook(b);
+			int result2 = aService.updateBAttachment(f);
+			
+			if(result1 > 0 && result2 > 0) {
+				return "redirect:book.ad";
+			} else {
+				throw new BooksException("도서 수정에 실패");
+			}
+		} else { // 이미지를 수정하지 않았으면
+			f.setBkNo(b.getbNo());
+			int result1 = aService.updateBook(b);
+			if(result1 > 0) {
+				return "redirect:book.ad";
+			} else {
+				throw new BooksException("도서 수정에 실패");
+			}
+		}
+	}
+	
+	
+	
+	
 	
 	
 	

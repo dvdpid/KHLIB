@@ -63,6 +63,16 @@ public interface AdminService {
 
 	int outTime(Integer rsNo);
 
+	ArrayList<Books> selectBlist(Integer bNo);
+
+	int deleteBook(Integer bNo);
+
+	ArrayList<Files> selectBFileName(Integer bNo);
+
+	int updateBook(Books b);
+
+	int updateBAttachment(Files f);
+
 
 
 

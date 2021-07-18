@@ -72,7 +72,7 @@
 				</tr>
 				</c:if>
 				<tr align="center" height="20" id="buttonTab">
-				<td colspan="6">
+				<td colspan="10">
 				<!-- [이전] -->
 					<c:if test="${ pi.currentPage <= 1 }">
 						[이전] &nbsp;
@@ -154,7 +154,7 @@
 					<td colspan="10">관리자가 없습니다.</td>
 				</c:if>
 				<tr align="center" height="20" id="buttonTab">
-				<td colspan="6">
+				<td colspan="10">
 				<!-- [이전] -->
 					<c:if test="${ api.currentPage <= 1 }">
 						[이전] &nbsp;
@@ -202,13 +202,22 @@
 		<script>
 	        $('.btn1').on('click', function () {
 	        	var no = $('input:radio[name=userCk]:checked').val();
-				location.href="userDelete.ad?no="+no;
+	        	if(no == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+	        		window.open("userDeleteForm.ad?no="+no, 'userSignPage', 'width=800, height=500, top=100, left=300,location=no');
+	        	}
 			});
         </script>
         <script>
 	        $('.btn2').on('click', function () {
 	        	var no = $('input:radio[name=adminCk]:checked').val();
-				location.href="adminDelete.ad?no="+no;
+	        	
+	        	if(no == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+	        		window.open("adminDeleteForm.ad?no="+no, 'userSignPage', 'width=800, height=500, top=100, left=300,location=no');
+	        	}
 			});
         </script>
 </body>

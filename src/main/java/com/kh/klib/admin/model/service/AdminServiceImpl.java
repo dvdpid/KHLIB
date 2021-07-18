@@ -175,7 +175,49 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.updateBAttachment(sqlSession, f);
 	}
 
+	@Override
+	public ArrayList<Member> deleteUserList(Integer no) {
+		return aDAO.deleteUserList(sqlSession, no);
+	}
 
+	@Override
+	public ArrayList<Culture> cDeleteList(Integer cNo) {
+		return aDAO.cDeleteList(sqlSession, cNo);
+	}
+
+	@Override
+	public int cultureDelete(Integer cNo) {
+		return aDAO.cultureDelete(sqlSession, cNo);
+	}
+
+	@Override
+	public ArrayList<Culture> selectClist(Integer cNo) {
+		return aDAO.selectClist(sqlSession, cNo);
+	}
+
+	@Override
+	public ArrayList<Files> selectCFileName(Integer cNo) {
+		return aDAO.selectCFileName(sqlSession, cNo);
+	}
+
+	@Override
+	public ArrayList<Files> selectCFileName2(Integer cNo) {
+		return aDAO.selectCFileName2(sqlSession, cNo);
+	}
+
+	@Override
+	public int updateCulture(Culture c) {
+		return aDAO.updateCulture(sqlSession, c);
+	}
+
+	@Override
+	public int updateCAttachment(Files f) {
+		return aDAO.updateCAttachment(sqlSession, f);
+	}
+	@Override
+	public int updateCFile(Files f) {
+		return aDAO.updateCFile(sqlSession, f);
+	}
 
 	
 }

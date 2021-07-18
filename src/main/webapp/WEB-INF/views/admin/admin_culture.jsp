@@ -10,6 +10,8 @@
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
 <script src="resources/js/admin.js" defer></script>
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <!-- 헤더부분 -->
@@ -38,7 +40,7 @@
 					<th>모집 마감</th>
 					<th>강사</th>
 					<th>대상</th>
-					<th><input type="checkbox"></th>
+					<th>체크</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -51,12 +53,12 @@
 					<td>${c.cEndDate }</td>
 					<td>${c.cInstructor }</td>
 					<td>${c.cTarget }</td>
-					<td><input type="checkbox"></td>
+					<td><input type="radio" name="cNo" value="${c.cNo }"></td>
 				</tr>
 				</c:forEach>
 				
 				<tr align="center" height="20" id="buttonTab">
-				<td colspan="6">
+				<td colspan="8">
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
@@ -98,11 +100,31 @@
 				</tbody>
 			</table>
 			<br>
+			<input type="button" class="btn3" value="문화마당 삭제" style="float:right; margin-right: 75px;">
+			<input type="button" class="btn2" value="문화마당 수정" style="float:right; margin-right: 75px;">
 			<input type="button" class="btn1" value="문화마당 등록" onclick="location.href='cultureInsertForm.ad'"  style="float:right; margin-right: 75px;">
-			<input type="button" class="btn1" value="문화마당 삭제" style="float:right; margin-right: 75px;">
 			<br><br>
-			
 		</div>
 	</div>
+	<script>
+	        $('.btn3').on('click', function () {
+	        	var cNo = $('input:radio[name=cNo]:checked').val();
+	        	if(cNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+	        	window.open("cDeleteForm.ad?cNo="+cNo, 'cultureSignPage', 'width=800, height=500, top=100, left=300,location=cNo');
+	        	}
+	        });
+     </script>
+	<script>
+	        $('.btn2').on('click', function () {
+	        	var cNo = $('input:radio[name=cNo]:checked').val();
+	        	if(cNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+					location.href="cUpdateForm.ad?cNo="+cNo;
+	        	}
+			});
+     </script>
 </body>
 </html>

@@ -73,6 +73,24 @@ public interface AdminService {
 
 	int updateBAttachment(Files f);
 
+	ArrayList<Member> deleteUserList(Integer no);
+
+	ArrayList<Culture> cDeleteList(Integer cNo);
+
+	int cultureDelete(Integer cNo);
+
+	ArrayList<Culture> selectClist(Integer cNo);
+
+	ArrayList<Files> selectCFileName(Integer cNo);
+
+	ArrayList<Files> selectCFileName2(Integer cNo);
+
+	int updateCulture(Culture c);
+
+	int updateCAttachment(Files f);
+
+	int updateCFile(Files f);
+
 
 
 

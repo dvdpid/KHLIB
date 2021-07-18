@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.Pagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
+import com.kh.klib.culture.model.exception.CultureException;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.vo.Member;
@@ -131,6 +133,21 @@ public class AdminController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping("userDeleteForm.ad")
+	public ModelAndView userDeleteForm(@RequestParam(value="no") Integer no, ModelAndView mv) {
+		ArrayList<Member> uList = aService.deleteUserList(no);
+		if(uList != null) {
+			mv.addObject("uList", uList);
+			mv.setViewName("userSign");
+		}else {
+			throw new MemberException("조회 실패!");
+		}
+		return mv;
+	}
+	
+	
+	
 	@RequestMapping("userDelete.ad")
 	public String userDelete(@RequestParam(value="no") Integer no, HttpServletRequest request) {
 		
@@ -138,12 +155,25 @@ public class AdminController {
 		String referer = request.getHeader("Referer");
 		
 		if(result > 0) {
-			return "redirect:"+ referer;
+			return "user_ok";
 		} else {
 			throw new MemberException("회원 삭제 실패");
 		}
 		
 	}
+	
+	@RequestMapping("adminDeleteForm.ad")
+	public ModelAndView adminDeleteForm(@RequestParam(value="no") Integer no, ModelAndView mv) {
+		ArrayList<Member> uList = aService.deleteUserList(no);
+		if(uList != null) {
+			mv.addObject("uList", uList);
+			mv.setViewName("userSign");
+		}else {
+			throw new MemberException("조회 실패!");
+		}
+		return mv;
+	}
+	
 	@RequestMapping("adminDelete.ad")
 	public String adminDelete(@RequestParam(value="no") Integer no, HttpServletRequest request) {
 		
@@ -460,6 +490,153 @@ public class AdminController {
 		}
 		return renameFileName;
 	}	
+//	문화마당 삭제
+	@RequestMapping("cDeleteForm.ad")
+	public ModelAndView cDeleteForm(@RequestParam("cNo") Integer cNo, ModelAndView mv) {
+		
+		ArrayList<Culture> cList = aService.cDeleteList(cNo);
+		
+		if(cList != null) {
+			mv.addObject("cList", cList).setViewName("cultureSign");
+		} else {
+			throw new BooksException("도서 조회 실패!");
+		}
+		return mv;
+	}
+	@RequestMapping("cultureDelete.ad")
+	public String cultureDelete(@RequestParam("cNo") Integer cNo) {
+		
+		int result = aService.cultureDelete(cNo);
+		if(result > 0) {
+			return "culture_ok";
+		} else {
+			throw new CultureException("문화마당 삭제 실패");
+		}
+	}
+	@RequestMapping("cUpdateForm.ad")
+	public ModelAndView cUpdateForm(@RequestParam("cNo") Integer cNo,  ModelAndView mv) {
+		
+		ArrayList<Culture> cList = aService.selectClist(cNo);
+		ArrayList<Files> fList = aService.selectCFileName(cNo); // 썸네일 이미지 가져오는 코드
+		ArrayList<Files> fList2 = aService.selectCFileName2(cNo); // 썸네일 이미지 가져오는 코드
+		
+		
+		
+		mv.addObject("cList", cList);
+		mv.addObject("fList", fList);
+		mv.addObject("fList2", fList2);
+		mv.setViewName("admin_update_culture");
+		return mv;
+		
+	}
+	@RequestMapping("cUpdate.ad")
+	public String cUpdate(@ModelAttribute Culture c, @RequestParam("thumbnailImg1") MultipartFile thumbnailImg1,
+							@RequestParam("cNo") Integer cNo,  HttpServletRequest request,
+							@RequestParam("uploadFile") MultipartFile uploadFile) {
+		Files f = new Files();
+		
+		if(thumbnailImg1.getOriginalFilename() != "" && uploadFile.getOriginalFilename() != "") { // 이미지, 파일 둘다 수정했을때
+			
+			System.out.println("이미지, 파일 둘다 수정하기");
+			
+			int result1 = aService.updateCulture(c);
+			f.setcNo(cNo);
+			
+			if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
+				String renameFileName = cultureImgSaveFile(thumbnailImg1, request);
+				
+				if(renameFileName != null) {
+					f.setOriginName(thumbnailImg1.getOriginalFilename());
+					f.setChangeName(renameFileName);
+				}
+			}
+			
+			int result2 = aService.updateCAttachment(f);
+			
+			if(uploadFile != null && !uploadFile.isEmpty()) {
+				String renameFileName = cultureSaveFile(uploadFile, request);
+				
+				if(renameFileName != null) {
+					f.setOriginName(uploadFile.getOriginalFilename());
+					f.setChangeName(renameFileName);
+				}
+			}
+			
+			System.out.println(f.getOriginName());
+			System.out.println(f.getChangeName());
+			
+			int result3 = aService.updateCFile(f);
+			
+			if(result1 > 0 && result2 > 0 && result3 > 0) {
+				return "redirect:culture.ad";
+			} else {
+				throw new CultureException("문화 수정에 실패");
+			}
+			
+			
+		} else if(thumbnailImg1.getOriginalFilename() != ""  && uploadFile.getOriginalFilename() == ""){ // 이미지만 수정했을경우(파일 수정 x)
+			
+			System.out.println("이미지만 수정하기");
+			
+			int result1 = aService.updateCulture(c);
+			
+			if(thumbnailImg1 != null && !thumbnailImg1.isEmpty()) {
+				String renameFileName = cultureImgSaveFile(thumbnailImg1, request);
+				
+				if(renameFileName != null) {
+					f.setOriginName(thumbnailImg1.getOriginalFilename());
+					f.setChangeName(renameFileName);
+				}
+			}
+			f.setcNo(cNo);
+			
+			int result2 = aService.updateCAttachment(f);
+			
+			if(result1 > 0 && result2 > 0 ) {
+				return "redirect:culture.ad";
+			} else {
+				throw new CultureException("문화 수정에 실패");
+			}
+			
+		
+		} else if(thumbnailImg1.getOriginalFilename() == ""  && uploadFile.getOriginalFilename() != "") { // 파일만 수정
+			
+			System.out.println("파일만 수정하기");
+			
+			int result1 = aService.updateCulture(c);
+			
+			f.setcNo(cNo);
+			
+			if(uploadFile != null && !uploadFile.isEmpty()) {
+				String renameFileName = cultureSaveFile(uploadFile, request);
+				
+				if(renameFileName != null) {
+					f.setOriginName(uploadFile.getOriginalFilename());
+					f.setChangeName(renameFileName);
+				}
+			}
+			
+			int result3 = aService.updateCFile(f);
+			
+			if(result1 > 0 && result3 > 0 ) {
+				return "redirect:culture.ad";
+			} else {
+				throw new CultureException("문화 수정에 실패");
+			}
+			
+		} else {
+			System.out.println("내용만 수정하기");
+			int result1 = aService.updateCulture(c);
+			
+			if(result1 > 0 ) {
+				return "redirect:culture.ad";
+			} else {
+				throw new CultureException("문화 수정에 실패");
+			}
+		}
+	}
+	
+	
 	
 	
 	@RequestMapping("bkgroup.ad")

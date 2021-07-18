@@ -85,6 +85,34 @@
 		insert into files
 		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 2, default, 0, 0, seq_cno.CURRVAL, 0, 0)
 	</insert>
+	<select id="cDeleteList" resultMap="cultureResultSet">
+		select *
+		from culture
+		where CULTURE_NO = #{cNo}
+	</select>
+	<update id="cultureDelete">
+		update culture
+		set C_STATUS='N'
+		where CULTURE_NO = #{cNo}
+	</update>
+	<select id="selectClist" resultMap="cultureResultSet">
+		select *
+		from culture
+		where CULTURE_NO = #{cNo}
+	</select>
+	<select id="selectCFileName" resultMap="FilesResultSet">
+		select *
+		from files
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 0
+	</select>
+	<select id="selectCFileName2" resultMap="FilesResultSet">
+		select *
+		from files
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 2
+	</select>
+	
+	
+	
 	
 	<!-- 관리자 로그인 -->
 	<select id="adminLogin" resultMap="memberResultSet">
@@ -158,6 +186,15 @@
 		<result column="U_STATUS" property="uStatus"/>
 		<result column="ADMIN_YN" property="admin"/>
 	</resultMap>
+	
+	<select id="deleteUserList" resultMap="MemberResultSet">
+		select *
+		from users
+		where USER_NO = #{no}
+	</select>
+	
+	
+	
 	
 	<update id="deleteUser">
 		update users
@@ -262,6 +299,25 @@
 		where books_no = #{bkNo}
 	</update>
 	
+	<update id="updateCulture">
+		update culture
+		set CULTURE_TITLE = #{cTitle}, CULTURE_CONTENT = #{cContent}, CULTURE_TOTAL = #{cTotal}, CULTURE_START_DATE = #{cStartDate},
+			CULTURE_END_DATE = #{cEndDate}, LECTURE_DATE = #{lDate}, LECTURE_TIME = #{lTime}, CULTURE_PLACE = #{cPlace},
+			CULTURE_INSTRUCTOR = #{cInstructor}, CULTURE_TARGET = #{cTarget}
+		where CULTURE_NO = #{cNo}
+	</update>
+	
+	<update id="updateCAttachment">
+		update files
+		set ORIGIN_NAME = #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 0
+	</update>
+	
+	<update id="updateCFile">
+		update files
+		set ORIGIN_NAME= #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 2
+	</update>
 	
 	
 </mapper>

@@ -62,7 +62,7 @@
 				</c:forEach>
 				
 				<tr align="center" height="20" id="buttonTab">
-				<td colspan="6">
+				<td colspan="8">
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
@@ -113,13 +113,21 @@
 	<script>
 	        $('.btn2').on('click', function () {
 	        	var bNo = $('input:radio[name=bNo]:checked').val();
-				window.open("bkDelete.ad?bNo="+bNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
-			});
+	        	if(bNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+	        	window.open("bkDelete.ad?bNo="+bNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
+	        	}
+	        });
      </script>
 	<script>
 	        $('.btn3').on('click', function () {
 	        	var bNo = $('input:radio[name=bNo]:checked').val();
-				location.href="bkUpdateForm.ad?bNo="+bNo;
+	        	if(bNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+					location.href="bkUpdateForm.ad?bNo="+bNo;
+	        	}
 			});
      </script>
 	

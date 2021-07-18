@@ -151,6 +151,42 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.updateBAttachment", f);
 	}
 
+	public ArrayList<Member> deleteUserList(SqlSessionTemplate sqlSession, Integer no) {
+		return (ArrayList)sqlSession.selectList("adminMapper.deleteUserList", no);
+	}
+
+	public ArrayList<Culture> cDeleteList(SqlSessionTemplate sqlSession, Integer cNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.cDeleteList", cNo);
+	}
+
+	public int cultureDelete(SqlSessionTemplate sqlSession, Integer cNo) {
+		return sqlSession.update("adminMapper.cultureDelete", cNo);
+	}
+
+	public ArrayList<Culture> selectClist(SqlSessionTemplate sqlSession, Integer cNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectClist", cNo);
+	}
+
+	public ArrayList<Files> selectCFileName(SqlSessionTemplate sqlSession, Integer cNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectCFileName", cNo);
+	}
+
+	public ArrayList<Files> selectCFileName2(SqlSessionTemplate sqlSession, Integer cNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectCFileName2", cNo);
+	}
+
+	public int updateCulture(SqlSessionTemplate sqlSession, Culture c) {
+		return sqlSession.update("adminMapper.updateCulture", c);
+	}
+
+	public int updateCAttachment(SqlSessionTemplate sqlSession, Files f) {
+		return sqlSession.update("adminMapper.updateCAttachment", f);
+	}
+
+	public int updateCFile(SqlSessionTemplate sqlSession, Files f) {
+		return sqlSession.update("adminMapper.updateCFile", f);
+	}
+
 
 	
 }

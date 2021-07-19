@@ -7,7 +7,7 @@
 	
 	<typeAliases>
 <!-- 		<typeAlias type="com.kh.klib.board.model.vo.Board" alias="Board"/> -->
-<!-- 		<typeAlias type="com.kh.klib.bkgroup.model.vo.BookGroup" alias="BookGroup"/> -->
+ 		<typeAlias type="com.kh.klib.bkgroup.model.vo.BookGroup" alias="BookGroup"/>
 		<typeAlias type="com.kh.klib.books.model.vo.Books" alias="Books"/>
 		<typeAlias type="com.kh.klib.culture.model.vo.Culture" alias="Culture"/>
 		<typeAlias type="com.kh.klib.culture.model.vo.CultureSign" alias="CultureSign"/>
@@ -17,10 +17,11 @@
 		<typeAlias type="com.kh.klib.room.model.vo.Room" alias="Room"/>
  		<typeAlias type="com.kh.klib.room.model.vo.RoomSign" alias="RoomSign"/>
  		<typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/>
+ 		<typeAlias type="com.kh.klib.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 	
 	<mappers>
-<!-- 		<mapper resource="mapper/group-mapper.xml"/> -->
+ 		<mapper resource="mapper/group-mapper.xml"/>
  		<mapper resource="mapper/room-mapper.xml"/>
  		<mapper resource="mapper/culture-mapper.xml"/>
 		<mapper resource="mapper/admin-mapper.xml"/>

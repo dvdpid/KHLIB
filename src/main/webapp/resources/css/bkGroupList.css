@@ -1,8 +1,9 @@
 @charset "UTF-8";
 
 	.gklist{
-		margin: 25px 110px 0px 10px;
+		margin: 25px 110px 0px 10px; 
 		width: 65%; margin-left: auto;
+		border-bottom: 2px solid lightgray;
 	}
 	#bkgroupSearchTable{margin-left: auto; margin-right: auto; padding: 5px;}
 	#bkgroupSearchTable td{padding: 5px;}
@@ -18,6 +19,7 @@
 		margin-left: auto; margin-right: auto; padding: 5px; width: 100%; height: 350px; 
 		border-collapse: collapse;
 	}
+	
 	.list td{padding: 5px; border-bottom: 1px solid black;}
 	.bkgroupListDiv{display: inline-block; padding: 20px; margin: auto; width: 280px; }
 	

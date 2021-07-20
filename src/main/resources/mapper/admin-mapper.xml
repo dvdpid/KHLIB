@@ -318,6 +318,71 @@
 		set ORIGIN_NAME= #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
 		where CULTURE_NO = #{cNo} and FILE_LEVEL = 2
 	</update>
+	<select id="getbgListCount" resultType="_int">
+		select count(*)
+		from bkgroup
+		where G_STATUS = 'Y'
+	</select>
+	
+	<select id="selectbgList" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where g_status='Y'
+		order by GROUP_NO desc
+	</select>
+	<select id="gDeleteList" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where GROUP_NO = #{gNo}
+	</select>
+	<update id="bgDelete">
+		update bkgroup
+		set G_STATUS = 'N'
+		where GROUP_NO = #{gNo}
+	</update>
+	
+	<resultMap type="BookGroup" id="groupResultSet">
+		<id column="GROUP_NO" property="gNo" />
+		<result column="GROUP_NAME" property="gName" />
+		<result column="GROUP_INTRO" property="gIntro" />
+		<result column="GROUP_TOTAL" property="gTotal" />
+		<result column="GROUP_CONTENT" property="gContent" />
+		<result column="GB_TITLE" property="gbTitle" />
+		<result column="GB_CONTENT" property="gbContent" />
+		<result column="GROUP_DATE" property="gDate" />
+		<result column="GROUP_PLACE" property="gPlace" />
+		<result column="G_DEADLINE" property="gDeadline" />
+		<result column="G_STATUS" property="gStatus" />
+		<result column="GROUP_WRITER" property="gWriter" />
+	</resultMap>
+	
+	<select id="getNoticeListCount" resultType="_int">
+		select count(*)
+		from notice
+		where NOTICE_STATUS = 'Y'
+	</select>
+	
+	<select id="selectNoticeList" resultMap="NoticeResultSet">
+		select *
+		from notice
+		where NOTICE_STATUS='Y'
+		order by NOTICE_NO desc
+	</select>
+	
+	<insert id="InsertNotice">
+		insert into notice
+ 		values( seq_nno.nextval, #{nTitle}, #{nContent}, sysdate, #{ nWriter}, default, default )
+	</insert>
+	
+	<resultMap type="Notice" id="NoticeResultSet">
+		<id column="NOTICE_NO" property="nNo" />
+		<result column="NOTICE_TITLE" property="nTitle" />
+		<result column="NOTICE_CONTENT" property="nContent" />
+		<result column="NOTICE_DATE" property="nDate" />
+		<result column="NOTICE_WRITER" property="nWriter" />
+		<result column="NOTICE_COUNT" property="nCount" />
+		<result column="NOTICE_STATUS" property="nStatus" />
+	</resultMap>
 	
 	
 </mapper>

@@ -27,49 +27,44 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p><img id="titleImg1" src="resources/images/icon3.png"/>
-			도서 관리</p>
+			<p><img id="titleImg1" src="resources/images/icon7.png"/>
+			공지사항 관리</p>
 		</div>
 		<div class="empty" style="height:50px;"></div>
-		<h3 align="left">도서 목록</h3><br>
+		<h3 align="left">공지사항 목록</h3><br>
 		<div>
 			<table class="type1">
 				<thead>
 				<tr>
 					<th>번호</th>
-					<th>책 제목</th>
-					<th>저자</th>
-					<th>출판사</th>
-					<th>출판년도</th>
-					<th>상태</th>
-					<th>입고일</th>
+					<th>공지사항 제목</th>
+					<th>작성일</th>
+					<th>작성자</th>
+					<th>조회수</th>
 					<th>체크</th>
-
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="b" items="${list }">
-				<tr class="list"  onclick="location.href='${ contextPath }/detail.bk?bNo=' + ${b.bNo} + '&page=' + ${ pi.currentPage }">
-					<td>${b.bNo }</td>
-					<td class="subject"><a href="#a">${b.bTitle }</a></td>
-					<td><a href="#a">${ b.bWriter }</a></td>
-					<td>${b.bCompany }</td>
-					<td>${b.bDate }</td>
-					<td>${b.bStatus }</td>
-					<td>${b.entryDate }</td>
-					<td><input type="radio" name="bNo" value="${b.bNo  }"></td>
+				<c:forEach var="n" items="${list }">
+				<tr class="list"  onclick="location.href='${ contextPath }/nDetail.ad?nNo=' + ${n.nNo} + '&page=' + ${ pi.currentPage }">
+					<td>${n.nNo }</td>
+					<td class="subject"><a href="#a">${n.nTitle }</a></td>
+					<td><a href="#a">${ n.nDate }</a></td>
+					<td>${n.nWriter }</td>
+					<td>${n.nCount }</td>
+					<td><input type="radio" name="nNo" value="${n.nNo  }"></td>
 				</tr>
 				</c:forEach>
 				
 				<tr align="center" height="20" id="buttonTab">
-				<td colspan="8">
+				<td colspan="6">
 			
 				<!-- [이전] -->
 				<c:if test="${ pi.currentPage <= 1 }">
 					[이전] &nbsp;
 				</c:if>
 				<c:if test="${ pi.currentPage > 1 }">
-					<c:url var="before" value="book.ad">
+					<c:url var="before" value="notice.ad">
 						<c:param name="page" value="${ pi.currentPage - 1 }"/>
 					</c:url>
 					<a href="${ before }">[이전]</a> &nbsp;
@@ -82,7 +77,7 @@
 					</c:if>
 					
 					<c:if test="${ p ne pi.currentPage }">
-						<c:url var="pagination" value="book.ad">
+						<c:url var="pagination" value="notice.ad">
 							<c:param name="page" value="${ p }"/>
 						</c:url>
 						<a href="${ pagination }">${ p }</a> &nbsp;
@@ -94,7 +89,7 @@
 					[다음]
 				</c:if>
 				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<c:url var="after" value="book.ad">
+					<c:url var="after" value="notice.ad">
 						<c:param name="page" value="${ pi.currentPage + 1 }"/>
 					</c:url> 
 					<a href="${ after }">[다음]</a>
@@ -105,18 +100,18 @@
 				</tbody>
 			</table>
 			<br>
-			<input type="button" class="btn2" value="도서 삭제"  style="float:right; margin-right: 75px;" >
-			<input type="button" class="btn3" value="도서 수정"  style="float:right; margin-right: 75px;" >
-			<input type="button" class="btn1" value="도서 등록"  onclick="location.href='bookInsertForm.ad'" style="float:right; margin-right: 75px;">
+			<input type="button" class="btn2" value="공지사항 삭제"  style="float:right; margin-right: 75px;" >
+			<input type="button" class="btn3" value="공지사항 수정"  style="float:right; margin-right: 75px;" >
+			<input type="button" class="btn1" value="공지사항 추가"  onclick="location.href='noticeInsertForm.ad'" style="float:right; margin-right: 75px;">
 		</div>
 	</div>
 	<script>
 	        $('.btn2').on('click', function () {
-	        	var bNo = $('input:radio[name=bNo]:checked').val();
+	        	var bNo = $('input:radio[name=nNo]:checked').val();
 	        	if(bNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-	        	window.open("bkDelete.ad?bNo="+bNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
+	        	window.open("noticeDelete.ad?nNo="+nNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
 	        	}
 	        });
      </script>

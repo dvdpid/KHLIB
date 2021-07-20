@@ -10,6 +10,8 @@
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
 <script src="resources/js/admin.js" defer></script>
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <!-- 헤더부분 -->
@@ -32,35 +34,87 @@
 				<thead>
 				<tr>
 					<th>번호</th>
-					<th>제목</th>
+					<th>그룹 이름</th>
 					<th>작성자</th>
-					<th>작성일</th>
-					<th><input type="checkbox"></th>
+					<th>모임 일자</th>
+					<th>체크</th>
 
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
-					<td>25</td>
-					<td class="subject"><a href="#a">자유로운 모임 글</a></td>
-					<td><a href="#a">남나눔</a></td>
-					<td>2021-06-15</td>
-					<td><input type="checkbox"></td>
+				<c:forEach var="g" items="${list }">
+					<tr class="list" onclick="location.href='${ contextPath }/gDetail.bg?gNo='+ ${ g.gNo } + '&page=' + ${ pi.currentPage }">
+						<td>${g.gNo }</td>
+						<td class="subject"><a href="#a">${g.gName }</a></td>
+						<td><a href="#a">${ g.gWriter }</a></td>
+						<td>${g.gDate }</td>
+						<td><input type="radio" name="gNo" value="${g.gNo  }"></td>
+					</tr>
+				</c:forEach>
+						<tr align="center" height="20" id="buttonTab">
+						<td colspan="5">
 					
-				</tr>
-				<tr>
-					<td>25</td>
-					<td class="subject"><a href="#a">자유로운 모임 글 2</a></td>
-					<td><a href="#a">도대담</a></td>
-					<td>2021-06-16</td>
-					<td><input type="checkbox"></td>
+						<!-- [이전] -->
+						<c:if test="${ pi.currentPage <= 1 }">
+							[이전] &nbsp;
+						</c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url var="before" value="bkgroup.ad">
+								<c:param name="page" value="${ pi.currentPage - 1 }"/>
+							</c:url>
+							<a href="${ before }">[이전]</a> &nbsp;
+						</c:if>
+				
+				<!-- 페이지 -->
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<font color="red" size="4"><b>[${ p }]</b></font>
+							</c:if>
+							
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="pagination" value="bkgroup.ad">
+									<c:param name="page" value="${ p }"/>
+								</c:url>
+								<a href="${ pagination }">${ p }</a> &nbsp;
+							</c:if>
+						</c:forEach>
+				
+						<!-- [다음] -->
+						<c:if test="${ pi.currentPage >= pi.maxPage }">
+							[다음]
+						</c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url var="after" value="bkgroup.ad">
+								<c:param name="page" value="${ pi.currentPage + 1 }"/>
+							</c:url> 
+							<a href="${ after }">[다음]</a>
+						</c:if>
+					</td>
 				</tr>
 				</tbody>
 			</table>
 			<br>
 			<input type="button" class="btn1" value="모임 삭제" style="float:right; margin-right: 75px;">
-			<input type="button" class="btn1" value="모임 수정" style="float:right; margin-right: 75px;">
 		</div>
 	</div>
+		<script>
+	        $('.btn1').on('click', function () {
+	        	var gNo = $('input:radio[name=gNo]:checked').val();
+	        	if(gNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+	        		window.open("bgDeleteForm.ad?gNo="+gNo, 'bookgroupSignPage', 'width=800, height=500, top=100, left=300,location=gNo');
+	        	}
+	        });
+     </script>
+     <script>
+		$(function(){
+			$('.list').mouseover(function(){
+				$(this).css({"background":"#EEEEEE", "color":"white", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).css({"background":"none", "color":"black"});
+			});
+		});
+	</script>
 </body>
 </html>

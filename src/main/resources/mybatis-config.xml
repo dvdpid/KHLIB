@@ -18,6 +18,7 @@
  		<typeAlias type="com.kh.klib.room.model.vo.RoomSign" alias="RoomSign"/>
  		<typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/>
  		<typeAlias type="com.kh.klib.member.model.vo.Member" alias="Member"/>
+ 		<typeAlias type="com.kh.klib.notice.model.vo.Notice" alias="Notice"/>
 	</typeAliases>
 	
 	<mappers>

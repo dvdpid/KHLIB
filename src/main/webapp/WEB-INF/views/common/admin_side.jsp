@@ -50,7 +50,12 @@
 				독서 모임
 			</h3>
 		</div>
-		
+		<div class="sideButton" onclick="location.href='notice.ad';">
+			<h3 id="sideButton3">
+				<img id="sideImg3" src="resources/images/icon7.png"/>
+				공지 사항
+			</h3>
+		</div>
 	</div>
 </body>
 </html>

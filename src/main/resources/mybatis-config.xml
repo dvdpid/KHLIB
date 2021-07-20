@@ -18,6 +18,8 @@
  		<typeAlias type="com.kh.klib.room.model.vo.RoomSign" alias="RoomSign"/>
  		<typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/>
  		<typeAlias type="com.kh.klib.member.model.vo.Member" alias="Member"/>
+ 		<typeAlias type="com.kh.klib.customer.model.vo.Question" alias="Question"/>
+ 		<typeAlias type="com.kh.klib.customer.model.vo.Answer" alias="Answer"/>
 	</typeAliases>
 	
 	<mappers>
@@ -27,7 +29,7 @@
 		<mapper resource="mapper/admin-mapper.xml"/>
 		<mapper resource="mapper/member-mapper.xml"/>
 		<mapper resource="mapper/books-mapper.xml" />
-<!--  	<mapper resource="mapper/customer-mapper.xml" />   -->
+	  	<mapper resource="mapper/customer-mapper.xml" />   
 	</mappers>
 	
 </configuration>

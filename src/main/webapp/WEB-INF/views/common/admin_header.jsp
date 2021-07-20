@@ -29,7 +29,7 @@
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
-			<div class="logo"><h2><b style="color:rgb(212, 129, 91);">KH&nbsp;</b><b>도서관</b></h2> </div>
+			<div class="logo" onclick="location.href='user.ad'"><h2><b style="color:rgb(212, 129, 91);">KH&nbsp;</b><b>도서관</b></h2></div>
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>

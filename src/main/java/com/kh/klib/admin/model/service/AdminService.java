@@ -2,11 +2,13 @@ package com.kh.klib.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.klib.bkgroup.model.vo.BookGroup;
 import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.notice.model.vo.Notice;
 import com.kh.klib.room.model.vo.Room;
 import com.kh.klib.room.model.vo.RoomSign;
 
@@ -90,6 +92,20 @@ public interface AdminService {
 	int updateCAttachment(Files f);
 
 	int updateCFile(Files f);
+
+	int getbgListCount();
+
+	ArrayList<BookGroup> selectbgList(PageInfo pi);
+
+	ArrayList<BookGroup> gDeleteList(Integer gNo);
+
+	int bgDelete(Integer gNo);
+
+	int getNoticeListCount();
+
+	ArrayList<Notice> selectNoticeList(PageInfo pi);
+
+	int InsertNotice(Notice n);
 
 
 

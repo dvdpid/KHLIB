@@ -45,7 +45,7 @@
 				</thead>
 				<tbody>
 				<c:forEach var="c" items="${list }">
-				<tr>
+				<tr class="list" onclick="location.href='${ contextPath }/cDetail.cu?cNo=' + ${c.cNo} + '&page=' + ${ pi.currentPage }">
 					<td>${c.cNo }</td>
 					<td class="subject"><a href="#a">${c.cTitle }</a></td>
 					<td><a href="#a">${ c.cTotal }</a></td>
@@ -126,5 +126,14 @@
 	        	}
 			});
      </script>
+      <script>
+		$(function(){
+			$('.list').mouseover(function(){
+				$(this).css({"background":"#EEEEEE", "color":"white", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).css({"background":"none", "color":"black"});
+			});
+		});
+	</script>
 </body>
 </html>

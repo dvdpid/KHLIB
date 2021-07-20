@@ -264,11 +264,7 @@
 			}).mouseout(function(){
 				$(this).css({"background":"none", "color":"black"});
 			});
-			
-			
 		});
-		
-		
 	</script>
 	
 	

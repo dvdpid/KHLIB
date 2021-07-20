@@ -52,7 +52,7 @@
 				<tbody>
 				<c:if test="${ not list.isEmpty() }">
 				<c:forEach var="u" items="${list }">
-				<tr>
+				<tr class="list">
 					<td>${u.no }</td>
 					<td class="subject"><a href="#a">${u.id }</a></td>
 					<td><a href="#a">${u.name }</a></td>
@@ -136,7 +136,7 @@
 				<tbody>
 				<c:if test="${ not alist.isEmpty() }">
 				<c:forEach var="au" items="${alist }">
-				<tr>
+				<tr class="list2">
 					<td>${au.no }</td>
 					<td class="subject"><a href="#a">${au.id }</a></td>
 					<td><a href="#a">${au.name }</a></td>
@@ -148,6 +148,7 @@
 					<td>${au.address }</td>
 					<td><input type="radio" name="adminCk" value="${ au.no }"></td>
 				</tr>
+				
 				</c:forEach>
 				</c:if>
 				<c:if test="${ alist.isEmpty() }">
@@ -220,5 +221,23 @@
 	        	}
 			});
         </script>
+     <script>
+		$(function(){
+			$('.list').mouseover(function(){
+				$(this).css({"background":"#EEEEEE", "color":"white", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).css({"background":"none", "color":"black"});
+			});
+		});
+	</script>
+	 <script>
+		$(function(){
+			$('.list2').mouseover(function(){
+				$(this).css({"background":"#EEEEEE", "color":"white", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).css({"background":"none", "color":"black"});
+			});
+		});
+	</script>
 </body>
 </html>

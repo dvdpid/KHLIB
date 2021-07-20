@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.klib.admin.model.service.AdminService;
+import com.kh.klib.bkgroup.model.exception.BookGroupException;
+import com.kh.klib.bkgroup.model.vo.BookGroup;
 import com.kh.klib.books.model.exception.BooksException;
 import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.Pagination;
@@ -33,6 +34,7 @@ import com.kh.klib.culture.model.exception.CultureException;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.notice.model.vo.Notice;
 import com.kh.klib.room.exception.RoomException;
 import com.kh.klib.room.model.vo.Room;
 import com.kh.klib.room.model.vo.RoomSign;
@@ -184,8 +186,13 @@ public class AdminController {
 		} else {
 			throw new MemberException("관리자 삭제 실패");
 		}
-		
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("board.ad")
@@ -197,7 +204,7 @@ public class AdminController {
 	
 	@RequestMapping("room.ad")
 	public ModelAndView adminRoomForm(ModelAndView mv, HttpSession session) {
-	ArrayList<Room> rlist = aService.selectrList();
+		ArrayList<Room> rlist = aService.selectrList();
 		
 		int allListCount = aService.getAllListCount();
 		int listCount = aService.getrlistCount();
@@ -640,9 +647,94 @@ public class AdminController {
 	
 	
 	@RequestMapping("bkgroup.ad")
-	public String adminBgroupForm() {
-		return "admin_bGroup";
+	public ModelAndView adminBgroupForm(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int bglistCount = aService.getbgListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, bglistCount);
+		
+		ArrayList<BookGroup> list = aService.selectbgList(pi);
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("pi", pi).setViewName("admin_bGroup");
+		} else {
+			throw new BookGroupException("도서 조회 실패!");
+		}
+		return mv;
 	}
+	@RequestMapping("bgDeleteForm.ad")
+	public ModelAndView bgDeleteForm(@RequestParam("gNo") Integer gNo, ModelAndView mv) {
+		
+		ArrayList<BookGroup> gList = aService.gDeleteList(gNo);
+		if(gList != null) {
+			mv.addObject("gList", gList).setViewName("bookGroupSign");
+		}
+		
+		return mv;
+	}
+	@RequestMapping("bgDelete.ad")
+	public String bgDelete(@RequestParam("gNo") Integer gNo) {
+		
+		int result = aService.bgDelete(gNo);
+		
+		if(result > 0) {
+			return "bookgroup_ok";
+		} else {
+			throw new BookGroupException("독서모임 삭제 실패!");
+		}
+		
+	}
+	
+	
+	@RequestMapping("notice.ad")
+	public ModelAndView notice(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int listCount = aService.getNoticeListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Notice> list = aService.selectNoticeList(pi);
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("pi", pi).setViewName("admin_notice");
+		} else {
+			throw new BooksException("회원 조회 실패!");
+		}
+		return mv;
+	}
+	@RequestMapping("noticeInsertForm.ad")
+	public String noticeInsertForm() {
+		return "admin_add_notice";
+	}
+	@RequestMapping("noticeInsert.ad")
+	public String noticeInsert(@ModelAttribute Notice n, HttpSession session) {
+		
+		System.out.println(n);
+		String writer = ((Member)session.getAttribute("loginUser")).getNickname();
+		
+		n.setnWriter(writer);
+		
+		int result = aService.InsertNotice(n);
+		
+		if( result> 0 ) {
+			return "redirect:notice.ad";
+		} else {
+			throw new BooksException("공지사항 등록 실패!");
+		}
+		
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("dupId.ad")
 	@ResponseBody
 	public String dupId(@RequestParam("id") String id) {

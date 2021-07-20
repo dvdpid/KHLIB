@@ -13,7 +13,13 @@
  	}
  	#bkUpdateTable{
  		text-align: center;  width: 80%; 
-		margin-right: auto; margin-left: 65px;
+		margin: 25px 60px 0px 60px;
+		padding: 0px 0px 13px 0px;
+ 	}
+ 	#gPlaceTable{
+ 		text-align: center;  width: 80%; 
+		margin: 25px 60px 0px 60px;
+		padding: 0px 0px 13px 0px;
  	}
  	table, td, th{border-collapse: collapse;}
  	td{padding: 10px;}

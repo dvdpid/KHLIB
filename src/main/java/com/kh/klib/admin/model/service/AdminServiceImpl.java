@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.klib.admin.model.dao.AdminDAO;
+import com.kh.klib.bkgroup.model.vo.BookGroup;
 import com.kh.klib.books.model.vo.Books;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.notice.model.vo.Notice;
 import com.kh.klib.room.model.vo.Room;
 import com.kh.klib.room.model.vo.RoomSign;
 
@@ -217,6 +219,41 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int updateCFile(Files f) {
 		return aDAO.updateCFile(sqlSession, f);
+	}
+
+	@Override
+	public int getbgListCount() {
+		return aDAO.getbgListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<BookGroup> selectbgList(PageInfo pi) {
+		return aDAO.selectbgList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<BookGroup> gDeleteList(Integer gNo) {
+		return aDAO.gDeleteList(sqlSession, gNo);
+	}
+
+	@Override
+	public int bgDelete(Integer gNo) {
+		return aDAO.bgDelete(sqlSession, gNo);
+	}
+
+	@Override
+	public int getNoticeListCount() {
+		return aDAO.getNoticeListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
+		return aDAO.selectNoticeList(sqlSession, pi);
+	}
+
+	@Override
+	public int InsertNotice(Notice n) {
+		return aDAO.InsertNotice(sqlSession, n);
 	}
 
 	

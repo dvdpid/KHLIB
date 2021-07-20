@@ -18,6 +18,8 @@
  		<typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/>
  		<typeAlias type="com.kh.klib.member.model.vo.Member" alias="Member"/>
  		<typeAlias type="com.kh.klib.notice.model.vo.Notice" alias="Notice"/>
+ 		<typeAlias type="com.kh.klib.customer.model.vo.Question" alias="Question"/>
+ 		<typeAlias type="com.kh.klib.customer.model.vo.Answer" alias="Answer"/>
 	</typeAliases>
 	
 	<mappers>

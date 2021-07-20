@@ -46,51 +46,57 @@
 	<div class="main">
 		<div id="toggleBooks">
 			<a href="${contextPath}/book.bk">
-			<div id="toggle-newarrival" class="toggle-size toggle-active">신착도서</div></a>
-			<span class="line"></span>
-			<a href="${contextPath}/recommend.bk">
-			<div id="toggle-recommend" class="toggle-size">추천도서</div>
+				<div id="toggle-newarrival" class="toggle-size toggle-active">신착도서</div>
+			</a> <span class="line"></span> <a href="${contextPath}/recommend.bk">
+				<div id="toggle-recommend" class="toggle-size">추천도서</div>
 			</a>
 		</div>
-		<div id="bookList">
-			<c:forEach var="book" items="${bList}">
-				<div class="bookItem">
-					<c:url var="bDetail" value="detail.bk">
-						<c:param name="bNo" value="${ book.bNo}"></c:param>
-					</c:url>
-					<a href="${bDetail}"> <img
-						src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}"
-						class="bookImage" />
-					</a>
-				</div>
-			</c:forEach>
-
-		</div>
-		<div class="pages">
-			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<!-- 현재 선택된 페이지와 번호 버튼이 같을 때 -->
-				<c:if test="${ p == pi.currentPage }">
-					<span class="active">${ p }</span>
-				</c:if>
-				<!-- 현재 선택된 페이지와 번호 버튼이 같지 않을 때 -->
-				<c:if test="${ p != pi.currentPage }">
-					<c:url var="bListCheck" value="${ loc }">
-						<c:param name="currentPage" value="${ p }"></c:param>
-					</c:url>
-					<a class="inactive" href="${ bListCheck  }">${ p }</a>
-				</c:if>
-			</c:forEach>
-		</div>
-		<div id="searchArea">
-			<select name="searchType">
-				<option value="title">도서명</option>
-				<option value="author">저자</option>
-				<option value="publisher">출판사</option>
-			</select> <input type="text" name="searchText" /> <img
-				src="resources/images/magnifying-glass.png"
-				style="width: 20px; display: block; margin-top: auto; margin-bottom: auto;"
-				alt="돋보기">
-		</div>
+		<c:if test="${bList ne null}">
+			<div id="bookList">
+				<c:forEach var="book" items="${bList}">
+					<div class="bookItem">
+						<c:url var="bDetail" value="detail.bk">
+							<c:param name="bNo" value="${ book.bNo}"></c:param>
+						</c:url>
+						<a href="${bDetail}"> <img
+							src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}"
+							class="bookImage" />
+						</a>
+					</div>
+				</c:forEach>
+			</div>
+		</c:if>
+		<c:if test="${ bList eq null}">
+			<div class="bookItem" style="text-align: center;">등록 된 책이 없습니다.
+			</div>
+		</c:if>
+		<c:if test="${bList ne null}">
+			<div class="pages">
+				<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+					<!-- 현재 선택된 페이지와 번호 버튼이 같을 때 -->
+					<c:if test="${ p == pi.currentPage }">
+						<span class="active">${ p }</span>
+					</c:if>
+					<!-- 현재 선택된 페이지와 번호 버튼이 같지 않을 때 -->
+					<c:if test="${ p != pi.currentPage }">
+						<c:url var="bListCheck" value="${ loc }">
+							<c:param name="currentPage" value="${ p }"></c:param>
+						</c:url>
+						<a class="inactive" href="${ bListCheck  }">${ p }</a>
+					</c:if>
+				</c:forEach>
+			</div>
+			<div id="searchArea">
+				<select name="searchType">
+					<option value="title">도서명</option>
+					<option value="author">저자</option>
+					<option value="publisher">출판사</option>
+				</select> <input type="text" name="searchText" /> <img
+					src="resources/images/magnifying-glass.png"
+					style="width: 20px; display: block; margin-top: auto; margin-bottom: auto;"
+					alt="돋보기">
+			</div>
+		</c:if>
 	</div>
 
 	<script>

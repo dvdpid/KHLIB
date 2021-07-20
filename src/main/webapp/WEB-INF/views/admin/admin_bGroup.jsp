@@ -38,7 +38,6 @@
 					<th>작성자</th>
 					<th>모임 일자</th>
 					<th>체크</th>
-
 				</tr>
 				</thead>
 				<tbody>
@@ -48,7 +47,7 @@
 						<td class="subject"><a href="#a">${g.gName }</a></td>
 						<td><a href="#a">${ g.gWriter }</a></td>
 						<td>${g.gDate }</td>
-						<td><input type="radio" name="gNo" value="${g.gNo  }"></td>
+						<td onclick="event.cancelBubble=true"><input type="radio" name="gNo" value="${g.gNo  }"></td>
 					</tr>
 				</c:forEach>
 						<tr align="center" height="20" id="buttonTab">

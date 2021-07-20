@@ -30,9 +30,4 @@
  			#{address}, default,default)
  	</insert>
  	
- 	<select id="dupId" resultType="_int">
-		SELECT count(*)
-		from users
-		where user_id = #{id}
-	</select>
 </mapper>

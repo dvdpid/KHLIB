@@ -34,16 +34,15 @@ public class BooksController {
 		}
 		
 		PageInfo pi = Pagination.getBookPageInfo(currentPage, listCount, limit);
-		
-		System.out.println(pi);
-		
 		ArrayList<Books> list = bService.getBookNewList(pi);
 		if(list != null && !list.isEmpty()) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("bList", list);			
+			return "bookMain";
+		} else {
+			throw new BooksException("게시글 조회에 실패하였습니다.");
 		}
 		
-		return "bookMain";
 	}
 	
 	@RequestMapping("recommend.bk")
@@ -62,9 +61,11 @@ public class BooksController {
 		ArrayList<Books> list = bService.getBookRecommendList(pi);
 		if(list != null && !list.isEmpty()) {
 			model.addAttribute("bList", list);			
+			return "bookRecommend";
+		} else {
+			throw new BooksException("게시글 조회에 실패하였습니다.");
 		}
 		
-		return "bookRecommend";
 	}
 	
 	@RequestMapping("detail.bk")

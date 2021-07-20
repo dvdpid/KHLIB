@@ -53,7 +53,7 @@
 					<td>${c.cEndDate }</td>
 					<td>${c.cInstructor }</td>
 					<td>${c.cTarget }</td>
-					<td><input type="radio" name="cNo" value="${c.cNo }"></td>
+					<td onclick="event.cancelBubble=true"><input type="radio" name="cNo" value="${c.cNo }"></td>
 				</tr>
 				</c:forEach>
 				

@@ -52,7 +52,7 @@
 					<td><a href="#a">${ n.nDate }</a></td>
 					<td>${n.nWriter }</td>
 					<td>${n.nCount }</td>
-					<td><input type="radio" name="nNo" value="${n.nNo  }"></td>
+					<td onclick="event.cancelBubble=true"><input type="radio" name="nNo" value="${n.nNo  }"></td>
 				</tr>
 				</c:forEach>
 				

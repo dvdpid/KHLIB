@@ -57,7 +57,7 @@
 					<td>${b.bDate }</td>
 					<td>${b.bStatus }</td>
 					<td>${b.entryDate }</td>
-					<td><input type="radio" name="bNo" value="${b.bNo  }"></td>
+					<td onclick="event.cancelBubble=true"><input type="radio" name="bNo" value="${b.bNo  }"></td>
 				</tr>
 				</c:forEach>
 				

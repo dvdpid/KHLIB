@@ -15,11 +15,9 @@
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
 		<property name="configLocation" value="classpath:mybatis-config.xml"/> <!--configLocation 마이바티스의 위치에 대해서  -->
 		<property name="dataSource" ref="dataSource"/>
-		
-	
 	</bean>
 		
-	<bean id="sqlSessinTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
 		<constructor-arg ref="sqlSession"/>
 	</bean>	
 		

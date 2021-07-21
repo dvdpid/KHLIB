@@ -52,6 +52,8 @@
 			<div id="toggle-recommend" class="toggle-size">추천도서</div>
 			</a>
 		</div>
+		<c:if test="${bList ne null}">
+		<!-- 도서 목록 -->
 		<div id="bookList">
 			<c:forEach var="book" items="${bList}">
 				<div class="bookItem">
@@ -64,8 +66,13 @@
 					</a>
 				</div>
 			</c:forEach>
-
 		</div>
+		</c:if>
+		<c:if test="${ bList eq null  }">
+		<div id="nobook" style="align-text: center">등록 된 도서가 없습니다.</div>
+		</c:if>
+		<c:if test="${ bList ne null }">
+		<!-- 페이징 영역 -->
 		<div class="pages">
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<!-- 현재 선택된 페이지와 번호 버튼이 같을 때 -->
@@ -81,6 +88,7 @@
 				</c:if>
 			</c:forEach>
 		</div>
+		<!-- 검색 -->
 		<div id="searchArea">
 			<select name="searchType">
 				<option value="title">도서명</option>
@@ -91,12 +99,10 @@
 				style="width: 20px; display: block; margin-top: auto; margin-bottom: auto;"
 				alt="돋보기">
 		</div>
+		</c:if>
 	</div>
 
 	<script>
-		$(function() {
-			('#boardTable')
-		})
 	</script>
 </body>
 </html>

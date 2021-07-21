@@ -38,11 +38,9 @@ public class BooksController {
 		if(list != null && !list.isEmpty()) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("bList", list);			
-			return "bookMain";
-		} else {
-			throw new BooksException("게시글 조회에 실패하였습니다.");
 		}
 		
+		return "bookMain";
 	}
 	
 	@RequestMapping("recommend.bk")
@@ -58,13 +56,15 @@ public class BooksController {
 		int listCount = bService.getBookRecommendListCount();
 		
 		PageInfo pi = Pagination.getBookPageInfo(currentPage, listCount, limit);
+		
 		ArrayList<Books> list = bService.getBookRecommendList(pi);
+		
 		if(list != null && !list.isEmpty()) {
-			model.addAttribute("bList", list);			
-			return "bookRecommend";
-		} else {
-			throw new BooksException("게시글 조회에 실패하였습니다.");
+			model.addAttribute("bList", list);
+			model.addAttribute("pi", pi);
 		}
+		
+		return "bookRecommend";
 		
 	}
 	
@@ -104,24 +104,18 @@ public class BooksController {
 		}
 		
 		
-		try {
+		
 		int limit = 9;
 		int listCount = bService.getSearchResultListCount(sc);
 		PageInfo pi  = Pagination.getBookPageInfo(currentPage, listCount, limit);
 		
 		ArrayList<Books> bList = bService.getSearchResultList(sc, pi);
-		
-		
-		System.out.println(bList);
-		
-		model.addAttribute("bList", bList);
+		if(bList != null) {			
+			model.addAttribute("bList", bList);
+			model.addAttribute("pi", pi);
+		}
 		
 		return "bookSearch";
-		
-		} catch(Exception e) {
-			 e.printStackTrace();
-			 throw new BooksException("검색결과가 없습니다.");
-		}
 		
 	}
 }

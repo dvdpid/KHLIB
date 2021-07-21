@@ -50,5 +50,15 @@ public class CustomerServiceImpl implements CustomerService {
 		return cDAO.getAnswer(sqlSession, qNo);
 	}
 
+	@Override
+	public int deleteAnswer(int qNo) {
+		return cDAO.deleteAnswer(sqlSession, qNo);
+	}
+
+	@Override
+	public int updateAnswer(Answer answer) {
+		return cDAO.updateAnswer(sqlSession, answer);
+	}
+
 
 }

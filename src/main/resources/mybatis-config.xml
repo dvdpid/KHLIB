@@ -21,6 +21,7 @@
        <typeAlias type="com.kh.klib.customer.model.vo.Question" alias="Question"/>
        <typeAlias type="com.kh.klib.customer.model.vo.Answer" alias="Answer"/>
         <typeAlias type="com.kh.klib.comments.model.vo.Comments" alias="Comments"/>
+        <typeAlias type="com.kh.klib.notice.model.vo.Notice" alias="Notice"/>
    </typeAliases>
    
    <mappers>
@@ -32,6 +33,7 @@
       <mapper resource="mapper/books-mapper.xml" />
      <mapper resource="mapper/customer-mapper.xml" />
 	<mapper resource="mapper/board-mapper.xml" />
+	<mapper resource="mapper/notice-mapper.xml" />
    </mappers>
    
 </configuration>

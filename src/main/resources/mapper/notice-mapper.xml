@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="noticeMapper">
+	<select id="getNoticeListCount" resultType="_int">
+		select count(*)
+		from notice
+		where NOTICE_STATUS = 'Y'
+	</select>
+	<select id="selectNoticeList" resultMap="NoticeResultSet">
+		select *
+		from notice
+		where NOTICE_STATUS='Y'
+		order by NOTICE_NO desc
+	</select>
+	<select id="selectNDList" resultMap="NoticeResultSet">
+		select *
+		from notice
+		where NOTICE_NO = #{nNo}
+	</select>
+	<update id="addReadCount">
+		update notice
+		set NOTICE_COUNT = NOTICE_COUNT + 1
+		where NOTICE_NO = #{nNo}
+	</update>
+	
+	<select id="searchListCount" parameterType="com.kh.klib.notice.model.vo.NoticeSearchValue" resultType="_int">
+		select count(*)
+		from notice
+		where NOTICE_STATUS = 'Y'
+		<if test="title != null">
+			and NOTICE_TITLE like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and NOTICE_WRITER like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchResultList" parameterType="com.kh.klib.notice.model.vo.NoticeSearchValue" resultMap="NoticeResultSet">
+		select *
+		from notice
+		where NOTICE_STATUS = 'Y'
+		<if test="title != null">
+			and NOTICE_TITLE like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and NOTICE_WRITER like '%' || #{writer} || '%'
+		</if>
+		order by NOTICE_NO desc
+	</select>
+	<resultMap type="Notice" id="NoticeResultSet">
+		<id column="NOTICE_NO" property="nNo" />
+		<result column="NOTICE_TITLE" property="nTitle" />
+		<result column="NOTICE_CONTENT" property="nContent" />
+		<result column="NOTICE_DATE" property="nDate" />
+		<result column="NOTICE_WRITER" property="nWriter" />
+		<result column="NOTICE_COUNT" property="nCount" />
+		<result column="NOTICE_STATUS" property="nStatus" />
+	</resultMap>
+</mapper>

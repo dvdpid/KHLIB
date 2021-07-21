@@ -88,7 +88,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int searchListCount(BoardSearchValue bsv) {
 		return boardDAO.searchListCount(sqlSession, bsv);
-	}
+	} 
 
 	@Override
 	public ArrayList<Board> selectSearchResultList(BoardSearchValue bsv, PageInfo pi) {

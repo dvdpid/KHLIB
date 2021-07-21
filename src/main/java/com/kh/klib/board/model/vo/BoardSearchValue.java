@@ -23,7 +23,7 @@ public class BoardSearchValue {
 	public String getWriter() {
 		return writer;
 	}
-
+ 
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}

@@ -65,7 +65,7 @@ public class BoardDAO {
 
 	public int addReadCount(SqlSessionTemplate sqlSession, int bNo) {
 		return sqlSession.update("boardMapper.addReadCount", bNo);
-	}
+	} 
 
 	public int searchListCount(SqlSessionTemplate sqlSession, BoardSearchValue bsv) {
 		return sqlSession.selectOne("boardMapper.searchListCount", bsv);

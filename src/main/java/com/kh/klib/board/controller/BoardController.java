@@ -276,7 +276,7 @@ public class BoardController {
 		} else {
 			throw new BoardException("댓글 등록에 실패하였습니다.");
 		}
-	}
+	} 
 	
 	@RequestMapping("cList.bo")
 	public void getCommentsList(@RequestParam("bNo") int bNo, HttpServletResponse response) throws JsonIOException, IOException {

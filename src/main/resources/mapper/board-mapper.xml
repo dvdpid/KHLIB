@@ -131,7 +131,7 @@
 	</insert>
 	
 	<select id="selectCommentsList" resultMap="commentsResultSet">	
-		select *
+		select * 
 		from comments
 		where board_no = #{bNo}
 		order by comment_no desc

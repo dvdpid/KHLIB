@@ -37,7 +37,7 @@
 			<table id="searchTable">
 				<tr>
 					<td>
-						<select id="searchCondition" name="searchCondition">
+		 				<select id="searchCondition" name="searchCondition">
 							<option value="title">제목</option>
 							<option value="writer">작성자</option>
 						</select>

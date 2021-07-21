@@ -29,7 +29,7 @@
 		</div>
 		
 		<br>
-		
+		 
 	<div class="outer">
 		<div class="tableArea">
 		<input type="hidden" name="bNo" value="${ board.bNo }">

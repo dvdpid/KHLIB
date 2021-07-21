@@ -24,7 +24,7 @@ public class Board {
 		this.bStatus = bStatus;
 	}
 
-	
+	 
 	
 	public int getbNo() {
 		return bNo;

@@ -9,7 +9,7 @@ public class Comments {
 	private Date cDate;
 	private String cStatus;
 	private int bNo;
-	
+	 
 	public Comments(int cNo, String cContent, String cWriter, Date cDate, String cStatus, int bNo) {
 		super();
 		this.cNo = cNo;

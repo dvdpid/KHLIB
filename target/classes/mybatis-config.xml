@@ -4,7 +4,7 @@
    <settings>
       <setting name="jdbcTypeForNull" value="NULL"/> <!-- 비어있는 값이 들어오면 널로 사용할 것 -->
    </settings>
-   
+    
    <typeAliases>
        <typeAlias type="com.kh.klib.board.model.vo.Board" alias="Board"/> 
        <typeAlias type="com.kh.klib.bkgroup.model.vo.BookGroup" alias="BookGroup"/>

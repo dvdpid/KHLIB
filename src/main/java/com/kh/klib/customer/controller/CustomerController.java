@@ -89,12 +89,15 @@ public class CustomerController {
 
 	@RequestMapping("detail.cm")
 	public String CustomerDetail(@RequestParam("qNo") int qNo, Model model) throws CustomerException {
-
+		
+		
 		Question q = cuService.getQuestion(qNo);
 
+		
 		Answer a = cuService.getAnswer(qNo);
 		if(q != null) { 
-			model.addAttribute("q", q); return "questionDetail"; 
+			model.addAttribute("a", a);
+			model.addAttribute("q", q); 
 		}
 		
 
@@ -129,6 +132,24 @@ public class CustomerController {
 		response.setCharacterEncoding("utf-8");
 		
 		gson.toJson(answer, response.getWriter());
+	}
+	
+	@RequestMapping(value="delete.cm")
+	public String CustomerDelete(@RequestParam("qNo") int qNo, @SessionAttribute("loginUser") Member m) {
+		if(m.getAdmin().equals("Y")) {
+			cuService.deleteAnswer(qNo);
+		}
+		
+		return "redirect:detail.cm?qNo="+qNo;
+	}
+	
+	@RequestMapping(value="update.cm")
+	public String CustomerUpdate(@ModelAttribute Answer answer, @SessionAttribute("loginUser") Member m) {
+		if(m.getAdmin().equals("Y")) {
+			int result = cuService.updateAnswer(answer);
+		}
+		
+		return "redirect:detail.cm?qNo="+answer.getqNo();
 	}
 
 }

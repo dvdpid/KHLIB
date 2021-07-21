@@ -143,6 +143,9 @@ td {
 					<td colspan="2">${ a.aContent }</td>
 				</tr>
 			</table>
+			<c:if test="${ loginUser.admin eq 'Y' }">
+			<div><button onclick="location.href='${contextPath}/update.cm'">수정하기</button><button onclick="location.href='${contextPath}/delete.cm'">답변 삭제하기</button></div>
+			</c:if>
 			</c:if>
 			<c:if test="${ a eq null && loginUser.admin eq 'Y' }">
 			<div class="title">답변</div>
@@ -205,8 +208,10 @@ td {
 				},
 				success: function(data){
 					console.log(data);
+					var $table = $('table');
+					var $td = $('td');
+					var $tr = $('tr');
 					
-					$('#')
 				}
 			});
 		};

@@ -65,4 +65,15 @@
   	<result column="Q_NO" property="qNo" />
   	<result column="USER_NO" property="userNo" />
   </resultMap>
+  
+  <update id="deleteAnswer" parameterType="_int">
+  	update answer
+  	set a_status = 'N'
+  	where q_no = #{qNo}
+  </update>
+  
+  <update id="updateAnswer">
+  	update answer
+  	set a_title = #{aTitle}, a_content = #{aContent}
+  </update>
 </mapper>

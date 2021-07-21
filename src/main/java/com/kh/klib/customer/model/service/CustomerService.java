@@ -20,4 +20,8 @@ public interface CustomerService {
 
 	int insertAnswer(Answer answer);
 
+	int deleteAnswer(int qNo);
+
+	int updateAnswer(Answer answer);
+
 }

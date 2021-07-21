@@ -15,10 +15,22 @@
 	<c:import url="../common/menubar.jsp"/>
 	
 <!-- 사이드 부분 -->
-	<div class="left">
+		<div class="left">
 		<div class="sideTitle">
 			<h2 id="sideMainTitle">자유게시판</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
+		</div>
+		<div class="sideButton" onclick="location.href='board.bo';">
+			<h3 id="sideButton1">
+				<img id="sideImg1" src="resources/images/laptop-solid.svg"/>
+				자유게시판
+			</h3>
+		</div>
+		<div class="sideButton" onclick="location.href='noticeList.nt';">
+			<h3 id="sideButton1">
+				<img id="sideImg1" src="resources/images/icon7.png"/>
+				공지사항
+			</h3>
 		</div>
 	</div>
 

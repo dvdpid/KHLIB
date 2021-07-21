@@ -35,15 +35,15 @@
 	<div class="main">
 		<div class="mainTitle">
 			<p>
-				<img id="titleImg1" src="resources/images/clipboard-list-solid.svg"/>
-				자유 게시판
+				<img id="titleImg1" src="resources/images/icon7.png"/>
+				공지사항
 			</p>
 		</div>
 		<div id="searchDiv">
 			<table id="searchTable">
 				<tr>
 					<td>
-		 				<select id="searchCondition" name="searchCondition">
+						<select id="searchCondition" name="searchCondition">
 							<option value="title">제목</option>
 							<option value="writer">작성자</option>
 						</select>
@@ -51,19 +51,19 @@
 					<td><input type="search" id="searchValue" placeholder="입력해주세요"></td>
 				</tr>
 			</table>
-			<button id="searchBtn" onclick="searchBoard();">조회</button>
+			<button id="searchBtn" onclick="searchNotice();">조회</button>
 		</div>
   	</div>
   	
   	<script>
-		function searchBoard(){
+		function searchNotice(){
 			var search = $('#searchCondition').val();
 			var searchContent = $('#searchValue').val();
 			
 			console.log(search);
 			console.log(searchContent);
 			
-			location.href="search.bo?search=" + search + "&searchContent=" + searchContent;
+			location.href="search.nt?search=" + search + "&searchContent=" + searchContent;
 		}
 	</script>
   	
@@ -82,24 +82,14 @@
  				</tr>
   			</c:if>
   			
-  			<c:forEach var="b" items="${ list }">
-		  		<tr onclick="location.href='${ contextPath }/bdetail.bo?bNo='+ ${ b.bNo } + '&page=' + ${ pi.currentPage }">
-		  			<td>${ b.bTitle }</td>
-		  			<td>${ b.bWriter }</td>
-		  			<td>${ b.bDate }</td>
-		  			<td>${ b.bCount }</td>
+  			<c:forEach var="n" items="${ list }">
+		  		<tr onclick="location.href='${ contextPath }/ndetail.nt?nNo='+ ${ n.nNo } + '&page=' + ${ pi.currentPage }">
+		  			<td>${ n.nTitle }</td>
+		  			<td>${ n.nWriter }</td>
+		  			<td>${ n.nDate }</td>
+		  			<td>${ n.nCount }</td>
 		  		</tr>
   			</c:forEach>
-  			
-  			
-  			<tr>
-				<td colspan="4" align="right" id="buttonTab">
-					<c:if test="${ !empty loginUser }">
-						&nbsp; &nbsp; &nbsp;
-						<button onclick="location.href='boardWriteForm.bo';">글쓰기</button>
-					</c:if>
-				</td>
-			</tr>
   			
   			<!-- 페이징 처리 -->
 			<tr align="center" height="20" id="buttonTab">
@@ -110,7 +100,7 @@
 						[이전] &nbsp;
 					</c:if>
 					<c:if test="${ pi.currentPage > 1 }">
-						<c:url var="before" value="blist.bo">
+						<c:url var="before" value="noticeList.nt">
 							<c:param name="page" value="${ pi.currentPage - 1 }"/>
 						</c:url>
 						<a href="${ before }">[이전]</a> &nbsp;
@@ -123,7 +113,7 @@
 						</c:if>
 						
 						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="pagination" value="blist.bo">
+							<c:url var="pagination" value="noticeList.nt">
 								<c:param name="page" value="${ p }"/>
 							</c:url>
 							<a href="${ pagination }">${ p }</a> &nbsp;
@@ -135,7 +125,7 @@
 						[다음]
 					</c:if>
 					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="after" value="blist.bo">
+						<c:url var="after" value="noticeList.nt">
 							<c:param name="page" value="${ pi.currentPage + 1 }"/>
 						</c:url> 
 						<a href="${ after }">[다음]</a>
@@ -158,13 +148,7 @@
 			}).mouseout(function(){
 				$(this).parent().css({"background":"none", "color":"black"});
 			});
-			
-			
 		});
-		
-		
 	</script>
-  	
-  	
 </body>
 </html>

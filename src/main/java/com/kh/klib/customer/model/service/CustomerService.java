@@ -24,7 +24,7 @@ public interface CustomerService {
 
 	int updateAnswer(Answer answer);
 
-	int deleteQuestion(Question q);
+	int deleteQuestion(int qNo);
 
 	int updateQuestion(Question q);
 

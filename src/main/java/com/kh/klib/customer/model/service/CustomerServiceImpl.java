@@ -61,8 +61,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public int deleteQuestion(Question q) {
-		return cDAO.deleteQuestion(sqlSession, q);	
+	public int deleteQuestion(int qNo) {
+		return cDAO.deleteQuestion(sqlSession, qNo);	
 	}
 
 	@Override

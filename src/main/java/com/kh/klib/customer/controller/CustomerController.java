@@ -167,8 +167,12 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value="updateQuestionForm.cm")
-	public String CustomerQuestionUpdateForm(@ModelAttribute Question q, @SessionAttribute("loginUser") Member m) {
+	public String CustomerQuestionUpdateForm(@RequestParam("qNo") int qNo, @SessionAttribute("loginUser") Member m, Model model) {
+		Question q = cuService.getQuestion(qNo);
 		if(m.getNo() == q.getUserNo()) {
+			model.addAttribute("q", q);
+			
+			System.out.println("???");
 			return "questionUpdateForm";
 		}
 		
@@ -178,11 +182,24 @@ public class CustomerController {
 	
 	@RequestMapping(value="deleteQuestion.cm")
 	public String CustomerDeleteQuestion(@RequestParam("qNo") int qNo, @SessionAttribute("loginUser") Member m) {
+		Question q = cuService.getQuestion(qNo);
 		if(m.getNo() == q.getUserNo()) {
-			cuService.deleteQuestion(q);
+			cuService.deleteQuestion(qNo);
 		}
 		
 		return "redirect:qna.cm";
+	}
+	
+	@RequestMapping(value="updateQuestion.cm")
+	public String CustomerQuestionUpdate(@ModelAttribute Question q, @SessionAttribute("loginUser") Member m) {
+		Question originalQuestion = cuService.getQuestion(q.getqNo());
+		if(m.getNo() == originalQuestion.getUserNo()) {
+			cuService.updateQuestion(q);
+			return "redirect:detail.cm?qNo="+q.getqNo();
+		}
+		
+		return "redirect:qna.cm";
+		
 	}
 
 }

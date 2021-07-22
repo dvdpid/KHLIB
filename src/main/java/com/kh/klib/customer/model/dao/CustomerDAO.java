@@ -47,8 +47,8 @@ public class CustomerDAO {
 		return sqlSession.update("customerMapper.updateAnswer", answer);
 	}
 
-	public int deleteQuestion(SqlSession sqlSession, Question q) {
-		return sqlSession.update("customerMapper.deleteQuestion", q);
+	public int deleteQuestion(SqlSession sqlSession, int qNo) {
+		return sqlSession.update("customerMapper.deleteQuestion", qNo);
 	}
 
 	public int updateQuestion(SqlSession sqlSession, Question q) {

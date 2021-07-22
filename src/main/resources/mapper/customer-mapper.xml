@@ -80,13 +80,13 @@
  
  <update id="deleteQuestion" parameterType="_int">
   	update qna
-  	set a_status = 'N'
+  	set q_status = 'N'
   	where q_no = #{qNo}
   </update>
   
  <update id="updateQuestion">
  	update qna
- 	set a_title = #{qTitle}, a_content = #{qContent}
- 	where q_no = #{qNo} and a_status = 'Y'
+ 	set q_title = #{qTitle}, q_content = #{qContent}
+ 	where q_no = #{qNo} and q_status = 'Y'
  </update>
 </mapper>

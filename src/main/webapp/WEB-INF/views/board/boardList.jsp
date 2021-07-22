@@ -91,9 +91,8 @@
 		  		</tr>
   			</c:forEach>
   			
-  			
   			<tr>
-				<td colspan="4" align="right" id="buttonTab">
+				<td colspan="4" align="right">
 					<c:if test="${ !empty loginUser }">
 						&nbsp; &nbsp; &nbsp;
 						<button onclick="location.href='boardWriteForm.bo';">글쓰기</button>
@@ -102,7 +101,7 @@
 			</tr>
   			
   			<!-- 페이징 처리 -->
-			<tr align="center" height="20" id="buttonTab">
+			<tr align="center" height="20">
 				<td colspan="6">
 				
 					<!-- [이전] -->
@@ -110,7 +109,7 @@
 						[이전] &nbsp;
 					</c:if>
 					<c:if test="${ pi.currentPage > 1 }">
-						<c:url var="before" value="blist.bo">
+						<c:url var="before" value="board.bo">
 							<c:param name="page" value="${ pi.currentPage - 1 }"/>
 						</c:url>
 						<a href="${ before }">[이전]</a> &nbsp;
@@ -123,7 +122,7 @@
 						</c:if>
 						
 						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="pagination" value="blist.bo">
+							<c:url var="pagination" value="board.bo">
 								<c:param name="page" value="${ p }"/>
 							</c:url>
 							<a href="${ pagination }">${ p }</a> &nbsp;
@@ -135,7 +134,7 @@
 						[다음]
 					</c:if>
 					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="after" value="blist.bo">
+						<c:url var="after" value="board.bo">
 							<c:param name="page" value="${ pi.currentPage + 1 }"/>
 						</c:url> 
 						<a href="${ after }">[다음]</a>
@@ -144,7 +143,7 @@
 			</tr>
   		
   		</table>
-  	
+  		
   	</div>
   		
   		

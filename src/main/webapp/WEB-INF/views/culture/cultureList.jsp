@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>문화마당 이용안내</title>
-<link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/cultureList.css" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -90,7 +90,7 @@
 		<!-- 페이징 부분 -->
 		<div class="pagingArea" align="center">
 			<!-- [이전] -->
-			<c:if test="${ pi.currentPage <= 1 }">[이전] &nbsp;</c:if>
+			<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
 			<c:if test="${ pi.currentPage > 1 }">
 				<c:url value="${ loc }" var="blistBack"> <!-- loc : 현재 내 주소 -->
             		<c:param name="page" value="${ pi.currentPage - 1 }"/>
@@ -99,13 +99,13 @@
             			<c:param name="searchValue" value="${ searchValue }"/>
             		</c:if>
             	</c:url>
-            	<a href="${ blistBack }">[이전]</a>
+            	<div class="pageBtn"><a href="${ blistBack }">&lt;</a></div>
 			</c:if>
 			
 			<!-- 페이지 -->
 			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 				<c:if test="${ p eq pi.currentPage }">
-					<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
+					<div class="currentpageBtn"><b>${ p }</b></div>
 				</c:if>
 				
 				<c:if test="${ p ne pi.currentPage }">
@@ -116,12 +116,12 @@
 	            			<c:param name="searchValue" value="${ searchValue }"/>
 	            		</c:if>
             		</c:url>
-            		<a href="${ blistCheck }">${ p }</a>
+            		<div class="pageBtn"><a href="${ blistCheck }">${ p }</a></div>
 				</c:if>
 			</c:forEach>
 			
 			<!-- [다음] -->
-			<c:if test="${ pi.currentPage >= pi.maxPage }">[다음]</c:if>
+			<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
 			<c:if test="${ pi.currentPage < pi.maxPage }">
 				<c:url value="${ loc }" var="blistNext"> <!-- loc : 현재 내 주소 -->
             		<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
@@ -130,7 +130,7 @@
             			<c:param name="searchValue" value="${ searchValue }"/>
             		</c:if>
             	</c:url>
-            	<a href="${ blistNext }">[다음]</a>
+            	<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
 			</c:if>
 		</div>
 	</c:if>

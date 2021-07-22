@@ -34,6 +34,7 @@
 	<select id="selectFList" resultMap="filesResultSet">
 		select *
 		from files
+			join culture using(culture_no)
 		where f_status='Y' and file_level=0
 		order by file_no desc
 	</select>
@@ -56,6 +57,7 @@
 		select count(*)
 		from culture
 		where c_status='Y'
+		
 		<if test="title != null">
 			and culture_title like '%' || #{title} || '%'
 		</if>
@@ -73,7 +75,8 @@
 	<select id="selectSearchResultBList" parameterType="CultureSearchCondition" resultMap="cultureResultSet">
 		select *
 		from culture
-		where c_status = 'Y'
+            join files using(culture_no)
+		where c_status='Y' and file_level=0
 		<choose>
 			<when test="title != null">
 				and culture_Title like '%' || #{title} || '%'
@@ -94,7 +97,21 @@
 	<select id="selectSearchResultFList" parameterType="CultureSearchCondition" resultMap="filesResultSet">
 		select *
 		from files
-		where f_status='Y'
+			join culture using(culture_no)
+		where f_status='Y' and file_level=0
+			<if test="title != null">
+				and culture_Title like '%' || #{title} || '%'
+			</if>
+			<if test="instructor != null">
+				and culture_Instructor like '%' || #{instructor} || '%'
+			</if>
+			<if test="place != null">
+				and culture_Place like '%' || #{place} || '%'
+			</if>
+			<if test="target != null">
+				and culture_Target like '%' || #{target} || '%'
+			</if>
+		order by file_no desc
 	</select>
 	
 	<select id="selectCulture" resultMap="cultureResultSet">

@@ -130,6 +130,10 @@ public interface AdminService {
 
 	Files selectBFile(Integer bNo);
 
+	int boardDelete(Integer bNo);
+
+	int commentDelete(Integer cNo);
+
 
 
 

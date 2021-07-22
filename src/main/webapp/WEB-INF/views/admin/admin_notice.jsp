@@ -46,7 +46,7 @@
 				</thead>
 				<tbody>
 				<c:forEach var="n" items="${list }">
-				<tr class="list"  onclick="location.href='${ contextPath }/nDetail.ad?nNo=' + ${n.nNo} + '&page=' + ${ pi.currentPage }">
+				<tr class="list"  onclick="location.href='${ contextPath }/ndetail.nt?nNo=' + ${n.nNo} + '&page=' + ${ pi.currentPage }">
 					<td>${n.nNo }</td>
 					<td class="subject"><a href="#a">${n.nTitle }</a></td>
 					<td><a href="#a">${ n.nDate }</a></td>

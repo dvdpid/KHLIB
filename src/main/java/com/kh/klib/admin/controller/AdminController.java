@@ -842,6 +842,47 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("boardDeleteForm.ad")
+	public String boardDeleteForm(@RequestParam("bNo") Integer bNo,  Model model) {
+		
+		Board board = aService.selectDetailBoard(bNo);
+		if(board != null) {
+			model.addAttribute("board", board);
+			return "boardSign";
+		} else {
+			throw new BoardException("게시글 삭제 실패!");
+		}
+		
+	}
+	@RequestMapping("boardDelete.ad")
+	public String boardDelete(@RequestParam("bNo") Integer bNo) {
+		
+		int result = aService.boardDelete(bNo);
+		if(result > 0 ) {
+			return "board_ok";
+		} else {
+			throw new BoardException("게시글 삭제 실패!");
+		}
+	}
+	@RequestMapping("cmDeleteForm.ad")
+	public String cmDeleteForm(@RequestParam("cNo") Integer cNo, Model model) {
+		
+		model.addAttribute("cNo", cNo);
+		
+		return "commentsSign";
+	}
+	@RequestMapping("commentsDelete.ad")
+	public String commentsDelete(@RequestParam("cNo") Integer cNo) {
+		
+		int result = aService.commentDelete(cNo);
+		if(result > 0 ) {
+			return "comments_ok";
+		} else {
+			throw new BoardException("댓글 삭제 실패!");
+		}
+		
+	}
+	
 	
 	
 	@RequestMapping("dupId.ad")

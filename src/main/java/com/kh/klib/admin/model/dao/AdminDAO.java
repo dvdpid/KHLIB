@@ -279,6 +279,14 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.selectBFile", bNo);
 	}
 
+	public int boardDelete(SqlSessionTemplate sqlSession, Integer bNo) {
+		return sqlSession.update("adminMapper.boardDelete", bNo);
+	}
+
+	public int commentDelete(SqlSessionTemplate sqlSession, Integer cNo) {
+		return sqlSession.update("adminMapper.commentDelete", cNo);
+	}
+
 
 
 	

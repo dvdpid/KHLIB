@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,37 +9,65 @@
 <title>열람실 상세설명</title>
 <link rel="stylesheet" href="resources/css/roomInfo.css" type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
+<style>
+#searchDiv {
+    display: flex;
+    margin: 25px 60px 0px 60px;
+    background: lightgray;
+    text-align: center;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+.main {
+    float: right;
+    width: 75%;
+    text-align: center;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+#mpTable {
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    border-left: none;
+    border-right: none;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 13px;
+    margin-bottom: 55px;
+}
+user agent stylesheet
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+.main {
+    float: right;
+    width: 75%;
+    text-align: center;
+}
+#bkgroupListOuter {
+    margin: 25px 80px 0px 10px;
+    width: 65%;
+    margin-left: auto;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+</style>
 </head>
 <body>
 <!-- 헤더부분 -->
-	<section id="header">
-		<div class="wrapper">
-		<div></div>
-			<ul class="lists">
-				<li><a href="">홈</a></li>
-				<li><a href="">로그인</a></li>
-				<li><a href="">회원가입</a></li>
-			</ul>
-		</div>
-	</section>
-	<section id="top">
-		<div class="wrapper" id="topWrapper">
-			<div class="logo"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </div>
-			<button type="button" class="toggleBtn">
-				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
-			</button>
-			<ul class="topLists">
-				<li><a href="">도서관 소개</a></li>
-				<li><a href="">도서 게시판</a></li>
-				<li><a href="">자유 게시판</a></li>
-				<li><a href="">독서 모임</a></li>
-				<li><a href="">문화 마당</a></li>
-				<li><a href="">열람실</a></li>
-				<li><a href="">도서 기부</a></li>
-				<li><a href="">공지사항</a></li>
-				</ul>
-		</div>
-	</section>
+
+	<c:import url="../common/menubar.jsp"/>
+
+
 	
 <!-- 사이드 부분 -->
 	<div class="left">
@@ -45,15 +75,15 @@
 			<h2 id="sideMainTitle">내 정보보기</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">Kh Library</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberCheck.me';">
 			<h3 id="sideButton1">
-				<img id="sideImg1" src="resources/images/open-book.png"/>
+				<img id="sideImg1" src="resources/images/info/notes.png"/>
 				회원정보 수정
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberdelete.me';">
 			<h3 id="sideButton2">
-				<img id="sideImg2" src="resources/images/maps.png"/>
+				<img id="sideImg2" src="resources/images/info/scissors.png"/>
 				회원 탈퇴
 			</h3>
 		</div>
@@ -61,149 +91,61 @@
 	</div>
 	
 <!-- 메인 부분 -->	
-	<div class="center" style="position:relative;left:-260px;top:-170px;
-	width: 100%;
-    min-height: 30px;">		
 	
 	
-	<div id="layer1" 
-	style="width:900px; height:250px; 
-	position:absolute; left:950px; top:200px; z-index:-1;
-	font-size :24px;
-	background-color:rgb(247, 247, 247);
-	font-size :24px;
-    text-align: center;"> 
-	<b>내 정보</b>  
-	<div id="layer1-1" 
-	style="width:850px; height:180px; 
-	position:absolute; left:20px; top:50px; z-index:-1;
-	font-size :24px;
-	background-color:white;
-	font-size :24px;
-     text-align: center;">
-	<div style="font-size:20px;
-	position:absolute; left:50px; top:10px; z-index:-1;
-	float: left;">
-	<img id="mypageImg7" src="resources/images/checked.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>
-	<b>아이디</b></div>
-	<div style="font-size:20px;
-	position:absolute; left:50px; top:70px; z-index:-1;
-	float: left;">
-	<img id="mypageImg7" src="resources/images/checked.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>
-	<b>이메일</b></div>
-	
-	<div style="font-size:20px;
-	position:absolute; left:50px; top:130px; z-index:-1;
-	float: left;">
-	<img id="mypageImg7" src="resources/images/checked.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>
-	<b>닉네임</b></div>
-	
-	<div style="font-size:20px;
-	position:absolute; left:450px; top:10px; z-index:-1;
-	float: left;">
-	<img id="mypageImg7" src="resources/images/checked.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>
-	<b>성명</b></div>
-	
-	<div style="font-size:20px;
-	position:absolute; left:450px; top:70px; z-index:-1;
-	float: left;">
-	<img id="mypageImg7" src="resources/images/checked.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>
-	<b>휴대전화</b></div>
-	
-	<div style="font-size:20px;
-	position:absolute; left:450px; top:130px; z-index:-1;
-	float: left;">
-	<img id="mypageImg7" src="resources/images/checked.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>
-	<b>주소</b></div>
-	
-</div>
-
-
-
-
-
-	
-	<div id="layer2" 
-  	style="width:420px; height:320px; 
-  	position:absolute; left:-2px; top:270px; z-index:-1;
-  	background-color:rgb(247, 247, 247);
-  	font-size :24px;
-    text-align: center;">
-  	<b>열람실 예약확인</b>  
-  	 <img id="mypageImg1" src="resources/images/add.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/> </div>
-  	
-  		<div id="layer3" 
-  	style="width:420px; height:320px; 
-  	position:absolute; left:480px; top:270px; z-index:-1;
-  	background-color:rgb(247, 247, 247);
-  	font-size :24px;
-    text-align: center;"> 
-  	<b>내가 작성한 글</b> 
-  	 <img id="mypageImg1" src="resources/images/add.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/> </div>
-  	
-  	<div id="layer4" 
-  	style="width:420px; height:320px; 
-  	position:absolute; left:-2px; top:610px; z-index:-1;
-  	background-color:rgb(247, 247, 247);
-  	font-size :24px;
-    text-align: center;">     
-  	<b>문화마당 신청 확인</b>
-  	<img id="mypageImg1" src="resources/images/add.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>  </div>
-  	
-  	<div id="layer5" 
-  	style="width:420px; height:320px; 
-  	position:absolute; left:480px; top:610px; z-index:-1;
-  	background-color:rgb(247, 247, 247);
-  	font-size :24px;
-    text-align: center;">  
-    	 
-  	<b>독서모임 신청 확인</b>
-  	<img id="mypageImg1" src="resources/images/add.png" 
-        	style="width: auto; height: 30px; vertical-align:middle;
-			padding-bottom: 7px;
-			margin-right: 5px;"/>  </div>
-  	
-  	
-  	</div>
-	</div>	
-		
+	<div class="centerText">
+		<div class="column">
+			<div id="searchDiv">
+			<table id="searchTable" style="margin-left: 130px;">
+				<tbody><tr>
+				
+					<td>아이디</td>
+					<td>${ loginUser.id }</td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td>${ loginUser.email }</td>
+				</tr>
+				<tr>
+					<td>닉네임</td>
+					<td>${ loginUser.nickname }</td>
+				</tr>				
+			</tbody>
+			
+			</table>
+			<table style="margin-left: 130px;">
+			<tbody>
+			<tr>
+					<td>성명</td>
+					<td>${ loginUser.name }</td>
+				</tr>
+				<tr>
+					<td>휴대전화</td>
+					<td>${ loginUser.phone }</td>
+				</tr>
+				<tr>
+					<td>주소</td>
+					<td><c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
+						<c:if test="${ status.index eq 0 && addr >= '0' && addr <= '99999' }">
+							(${ addr })
+						</c:if>
+						<c:if test="${ status.index eq 0 && !(addr >= '0' && addr <= '99999') }">
+							${ addr }
+						</c:if>
+						<c:if test="${ status.index eq 1 }">
+							${ addr }
+						</c:if>
+						<c:if test="${ status.index eq 2 }">
+							${ addr }
+						</c:if>
+					</c:forTokens></td>
+				</tr>			
+			</tbody>		
+			</table>
+			</div>	
+			
 	
 	
-	<div>
-		<div class="empty" style="height:140px;"></div>
-		<div class="in1"></div>
-	</div>
-	
-	<!-- 푸터 -->
-	
-	
-
+	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

@@ -47,12 +47,20 @@ public class MemberController {
 	}
 	@RequestMapping("mypageForm.me")
 	public String mypageForm() {
-		return "memberMypage";
+		return "mypage2";
 	}
 	
 	@RequestMapping("mupdateView.me")
 	public String memberUpdateForm() {		
 		return "memberUpdate";
+	}
+	@RequestMapping("memberdelete.me")
+	public String memberDeleteForm() {		
+		return "memberDelete";
+	}
+	@RequestMapping("memberCheck.me")
+	public String memberCheckForm() {
+		return "memberCheck";
 	}
 
 	
@@ -75,9 +83,9 @@ public class MemberController {
 		
 		String address = address1 + "/" + address2 + "/" + address3;
 		m.setAddress(address);
-		String date = year + "-"+ month + "-"+ day;
-		Date d = Date.valueOf(date);
 		
+		String date = year + "-"+ month + "-"+ day;
+		Date d = Date.valueOf(date);		
 		m.setBirthday(d);
 		
 		
@@ -104,7 +112,7 @@ public class MemberController {
 		
 		if(bcrypPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			model.addAttribute("loginUser", loginUser);
-			System.out.println(m);
+			
 			return "../home";
 			
 		} else {
@@ -118,4 +126,122 @@ public class MemberController {
 		int result = mService.dupId(id);
 		return result + "";
 	}
+	
+	@RequestMapping("dupnickname.me")
+	@ResponseBody
+	public String dupNickname(@RequestParam("nickname") String nickname) {
+		
+		int result = mService.nickname(nickname);
+		return result + "";
+	}
+	
+	@RequestMapping("mCheck.me")
+	public String mCheck(@RequestParam("pwd")String pwd,HttpSession session) {
+		
+		String id = ((Member)session.getAttribute("loginUser")).getId();
+		
+
+		Member loginUser = mService.mlistcheck(id);
+
+		if(bcrypPasswordEncoder.matches(pwd, loginUser.getPwd())) {						
+			return "memberDelete2";		
+		} else {
+			return "../common/errorPage";
+		}
+	}
+	@RequestMapping("mCheck2.me")
+	public String mCheck2(@RequestParam("pwd")String pwd,HttpSession session,Model model) {
+		
+		String id = ((Member)session.getAttribute("loginUser")).getId();
+		
+
+		Member loginUser = mService.mlistcheck(id);                          
+		
+		String address = ((Member)session.getAttribute("loginUser")).getAddress();
+		String[] array=address.split("/");
+		
+		String address1 =array[0];
+		String address2 =array[1];
+		String address3 =array[2];
+		
+		Date birthday = ((Member)session.getAttribute("loginUser")).getBirthday();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd");
+		String birthday2 = fm.format(birthday);
+		
+		String[] array2 = birthday2.split("-");
+		
+		String year=array2[0];
+		String month=array2[1];
+		String day=array2[2];
+		
+		
+		
+		if(bcrypPasswordEncoder.matches(pwd, loginUser.getPwd())) {						
+			model.addAttribute("address1",address1);
+			model.addAttribute("address2",address2);
+			model.addAttribute("address3",address3);	
+			
+			model.addAttribute("year",year);
+			model.addAttribute("month",month);
+			model.addAttribute("day",day);
+			
+			return "memberUpdate";	
+						
+		} else {
+			return "../common/errorPage";
+		}
+	}
+	
+	@RequestMapping("mupdate.me")
+	public String memberUpdate(@ModelAttribute Member m, @RequestParam("address1") String address1,
+			 @RequestParam("address2") String address2,
+			 @RequestParam("address3") String address3,
+			 @RequestParam("year") String year,
+			 @RequestParam("month") String month,
+			 @RequestParam("day") String day,	
+			 Model model,SessionStatus s) {
+		
+		
+		String address = address1 + "/" + address2 + "/" + address3;
+		m.setAddress(address);
+		
+		String date = year + "-"+ month + "-"+ day;
+		Date d = Date.valueOf(date);		
+		m.setBirthday(d);
+		
+		String encPwd = bcrypPasswordEncoder.encode(m.getPwd());
+		m.setPwd(encPwd);
+		
+		System.out.println(m);
+		
+		
+		int result = mService.updateMember(m);
+		
+		if(result > 0) {
+			Member loginUser = mService.memberLogin(m);
+			model.addAttribute("loginUser", loginUser);
+			
+			s.setComplete();
+			return "../home";
+		} else {
+			return "../common/errorPage";
+		}
+	}
+	
+	
+	@RequestMapping("mdelete.me")
+	public String memberDelete(HttpSession session,SessionStatus s) {
+		
+		String id = ((Member)session.getAttribute("loginUser")).getId();
+		
+		int result = mService.deleteMember(id);
+		
+		if(result > 0) {
+			s.setComplete();
+			return "../home";
+		} else {
+			return "../common/errorPage";
+		}		
+	}
+
 }

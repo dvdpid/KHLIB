@@ -236,13 +236,13 @@
 			<h2 id="sideMainTitle">마이페이지</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">My Page</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberCheck.me';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" />
 				회원정보 수정
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberdelete.me';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" />
 				회원 탈퇴

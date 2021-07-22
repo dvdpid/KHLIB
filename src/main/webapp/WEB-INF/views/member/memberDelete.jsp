@@ -252,13 +252,13 @@
 			<h2 id="sideMainTitle">마이페이지</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">My Page</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberCheck.me';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" />
 				회원정보 수정
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberdelete.me';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" />
 				회원 탈퇴
@@ -275,19 +275,15 @@
 	<div align="center" class="loginArea">
 		<h3>비밀번호 재확인</h3>
 		<p>회원 정보를 안전하게 보호하기 위해 회원 비밀번호를 다시 확인 합니다</p>
-		<form action="login.me" method="post">
+		<form action="mCheck.me" method="post">
 			<table id="loginTable" style="text-align:center;">
+				<tr>
 					<th>비밀번호</th>
 					<td colspan="2"><input type="password" name="pwd">
-					<input type="submit" id="btn1" value="확인" onclick=>
+					<input type="submit" id="btn1" value="확인">
 					</td>
 				</tr>
-				<tr>
-					<td colspan="3">
-						<input type="submit" id="btn1" value="이전으로" onclick=>
-						<input type="submit" id="btn2" value="탈퇴" onclick=>
-					</td>
-				</tr>
+				
 			</table>
 		</form>
 	</div>

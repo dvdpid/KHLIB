@@ -10,4 +10,16 @@ public interface MemberService {
 
 	int dupId(String id);
 
+	int deleteMember(String id);
+
+	Member mlistcheck(String id);
+
+	int nickname(String nickname);
+
+	int updateMember(Member m);
+
+	
+
+	
+
 }

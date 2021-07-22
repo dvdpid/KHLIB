@@ -29,4 +29,26 @@ public class MemberServiceImpl implements MemberService {
 	public int dupId(String id) {
 		return mDAO.dupId(sqlSession, id);
 	}
+
+	@Override
+	public int deleteMember(String id) {
+		return mDAO.delteMember(sqlSession, id);
+	}
+
+	@Override
+	public Member mlistcheck(String id) {		
+		return mDAO.mlistcheck(sqlSession, id);
+	}
+
+	@Override
+	public int nickname(String nickname) {
+		return mDAO.nickname(sqlSession, nickname);
+	}
+
+	@Override
+	public int updateMember(Member m) {		
+		return mDAO.updateMember(sqlSession, m);		
+	}
+
+	
 }

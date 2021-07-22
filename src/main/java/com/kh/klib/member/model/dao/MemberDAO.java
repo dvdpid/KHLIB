@@ -1,5 +1,7 @@
 package com.kh.klib.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +22,23 @@ public class MemberDAO {
 	public int dupId(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.selectOne("memberMapper.dupId", id);
 	}
+
+	public int delteMember(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.update("memberMapper.deleteMember", id);
+	}
+
+	public Member mlistcheck(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("memberMapper.mlistcheck",id);
+	}
+
+	public int nickname(SqlSessionTemplate sqlSession, String nickname) {
+		return sqlSession.selectOne("memberMapper.dupNickname", nickname);
+	}
+
+	public int updateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateMember", m);
+	}
+
+
 
 }

@@ -36,7 +36,7 @@
 	span.error{color: red;}
 	span.guide2{display: none; font-size: 12px; top:12px; right: 10px;}
 	span.ok2{color: green;}
-	span.error{color: red;}
+	span.error2{color: red;}
 	
 </style>
 </head>
@@ -67,9 +67,8 @@
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 확인 </th>
-						<td>
-							<input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;">
-							<font id="chkNotice" size="2"></font>
+						<td><input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;">
+						<font id="chkNotice" size="2"></font>
 						</td>
 						
 					</tr>
@@ -78,10 +77,16 @@
 						<td><input type="text" name="name" placeholder="이름" required style="width: 100%;"></td>
 						<td></td>
 					</tr>
+					
 					<tr>
 						<th><label class="must">*</label> 닉네임 </th>
-						<td><input type="text" name="nickname" placeholder="닉네임" required style="width: 100%;"></td>
+						<td><input type="text" id="nickname" name="nickname" placeholder="닉네임" required style="width: 100%;">
+							<span class="guide ok2">사용 가능합니다.</span>
+							<span class="guide error2">사용 불가능합니다.</span>
+							<input type="hidden" name="nicknameDUplicateCheck" id="nicknameDUplicateCheck" value="0">		
+						</td>
 					</tr>
+					
 					<tr>
 						<th>생일</th>
 						<td>
@@ -187,6 +192,9 @@
 				}
 			});
 		});
+		
+		
+		
 		$(function(){
 		    $('#userpwd1').keyup(function(){
 		      $('#chkNotice').html('');
@@ -204,6 +212,36 @@
 
 		    });
 		});
+	</script>
+	<script>
+	$('#nickname').on('keyup', function() {
+		var nickname= $(this).val().trim();
+		
+		if(nickname.length < 1){
+			$('.guide').hide();
+			$('#nicknameDUplicateCheck').val(0);
+			
+			return;
+		}
+		
+		$.ajax({
+			url: 'dupnickname.me',
+			data: {nickname:nickname},
+			success: function(data) {
+				if(data == 0){
+					$('.guide.error2').hide();
+					$('.guide.ok2').show();
+					$('#nicknameDUplicateCheck').val(1);
+				} else{
+					$('.guide.error2').show();
+					$('.guide.ok2').hide();
+					$('#nicknameDUplicateCheck').val(0);
+				}
+			}
+		});
+	});
+	
+	
 	</script>
 </body>
 </html>

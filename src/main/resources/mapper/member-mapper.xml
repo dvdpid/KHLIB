@@ -5,9 +5,16 @@
  	<select id="login" resultMap="memberResultSet">
  		select *
  		from users
- 		where user_id=#{id} and u_status='Y'
- 		
+ 		where user_id=#{id} and u_status='Y' 		
  	</select>
+ 	
+ 	<select id="mlistcheck" resultMap="memberResultSet">
+ 		select *
+ 		from users
+ 		where user_id=#{id} and u_status='Y' 	
+ 	</select>
+ 	
+ 	
  	<resultMap type="com.kh.klib.member.model.vo.Member" id="memberResultSet">
  		<id column="USER_NO" property="no"/>
  		<result column="USER_ID" property="id"/> 		
@@ -35,4 +42,32 @@
 		from users
 		where user_id = #{id}
 	</select>
+	<update id="deleteMember">
+		UPDATE USERS
+		SET u_status = 'N'
+		where user_id = #{id}
+	</update>
+	
+	<select id="dupNickname" resultType="_int">
+		SELECT count(*)
+		from users
+		where nickname = #{nickname}
+	</select>
+	
+	<update id="updateMember">
+		UPDATE USERS
+		SET USER_PWD = #{pwd}, USER_NAME = #{name}, NICKNAME=#{nickname},BIRTHDAY=#{birthday},GENDER = #{gender},PHONE=#{phone} ,EMAIL = #{email}, ADDRESS=#{address}
+		WHERE USER_ID = #{id}
+	</update>
+	
+	
+	
+<!-- 	<update id="updateMember"> -->
+<!-- 		UPDATE USERS -->
+		
+<!-- 	</update> -->
+	
+	
+	
+	
 </mapper>

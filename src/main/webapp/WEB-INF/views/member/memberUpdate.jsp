@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <style>
 @charset "UTF-8";
 
@@ -237,13 +238,13 @@
 			<h2 id="sideMainTitle">마이페이지</h2>
 			<h4 id="sideSubTitle" style="color:lightgray;">My Page</h4>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberCheck.me';">
 			<h3 id="sideButton1">
 				<img id="sideImg1" />
 				회원정보 수정
 			</h3>
 		</div>
-		<div class="sideButton" onclick="location.href='';">
+		<div class="sideButton" onclick="location.href='memberdelete.me';">
 			<h3 id="sideButton2">
 				<img id="sideImg2" />
 				회원 탈퇴
@@ -258,49 +259,52 @@
 	
 		<div class="joinArea" align="center">
 			<h1>회원정보 수정</h1>
-			<form aciton="joinMember.me" method="post">
+			<form action="mupdate.me" method="post">
+			<input type="hidden" name="id" value="${ loginUser.id }">
 				<table id="joinMemberTable">
 					<tr>
 						<th><label class="must">*</label> 아이디 </th>
-						<td width="200px"><input type="text" id="userId" name="userId" value="${member.userId}" readonly="readonly"required style="width: 100%;"></td>
+						<td width="200px">${ loginUser.id }</td>
 						<td width="100px"><label id="idResult"></label></td>
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 </th>
-						<td><input type="password" name="pwd1" placeholder="변경 할 비밀번호" required style="width: 100%;"></td>
+						<td><input type="password" name="pwd"  id="userpwd1" placeholder="변경 할 비밀번호" required style="width: 100%;"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 확인 </th>
-						<td><input type="password" name="pwd2" placeholder="비밀번호 확인" required style="width: 100%;"></td>
-						<td><label id="pwdResult"></label></td>
+						<td><input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;">
+						<font id="chkNotice" size="2"></font>
+						</td>
+						
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 이름 </th>
-						<td><input type="text" id="userName" name="userName" value="${member.userName}" required style="width: 100%;"></td>
+						<td><input type="text" id="userName" name="name" value="${loginUser.name}" required style="width: 100%;"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 닉네임 </th>
-						<td><input type="text" id="nickname" name="nickname" value="${member.nickName}" required style="width: 100%;"></td>
-						<td width="100px"><input type="button" id="nickCheck" value="중복확인"></td>
+						<td><input type="text" id="nickname" name="nickname" value="${loginUser.nickname}" required style="width: 100%;"></td>
+						
 					</tr>
 					<tr>
 						<th>생일</th>
 						<td>
 							<select name="year">
 								<c:forEach var="i" begin="1990" end="${ nowYear }" step="1">
-									<option value="${ nowYear - i + 1990 }">${ nowYear - i + 1990 }</option>
+									<option value="${ nowYear - i + 1990 }"<c:if test="${year eq nowYear - i + 1990 }"> selected="selected" </c:if>>${ nowYear - i + 1990 }</option>
 								</c:forEach>
 							</select>년
 							<select name="month">
 								<c:forEach var="j" begin="1" end="12" step="1">
-									<option value="${ j }">${ j }</option>
+									<option value="${ j }" <c:if test="${month eq j }"> selected="selected" </c:if>>${j }</option>
 								</c:forEach>
 							</select>월
-							<select name="day">
-								<c:forEach var="k" begin="1" end="31" step="1">
-									<option value="${ k }">${ k }</option>
+							<select name="day" >
+								<c:forEach var="k"  begin="1" end="31" step="1">
+									<option value="${ k }"<c:if test="${day eq k }"> selected="selected" </c:if>>${ k }</option>
 								</c:forEach>
 							</select>일
 						</td>
@@ -309,36 +313,43 @@
 					<tr>
 						<th>성별</th>
 						<td>
-							<input type="radio" name="gender" value="M">남자
+						<c:if test="${loginUser.gender == 'M' }">
+							<input type="radio" name="gender"  value="M" checked="checked">남자
 							<input type="radio" name="gender" value="W">여자
+						</c:if>
+						
+							<c:if test="${loginUser.gender == 'W' }">
+							<input type="radio" name="gender"  value="M" >남자
+							<input type="radio" name="gender" value="W" checked="checked">여자
+						</c:if>
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>연락처</th>
-						<td><input type="text" id="phone" name="phone" value="${member.phone}" style="width: 100%;"></td>
+						<td><input type="text" id="phone" name="phone" value="${loginUser.phone}" style="width: 100%;"></td>
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 이메일 </th>
-						<td><input type="text" id="email" name="email" value="${member.email}" placeholder="이메일" required style="width: 100%;"></td>
+						<td><input type="text" id="email" name="email" value="${loginUser.email}" placeholder="이메일" required style="width: 100%;"></td>
 						<td></td>
 					</tr>
 					<tr>
 						<th>우편번호</th>
 						<td>
-							<input type="text" name="post" class="postcodify_postcode5" value="" size="6">
+							<input type="text" name="address1" class="postcodify_postcode5" value="${address1}" size="6">
 							<button type="button" id="postcodify_search_button">검색</button>
 						</td>
 						<td></td>
 				</tr>
 				<tr>
 					<th>도로명 주소</th>
-					<td><input type="text" name="address1" class="postcodify_address" value="" style="width: 100%;"></td>
+					<td><input type="text" name="address2" class="postcodify_address" value="${address2}" style="width: 100%;"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>상세 주소</th>
-					<td><input type="text" name="address2" class="postcodify_extra_info" value="" style="width: 100%;"></td>
+					<td><input type="text" name="address3" class="postcodify_extra_info" value="${address3}" style="width: 100%;"></td>
 					<td></td>
 				</tr>
 				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
@@ -351,7 +362,7 @@
 				<tr>
 					<td colspan="3" align="center">
 						<button id="updateBtn" onclick="validate();">수정하기</button>
-						<button type="button" id="homeBtn" onclick="location.href='mypage.do'">마이페이지로</button>
+						<button type="button" id="homeBtn" onclick="location.href='mypageForm.me'">마이페이지로</button>
 						<input type="reset" id="reset" value="취소하기">
 					</td>
 				</tr>
@@ -361,7 +372,28 @@
 		
 		<br>
 		
-		<c:import url="common/footer.jsp"/>
+		<c:import url="../common/footer.jsp"/>
 		
 </body>
+<script>
+		$(function(){
+		    $('#userpwd1').keyup(function(){
+		      $('#chkNotice').html('');
+		    });
+		
+		    $('#userpwd2').keyup(function(){
+		
+		        if($('#userpwd1').val() != $('#userpwd2').val()){
+		          $('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
+		          $('#chkNotice').attr('color', '#f82a2aa3');
+		        } else{
+		          $('#chkNotice').html('비밀번호 일치함<br><br>');
+		          $('#chkNotice').attr('color', '#199894b3');
+		        }
+		
+		    });
+		});
+
+
+</script>
 </html>

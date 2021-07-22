@@ -220,14 +220,20 @@
 		border: 0; border-radius: 7px; font-size: 12px;
 	}
 	
-	
-	#loginBtn{	
+	#btn1{	
 			background: rgb(212, 129, 91); 
 			color: white; 
 			font-weight: bold; 
 			padding: 5px; margin:5px;
 			border: 0; border-radius: 7px; 
 			width: 80px;
+}
+	
+	#btn2{
+			background: rgb(153, 153, 153); 
+			color: white; 
+			font-weight: bold; padding: 5px; margin:5px;
+			border: 0; border-radius: 7px; width: 80px;
 }	
 	
 </style>
@@ -239,7 +245,6 @@
 </head>
 <body>
 <!-- 헤더부분 -->
-
 <c:import url="../common/menubar.jsp"/>
 <!-- 사이드 부분 -->
 	<div class="left">
@@ -264,28 +269,22 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p>회원정보 수정</p>
+			<p>회원 탈퇴</p>
 		</div>
 		
-		<div align="center" class="loginArea">
-			<h3>비밀번호 재확인</h3>
-			<p>이용자의 정보를 안전하게 보호하가 위해 비밀번호를 한번 더 입력하십시오. </p>
-			<form action="login.me" method="">
-				<table id="loginTable" style="text-align:center;">
-					<tr>
-						<th width="100px">아이디</th>
-						<td colspan="2"><input type="text" name="id" placeholder="아이디"></td>
-					</tr>			
-					<tr>
-						<th>비밀번호</th>
-						<td colspan="2"><input type="password" name="pwd" placeholder="비밀번호"></td>
-					</tr>
-					<tr>
-						<td colspan="3"><button id="loginBtn">로그인</button></td>
-					</tr>
-				</table>
-			</form>
-		</div>
+	<div align="center" class="loginArea">
+		<h3>탈퇴하시겠습니까?</h3>
+		<form action="mdelete.me" method="post">
+			<table id="loginTable" style="text-align:center;">
+				<tr>					
+					<td colspan="2">
+					<input type="submit" id="btn1" value="확인">
+					<input type="submit" id="btn2" value="취소">
+					</td>
+				</tr>
+				
+			</table>
+		</form>
 	</div>
 
 		

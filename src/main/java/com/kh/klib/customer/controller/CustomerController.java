@@ -165,5 +165,24 @@ public class CustomerController {
 
 		return "redirect:detail.cm?qNo=" + answer.getqNo();
 	}
+	
+	@RequestMapping(value="updateQuestionForm.cm")
+	public String CustomerQuestionUpdateForm(@ModelAttribute Question q, @SessionAttribute("loginUser") Member m) {
+		if(m.getNo() == q.getUserNo()) {
+			return "questionUpdateForm";
+		}
+		
+		return "redirect:qna.cm";
+		
+	}
+	
+	@RequestMapping(value="deleteQuestion.cm")
+	public String CustomerDeleteQuestion(@RequestParam("qNo") int qNo, @SessionAttribute("loginUser") Member m) {
+		if(m.getNo() == q.getUserNo()) {
+			cuService.deleteQuestion(q);
+		}
+		
+		return "redirect:qna.cm";
+	}
 
 }

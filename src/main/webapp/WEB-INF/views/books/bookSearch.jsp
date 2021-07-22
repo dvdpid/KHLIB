@@ -76,13 +76,24 @@
 			</c:forEach>
 
 		</div>
-		<div id="pagination">
-			<div class="arrow pageButton">&lt;</div>
-			<div class="pageNumber activeNumber  pageButton">1</div>
-			<div class="pageNumber  pageButton">2</div>
-			<div class="pageNumber  pageButton">3</div>
-			<div class="arrow  pageButton">&gt;</div>
+		<c:if test="${ bList ne null }">
+		<!-- 페이징 영역 -->
+		<div class="pages">
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<!-- 현재 선택된 페이지와 번호 버튼이 같을 때 -->
+				<c:if test="${ p == pi.currentPage }">
+					<span class="active">${ p }</span>
+				</c:if>
+				<!-- 현재 선택된 페이지와 번호 버튼이 같지 않을 때 -->
+				<c:if test="${ p != pi.currentPage }">
+					<c:url var="bListCheck" value="${ loc }">
+						<c:param name="currentPage" value="${ p }"></c:param>
+					</c:url>
+					<a class="inactive" href="${ bListCheck  }">${ p }</a>
+				</c:if>
+			</c:forEach>
 		</div>
+		</c:if>
 	</div>
 </body>
 </html>

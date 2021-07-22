@@ -311,6 +311,16 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.selectBFile(sqlSession, bNo);
 	}
 
+	@Override
+	public int boardDelete(Integer bNo) {
+		return aDAO.boardDelete(sqlSession, bNo);
+	}
+
+	@Override
+	public int commentDelete(Integer cNo) {
+		return aDAO.commentDelete(sqlSession, cNo);
+	}
+
 
 
 	

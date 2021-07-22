@@ -483,6 +483,7 @@
 	<select id="selectCommentsList" resultMap="commentsResultSet">
 		select * 
 		from comments
+		where COMMENT_STATUS = 'Y'
 		order by comment_no desc
 	</select>
 		<resultMap type="Comments" id="commentsResultSet">
@@ -493,6 +494,18 @@
 		<result column="COMMENT_STATUS" property="cStatus" />
 		<result column="BOARD_NO" property="bNo" />
 	</resultMap>
+	
+	
+	<update id="boardDelete">
+		update board
+		set B_STATUS = 'N'
+		where BOARD_NO = #{bNo}
+	</update>
+	<update id="commentDelete">
+		update comments
+		set COMMENT_STATUS = 'N'
+		where COMMENT_NO = #{cNo}
+	</update>
 	
 	
 </mapper>

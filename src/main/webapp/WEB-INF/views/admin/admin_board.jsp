@@ -96,7 +96,7 @@
 				</tbody>
 			</table>
 			<br>
-			<input type="button" class="btn3" value="게시글 삭제" style="float:right; margin-right: 75px;">
+			<input type="button" class="btn1" value="게시글 삭제" style="float:right; margin-right: 75px;">
 			<br><br>
 		</div>
 		
@@ -123,7 +123,7 @@
 					<td>${cm.cContent }</td>
 					<td>${cm.cWriter }</td>
 					<td>${cm.cDate }</td>
-					<td onclick="event.cancelBubble=true"><input type="radio" name="bNo" value="${cm.cNo }"></td>
+					<td onclick="event.cancelBubble=true"><input type="radio" name="cNo" value="${cm.cNo }"></td>
 				</tr>
 				</c:forEach>
 				
@@ -170,19 +170,29 @@
 				</tbody>
 			</table>
 			<br>
-			<input type="button" class="btn3" value="게시글 삭제" style="float:right; margin-right: 75px;">
+			<input type="button" class="btn2" value="댓글 삭제" style="float:right; margin-right: 75px;">
 			<br><br>
 		</div>
 		
 		
 	</div>
 	<script>
-	        $('.btn3').on('click', function () {
+	        $('.btn1').on('click', function () {
+	        	var bNo = $('input:radio[name=bNo]:checked').val();
+	        	if(bNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+	        	window.open("boardDeleteForm.ad?bNo="+bNo, 'boardSignPage', 'width=800, height=500, top=100, left=300,location=bNo');
+	        	}
+	        });
+     </script>
+     <script>
+	        $('.btn2').on('click', function () {
 	        	var cNo = $('input:radio[name=cNo]:checked').val();
 	        	if(cNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-	        	window.open("cDeleteForm.ad?cNo="+cNo, 'cultureSignPage', 'width=800, height=500, top=100, left=300,location=cNo');
+	        	window.open("cmDeleteForm.ad?cNo="+cNo, 'commentsSignPage', 'width=800, height=500, top=100, left=300,location=cNo');
 	        	}
 	        });
      </script>

@@ -384,5 +384,115 @@
 		<result column="NOTICE_STATUS" property="nStatus" />
 	</resultMap>
 	
+	<select id="searchUListCount" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultType="_int">
+		select count(*)
+		from users
+		where U_STATUS = 'Y'  and ADMIN_YN = 'N'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="searchAUListCount" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultType="_int">
+		select count(*)
+		from users
+		where U_STATUS = 'Y' and ADMIN_YN = 'Y'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchResultUList" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultMap="memberResultSet">
+		select *
+		from users
+		where U_STATUS='Y' and ADMIN_YN = 'N'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+		order by USER_NO desc
+	</select>
+	
+	<select id="selectSearchResultAUList" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultMap="memberResultSet">
+		select *
+		from users
+		where U_STATUS='Y' and ADMIN_YN = 'Y'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+		order by USER_NO desc
+	</select>
+	
+	
+	
+	<select id="bListCount" resultType="_int">
+		select count(*)
+		from board
+		where B_STATUS = 'Y'
+	</select>
+	
+	<select id="selectBoardList" resultMap="boardResultSet">
+		select *
+		from board
+		where b_status = 'Y'
+		order by board_no desc
+	</select>
+	
+	<select id="selectDetailBoard" resultMap="boardResultSet">
+		select *
+		from board
+		where board_no = #{bNo}
+	</select>
+	
+	<select id="selectBFile" resultMap="fileResultSet">
+		select *
+		from files
+			 join board using(board_no)
+		where board_no = #{bNo}
+	</select>
+	
+	<resultMap type="Files" id="fileResultSet">
+		<id column="FILE_NO" property="fNo" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+		<result column="FILE_PATH" property="filePath" />
+		<result column="UPLOAD_DATE" property="uploadDate" />
+		<result column="FILE_LEVEL" property="fileLevel" />
+		<result column="F_STATUS" property="fStatus" />
+		<result column="BOARD_NO" property="bNo" />
+		<result column="GROUP_NO" property="gNo" />
+		<result column="CULTURE_NO" property="cNo" />
+		<result column="BOOKS_NO" property="bkNo" />
+		<result column="Q_NO" property="qNo" />
+	</resultMap>
+	
+	<resultMap type="Board" id="boardResultSet">
+		<id column="BOARD_NO" property="bNo" />
+		<result column="BOARD_TITLE" property="bTitle" />
+		<result column="BOARD_CONTENT" property="bContent" />
+		<result column="BOARD_WRITER" property="bWriter" />
+		<result column="BOARD_DATE" property="bDate" />
+		<result column="BOARD_COUNT" property="bCount" />
+		<result column="B_STATUS" property="bStatus" />
+	</resultMap>
+	
+	<select id="CMListCount" resultType="_int">
+		select count(*)
+		from comments
+		where COMMENT_STATUS = 'Y'
+	</select>
+	<select id="selectCommentsList" resultMap="commentsResultSet">
+		select * 
+		from comments
+		order by comment_no desc
+	</select>
+		<resultMap type="Comments" id="commentsResultSet">
+		<id column="COMMENT_NO" property="cNo" />
+		<result column="COMMENT_CONTENT" property="cContent" />
+		<result column="COMMENT_WRITER" property="cWriter" />
+		<result column="COMMENT_DATE" property="cDate" />
+		<result column="COMMENT_STATUS" property="cStatus" />
+		<result column="BOARD_NO" property="bNo" />
+	</resultMap>
+	
 	
 </mapper>

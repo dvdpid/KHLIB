@@ -138,7 +138,6 @@ public class BoardController {
 	public String boardDetail(@RequestParam("page") int page, @RequestParam("bNo") int bNo, Model model) {
 		Board board = boardService.selectBoard(bNo);
 		Files file = boardService.selectFile(bNo);
-		
 		if(board != null) {
 			model.addAttribute("page", page).addAttribute("board", board).addAttribute("file", file);
 			return "boardDetail";

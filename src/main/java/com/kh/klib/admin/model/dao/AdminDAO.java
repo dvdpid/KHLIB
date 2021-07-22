@@ -6,8 +6,11 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.board.model.vo.Board;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
@@ -222,6 +225,60 @@ public class AdminDAO {
 	public int InsertNotice(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.insert("adminMapper.InsertNotice", n);
 	}
+
+	public int searchUListCount(SqlSessionTemplate sqlSession, AdminSearchValue asv) {
+		return sqlSession.selectOne("adminMapper.searchUListCount", asv);
+	}
+
+	public ArrayList<Member> selectSearchResultUList(SqlSessionTemplate sqlSession, AdminSearchValue asv, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectSearchResultUList", asv, rowBounds);
+	}
+
+	public int searchAUListCount(SqlSessionTemplate sqlSession, AdminSearchValue asv) {
+		return sqlSession.selectOne("adminMapper.searchAUListCount", asv);
+	}
+
+	public ArrayList<Member> selectSearchResultAUList(SqlSessionTemplate sqlSession, AdminSearchValue asv,
+			PageInfo api) {
+		int offset = (api.getCurrentPage() - 1) * api.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, api.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectSearchResultAUList", asv, rowBounds);
+	}
+
+	public int bListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.bListCount");
+	}
+
+	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectBoardList", null, rowBounds);
+	}
+
+	public int CMListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.CMListCount");
+	}
+
+	public ArrayList<Comments> selectCommentsList(SqlSessionTemplate sqlSession, PageInfo cmpi) {
+		int offset = (cmpi.getCurrentPage() - 1) * cmpi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, cmpi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectCommentsList", null, rowBounds);
+	}
+
+	public Board selectDetailBoard(SqlSessionTemplate sqlSession, Integer bNo) {
+		return sqlSession.selectOne("adminMapper.selectDetailBoard", bNo);
+	}
+
+	public Files selectBFile(SqlSessionTemplate sqlSession, Integer bNo) {
+		return sqlSession.selectOne("adminMapper.selectBFile", bNo);
+	}
+
 
 
 	

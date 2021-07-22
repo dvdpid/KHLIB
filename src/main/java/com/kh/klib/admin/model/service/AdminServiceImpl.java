@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.klib.admin.model.dao.AdminDAO;
+import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.board.model.vo.Board;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
@@ -255,6 +258,60 @@ public class AdminServiceImpl implements AdminService {
 	public int InsertNotice(Notice n) {
 		return aDAO.InsertNotice(sqlSession, n);
 	}
+
+	@Override
+	public int searchUListCount(AdminSearchValue asv) {
+		return aDAO.searchUListCount(sqlSession, asv);
+	}
+
+	@Override
+	public ArrayList<Member> selectSearchResultUList(AdminSearchValue asv, PageInfo pi) {
+		return aDAO.selectSearchResultUList(sqlSession, asv, pi);
+	}
+
+	@Override
+	public ArrayList<Member> selectSearchResultAUList(AdminSearchValue asv, PageInfo api) {
+		return aDAO.selectSearchResultAUList(sqlSession, asv, api);
+	}
+
+	@Override
+	public int searchAUListCount(AdminSearchValue asv) {
+		return aDAO.searchAUListCount(sqlSession, asv);
+	}
+
+	@Override
+	public int bListCount() {
+		return aDAO.bListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Board> selectBoardList(PageInfo pi) {
+		return aDAO.selectBoardList(sqlSession, pi);
+	}
+
+	@Override
+	public int CMListCount() {
+		return aDAO.CMListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Comments> selectCommentsList(PageInfo cmpi) {
+		return aDAO.selectCommentsList(sqlSession, cmpi);
+	}
+
+	@Override
+	public Board selectDetailBoard(Integer bNo) {
+		Board b = null;
+		b = aDAO.selectDetailBoard(sqlSession, bNo);
+		return b;
+	}
+
+	@Override
+	public Files selectBFile(Integer bNo) {
+		return aDAO.selectBFile(sqlSession, bNo);
+	}
+
+
 
 	
 }

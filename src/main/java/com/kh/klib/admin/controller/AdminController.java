@@ -23,10 +23,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.klib.admin.model.service.AdminService;
+import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.exception.BookGroupException;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.board.model.exception.BoardException;
+import com.kh.klib.board.model.vo.Board;
 import com.kh.klib.books.model.exception.BooksException;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.Pagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
@@ -35,6 +39,7 @@ import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.vo.Member;
 import com.kh.klib.notice.model.vo.Notice;
+import com.kh.klib.notice.model.vo.NoticeSearchValue;
 import com.kh.klib.room.exception.RoomException;
 import com.kh.klib.room.model.vo.Room;
 import com.kh.klib.room.model.vo.RoomSign;
@@ -188,16 +193,32 @@ public class AdminController {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
 	@RequestMapping("board.ad")
-	public String adminBoardForm() {
-		return "admin_board";
+	public ModelAndView adminBoardList(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int listCount = aService.bListCount();
+		int cmlistCount = aService.CMListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo cmpi = Pagination.getPageInfo(currentPage, cmlistCount);
+		
+		
+		
+		ArrayList<Board> bList = aService.selectBoardList(pi);
+		ArrayList<Comments> cmList = aService.selectCommentsList(cmpi);
+		
+		
+		if(bList != null) {
+			mv.addObject("bList", bList).addObject("pi", pi).addObject("cmList", cmList).addObject("cmpi", cmpi).setViewName("admin_board");
+		} else {
+			throw new BoardException("게시글 조회 실패!");
+		}
+		
+		return mv;
 	}
 	
 	
@@ -731,7 +752,95 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("searchUser.ad")
+	public ModelAndView searchUser(@RequestParam(value="searchContent", required=false) String content,
+										@RequestParam(value="page", required=false) Integer page,
+										ModelAndView mv) {
+		
+		AdminSearchValue asv = new AdminSearchValue();
+		asv.setWriter(content);
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int searchListCount = aService.searchUListCount(asv);
+		
+		ArrayList<Member> list = null;
+		
+		int alistCount = aService.getListadminUserCount();
+		PageInfo api = Pagination.getPageInfo(currentPage, alistCount);
+		ArrayList<Member> alist = aService.selectadminUserList(api);
+		
+		if(searchListCount != 0) {
+		PageInfo pi = Pagination.getPageInfo(currentPage, searchListCount);
+		
+		list = aService.selectSearchResultUList(asv, pi);
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("alist", alist).addObject("api", api).addObject("searchContent", content).addObject("pi", pi).setViewName("admin_user");
+		} else {
+			throw new MemberException("유저 검색 조회에 실패했습니다.");
+			}
+		} else {
+			mv.addObject("list", list).addObject("alist", alist).addObject("api", api).addObject("searchContent", content).setViewName("admin_user");
+		}
+		
+		return mv;
+	}
 	
+	@RequestMapping("searchAdminUser.ad")
+	public ModelAndView searchAdminUser(@RequestParam(value="searchContent", required=false) String content,
+										@RequestParam(value="page", required=false) Integer page,
+										ModelAndView mv) {
+		
+		AdminSearchValue asv = new AdminSearchValue();
+		asv.setWriter(content);
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		
+		int searchListCount = aService.searchAUListCount(asv);
+		
+		ArrayList<Member> alist = null;
+		
+		int listCount = aService.getListUserCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Member> list = aService.selectUserList(pi);
+		
+		if(searchListCount != 0) {
+		PageInfo api = Pagination.getPageInfo(currentPage, searchListCount);
+		
+		alist = aService.selectSearchResultAUList(asv, api);
+		
+			if(alist != null) {
+				mv.addObject("list", list).addObject("alist", alist).addObject("api", api).addObject("searchContent", content).addObject("pi", pi).setViewName("admin_user");
+			} else {
+				throw new MemberException("유저 검색 조회에 실패했습니다.");
+				}
+			} else {
+				mv.addObject("list", list).addObject("alist", alist).addObject("pi", pi).addObject("searchContent", content).setViewName("admin_user");
+		}
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping("bDetail.ad")
+	public String bDetail(@RequestParam("page") int page, @RequestParam("bNo") Integer bNo, Model model) {
+		
+		Board board = aService.selectDetailBoard(bNo);
+		Files file = aService.selectBFile(bNo);
+		if(board != null) {
+			model.addAttribute("page", page).addAttribute("board", board).addAttribute("file", file);
+			return "../board/boardDetail";
+		} else {
+			throw new BoardException("게시판 상세보기에 실패하였습니다.");
+		}
+	}
 	
 	
 	

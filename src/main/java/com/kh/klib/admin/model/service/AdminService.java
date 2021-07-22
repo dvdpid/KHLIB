@@ -2,8 +2,11 @@ package com.kh.klib.admin.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.board.model.vo.Board;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
@@ -106,6 +109,28 @@ public interface AdminService {
 	ArrayList<Notice> selectNoticeList(PageInfo pi);
 
 	int InsertNotice(Notice n);
+
+	int searchUListCount(AdminSearchValue asv);
+
+	ArrayList<Member> selectSearchResultUList(AdminSearchValue asv, PageInfo pi);
+
+	ArrayList<Member> selectSearchResultAUList(AdminSearchValue asv, PageInfo api);
+
+	int searchAUListCount(AdminSearchValue asv);
+
+	int bListCount();
+
+	ArrayList<Board> selectBoardList(PageInfo pi);
+
+	int CMListCount();
+
+	ArrayList<Comments> selectCommentsList(PageInfo cmpi);
+
+	Board selectDetailBoard(Integer bNo);
+
+	Files selectBFile(Integer bNo);
+
+
 
 
 

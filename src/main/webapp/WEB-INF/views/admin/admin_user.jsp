@@ -9,7 +9,10 @@
 <title> 회원 </title>
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin_search.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <script src="resources/js/admin.js" defer></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 	.ubtn{
@@ -33,6 +36,21 @@
 		</div>
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">회원 목록</h3><br>
+		<div class="search-box" style="float:right; margin-right: 75px;">
+    	  <input type="text" class="search-txt" id="searchValue" name="" placeholder="아이디 검색">
+     		 <a class="search-btn" onclick="searchUser();">
+        		<i class="fas fa-search"></i>
+    		  </a>
+  		</div>
+	<script>
+		function searchUser(){
+			var searchContent = $('#searchValue').val();
+			
+			console.log(searchContent);
+			
+			location.href="searchUser.ad?searchContent=" + searchContent;
+		}
+	</script>
 		<div>
 			<table class="type1">
 				<thead>
@@ -50,6 +68,12 @@
 				</tr>
 				</thead>
 				<tbody>
+				<c:if test="${ empty list }">
+					<tr>
+						<td colspan="10"> 회원이 없습니다. </td>
+					</tr>
+				</c:if>
+				
 				<c:if test="${ not list.isEmpty() }">
 				<c:forEach var="u" items="${list }">
 				<tr class="list">
@@ -65,11 +89,6 @@
 					<td><input type="radio" name="userCk" value="${u.no }"></td>
 				</tr>
 				</c:forEach>
-				</c:if>
-				<c:if test="${ list.isEmpty() }">
-				<tr>
-					<td colspan="10"> 회원이 없습니다. </td>
-				</tr>
 				</c:if>
 				<tr align="center" height="20" id="buttonTab">
 				<td colspan="10">
@@ -115,8 +134,25 @@
 			<div class="ubtn">
 				<input type="submit" class="btn1" value="회원 삭제" style="float:right; margin-right: 75px;">
 			</div>
+			<div class="empty" style="height:50px;"></div>
+			<div class="empty" style="height:50px;"></div>
 		</div>
 		<h3 align="left">관리자 목록</h3><br>
+		<div class="search-box" style="float:right; margin-right: 75px;">
+    	  <input type="text" class="search-txt" id="searchValue2" name="" placeholder="아이디 검색">
+     		 <a class="search-btn" onclick="searchAdminUser();">
+        		<i class="fas fa-search"></i>
+    		  </a>
+  		</div>
+	<script>
+		function searchAdminUser(){
+			var searchContent = $('#searchValue2').val();
+			
+			console.log(searchContent);
+			
+			location.href="searchAdminUser.ad?searchContent=" + searchContent;
+		}
+	</script>
 		<div>
 			<table class="type1">
 				<thead>
@@ -134,6 +170,12 @@
 				</tr>
 				</thead>
 				<tbody>
+				<c:if test="${ empty alist }">
+					<tr>
+						<td colspan="10"> 관리자가 없습니다. </td>
+					</tr>
+				</c:if>
+				
 				<c:if test="${ not alist.isEmpty() }">
 				<c:forEach var="au" items="${alist }">
 				<tr class="list2">
@@ -151,9 +193,7 @@
 				
 				</c:forEach>
 				</c:if>
-				<c:if test="${ alist.isEmpty() }">
-					<td colspan="10">관리자가 없습니다.</td>
-				</c:if>
+				
 				<tr align="center" height="20" id="buttonTab">
 				<td colspan="10">
 				<!-- [이전] -->

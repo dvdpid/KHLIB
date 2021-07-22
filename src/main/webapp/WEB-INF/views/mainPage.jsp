@@ -7,7 +7,7 @@
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>홈페이지</title>
-<link rel="stylesheet" href="resources/css/common/mainPage.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/common/mainPage.css" type="text/css">
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
@@ -43,7 +43,7 @@
 			</div>
 			
 			<div class="noticeArea">
-				<div id="noticeTitle"><span>공지사항</span><button id="noticeBtn" onclick="location.href='notice.ad';">+ 더보기</button></div>
+				<div id="noticeTitle"><span>공지사항</span><button id="noticeBtn" onclick="location.href='noticeList.nt';">+ 더보기</button></div>
 				<div id="noticeTable"><table id="noticeTableArea"></table></div>
 			</div>
 			
@@ -130,7 +130,7 @@
 				},
 				error: function(data){
 					console.log(data);
-					alert("에러");
+					alert("notice 에러");
 				}
 			});
 		}
@@ -153,7 +153,7 @@
 				},
 				error: function(data){
 					console.log(data);
-					alert("에러");
+					alert("book 에러");
 				}
 			});
 		}
@@ -196,7 +196,7 @@
 				$seatView2.append(str2);
 			},
 			error: function(){
-				alert("에러");
+				alert("room 에러");
 			}
 			
 		});
@@ -254,7 +254,7 @@
 				}});
 			},
 			error: function(){
-				alert("에러");
+				alert("cu 에러");
 			}
 		});
 	});
@@ -289,10 +289,10 @@
 					var $nameTd = $('<td>').text(data[key].gName);
 					var $writerTd = $('<td>').text(data[key].gWriter);
 					var $dateTd = $('<td>').text(data[key].gDate);
-					var $titleTd = $('<td>').text(data[key].gTitle);
+					var $titleTd = $('<td>').text(data[key].gbTitle);
 					
 					$tr.append(txt);
-					$tr.append($titleTd);
+					$tr.append($nameTd);
 					$tr.append($writerTd);
 					$tr.append($dateTd);
 					$tr.append($titleTd);
@@ -308,8 +308,9 @@
 					location.href='gDetail.bg?gNo=' + gNo + '&page=' + 1;
 				}});
 			},
-			error: function(){
-				alert("에러");
+			error: function(data){
+				console.log(data);
+				alert("bk 에러");
 			}
 		});
 	});

@@ -195,17 +195,30 @@ a{
 		margin-top: 20px; border-collapse: collapse;
 	}
 	
-	#cultureArea td, #bkArea td{
+	#cultureArea td{
 		border: 1px solid #5e5e5e; border-left: none; border-right: none;
 		text-align: center; font-size: 8px;
 		padding: 5px 30px;
 	}
 	
-	#cultureArea th, #bkArea th{
+	#cultureArea th{
 		border: none; background:rgba(212, 129, 91, 0.8); color: white;
 		border-left: none; border-right: none;
 		text-align: center; font-size: 10px;
 		padding: 5px 30px;
+	}
+	
+	#bkArea th{
+		border: none; background:rgba(212, 129, 91, 0.8); color: white;
+		border-left: none; border-right: none;
+		text-align: center; font-size: 10px;
+		padding: 5px 20px;
+	}
+	
+	#bkArea td{
+		border: 1px solid #5e5e5e; border-left: none; border-right: none;
+		text-align: center; font-size: 8px;
+		padding: 5px 20px;
 	}
 	
 	#noticeTableArea th{

@@ -124,50 +124,27 @@ td {
 					<td colspan="2">${ q.qContent }</td>
 				</tr>
 			</table>
-			<c:if test="${ a ne null }">
 			<div class="title">답변</div>
+			<form action="update.cm" method="post">
+			<input type="hidden" name="qNo" value="${a.qNo}">
+			<input type="hidden" name="aNo" value="${a.aNo}">
 			<table class="board-view">
 				<tr>
 					<th>제목</th>
-					<td>${ a.aTitle }</td>
+					<td><input type="text" name="aTitle" id="aTitle" value="${a.aTitle}"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${ a.writer }</td>
+					<td><input type="text" id="writer" name="writer" value="${ loginUser.nickname }" readonly></td>
 				</tr>
 				<tr>
-					<th>작성일</th>
-					<td>${ a.aDate }</td>
-				</tr>
-				<tr>
-					<td colspan="2">${ a.aContent }</td>
-				</tr>
-			</table>
-			<c:if test="${ loginUser.admin eq 'Y' }">
-			<div><button onclick="location.href='${contextPath}/updateAnswer.cm?qNo=${q.qNo}'">수정하기</button><button onclick="location.href='${contextPath}/delete.cm?qNo=${q.qNo}'">답변 삭제하기</button></div>
-			</c:if>
-			</c:if>
-			<c:if test="${ a eq null && loginUser.admin eq 'Y' }">
-			<div class="title">답변</div>
-			<form action="${contextPath }/insertAnswer.cm" method="post">
-			<table class="board-view">
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="aTitle" id="aTitle" ></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td>${ loginUser.nickname }</td>
-				</tr>
-				<tr>
-					<td colspan="2"><textarea cols="80" rows="20" id="aContent"></textarea></td>
+					<td colspan="2"><textarea cols="80" rows="20" id="aContent" name="aContent">${ a.aContent }</textarea></td>
 				</tr>
 			</table>
 			<div style="text-align: center;">
 				<input type="submit" value="등록" id="aSubmit"> <input type="reset" value="초기화">
 			</div>
 			</form>
-			</c:if>
 		</div>
 	</div>
 </body>

@@ -72,8 +72,9 @@
   	where q_no = #{qNo}
   </update>
   
-  <update id="updateAnswer">
-  	update answer
-  	set a_title = #{aTitle}, a_content = #{aContent}
-  </update>
+ <update id="updateAnswer">
+ 	update answer
+ 	set a_title = #{aTitle}, a_content = #{aContent}, writer = #{writer}
+ 	where a_no = #{aNo} and a_status = 'Y'
+ </update>
 </mapper>

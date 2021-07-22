@@ -3,6 +3,7 @@ package com.kh.klib.customer.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,69 +88,82 @@ public class CustomerController {
 		return "questionForm";
 	}
 
+	@RequestMapping(value="insertAnswer.cm")
+	public String CustomerInsertAnswer(@ModelAttribute Answer answer, 
+									   @SessionAttribute("loginUser") Member m,
+									   HttpServletResponse response) {
+		System.out.println("insert invoked!");
+//		작성자 정보 입력
+		answer.setWriter(m.getNickname());
+		answer.setUserNo(m.getNo());
+//		답변 삽입
+		if (m.getAdmin().equals("Y")) {
+			cuService.insertAnswer(answer);
+		}
+
+		return "redirect:detail?qNo=" + answer.getqNo();
+	}
+
 	@RequestMapping("detail.cm")
 	public String CustomerDetail(@RequestParam("qNo") int qNo, Model model) throws CustomerException {
-		
-		
+
 		Question q = cuService.getQuestion(qNo);
 
-		
 		Answer a = cuService.getAnswer(qNo);
-		if(q != null) { 
+		if (q != null) {
 			model.addAttribute("a", a);
-			model.addAttribute("q", q); 
+			model.addAttribute("q", q);
 		}
-		
 
 		return "questionDetail";
 	}
 
-	@RequestMapping(value="insertAnswer.cm", produces="application/json; charset=utf-8")
-	public void CustomerInsertAnswer(@ModelAttribute Answer answer, @SessionAttribute("loginUser") Member m, HttpServletResponse response) throws JsonIOException, IOException {
-//		작성자 정보 입력
-		answer.setWriter(m.getNickname());
-		answer.setUserNo(m.getNo());
-		
-		Gson gson = new Gson();
-//		답변 삽입
-		if(m.getAdmin().equals("Y")) {
-			cuService.insertAnswer(answer);
-			gson.toJson("success", response.getWriter());
-		} else {
-			gson.toJson("denied", response.getWriter());			
-		}
-	}
-	
-	
-	@RequestMapping(value="getAnswer.cm", produces="application/json; charset=utf-8")
-	public void CustomerGetAnswer(@RequestParam("qNo") int qNo, HttpServletResponse response) throws JsonIOException, IOException {
+	@RequestMapping(value = "getAnswer.cm", produces = "application/json; charset=utf-8")
+	public void CustomerGetAnswer(@RequestParam("qNo") int qNo, HttpServletResponse response)
+			throws JsonIOException, IOException {
 		Answer answer = cuService.getAnswer(qNo);
-		
+
 		System.out.println(answer);
-		
+
 		Gson gson = new Gson();
-		
+
 		response.setCharacterEncoding("utf-8");
-		
+
 		gson.toJson(answer, response.getWriter());
 	}
-	
-	@RequestMapping(value="delete.cm")
+
+	@RequestMapping(value = "delete.cm")
 	public String CustomerDelete(@RequestParam("qNo") int qNo, @SessionAttribute("loginUser") Member m) {
-		if(m.getAdmin().equals("Y")) {
+		if (m.getAdmin().equals("Y")) {
 			cuService.deleteAnswer(qNo);
 		}
-		
-		return "redirect:detail.cm?qNo="+qNo;
+
+		return "redirect:detail.cm?qNo=" + qNo;
 	}
-	
-	@RequestMapping(value="update.cm")
-	public String CustomerUpdate(@ModelAttribute Answer answer, @SessionAttribute("loginUser") Member m) {
-		if(m.getAdmin().equals("Y")) {
-			int result = cuService.updateAnswer(answer);
+
+	@RequestMapping(value = "updateAnswer.cm")
+	public String CustomerUpdateForm(@RequestParam("qNo") int qNo, @SessionAttribute("loginUser") Member m,
+			HttpServletRequest request, Model model) {
+
+		Answer a = cuService.getAnswer(qNo);
+		Question q = cuService.getQuestion(qNo);
+
+		if (a != null && m.getAdmin().equals("Y")) {
+			model.addAttribute("q", q);
+			model.addAttribute("a", a);
+			return "answerUpdate";
 		}
-		
-		return "redirect:detail.cm?qNo="+answer.getqNo();
+
+		return "redirect:detail.cm?qNo=" + qNo;
+	}
+
+	@RequestMapping(value = "update.cm")
+	public String CustomerUpdate(@ModelAttribute Answer answer, @SessionAttribute("loginUser") Member m) {
+		if (m.getAdmin().equals("Y")) {
+			cuService.updateAnswer(answer);
+		}
+
+		return "redirect:detail.cm?qNo=" + answer.getqNo();
 	}
 
 }

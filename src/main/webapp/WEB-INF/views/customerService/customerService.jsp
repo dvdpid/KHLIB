@@ -74,6 +74,9 @@
 					</c:choose>
 				</tbody>
 			</table>
+			<c:if test="${loginUser != null }">
+			<div id="writequestion" style="position:relative;"><button style=" width: 6em; position: absolute; left: 378px;" onclick="location.href='questionForm.cm'">질문등록</button></div>
+			</c:if>
 			<c:if test="${!empty qList }">
 				<div id="pagination">
 				<!-- 이전 -->

@@ -39,7 +39,6 @@ form {
 	padding: 0px 1em;
 }
 
-
 /* main part styling start */
 table {
 	width: 80%;
@@ -124,52 +123,64 @@ td {
 					<td colspan="2">${ q.qContent }</td>
 				</tr>
 			</table>
-			<c:if test="${ loginUser.UserNo eq q.UserNo }">
-			<div><button onclick="location.href="updateQuestionForm.cm">수정</button><button onclick="location.href="deleteQuestionForm.cm">삭제</button></div>
+			<c:if test="${ loginUser.no eq q.userNo }">
+				<div>
+					<button
+						onclick="location.href='${contextPath }/updateQuestionForm.cm?qNo=${q.qNo}'">수정</button>
+					<button
+						onclick="location.href='${contextPath}/deleteQuestion.cm?qNo=${q.qNo}'">삭제</button>
+				</div>
 			</c:if>
 			<c:if test="${ a ne null }">
-			<div class="title">답변</div>
-			<table class="board-view">
-				<tr>
-					<th>제목</th>
-					<td>${ a.aTitle }</td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td>${ a.writer }</td>
-				</tr>
-				<tr>
-					<th>작성일</th>
-					<td>${ a.aDate }</td>
-				</tr>
-				<tr>
-					<td colspan="2">${ a.aContent }</td>
-				</tr>
-			</table>
-			<c:if test="${ loginUser.admin eq 'Y' }">
-			<div><button onclick="location.href='${contextPath}/updateAnswer.cm?qNo=${q.qNo}'">수정하기</button><button onclick="location.href='${contextPath}/delete.cm?qNo=${q.qNo}'">답변 삭제하기</button></div>
-			</c:if>
+				<div class="title">답변</div>
+				<table class="board-view">
+					<tr>
+						<th>제목</th>
+						<td>${ a.aTitle }</td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td>${ a.writer }</td>
+					</tr>
+					<tr>
+						<th>작성일</th>
+						<td>${ a.aDate }</td>
+					</tr>
+					<tr>
+						<td colspan="2">${ a.aContent }</td>
+					</tr>
+				</table>
+				<c:if test="${ loginUser.admin eq 'Y' }">
+					<div>
+						<button
+							onclick="location.href='${contextPath}/updateAnswer.cm?qNo=${q.qNo}'">수정하기</button>
+						<button
+							onclick="location.href='${contextPath}/deleteQuestion.cm?qNo=${q.qNo}'">답변
+							삭제하기</button>
+					</div>
+				</c:if>
 			</c:if>
 			<c:if test="${ a eq null && loginUser.admin eq 'Y' }">
-			<div class="title">답변</div>
-			<form action="${contextPath }/insertAnswer.cm" method="post">
-			<table class="board-view">
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="aTitle" id="aTitle" ></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td>${ loginUser.nickname }</td>
-				</tr>
-				<tr>
-					<td colspan="2"><textarea cols="80" rows="20" id="aContent"></textarea></td>
-				</tr>
-			</table>
-			<div style="text-align: center;">
-				<input type="submit" value="등록" id="aSubmit"> <input type="reset" value="초기화">
-			</div>
-			</form>
+				<div class="title">답변</div>
+				<form action="${contextPath }/insertAnswer.cm" method="post">
+					<table class="board-view">
+						<tr>
+							<th>제목</th>
+							<td><input type="text" name="aTitle" id="aTitle"></td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${ loginUser.nickname }</td>
+						</tr>
+						<tr>
+							<td colspan="2"><textarea cols="80" rows="20" id="aContent"></textarea></td>
+						</tr>
+					</table>
+					<div style="text-align: center;">
+						<input type="submit" value="등록" id="aSubmit"> <input
+							type="reset" value="초기화">
+					</div>
+				</form>
 			</c:if>
 		</div>
 	</div>

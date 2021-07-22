@@ -28,6 +28,7 @@
        <mapper resource="mapper/group-mapper.xml"/>
        <mapper resource="mapper/room-mapper.xml"/>
        <mapper resource="mapper/culture-mapper.xml"/>
+       <mapper resource="mapper/mainpage-mapper.xml"/>
       <mapper resource="mapper/admin-mapper.xml"/>
       <mapper resource="mapper/member-mapper.xml"/>
       <mapper resource="mapper/books-mapper.xml" />

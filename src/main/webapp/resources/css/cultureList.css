@@ -144,25 +144,25 @@
 	.thumbInfo span {color: rgb(211, 0, 137);}
 	
 	.pagingArea { 
-		display: inline-block; justify-content: center; width: 100%;
+		display: inline-block; width: 100%;
 		font-size: 13px; margin-top: 20px; margin-bottom: 20px;
 	}
 	
-	/* .thumbTable{
-		display: table;
-		margin: 25px 60px 0px 60px;
-		text-align: center; table-layout: fixed;
-	}
-	
-	.thumbTable td{ display: table-cell;}
-	
-	.thumbIMG img{ 
-		width: 100%; height: auto; border: none; 
+	.pageBtn{ 
 		display: inline-block;
-		align: center;
+		background: rgb(244, 244, 244); width: 30px; line-height: 30px;	
+		text-align: center; border-radius: 2px; 
 	}
 	
-	.thumbTitle td{ font-size: 15px; font-weight: 600; } */
+	.pageBtn:hover{ 
+		background: lightgray;
+	}
+	
+	.currentpageBtn{ 
+		display: inline-block;
+		background: rgb(212, 129, 91); color: white; text-align: center; 
+		width: 30px; line-height: 30px;  border-radius: 2px;
+	}
 	
 @media screen and (max-width: 1035px){
 

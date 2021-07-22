@@ -77,4 +77,16 @@
  	set a_title = #{aTitle}, a_content = #{aContent}, writer = #{writer}
  	where a_no = #{aNo} and a_status = 'Y'
  </update>
+ 
+ <update id="deleteQuestion" parameterType="_int">
+  	update qna
+  	set a_status = 'N'
+  	where q_no = #{qNo}
+  </update>
+  
+ <update id="updateQuestion">
+ 	update qna
+ 	set a_title = #{qTitle}, a_content = #{qContent}
+ 	where q_no = #{qNo} and a_status = 'Y'
+ </update>
 </mapper>

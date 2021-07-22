@@ -45,7 +45,7 @@
 		<div class="title">도서정보</div>
 		<div class="bookSumWrapper">
 			<div class="bookImage">
-				<img src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}" />
+				<img style="width: 250px;" src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}" />
 			</div>
 			<div class="infoArea">
 			<div class="titleArea">

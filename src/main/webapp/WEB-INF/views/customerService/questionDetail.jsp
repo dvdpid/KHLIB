@@ -124,6 +124,9 @@ td {
 					<td colspan="2">${ q.qContent }</td>
 				</tr>
 			</table>
+			<c:if test="${ loginUser.UserNo eq q.UserNo }">
+			<div><button onclick="location.href="updateQuestionForm.cm">수정</button><button onclick="location.href="deleteQuestionForm.cm">삭제</button></div>
+			</c:if>
 			<c:if test="${ a ne null }">
 			<div class="title">답변</div>
 			<table class="board-view">

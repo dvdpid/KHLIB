@@ -71,20 +71,8 @@ public class MainController {
 	public void bkForm(HttpServletResponse response) throws JsonIOException, IOException {
 		ArrayList<BookGroup> bglist = mpService.selectbgList();
 		
-//		JSONArray arr = new JSONArray();
-//		for(BookGroup bg: bglist) {
-//			JSONObject obj = new JSONObject();
-//			obj.put("gNo", bg.getgNo());
-//			obj.put("gName", bg.getgName());
-//			obj.put("gWriter", bg.getgWriter());
-//			obj.put("gDate", bg.getgDate());
-//			obj.put("gTitle", bg.getGbTitle());
-//			
-//			arr.add(obj);
-//		}
-//		return arr.toJSONString();
 		response.setContentType("application/json; charset=utf-8");
-		new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create().toJson(bglist, response.getWriter());
+		new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(bglist, response.getWriter());
 	}
 	
 	@ResponseBody

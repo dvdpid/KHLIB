@@ -3,6 +3,7 @@ package com.kh.klib.member;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.service.MemberService;
 import com.kh.klib.member.model.vo.Member;
 
@@ -242,6 +242,33 @@ public class MemberController {
 		} else {
 			return "../common/errorPage";
 		}		
+	}
+	
+	@RequestMapping("memberFind.me")
+	public String findForm() {
+		return "memberFind";
+	}
+	
+	@RequestMapping(value="findPwd.me", method = RequestMethod.GET)
+	public void findPwdGET() throws Exception{
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="findPwd.me", method = RequestMethod.POST)
+	public String findPwdPOST(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
+		mService.findPwd(response, member);
+		System.out.println("pwd: "+member.getPwd());
+		String encPwd = bcrypPasswordEncoder.encode(member.getPwd());
+		member.setPwd(encPwd);
+		
+		int result = mService.updatePwd(member);
+		
+		if(result > 0) {
+			return "memberLogin";
+		} else {
+			return "../common/errorPage";
+		}
 	}
 
 }

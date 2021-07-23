@@ -60,14 +60,9 @@
 		WHERE USER_ID = #{id}
 	</update>
 	
-	
-	
-<!-- 	<update id="updateMember"> -->
-<!-- 		UPDATE USERS -->
-		
-<!-- 	</update> -->
-	
-	
-	
-	
+	<update id="updatePwd">
+		UPDATE USERS
+		SET USER_PWD = #{pwd}
+		WHERE USER_ID = #{id}
+	</update>
 </mapper>

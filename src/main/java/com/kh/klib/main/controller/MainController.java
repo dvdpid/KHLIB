@@ -52,6 +52,12 @@ public class MainController {
 	public String cultureForm() {
 		ArrayList<Culture> clist = mpService.selectcList();
 		
+		for(int i = 0; i < clist.size(); i++) {
+			String str = clist.get(i).getlDate();
+			String text = str.replace('T', ' ');
+			clist.get(i).setlDate(text);
+		}
+		
 		JSONArray arr = new JSONArray();
 		for(Culture c: clist) {
 			JSONObject obj = new JSONObject();

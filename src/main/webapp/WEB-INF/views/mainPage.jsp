@@ -7,7 +7,7 @@
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>홈페이지</title>
-<link rel="stylesheet" href="resources/css/common/mainPage.css" type="text/css">
+<link rel="stylesheet" href="resources/css/common/mainPage.css?ver=3.0" type="text/css">
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
@@ -44,7 +44,7 @@
 			
 			<div class="noticeArea">
 				<div id="noticeTitle"><span>공지사항</span><button id="noticeBtn" onclick="location.href='noticeList.nt';">+ 더보기</button></div>
-				<div id="noticeTable"><table id="noticeTableArea"></table></div>
+				<div id="noticeTable"><table id="noticeTableArea" style="table-layout:fixed;"></table></div>
 			</div>
 			
 			<div class="bookArea">
@@ -69,10 +69,10 @@
 					</div>
 				</div>
 				<div id="viewArea2" style="display: none;">
-					<div id="cultureView"><table id="cultureArea"></table></div>
+					<div id="cultureView"><table id="cultureArea" style=" width: 90%; table-layout:fixed;"></table></div>
 				</div>
 				<div id="viewArea3" style="display: none;">
-					<div id="bkView"><table id="bkArea"></table></div>
+					<div id="bkView"><table id="bkArea" style=" width: 90%; table-layout:fixed;"></table></div>
 				</div>
 			</div>
 			<div class="groupArea">
@@ -86,11 +86,13 @@
 
 	$(function(){
 		
-		getNoticeArea();
+		getNoticeArea();	
+		getBookArea();
 		
 		function getNoticeArea(){
 			$.ajax({
 				url: 'notice.mp',
+				async: false,
 				success: function(data){
 					$noticeTableArea = $('#noticeTableArea');
 					$noticeTableArea.html('');
@@ -134,12 +136,12 @@
 				}
 			});
 		}
-		
-		getBookArea();
+	
 		
 		function getBookArea(){
 			$.ajax({
 				url: 'book.mp',
+				async: false,
 				success: function(data){
 					for(var key in data){
 						$('#autoWidth').append(
@@ -147,7 +149,7 @@
 						+ '<div class="box">'
 						+ '<input type="hidden" id="bNo" value="'+data[key].bNo+'">'
 						+ '<a href="detail.bk?bNo='+data[key].bNo+'">'
-						+ '<img src="resources/bkuploadFiles/'+data[key].renameFileName+'" class="model">'
+						+ '<img id="bookImg" src="resources/bkuploadFiles/'+data[key].renameFileName+'" class="model">'
 						+ '</a></div></li>');
 					}
 				},

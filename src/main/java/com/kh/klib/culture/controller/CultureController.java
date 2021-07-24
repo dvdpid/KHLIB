@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.klib.bkgroup.model.vo.GroupSign;
 import com.kh.klib.common.ThumbnailPagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
@@ -39,13 +40,28 @@ public class CultureController {
 		
 		int listCount = cService.getListCount();
 		
+		int cNo = 0;
+		int approvalCount = 0;
+		
 		// 페이징 처리를 위한 연산
 		PageInfo pi = ThumbnailPagination.getPageInfo(currentPage, listCount);
 
 		ArrayList<Culture> cList = cService.selectTList(pi, 1); // 게시판 리스트 가져오기
 		ArrayList<Files> fList = cService.selectTList(pi, 2); // 파일 리스트 가져오기
+		
+		ArrayList<CultureSign> csList = new ArrayList<CultureSign>();
+		
+		for(int i = 0; i < cList.size(); i++) {
+			cNo = cList.get(i).getcNo();
+			
+			approvalCount = cService.getApprovalCount(cNo);
+			
+			csList.add(i, new CultureSign(cNo, approvalCount));
+			
+		}
+		
 		if(cList != null && fList != null) {
-			mv.addObject("pi", pi).addObject("cList", cList).addObject("fList", fList).setViewName("cultureList");
+			mv.addObject("pi", pi).addObject("cList", cList).addObject("csList", csList).addObject("fList", fList).setViewName("cultureList");
 		} else {
 			throw new CultureException("프로그램 전체 조회에 실패하였습니다.");
 		}

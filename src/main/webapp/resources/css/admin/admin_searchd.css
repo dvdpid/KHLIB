@@ -2,17 +2,7 @@
 
 .search-box{
   padding: 10px;
-  height: 30px;
-  background-color: #fff;
-  border: 1px solid rgb(159, 101, 74);
-  border-radius: 30px;
-  transition: 0.4s;
-  width:30px;
-  margin-bottom: 10px;
-}
-.search-boxs{
-  padding: 10px;
-  height: 30px;
+  height: 40px;
   background-color: #fff;
   border: 1px solid rgb(159, 101, 74);
   border-radius: 30px;
@@ -24,10 +14,6 @@
 .search-box:hover{
   box-shadow: 0px 0px .5px 1px rgb(159, 101, 74);
   width: 282px;
-}
-.search-boxs:hover{
-  box-shadow: 0px 0px .5px 1px rgb(159, 101, 74);
-  width: 100px;
 }
 .search-btn{
   text-decoration: none;
@@ -61,7 +47,3 @@
   padding: 0 6px;
 }
 
-.search-boxs:hover > .search-txt{
-  width: 100px;
-  padding: 0 6px;
-}

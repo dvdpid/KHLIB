@@ -8,6 +8,12 @@
 		from books
 		where b_Status='Y'
 	</select>
+	<select id="getReListCount" resultType="_int">
+		select count(*)
+		from books
+		where b_Status='Y' and B_RECOMMEND = 'Y'
+	</select>
+	
 	
 	<select id="selectList" resultMap="booksResultSet">
 		select *
@@ -15,6 +21,26 @@
 		where b_status='Y'
 		order by books_no desc
 	</select>
+	
+	<select id="selectReList" resultMap="booksResultSet">
+		select *
+		from books
+		where b_status='Y' and B_RECOMMEND = 'Y'
+		order by books_no desc
+	</select>
+	
+	<update id="bkRecommend">
+		update books
+		set B_RECOMMEND = 'Y'
+		where BOOKS_NO = #{bNo}
+	</update>
+	<update id="bkCancelRecommend">
+		update books
+		set B_RECOMMEND = 'N'
+		where BOOKS_NO = #{bNo}
+	</update>
+	
+	
 	<resultMap type="Books" id="booksResultSet">
 		<id column="BOOKS_NO" property="bNo"/>
 		<result column="BOOK_TITLE" property="bTitle"/>
@@ -506,6 +532,138 @@
 		set COMMENT_STATUS = 'N'
 		where COMMENT_NO = #{cNo}
 	</update>
+	
+	
+	<select id="searchBoardListCount" parameterType="com.kh.klib.board.model.vo.BoardSearchValue" resultType="_int">
+		select count(*)
+		from board
+		where b_status='Y'
+		<if test="title != null">
+			and board_title like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and board_writer like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchBoardResultList" parameterType="com.kh.klib.board.model.vo.BoardSearchValue" resultMap="boardResultSet">
+		select *
+		from board
+		where b_status = 'Y'
+		<if test="title != null">
+			and board_title like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and board_writer like '%' || #{writer} || '%'
+		</if>
+		order by board_no desc
+	</select>
+	
+	<select id="searchBookListCount" parameterType="com.kh.klib.books.model.vo.SearchCondition" resultType="_int" >
+		select count(*) 
+		from books
+		<where>
+		b_status= 'Y'
+		<if test="writer != null" >
+		and books_writer like '%' || #{writer} || '%'
+		</if>
+		<if test="title != null" >
+		and book_title like '%' || #{title} || '%' 
+		</if>
+		<if test="company !=null" >
+		and books_company = #{company}
+		</if>
+		</where>
+	</select>
+	
+	<select id="selectSearchBookResultList"  parameterType="com.kh.klib.books.model.vo.SearchCondition" resultMap="bookResultSet">
+		select * 
+		from books
+		<where>
+		b_status= 'Y'
+		<if test="writer != null" >
+		and books_writer like '%' || #{writer} || '%'
+		</if>
+		<if test="title != null" >
+		and book_title like '%' || #{title} || '%' 
+		</if>
+		<if test="company !=null" >
+		and books_company = #{company}
+		</if>
+		</where>
+		order by books_no desc	
+	</select>
+		<resultMap type="Books" id="bookResultSet">
+		<id column="BOOKS_NO" property="bNo" />
+		<result column="BOOK_TITLE" property="bTitle" />
+		<result column="BOOKS_WRITER" property="bWriter" />
+		<result column="BOOKS_COMPANY" property="bCompany" />
+		<result column="BOOKS_DATE" property="bDate" />
+		<result column="BOOKS_CONTENT" property="bContent" />
+		<result column="B_RECOMMEND" property="bRecommend" />
+		<result column="ENTRY_DATE" property="entryDate" />
+		<result column="ORIGIN_NAME" property="originFileName" />
+		<result column="CHANGE_NAME" property="renameFileName" />
+	</resultMap>
+	
+	<select id="searchCultureListCount" parameterType="CultureSearchCondition" resultType="_int">
+		select count(*)
+		from culture
+		where c_status='Y'
+		<if test="title != null">
+			and culture_title like '%' || #{title} || '%'
+		</if>
+		<if test="instructor != null">
+			and culture_instructor like '%' || #{instructor} || '%'
+		</if>
+		<if test="target != null">
+			and culture_target like '%' || #{target} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchCultureResultList" parameterType="CultureSearchCondition" resultMap="cultureResultSet">
+		select *
+		from culture
+		where c_status='Y'
+		<choose>
+			<when test="title != null">
+				and culture_Title like '%' || #{title} || '%'
+			</when>
+			<when test="instructor != null">
+				and culture_Instructor like '%' || #{instructor} || '%'
+			</when>
+			<otherwise>
+				and culture_Target like '%' || #{target} || '%'
+			</otherwise>
+		</choose>
+		order by culture_No desc
+	</select>
+	
+	<select id="searchBGroupListCount" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultType="_int">
+		select count(*)
+		from bkgroup
+		where g_status='Y'
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchBGroupResultList" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where g_status = 'Y'
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if> 
+		order by group_no desc
+	</select>
+		
 	
 	
 </mapper>

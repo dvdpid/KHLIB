@@ -9,6 +9,8 @@
 <title> 회원 </title>
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <script src="resources/js/admin.js" defer></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 
@@ -29,6 +31,27 @@
 		</div>
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">문화마당 목록</h3><br>
+		<div class="search-box" style="float:right; margin-right: 75px;">
+    	  	<select id="searchCondition" class="search-txt" name="searchCondition">
+				<option value="title">제목</option>
+				<option value="instructor">강사명</option>
+				<option value="target">대상</option>
+			</select>
+    	  <input type="text" class="search-txt" id="searchValue" name="" placeholder="검색">
+     		 <a class="search-btn" onclick="searchCulture();">
+        		<i class="fas fa-search"></i>
+    		  </a>
+  		</div>
+	<script type="text/javascript">
+		function searchCulture(){
+			var search = $('#searchCondition').val();
+			var searchContent = $('#searchValue').val();
+			
+			location.href="searchCulture.ad?search=" + search + "&searchContent=" + searchContent;
+		}
+	</script>
+		
+		
 		<div>
 			<table class="type1">
 				<thead>

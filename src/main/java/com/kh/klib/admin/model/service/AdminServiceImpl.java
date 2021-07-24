@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import com.kh.klib.admin.model.dao.AdminDAO;
 import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.bkgroup.model.vo.BookGroupSearchValue;
 import com.kh.klib.board.model.vo.Board;
+import com.kh.klib.board.model.vo.BoardSearchValue;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.books.model.vo.SearchCondition;
 import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.member.model.vo.Member;
 import com.kh.klib.notice.model.vo.Notice;
 import com.kh.klib.room.model.vo.Room;
@@ -319,6 +323,66 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int commentDelete(Integer cNo) {
 		return aDAO.commentDelete(sqlSession, cNo);
+	}
+
+	@Override
+	public int searchBoardListCount(BoardSearchValue bsv) {
+		return aDAO.searchBoardListCount(sqlSession, bsv);
+	}
+
+	@Override
+	public ArrayList<Board> selectSearchBoardResultList(BoardSearchValue bsv, PageInfo pi) {
+		return aDAO.selectSearchBoardResultList(sqlSession, bsv, pi);
+	}
+
+	@Override
+	public int searchBookListCount(SearchCondition sc) {
+		return aDAO.searchBookListCount(sqlSession, sc);
+	}
+
+	@Override
+	public ArrayList<Books> selectSearchBookResultList(SearchCondition sc, PageInfo pi) {
+		return aDAO.selectSearchBookResultList(sqlSession, sc, pi);
+	}
+
+	@Override
+	public int searchCultureListCount(CultureSearchCondition csc) {
+		return aDAO.searchCultureListCount(sqlSession, csc);
+	}
+
+	@Override
+	public ArrayList<Culture> selectSearchCultureResultList(CultureSearchCondition csc, PageInfo pi) {
+		return aDAO.selectSearchCultureResultList(sqlSession, csc, pi);
+	}
+
+	@Override
+	public int searchBGroupListCount(BookGroupSearchValue gsv) {
+		return aDAO.searchBGroupListCount(sqlSession, gsv);
+	}
+
+	@Override
+	public ArrayList<Culture> selectSearchBGroupResultList(BookGroupSearchValue gsv, PageInfo pi) {
+		return aDAO.selectSearchBGroupResultList(sqlSession, gsv, pi);
+	}
+
+	@Override
+	public int getReListCount() {
+		return aDAO.getReListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Books> selectReList(PageInfo rpi) {
+		return aDAO.selectReList(sqlSession, rpi);
+	}
+
+	@Override
+	public int bkRecommend(Integer bNo) {
+		return aDAO.bkRecommend(sqlSession, bNo);
+	}
+
+	@Override
+	public int bkCancelRecommend(Integer bNo) {
+		return aDAO.bkCancelRecommend(sqlSession, bNo);
 	}
 
 

@@ -52,7 +52,7 @@
 				</tr>
 			</table>
 			<button id="searchBtn" onclick="searchBoard();">조회</button>
-		</div>
+		</div>/*
   	</div>
   	
   	<script>

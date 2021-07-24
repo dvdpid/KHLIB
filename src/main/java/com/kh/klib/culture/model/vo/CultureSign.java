@@ -8,8 +8,15 @@ public class CultureSign {
 	private String csStatus;	// 신청 여부
 	private Date csDate;		// 신청 시간
 	private String csApproval;	// 승인 여부
+	private int approvalCount;
 	
 	public CultureSign() {}
+	
+	public CultureSign(int cNo, int approvalCount) {
+		super();
+		this.cNo = cNo;
+		this.approvalCount = approvalCount;
+	}
 
 	public CultureSign(int uNo, int cNo, String csStatus, Date csDate, String csApproval) {
 		super();
@@ -60,11 +67,17 @@ public class CultureSign {
 		this.csApproval = csApproval;
 	}
 
+	public int getApprovalCount() {
+		return approvalCount;
+	}
+
+	public void setApprovalCount(int approvalCount) {
+		this.approvalCount = approvalCount;
+	}
+
 	@Override
 	public String toString() {
 		return "CultureSign [uNo=" + uNo + ", cNo=" + cNo + ", csStatus=" + csStatus + ", csDate=" + csDate
-				+ ", csApproval=" + csApproval + "]";
+				+ ", csApproval=" + csApproval + ", approvalCount=" + approvalCount + "]";
 	}
-	
-	
 }

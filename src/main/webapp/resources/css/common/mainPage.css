@@ -43,7 +43,10 @@ a{
 	transition: all ease 0.3s;
 }
 
-
+#bookImg{ 
+	width: 180px;
+	height: 250px;
+}
 
 
 
@@ -87,6 +90,7 @@ a{
 
 #noticeTable table, #groupTable table{
 	width: 100%;
+	table-layout:fixed;
 	border-top: 1px solid lightgray;
 	border-bottom: 1px solid lightgray;
 	border-left: none;
@@ -102,6 +106,7 @@ a{
 	border-right: none;
 	border-collapse: collapse;
 	padding: 5px 0px; font-size: 13px;
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 #bookList{ 
@@ -188,7 +193,9 @@ a{
 	.full{ background: rgb(212, 129, 91); color: white;}
 	.empty{ background: none; }
 	
-	#cultureView, #bkView{ display: flex; width: 100%; justify-content: center; align-items: center;}
+	#cultureView, #bkView{ 
+		display: flex; width: 100%; justify-content: center; align-items: center;
+	}
 	
 	#cultureArea, #bkArea{
 		border: 1px solid #5e5e5e; border-left: none; border-right: none;
@@ -197,28 +204,28 @@ a{
 	
 	#cultureArea td{
 		border: 1px solid #5e5e5e; border-left: none; border-right: none;
-		text-align: center; font-size: 8px;
-		padding: 5px 30px;
+		text-align: center; font-size: 8px; padding: 5px 15px;
+		overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 	}
 	
 	#cultureArea th{
 		border: none; background:rgba(212, 129, 91, 0.8); color: white;
 		border-left: none; border-right: none;
 		text-align: center; font-size: 10px;
-		padding: 5px 30px;
+		padding: 5px 15px;
 	}
 	
 	#bkArea th{
 		border: none; background:rgba(212, 129, 91, 0.8); color: white;
 		border-left: none; border-right: none;
 		text-align: center; font-size: 10px;
-		padding: 5px 20px;
+		padding: 5px 15px;
 	}
 	
 	#bkArea td{
 		border: 1px solid #5e5e5e; border-left: none; border-right: none;
-		text-align: center; font-size: 8px;
-		padding: 5px 20px;
+		text-align: center; font-size: 8px; padding: 5px 15px; 
+		overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 	}
 	
 	#noticeTableArea th{
@@ -227,12 +234,12 @@ a{
 	}
 	
 	#noticeTableArea td{
-		padding: 3px 0px;
+		padding: 3px 0px; text-overflow: ellipsis;
 	}
 	
 
 @media screen and (max-width: 1035px){
 	.leftArea{ width: 100%; }
 	.rightArea{ width: 100%; }
-	#cultureArea th, #bkArea th{ padding: 5px 55px; }
+	#cultureArea th, #bkArea th{ padding: 5px 0px; }
 }

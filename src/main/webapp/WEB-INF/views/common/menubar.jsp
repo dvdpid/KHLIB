@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>열람실 상세설명</title>
-<link rel="stylesheet" href="resources/css/common/menubar.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/common/menubar.css" type="text/css">
 <script src="resources/js/menubar.js" defer></script>
 </head>
 <body>

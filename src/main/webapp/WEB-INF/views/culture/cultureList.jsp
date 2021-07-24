@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>문화마당 이용안내</title>
-<link rel="stylesheet" href="resources/css/cultureList.css" type="text/css">
+<link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -69,6 +69,11 @@
 					<c:forEach var="c" items="${ cList }">
 				<div class="thumbList" align="center" onclick="location.href='${ contextPath }/cDetail.cu?cNo=' + ${c.cNo} + '&page=' + ${ pi.currentPage }">
 					<div class="cultureListIMG">
+						<c:forEach var="cs" items="${ csList }">
+							<c:if test="${ ((c.cNo eq cs.cNo) && (c.cTotal eq cs.approvalCount)) || ((c.cNo eq cs.cNo) && c.cDeadLine == 'Y') }">
+                                 <em>마감</em>
+                            </c:if>
+                        </c:forEach>
 						<c:forEach var="f" items="${ fList }">
 							<c:if test="${ c.cNo == f.cNo}">
 								<img src="${ contextPath }/resources/CultureUploadFiles/${ f.changeName }">

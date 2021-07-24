@@ -85,8 +85,11 @@
 				<tr>
 					<td>마감 여부</td>
 					<td>
-						<c:if test="${ culture.cDeadLine == 'N' }">진행중</c:if>
-						<c:if test="${ culture.cDeadLine == 'Y' }">마감</c:if>
+						<jsp:useBean id="toDay" class="java.util.Date"/>
+						<fmt:formatDate var="now" value="${ toDay }" pattern="E MMM dd HH:mm:ss z yyyy"/>
+						<c:if test="${ toDay < cLDate && toDay < cSDate && culture.cDeadLine == 'N' && toDay < cEDate  }">진행 전</c:if>
+						<c:if test="${ (toDay < cLDate && cSDate < toDay && toDay < cEDate) || cSDate < toDay && culture.cDeadLine == 'N' && toDay < cEDate }">진행 중</c:if>
+						<c:if test="${ cLDate < toDay || cEDate < toDay || culture.cDeadLine == 'Y' || approvalCount == culture.cTotal }">마감</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -122,7 +125,15 @@
 		</div>
 	</div>
 	<input type="hidden" id="CNO" name="CNO" value="${ culture.cNo }">
+	<input type="hidden" id="cDeadLine" name="cDeadLine" value="${ culture.cDeadLine }">
 	<input type="hidden" id="uNo" name="uNo" value="${ loginUser.no }">
+	<input type="hidden" id="cTotal" name="cTotal" value="${ culture.cTotal }">
+	<input type="hidden" id="sd" name="sd" value="${ cSDate }">
+	<input type="hidden" id="ed" name="ed" value="${ cEDate }">
+	<input type="hidden" id="ld" name="ld" value="${ cLDate }">
+	<input type="hidden" id="now" name="now" value="${ toDay }">
+	<input type="hidden" id="approvalCount" name="approvalCount" value="${ approvalCount }">
+
 	<c:forEach var="cs" items="${ csList }">
 		<input type="hidden" id="csListcNo" name="csListcNo" value="${ cs.cNo }">
 	 	<input type="hidden" id="csListuNo" name="csListuNo" value="${ cs.uNo }">
@@ -140,16 +151,42 @@
 	</c:if>
 	<c:if test="${ !empty loginUser }">
 		<script type="text/javascript">
+		
 			$('#signBtn').click(function(){
 				var csListcNo = $('#csListcNo').val();
 				var cNo = $('#CNO').val();
 				var csListuNo = $('#csListuNo').val();
 				var uNo = $('#uNo').val();
 				var csListStatus = $('#csListStatus').val();
+				var cTotal = $('#cTotal').val();
+				var approvalCount = $('#approvalCount').val();
+				var cDeadLine = $('#cDeadLine').val();
+				var sd = $('#sd').val();
+				var ed = $('#ed').val();
+				var ld = $('#ld').val();
+				var now = $('#now').val(); 
+				
+				console.log(ld);
+				console.log(ed);
+				console.log(now);
+				console.log('마감 됐니? ' + ed < now);
+				console.log('끝났니? ' + ld < now)
+				
+				/* if(csListcNo == cNo && csListuNo == uNo && csListStatus=='Y'){
+					alert('중복 신청은 불가능합니다.');
+				} else if( (now < ld && ed < now) || cDeadLine == 'Y' || approvalCount == cTotal){
+					alert('마감된 프로그램은 신청이 불가능합니다.');
+				} else if(now < ld && now < sd && cDeadLine =='N' && now < ed){
+					alert('프로그램 신청 기간이 아닙니다.');
+				} else{
+					window.open('cSign.cu?cNo='+cNo, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
+				} */
 				if(csListcNo == cNo && csListuNo == uNo && csListStatus=='Y'){
 					alert('중복 신청은 불가능합니다.');
+				} else if(cDeadLine == 'Y' || approvalCount == cTotal){
+					alert('마감된 프로그램은 신청이 불가능합니다.');
 				} else{
-					window.open('cSign.cu?cNo='+${ culture.cNo }, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
+					window.open('cSign.cu?cNo='+cNo, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
 				}
 			});
 		</script>

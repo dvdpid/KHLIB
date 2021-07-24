@@ -8,58 +8,11 @@
 <meta charset="UTF-8">
 <title>열람실 상세설명</title>
 <link rel="stylesheet" href="resources/css/roomInfo.css" type="text/css">
+<link rel="stylesheet" href="resources/css/mypage.css" type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
 <style>
-#searchDiv {
-    display: flex;
-    margin: 25px 60px 0px 60px;
-    background: lightgray;
-    text-align: center;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-.main {
-    float: right;
-    width: 75%;
-    text-align: center;
-}
-tbody {
-    display: table-row-group;
-    vertical-align: middle;
-    border-color: inherit;
-}
-#mpTable {
-    border-top: 2px solid lightgray;
-    border-bottom: 2px solid lightgray;
-    border-left: none;
-    border-right: none;
-    border-collapse: collapse;
-    width: 100%;
-    font-size: 13px;
-    margin-bottom: 55px;
-}
-user agent stylesheet
-table {
-    border-collapse: separate;
-    text-indent: initial;
-    border-spacing: 2px;
-}
-.main {
-    float: right;
-    width: 75%;
-    text-align: center;
-}
-#bkgroupListOuter {
-    margin: 25px 80px 0px 10px;
-    width: 65%;
-    margin-left: auto;
-}
-user agent stylesheet
-div {
-    display: block;
-}
+
+
 </style>
 </head>
 <body>
@@ -94,38 +47,43 @@ div {
 	
 	
 	<div class="centerText">
-		<div class="column">
-			<div id="searchDiv">
-			<table id="searchTable" style="margin-left: 130px;">
+		<div class="main">
+		<div class="mainTitle">
+			<p><img id="titleImg1" src="resources/images/info/notes.png"/>
+			${ loginUser.id } 님의 정보</p>
+		</div>
+			<div id="myinfo">
+			
+			<table id="searchTable" style="margin-left: 70px;">
 				<tbody><tr>
 				
-					<td>아이디</td>
-					<td>${ loginUser.id }</td>
+					<td id="infoname">아이디</td>
+					<td class="userinfot">${ loginUser.id }</td>
 				</tr>
 				<tr>
-					<td>이메일</td>
-					<td>${ loginUser.email }</td>
+					<td id="infoname">이메일</td>
+					<td class="userinfot">${ loginUser.email }</td>
 				</tr>
 				<tr>
-					<td>닉네임</td>
-					<td>${ loginUser.nickname }</td>
+					<td id="infoname">닉네임</td>
+					<td class="userinfot">${ loginUser.nickname }</td>
 				</tr>				
 			</tbody>
 			
 			</table>
-			<table style="margin-left: 130px;">
+			<table style="margin-left: 70px;">
 			<tbody>
 			<tr>
-					<td>성명</td>
-					<td>${ loginUser.name }</td>
+					<td id="infoname">성명</td>
+					<td class="userinfot">${ loginUser.name }</td>
 				</tr>
 				<tr>
-					<td>휴대전화</td>
-					<td>${ loginUser.phone }</td>
+					<td id="infoname">휴대전화</td>
+					<td class="userinfot">${ loginUser.phone }</td>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td><c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
+					<td id="infoname">주소</td>
+					<td class="userinfot"><c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
 						<c:if test="${ status.index eq 0 && addr >= '0' && addr <= '99999' }">
 							(${ addr })
 						</c:if>
@@ -139,13 +97,36 @@ div {
 							${ addr }
 						</c:if>
 					</c:forTokens></td>
-				</tr>			
-			</tbody>		
+				</tr>					
+			</tbody>	
+				
 			</table>
+			
+					</div>	
+				<div>
+			<div id="roominfo">
+				<p id="infop"><img id="titleImg1" src="resources/images/info/add.png"/>
+			열람실 예약 확인</p>				
+			</div>
+			<div id="boardinfo">
+				<p id="infop"><img id="titleImg1" src="resources/images/info/add.png"/>
+			내가 작성한 글</p>	
+			</div>
+			
+			<div id="cultureinfo">
+				<p id="infop"><img id="titleImg1" src="resources/images/info/add.png"/>
+			문화마당 신청 확인</p>	
+			</div>
+			
+			<div id="bookinfo">
+				<p id="infop"><img id="titleImg1" src="resources/images/info/add.png"/>
+			독서모임 신청 확인</p>	
+			</div>
+			</div>
+				</div>
 			</div>	
 			
-	
-	
+			
 	<c:import url="../common/footer.jsp"/>
 </body>
 </html>

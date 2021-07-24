@@ -153,7 +153,7 @@ public class BookGroupController {
 	
 	
 	@RequestMapping("gDetail.bg")
-	public String groupDetail(@RequestParam(value="page", required = false) int page, @RequestParam("gNo") int gNo, Model model) {
+	public String groupDetail(@RequestParam(value="page", required=false) Integer page, @RequestParam("gNo") int gNo, Model model) {
 		BookGroup group = gService.selectBookGroup(gNo);
 		Files file = gService.selectFile(gNo);
 		

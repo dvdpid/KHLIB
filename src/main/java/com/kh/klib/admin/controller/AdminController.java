@@ -838,7 +838,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("bDetail.ad")
-	public String bDetail(@RequestParam("page") int page, @RequestParam("bNo") Integer bNo, Model model) {
+	public String bDetail(@RequestParam(value="page", required=false) Integer page, @RequestParam("bNo") Integer bNo, Model model) {
 		
 		Board board = aService.selectDetailBoard(bNo);
 		Files file = aService.selectBFile(bNo);

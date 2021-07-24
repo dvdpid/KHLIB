@@ -2,6 +2,7 @@ package com.kh.klib.member;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,9 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.bkgroup.model.vo.GroupSign;
+import com.kh.klib.board.model.vo.Board;
+import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.culture.model.vo.CultureSign;
 import com.kh.klib.member.model.service.MemberService;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.room.model.vo.RoomSign;
 
 @SessionAttributes("loginUser") 
 @Controller 
@@ -46,8 +54,25 @@ public class MemberController {
 		return "home";
 	}
 	@RequestMapping("mypageForm.me")
-	public String mypageForm() {
-		return "mypage2";
+	public ModelAndView mypageForm(ModelAndView mv,HttpSession session) {
+		
+		int no = ((Member)session.getAttribute("loginUser")).getNo();
+		String name = ((Member)session.getAttribute("loginUser")).getNickname();
+		
+		ArrayList<RoomSign> rlist = mService.selectrList(no);
+		ArrayList<Board> blist = mService.selectbList(name);
+		
+		ArrayList<GroupSign> gsList = mService.selectgsList(no);
+		ArrayList<BookGroup> gList = mService.selectgList();
+		
+		ArrayList<CultureSign> csList = mService.selectcsList(no);
+		ArrayList<Culture> cList = mService.selectcList();
+		
+		
+		mv.addObject("rlist", rlist).addObject("blist", blist).addObject("gList", gList).addObject("gsList", gsList).addObject("csList", csList).addObject("cList", cList).setViewName("mypage2");
+		
+		
+		return mv;
 	}
 	
 	@RequestMapping("mupdateView.me")

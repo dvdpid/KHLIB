@@ -23,17 +23,17 @@ td{
 #roominfo {
    
     margin: 25px 60px 0px 53px;
-    background: #F6F6F6;
+    background: #fff;
     text-align: center;
     
-    width : 453px;
+    width : 430px;
     height : 200px;
     display:inline-block;
    
 }
 #boardinfo {
     margin: 25px 60px 0px 60px;
-    background: #F6F6F6;
+    background: #fff;
     text-align: center;
     
     width : 430px;
@@ -42,17 +42,17 @@ td{
 }
 #cultureinfo {    
     margin: 55px 60px 40px 53px;
-    background: #F6F6F6;
+    background: #fff;
     text-align: center;
     
-    width : 453px;
+    width : 430px;
     height : 200px;
     display: inline-block;
     
 }
 #bookinfo {    
     margin: 55px 60px 40px 60px;
-    background: #F6F6F6;
+    background: #fff;
     text-align: center;
     
     width : 430px;

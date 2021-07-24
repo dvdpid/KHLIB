@@ -68,7 +68,6 @@
 					<th>상태</th>
 					<th>입고일</th>
 					<th>체크</th>
-
 				</tr>
 				</thead>
 				<tbody>

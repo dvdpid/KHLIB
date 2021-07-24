@@ -1,7 +1,7 @@
 package com.kh.klib.member.model.service;
 
-import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,8 +10,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.bkgroup.model.vo.GroupSign;
+import com.kh.klib.board.model.vo.Board;
+import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.culture.model.vo.CultureSign;
 import com.kh.klib.member.model.dao.MemberDAO;
 import com.kh.klib.member.model.vo.Member;
+import com.kh.klib.room.model.vo.RoomSign;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
@@ -145,4 +151,35 @@ public class MemberServiceImpl implements MemberService {
 	public int updatePwd(Member member) {
 		return mDAO.updatePwd(sqlSession, member);
 	}
+
+	@Override
+	public ArrayList<RoomSign> selectrList(int no) {
+		return mDAO.selectrList(sqlSession, no);
+	}
+
+	@Override
+	public ArrayList<Board> selectbList(String name) {
+		return mDAO.selectbList(sqlSession, name);
+	}
+
+	@Override
+	public ArrayList<GroupSign> selectgsList(int no) {
+		return mDAO.selectgsList(sqlSession, no);
+	}
+
+	@Override
+	public ArrayList<BookGroup> selectgList() {
+		return mDAO.selectgList(sqlSession);
+	}
+
+	@Override
+	public ArrayList<CultureSign> selectcsList(int no) {
+		return mDAO.selectcsList(sqlSession, no);
+	}
+
+	@Override
+	public ArrayList<Culture> selectcList() {
+		return mDAO.selectcList(sqlSession);
+	}
+
 }

@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.bkgroup.model.vo.BookGroupSearchValue;
 import com.kh.klib.board.model.vo.Board;
+import com.kh.klib.board.model.vo.BoardSearchValue;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.books.model.vo.SearchCondition;
 import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.member.model.vo.Member;
 import com.kh.klib.notice.model.vo.Notice;
 import com.kh.klib.room.model.vo.Room;
@@ -133,6 +137,30 @@ public interface AdminService {
 	int boardDelete(Integer bNo);
 
 	int commentDelete(Integer cNo);
+
+	int searchBoardListCount(BoardSearchValue bsv);
+
+	ArrayList<Board> selectSearchBoardResultList(BoardSearchValue bsv, PageInfo pi);
+
+	int searchBookListCount(SearchCondition sc);
+
+	ArrayList<Books> selectSearchBookResultList(SearchCondition sc, PageInfo pi);
+
+	int searchCultureListCount(CultureSearchCondition csc);
+
+	ArrayList<Culture> selectSearchCultureResultList(CultureSearchCondition csc, PageInfo pi);
+
+	int searchBGroupListCount(BookGroupSearchValue gsv);
+
+	ArrayList<Culture> selectSearchBGroupResultList(BookGroupSearchValue gsv, PageInfo pi);
+
+	int getReListCount();
+
+	ArrayList<Books> selectReList(PageInfo rpi);
+
+	int bkRecommend(Integer bNo);
+
+	int bkCancelRecommend(Integer bNo);
 
 
 

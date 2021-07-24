@@ -9,6 +9,8 @@
 <title> 회원 </title>
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <script src="resources/js/admin.js" defer></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 
@@ -29,12 +31,33 @@
 		</div>
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">독서 모임</h3><br>
+		
+		<div class="search-box" style="float:right; margin-right: 75px;">
+    	  	<select id="searchCondition" class="search-txt" name="searchCondition">
+				<option value="name">그룹 명</option>
+				<option value="book">책 제목</option>
+			</select>
+    	  <input type="text" class="search-txt" id="searchValue" name="" placeholder="검색">
+     		 <a class="search-btn" onclick="searchBGroup();">
+        		<i class="fas fa-search"></i>
+    		  </a>
+  		</div>
+	<script type="text/javascript">
+		function searchBGroup(){
+			var search = $('#searchCondition').val();
+			var searchContent = $('#searchValue').val();
+			
+			location.href="searchBGroup.ad?search=" + search + "&searchContent=" + searchContent;
+		}
+	</script>
+	
 		<div>
 			<table class="type1">
 				<thead>
 				<tr>
 					<th>번호</th>
 					<th>그룹 이름</th>
+					<th>책 제목</th>
 					<th>작성자</th>
 					<th>모임 일자</th>
 					<th>체크</th>
@@ -44,8 +67,9 @@
 				<c:forEach var="g" items="${list }">
 					<tr class="list" onclick="location.href='${ contextPath }/gDetail.bg?gNo='+ ${ g.gNo } + '&page=' + ${ pi.currentPage }">
 						<td>${g.gNo }</td>
-						<td class="subject"><a href="#a">${g.gName }</a></td>
-						<td><a href="#a">${ g.gWriter }</a></td>
+						<td class="subject">${g.gName }</td>
+						<td>${g.gbTitle }</td>
+						<td>${ g.gWriter }</td>
 						<td>${g.gDate }</td>
 						<td onclick="event.cancelBubble=true"><input type="radio" name="gNo" value="${g.gNo  }"></td>
 					</tr>

@@ -8,12 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.bkgroup.model.vo.BookGroupSearchValue;
 import com.kh.klib.board.model.vo.Board;
+import com.kh.klib.board.model.vo.BoardSearchValue;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.books.model.vo.SearchCondition;
 import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.member.model.vo.Member;
 import com.kh.klib.notice.model.vo.Notice;
 import com.kh.klib.room.model.vo.Room;
@@ -285,6 +289,77 @@ public class AdminDAO {
 
 	public int commentDelete(SqlSessionTemplate sqlSession, Integer cNo) {
 		return sqlSession.update("adminMapper.commentDelete", cNo);
+	}
+
+	public int searchBoardListCount(SqlSessionTemplate sqlSession, BoardSearchValue bsv) {
+		return sqlSession.selectOne("adminMapper.searchBoardListCount", bsv);
+	}
+
+	public ArrayList<Board> selectSearchBoardResultList(SqlSessionTemplate sqlSession, BoardSearchValue bsv,
+			PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectSearchBoardResultList", bsv, rowBounds);
+	}
+
+	public int searchBookListCount(SqlSessionTemplate sqlSession, SearchCondition sc) {
+		return sqlSession.selectOne("adminMapper.searchBookListCount", sc);
+	}
+
+	public ArrayList<Books> selectSearchBookResultList(SqlSessionTemplate sqlSession, SearchCondition sc, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectSearchBookResultList", sc, rowBounds);
+	
+	}
+
+	public int searchCultureListCount(SqlSessionTemplate sqlSession, CultureSearchCondition csc) {
+		return sqlSession.selectOne("adminMapper.searchCultureListCount", csc);
+	}
+
+	public ArrayList<Culture> selectSearchCultureResultList(SqlSessionTemplate sqlSession, CultureSearchCondition csc,
+			PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectSearchCultureResultList", csc, rowBounds);
+	
+	}
+
+	public int searchBGroupListCount(SqlSessionTemplate sqlSession, BookGroupSearchValue gsv) {
+		return sqlSession.selectOne("adminMapper.searchBGroupListCount", gsv);
+	}
+
+	public ArrayList<Culture> selectSearchBGroupResultList(SqlSessionTemplate sqlSession, BookGroupSearchValue gsv,
+			PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+	
+		return (ArrayList)sqlSession.selectList("adminMapper.selectSearchBGroupResultList", gsv, rowBounds);
+	
+	}
+
+	public int getReListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getReListCount");
+	}
+
+	public ArrayList<Books> selectReList(SqlSessionTemplate sqlSession, PageInfo rpi) {
+		int offset = (rpi.getCurrentPage() - 1) * rpi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, rpi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectReList", null, rowBounds);
+	}
+
+	public int bkRecommend(SqlSessionTemplate sqlSession, Integer bNo) {
+		return sqlSession.update("adminMapper.bkRecommend", bNo);
+	}
+
+	public int bkCancelRecommend(SqlSessionTemplate sqlSession, Integer bNo) {
+		return sqlSession.update("adminMapper.bkCancelRecommend", bNo);
 	}
 
 

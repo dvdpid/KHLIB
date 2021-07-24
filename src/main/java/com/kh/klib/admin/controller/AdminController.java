@@ -26,20 +26,23 @@ import com.kh.klib.admin.model.service.AdminService;
 import com.kh.klib.admin.model.vo.AdminSearchValue;
 import com.kh.klib.bkgroup.model.exception.BookGroupException;
 import com.kh.klib.bkgroup.model.vo.BookGroup;
+import com.kh.klib.bkgroup.model.vo.BookGroupSearchValue;
 import com.kh.klib.board.model.exception.BoardException;
 import com.kh.klib.board.model.vo.Board;
+import com.kh.klib.board.model.vo.BoardSearchValue;
 import com.kh.klib.books.model.exception.BooksException;
 import com.kh.klib.books.model.vo.Books;
+import com.kh.klib.books.model.vo.SearchCondition;
 import com.kh.klib.comments.model.vo.Comments;
 import com.kh.klib.common.Pagination;
 import com.kh.klib.common.model.vo.Files;
 import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.exception.CultureException;
 import com.kh.klib.culture.model.vo.Culture;
+import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.member.model.exception.MemberException;
 import com.kh.klib.member.model.vo.Member;
 import com.kh.klib.notice.model.vo.Notice;
-import com.kh.klib.notice.model.vo.NoticeSearchValue;
 import com.kh.klib.room.exception.RoomException;
 import com.kh.klib.room.model.vo.Room;
 import com.kh.klib.room.model.vo.RoomSign;
@@ -278,13 +281,18 @@ public class AdminController {
 			currentPage = page;
 		}
 		int listCount = aService.getListCount();
+		int relistCount = aService.getReListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo rpi = Pagination.getPageInfo(currentPage, relistCount);
+		
 		
 		ArrayList<Books> list = aService.selectList(pi);
+		ArrayList<Books> rlist = aService.selectReList(rpi);
+		
 		
 		if(list != null) {
-			mv.addObject("list", list).addObject("pi", pi).setViewName("admin_book");
+			mv.addObject("list", list).addObject("pi", pi).addObject("rlist", rlist).addObject("rpi", rpi).setViewName("admin_book");
 		} else {
 			throw new BooksException("도서 조회 실패!");
 		}
@@ -882,6 +890,221 @@ public class AdminController {
 		}
 		
 	}
+	
+	
+	
+	@RequestMapping("searchBoard.ad")
+	public ModelAndView searchBoard(@RequestParam(value="search", required=false) String search,
+								@RequestParam(value="searchContent", required=false) String content,
+								@RequestParam(value="page", required=false) Integer page,
+								ModelAndView mv) {
+
+			System.out.println("board 검색 컨트롤러 넘어옴");
+			System.out.println(search);
+			System.out.println(content);
+		
+			BoardSearchValue bsv = new BoardSearchValue();
+			
+			if(search.equals("title")) bsv.setTitle(content);
+			else if(search.equals("writer")) bsv.setWriter(content);
+			
+			System.out.println("bsv : " + bsv);
+			
+			int currentPage = 1;
+				if(page != null) {
+				currentPage = page;
+			}
+			
+			int searchListCount = aService.searchBoardListCount(bsv);
+			
+			int cmlistCount = aService.CMListCount();
+			PageInfo cmpi = Pagination.getPageInfo(currentPage, cmlistCount);
+			ArrayList<Comments> cmList = aService.selectCommentsList(cmpi);
+			
+			ArrayList<Board> bList = null;
+			
+			if(searchListCount != 0) {
+				PageInfo pi = Pagination.getPageInfo(currentPage, searchListCount);
+			
+				bList = aService.selectSearchBoardResultList(bsv, pi);
+			
+				System.out.println("검색 board List : "+ bList);
+			
+			if(bList != null) {
+				mv.addObject("bList", bList).addObject("search", search).addObject("cmList", cmList).addObject("cmpi", cmpi).addObject("searchContent", content).addObject("pi", pi).setViewName("admin_board");
+			} else {
+				throw new BoardException("게시글  검색 조회에 실패했습니다.");
+			}
+			} else {
+				mv.addObject("bList", bList).addObject("search", search).addObject("cmList", cmList).addObject("cmpi", cmpi).addObject("searchContent", content).setViewName("admin_board");
+			}
+			
+			return mv;
+
+	}
+	
+	@RequestMapping("searchBook.ad")
+	public ModelAndView searchBook(@RequestParam(value="search", required=false) String search,
+									@RequestParam(value="searchContent", required=false) String content,
+									@RequestParam(value="page", required=false) Integer page,
+									ModelAndView mv) {
+		
+		
+		SearchCondition sc = new SearchCondition();
+		
+		if(search != null) {
+			if(search.equals("writer")) sc.setWriter(content);
+			else if(search.equals("title")) sc.setTitle(content);
+			else if(search.equals("company")) sc.setCompany(content);
+		}
+
+		
+		System.out.println("sc : " + sc);
+		
+		int currentPage = 1;
+			if(page != null) {
+			currentPage = page;
+		}
+		
+		int searchListCount = aService.searchBookListCount(sc);
+		
+		
+		ArrayList<Books> list = null;
+		
+		if(searchListCount != 0) {
+			PageInfo pi = Pagination.getPageInfo(currentPage, searchListCount);
+		
+			list = aService.selectSearchBookResultList(sc, pi);
+		
+			System.out.println("검색 board List : "+ list);
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("search", search).addObject("searchContent", content).addObject("pi", pi).setViewName("admin_book");
+		} else {
+			throw new BoardException("게시글  검색 조회에 실패했습니다.");
+		}
+		} else {
+			mv.addObject("list", list).addObject("search", search).addObject("searchContent", content).setViewName("admin_book");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("searchCulture.ad")
+	public ModelAndView searchCulture(@RequestParam(value="search", required=false) String search,
+										@RequestParam(value="searchContent", required=false) String content,
+										@RequestParam(value="page", required=false) Integer page,
+										ModelAndView mv) {
+		
+		
+		CultureSearchCondition csc = new CultureSearchCondition();
+		
+		if(search.equals("title")) csc.setTitle(content);
+		else if(search.equals("instructor")) csc.setInstructor(content);
+		else if(search.equals("place")) csc.setPlace(content);
+		else if(search.equals("target")) csc.setTarget(content);
+		
+		System.out.println("csc : " + csc);
+		
+		int currentPage = 1;
+			if(page != null) {
+			currentPage = page;
+		}
+		
+		int searchListCount = aService.searchCultureListCount(csc);
+		
+		
+		ArrayList<Culture> list = null;
+		
+		if(searchListCount != 0) {
+			PageInfo pi = Pagination.getPageInfo(currentPage, searchListCount);
+		
+			list = aService.selectSearchCultureResultList(csc, pi);
+		
+			System.out.println("검색 board List : "+ list);
+		
+		if(list != null) {
+			mv.addObject("list", list).addObject("search", search).addObject("searchContent", content).addObject("pi", pi).setViewName("admin_culture");
+		} else {
+			throw new BoardException("게시글  검색 조회에 실패했습니다.");
+		}
+		} else {
+			mv.addObject("list", list).addObject("search", search).addObject("searchContent", content).setViewName("admin_culture");
+		}
+		
+		return mv;
+	}
+	
+	@RequestMapping("searchBGroup.ad")
+	public ModelAndView searchBGroup(@RequestParam(value="search", required=false) String search,
+													@RequestParam(value="searchContent", required=false) String content,
+													@RequestParam(value="page", required=false) Integer page,
+													ModelAndView mv) {
+
+		
+			BookGroupSearchValue gsv = new BookGroupSearchValue();
+				
+			if(search.equals("name")) gsv.setName(content);
+			else if(search.equals("book")) gsv.setBook(content);
+			
+			System.out.println("gsv" + gsv);
+			
+			int currentPage = 1;
+			if(page != null) {
+			currentPage = page;
+			}
+			
+			int searchListCount = aService.searchBGroupListCount(gsv);
+			
+			
+			ArrayList<Culture> list = null;
+			
+			if(searchListCount != 0) {
+			PageInfo pi = Pagination.getPageInfo(currentPage, searchListCount);
+			
+			list = aService.selectSearchBGroupResultList(gsv, pi);
+			
+			
+			if(list != null) {
+			mv.addObject("list", list).addObject("search", search).addObject("searchContent", content).addObject("pi", pi).setViewName("admin_bGroup");
+			} else {
+			throw new BoardException("게시글  검색 조회에 실패했습니다.");
+			}
+			} else {
+			mv.addObject("list", list).addObject("search", search).addObject("searchContent", content).setViewName("admin_bGroup");
+			}
+			
+			return mv;
+	}
+	
+	@RequestMapping("bkRecommend.ad")
+	public String bkRecommend(@RequestParam("bNo") Integer bNo) {
+		
+		int result = aService.bkRecommend(bNo);
+		if(result > 0) {
+			return "redirect:book.ad";
+		} else {
+			throw new BooksException("추천도서 등록 실패!");
+		}
+		
+	}
+	
+	@RequestMapping("bkCancelRecommend.ad")
+	public String bkCancelRecommend(@RequestParam("bNo") Integer bNo) {
+		
+		int result = aService.bkCancelRecommend(bNo);
+		if(result > 0) {
+			return "redirect:book.ad";
+		} else {
+			throw new BooksException("추천도서 취소 실패!");
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -255,4 +255,17 @@
 		where group_no = #{ gNo } and user_no = #{ uNo }
 	</update>
 	
+	<update id="updateDeadLine">
+		update bkgroup
+		set g_deadline = 'Y'
+		where group_no = #{gNo}
+	</update>
+	
+	<update id="updateNoDeadLine">
+		update bkgroup
+		set g_deadline = 'N'
+		where group_no = #{gNo}
+	</update>
+	
+	
 </mapper>

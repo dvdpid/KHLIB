@@ -6,12 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/bkGroupList.css" type="text/css">
+<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=2.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<!-- list 주석 추가 -->
-<!-- 추가2 -->
 	<c:import url="../common/menubar.jsp"/>
 	<div class="left">
 		<div class="sideTitle">
@@ -25,41 +23,51 @@
 			</h3>
 		</div>
 		
-		<div class="sideButton" onclick="location.href='bkgroupMyPage.bg';">
+		<div class="sideButton" id="side">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				신청 내역
 			</h3>
 		</div>
 		<c:if test="${ !empty loginUser }">
+		
+			<div class="sideButton" onclick="location.href='bkGroupMyWrite.bg'">
+				<h3 id="sideButton3">
+					<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
+					게시글 내역
+				</h3>
+			</div>
+		
 			<div class="sideButton" onclick="location.href='bkgroupInsertForm.bg';">
 				<h3 id="sideButton2">
 					<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
-					독서 모임 등록
+					모임 등록
 				</h3>
 			</div>
 		</c:if>
 	</div>
 	
 	<!-- 검색 부분 -->
-	<div class="gklist">
-		<table id="bkgroupSearchTable">
-			<tr>
-				<td height="50px;">
-					<select id="bksearch">
+	<div class="main">
+		<div class="mainTitle">
+			<p><img id="titleImg1" src="resources/images/laptop-solid.svg"/>
+			독서 모임</p>
+		</div>
+		<div id="searchDiv">
+			<table id="searchTable">
+				<tr>
+					<td>
+						<select id="bksearch">
 						<option value="name">모임명</option>
 						<option value="place">장소</option>
 						<option value="book">책 제목</option>
 					</select>
-				</td>
-				<td width="380px">
-					<input type="text" name="bksearchContent" id="bksearchContent" placeholder="검색 내용을 입력하세요." style="width: 100%;">
-				</td>
-				<td>
-					<button id="bksearchBtn" onclick="searchGroup();">검색</button>
-				</td>
-			</tr>
-		</table>
+					</td>
+					<td><input type="search" name="bksearchContent" id="bksearchContent" placeholder="입력해주세요"></td>
+				</tr>
+			</table>
+			<button id="bksearchBtn" onclick="searchGroup();">조회</button>
+		</div>
 	</div>	
 	
 	<script>
@@ -73,6 +81,8 @@
 			location.href="search.bg?search=" + search + "&searchContent=" + searchContent;
 		}
 	</script>
+	
+	<br><br>
 	
 	<!-- 리스트 부분 -->
 	<div id="bkgroupListOuter">
@@ -101,7 +111,7 @@
 		               </td>
 		               <td width="165px;" height="220px;">
 		               		<c:forEach var="gs" items="${ gsList }">
-					           	<c:if test="${ g.gNo eq gs.gNo && g.gTotal eq gs.memberCount }">
+					           	<c:if test="${ ((g.gNo eq gs.gNo) && (g.gTotal eq gs.memberCount)) || ((g.gNo eq gs.gNo) && g.gDeadline == 'Y') }">
 				               		<em>마감</em>
 					           	</c:if>
 				          	</c:forEach>
@@ -130,14 +140,11 @@
 		               <td colspan="2" height="80">
 		                  <strong>
 		                  <c:forTokens var="addr" items="${ g.gPlace }" delims="/" varStatus="status">
-						 <c:if test="${ status.index eq 0 && !(addr >= '0' && addr <= '99999') }">
+						 <c:if test="${ status.index eq 0 }">
 							${ addr }
 						 </c:if>
 						 <c:if test="${ status.index eq 1 }">
 							${ addr }
-						 </c:if>
-						 <c:if test="${ status.index eq 2 }">
-						 	${ addr }
 						 </c:if>
 						 </c:forTokens> | ${ g.gDate }</strong>
 		               </td>
@@ -194,19 +201,19 @@
 		</div>
 		
 		-->
-		<table>
+		<table id="boTab">
 			<tr>
-				<td colspan="6" align="right" id="buttonTab">
+				<td colspan="6" align="right">
 	 				<c:if test="${ !empty loginUser }">
 						&nbsp; &nbsp; &nbsp;
-						<button onclick="location.href='bkgroupInsertForm.bg';">글쓰기</button>
+						<button id="wirteBtn" onclick="location.href='bkgroupInsertForm.bg';">글쓰기</button>
 	 				</c:if>
 				</td>
 			</tr>
 		
 		<c:if test="${ !empty gList || !empty fList }">
 			
-			<tr align="center" height="20" id="buttonTab">
+			<tr align="center" height="20">
 				<td colspan="6">
 					<!-- [이전] -->
 					<c:if test="${ pi.currentPage <= 1 }">
@@ -251,9 +258,10 @@
 		</table>
 		
 		<input type="hidden" id="currentPage" value="${ pi.currentPage }">
+		<input type="hidden" id="loginUser" value="${ loginUser }">
 	</div>		
 	
-	<br>
+	<br><br>
 	
 	<c:import url="../common/footer.jsp"/>
 	
@@ -265,6 +273,18 @@
 				$(this).css({"background":"none", "color":"black"});
 			});
 		});
+		
+		var loginUser = document.getElementById('loginUser').value;
+		
+		$('#side').on('click', function(){
+			if(!loginUser){
+				alert('로그인 후 이용 가능합니다.');
+				location.href="${contextPath}/loginForm.me";
+			} else {
+				location.href="${contextPath}/bkgroupMyPage.bg";
+			}
+		});
+		
 	</script>
 	
 	

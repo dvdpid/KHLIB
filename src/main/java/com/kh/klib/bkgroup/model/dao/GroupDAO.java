@@ -171,6 +171,16 @@ public class GroupDAO {
 	}
 
 
+	public int updateDeadLine(SqlSessionTemplate sqlSession, int gNo) {
+		return sqlSession.update("groupMapper.updateDeadLine", gNo);
+	}
+
+
+	public int updateNoDeadLine(SqlSessionTemplate sqlSession, int gNo) {
+		return sqlSession.update("groupMapper.updateNoDeadLine", gNo);
+	}
+
+
 
 
 

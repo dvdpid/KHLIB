@@ -1,19 +1,4 @@
 @charset "UTF-8";
-
-	textarea{resize: none; background: none;}
- 	#bkDetailDiv{margin: 25px 80px 0px 10px; width: 70%; margin-left: auto;}
- 	h2, #count{display: inline;}
- 	#count{float: right; padding-right: 5px;}
- 	button {
- 		font-size: 15px; background: rgb(212, 129, 91); color: white; 
-		padding: 5px 10px 5px 10px; margin:5px; 
-		border: 0;  border-radius: 7px;
- 	}
- 	#applyDiv, #ectDiv{display: inline-block;} 
- 	#etcDiv{float: right;}
- 	
- 	.left{ float: left; width: 25%; }
-	
 	.sideTitle{
 		background: rgb(212, 129, 91);
 		color: white;
@@ -30,36 +15,14 @@
 		padding: 10px 25px;
 	}
 	
-	.main{ float: right; width: 75%; text-align: center; }
+	.main{ float: right; width: 75%; }
 	
 	.mainTitle{
-		font-weight: 900;
 		border-bottom: 2px solid lightgray;
-		font-size: 30px;
+		font-size: 20px;
 		margin: 25px 60px 0px 60px;
-		padding: 0px 0px 13px 0px;
+		padding: 0px 0px 5px 0px;
 	}
-	
-	.mainTitle p{ text-align: left; width: 70%; margin: 0;}
-
-	#titleImg1{ 
-		width: 25px; height: auto; vertical-align:middle;
-		padding-bottom: 7px;
-		margin-right: 10px;
-	}
-	
-	.infoSpace{ margin: 0px 60px 0px 60px; }
-	
-	#infoTable{
-		border-top: 2px solid lightgray;
-		border-bottom: 2px solid lightgray;
-		border-left: none;
-		border-right: none;
-		border-collapse: collapse;
-		width: 100%;
-		font-size:10px;
-	}
-	
 	
 	.sideButton{
 		text-align: left;
@@ -68,8 +31,6 @@
 	}
 	
 	.sideButton a{ color: black; }
-	
-	#infoImg1 { width: 100%; height: auto; }
 	
 	.sideButton img{
 		width: auto; height: 30px; vertical-align:middle;
@@ -86,3 +47,38 @@
 	.sideButton:hover{
 		background: gray;
 	}
+	
+	
+	textarea{resize: none; background: none;}
+	
+ 	h2, #count{display: inline;}
+ 	
+ 	#count{float: right; padding-right: 5px;}
+ 	
+ 	.btn {
+ 		font-size: 15px; background: rgb(212, 129, 91); color: white; 
+		padding: 5px 10px 5px 10px; margin:5px; 
+		border: 0;  border-radius: 7px;
+ 	}
+ 	
+ 	#applyDiv, #ectDiv{display: inline-block;} 
+ 	#etcDiv{float: right;}
+ 	
+ 	.left{float: left; width: 25%; }
+	
+	#groupTable1{padding: 5px; text-align: center; margin: 0px 60px;}
+	#groupTable1 td{padding: 5px;}
+	#bookTable{padding: 5px; margin: 0px 60px;}
+	
+	.main > hr{margin: 0px 60px;}
+	.main > h3{padding: 5px; margin: 0px 60px;}
+	.main > h4{padding: 5px; margin: 0px 60px;}
+	
+	.main > .div {padding: 5px; margin: 0px 60px;}
+	.mainTitle > span{font-size: 25px; font-weight: bold;}
+	#count{font-size: 15px;}
+	
+	
+	
+	
+	

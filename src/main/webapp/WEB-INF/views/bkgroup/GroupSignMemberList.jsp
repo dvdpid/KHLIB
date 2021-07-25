@@ -6,12 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>독서모임 상세보기</title>
-<link rel="stylesheet" href="resources/css/bkGroupDetail.css" type="text/css"> 
+<link rel="stylesheet" href="resources/css/gsMemberList.css?ver=1.0" type="text/css"> 
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
-<style type="text/css">
-	#signTable{border : 1px solid black; text-align: center;}
-	#signTable td{padding: 8px;}
-</style>
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -27,38 +23,55 @@
 			</h3>
 		</div>
 		
-		<div class="sideButton" onclick="location.href='bkgroupMyPage.bg';">
+		<div class="sideButton" id="side">
 			<h3 id="sideButton3">
 				<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
 				신청 내역
 			</h3>
 		</div>
 		<c:if test="${ !empty loginUser }">
+		
+			<div class="sideButton" onclick="location.href='bkGroupMyWrite.bg'">
+				<h3 id="sideButton3">
+					<img id="sideImg3" src="resources/images/clipboard-list-solid.svg"/>
+					게시글 내역
+				</h3>
+			</div>
+		
 			<div class="sideButton" onclick="location.href='bkgroupInsertForm.bg';">
 				<h3 id="sideButton2">
 					<img id="sideImg2" src="resources/images/user-check-solid.svg"/>
-					독서 모임 등록
+					모임 등록
 				</h3>
 			</div>
 		</c:if>
 	</div>
 	
 	<br>
-	
-	
-	
-	<div>
+
+	<div class="main">
+		<div class="mainTitle">
+			<p><img id="titleImg1" src="resources/images/laptop-solid.svg"/>
+			신청자 리스트</p>
+		</div>
+		<br>
 		<table id="signTable">
 			<tr>
 				<th></th>
-				<th width="70px;">글 번호</th>
-				<th width="200px;">모임명</th>
+				<th width="100px;">글 번호</th>
+				<th width="300px;">모임명</th>
 				<th width="150px;">신청자 닉네임</th>
-				<th width="180px;">이메일</th>
+				<th width="280px;">이메일</th>
 				<th width="100px;">모집 인원</th>
 				<th width="100px;">승인 여부</th>
 			</tr>
 			
+			<c:if test="${ empty memInfoList }">
+				<tr>
+					<td colspan="6">신청자가 없습니다.</td>
+				</tr>
+			</c:if>
+					
 		 	<c:forEach var="m" items="${ memInfoList }">
 			 	<c:forEach var="gs" items="${ gsList }">
 			 		<c:if test="${ gs.uNo eq m.no }">
@@ -82,8 +95,9 @@
 							${ m.email }
 						</td>
 						<td>
-							<input type="hidden" id="smc" value="${ signMemberCount }">	${ signMemberCount} 
-							/  ${ group.gTotal }
+							<input type="hidden" id="smc" value="${ signMemberCount }">	
+							<input type="hidden" id="gTotal" value="${ group.gTotal }">	
+							${ signMemberCount} /  ${ group.gTotal }
 							
 						</td>
 						<td>
@@ -106,19 +120,29 @@
 		
 		<br>
 		
-		<button id="yesBtn">신청 승인</button>
-		<button id="noBtn">신청 거절</button>
+		<div class="btn">
+			<button id="yesBtn">신청 승인</button>
+			<button id="noBtn">신청 거절</button>
+		</div>
 		
+		<input type="hidden" id="loginUser" value="${ loginUser }">
 	</div>
 	
 	<script>
 		$('#yesBtn').on('click', function(){
 			var radio = $('input:radio[name="sign"]').is(':checked');
 			
-			if(radio == true){	// 버튼이 체크 된 경우
+			var signCount = 0;
+			var total = 0;
+			signCount = document.getElementById('smc').value;
+			total = document.getElementById('gTotal').value;
+			
+			if(radio == true && signCount < total){	// 버튼이 체크 된 경우
 				var bool = confirm('신청을 수락하시겠습니까?');
-			} else {
+			} else if(radio == false) {
 				alert('신청 승인을 원하는 사용자의 버튼을 클릭해주세요.');
+			} else if(signCount >= total){
+				alert('모집 인원이 마감되었습니다.');
 			}
 			
 			if(bool){
@@ -152,11 +176,16 @@
 		$('#noBtn').on('click', function(){
 			
 			var radio = $('input:radio[name="sign"]').is(':checked');
+			var gsApproval = $('input:radio[name="sign"]:checked').parent().parent().children().eq(6).find('input[name="gsApproval"]').val();
 			
-			if(radio == true){	// 버튼이 체크 된 경우
+			console.log(gsApproval);
+			
+			if(radio == true && gsApproval != 'N'){	// 버튼이 체크 된 경우
 				var bool = confirm('신청을 거절하시겠습니까?');
-			} else {
+			} else if(radio == false){
 				alert('신청 거절을 원하는 사용자의 버튼을 클릭해주세요.');
+			} else if(gsApproval == 'N'){
+				alert('이미 신청 거절된 사용자입니다.');
 			}
 			
 			
@@ -183,6 +212,16 @@
 			}
 		});
 	
+		var loginUser = document.getElementById('loginUser').value;
+		
+		$('#side').on('click', function(){
+			if(!loginUser){
+				alert('로그인 후 이용 가능합니다.');
+				location.href="${contextPath}/loginForm.me";
+			} else {
+				location.href="${contextPath}/bkgroupMyPage.bg";
+			}
+		});
 	</script>
 	
 	

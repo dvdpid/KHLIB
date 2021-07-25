@@ -51,32 +51,36 @@
 			<div class="titleArea">
 				<div id="bookCategory">도서</div>
 				<div id="bookTitle">${ book.bTitle }</div>
+				<c:if test="${ b.bRecommend eq 'Y' }">
+				<div class="recommend">추천도서</div>
+				</c:if>
 			</div>
 			<div>
 				<table>
 					<tr>
-						<td>표제/책임사항</td>
-						<td>(10대와 통하는)법과 재판 이야기/ 이지현 지음</td>
+						<td>출판사</td>
+						<td>${ book.bCompany }</td>
 					</tr>
 					<tr>
-						<td>발행사항</td>
-						<td>${ book.bCompany }, ${ book.bDate }</td>
+						<td>발행년도</td>
+						<td>${ book.bDate }</td>
 					</tr>
-					<!-- 이부분을 어떻게 해야 좋을지 모르겠다. -->
 					<tr>
 						<td>형태사항</td>
-						<td>204p.: 삽화; 22cm</td>
+						<td>${ book.bForm }</td>
 					</tr>
 					<tr>
-						<td>총서사항</td>
-						<td>10대를 위한 책도둑 시리즈; 38</td>
+						<td>표준번호</td>
+						<td>${ book.bStandardNo }</td>
 					</tr>
 					<tr>
-						<td>주기사항</td>
-						<td>청소년용</td>
+						<td>분류기호</td>
+						<td>${ book.bCallNo }</td>
 					</tr>
-					
-					<!--  -->
+					<tr>
+						<td>도서관</td>
+						<td>KHLIB</td>
+					</tr>
 				</table>
 			</div>
 			</div>

@@ -197,6 +197,18 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 
+	@Override
+	public int updateDeadLine(int gNo) {
+		return gDAO.updateDeadLine(sqlSession, gNo);
+	}
+
+
+	@Override
+	public int updateNoDeadLine(int gNo) {
+		return gDAO.updateNoDeadLine(sqlSession, gNo);
+	}
+
+
 
 
 

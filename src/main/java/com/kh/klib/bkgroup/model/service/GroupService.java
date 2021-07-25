@@ -64,6 +64,10 @@ public interface GroupService {
 
 	int updateGsMemberNoApply(GroupSign gs);
 
+	int updateDeadLine(int gNo);
+
+	int updateNoDeadLine(int gNo);
+
 
 
 

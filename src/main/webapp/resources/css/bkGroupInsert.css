@@ -6,17 +6,26 @@ textarea{resize: none; background: none;}
 		padding: 5px 10px 5px 10px; margin:5px;
 		border: 0;  border-radius: 7px;
  	}
- 	button {
+ 	.btn {
  		font-size: 15px; background: rgb(212, 129, 91); color: white; 
-		padding: 5px 10px 5px 10px; margin:5px; 
+		padding: 5px 10px 5px 10px; margin:5px; height: 30px;
 		border: 0;  border-radius: 7px;
  	}
  	#bkInsertTable{
- 		text-align: center;  width: 80%; 
-		margin-right: auto; margin-left: 65px;
+ 		border-collapse: collapse;
+ 		text-align: center; width: 80%; margin: 0px 60px;
+ 		margin-right: auto; margin-left: auto;
  	}
- 	table, td, th{border-collapse: collapse;}
- 	td{padding: 10px;}
+ 	
+ 	#bkInsertTable td{padding: 7px; text-align: left;}
+ 	
+ 	#placeTable{
+ 		border-collapse: collapse;
+ 		text-align: left; width: 80%; margin: 0px 60px;
+ 		margin-right: auto; margin-left: auto;
+ 	}
+ 	
+ 	#placeTable th{text-align: center;}
  	
  	.left{ float: left; width: 25%; }
 	
@@ -36,7 +45,7 @@ textarea{resize: none; background: none;}
 		padding: 10px 25px;
 	}
 	
-	.main{ float: right; width: 75%; text-align: center; }
+	.main{ float: right; width: 75%; text-align: center;}
 	
 	.mainTitle{
 		font-weight: 900;
@@ -92,3 +101,19 @@ textarea{resize: none; background: none;}
 	.sideButton:hover{
 		background: gray;
 	}
+	
+	
+	input[type=number]{height: 20px; width: 50px;}
+	
+	input[type=date]{height: 20px; width: 80%;}
+	
+	#placeTable{
+		border-collapse: collapse;
+ 		width: 80%; margin: 0px 60px;
+ 		margin-right: auto; margin-left: auto;
+	}	
+	
+	#placeTable td{padding: 5px;}
+	
+	#placeTable td > input[type=text]{height: 28px;}
+	

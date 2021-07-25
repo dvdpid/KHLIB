@@ -87,17 +87,56 @@ public class BookGroupController {
 		return "bkGroupInsertForm";
 	}
 	
+	/*
+	 * @RequestMapping("bkgroupInsert.bg") public String insertGroup(@ModelAttribute
+	 * BookGroup g, @RequestParam("mainIntro") String intro1,
+	 * 
+	 * @RequestParam("subIntro") String intro2, @RequestParam("post") String post,
+	 * 
+	 * @RequestParam("address1") String address1, @RequestParam("address2") String
+	 * address2,
+	 * 
+	 * @RequestParam(value="thumbnailImg1", required = false) MultipartFile
+	 * uploadFile, HttpServletRequest request) {
+	 * 
+	 * String intro = intro1 + "/" + intro2; g.setgIntro(intro);
+	 * 
+	 * String address = post + "/" + address1 + "/" + address2;
+	 * g.setgPlace(address);
+	 * 
+	 * int result = gService.insertGroup(g);
+	 * 
+	 * Files f = new Files();
+	 * 
+	 * if(uploadFile != null && !uploadFile.isEmpty()) { String renameFileName =
+	 * saveFile(uploadFile, request);
+	 * 
+	 * if(renameFileName != null) {
+	 * f.setOriginName(uploadFile.getOriginalFilename());
+	 * f.setChangeName(renameFileName); } }
+	 * 
+	 * 
+	 * int result2 = gService.insertFile(f);
+	 * 
+	 * if(result > 0 && result2 > 0) { return "redirect:bkgroup.bg"; } else { throw
+	 * new BookGroupException("독서모임 등록에 실패하였습니다."); }
+	 * 
+	 * }
+	 */
+	
 	@RequestMapping("bkgroupInsert.bg")
-	public String insertGroup(@ModelAttribute BookGroup g, @RequestParam("mainIntro") String intro1,
-							  @RequestParam("subIntro") String intro2, @RequestParam("post") String post,
-							  @RequestParam("address1") String address1, @RequestParam("address2") String address2,
+	public String insertGroup(@ModelAttribute BookGroup g, @RequestParam("mainIntro") String intro1, @RequestParam("subIntro") String intro2,
+							  @RequestParam("address2") String address2, @RequestParam("resultX") double resultX, @RequestParam("resultY") double resultY,
 							  @RequestParam(value="thumbnailImg1", required = false) MultipartFile uploadFile, HttpServletRequest request) {
 		
 		String intro = intro1 + "/" + intro2;
 		g.setgIntro(intro);
 		
-		String address = post + "/" + address1 + "/" + address2;
+		String address = g.getgPlace() + "/" + address2 + "/" + resultX + "/" + resultY;
 		g.setgPlace(address);
+		
+		System.out.println(g);
+		
 		
 		int result = gService.insertGroup(g);
 
@@ -153,7 +192,7 @@ public class BookGroupController {
 	
 	
 	@RequestMapping("gDetail.bg")
-	public String groupDetail(@RequestParam(value="page", required=false) Integer page, @RequestParam("gNo") int gNo, Model model) {
+	public String groupDetail(@RequestParam(value="page", required = false) int page, @RequestParam("gNo") int gNo, Model model) {
 		BookGroup group = gService.selectBookGroup(gNo);
 		Files file = gService.selectFile(gNo);
 		
@@ -179,10 +218,53 @@ public class BookGroupController {
 		return "bkGroupUpdateForm";
 	}
 	
+	/*
+	 * @RequestMapping("bkgroupUpdate.bg") public String updateGroup(@ModelAttribute
+	 * BookGroup group, @RequestParam("mainIntro") String
+	 * intro1, @RequestParam("subIntro") String intro2,
+	 * 
+	 * @RequestParam("post") String post,
+	 * 
+	 * @RequestParam("address1") String address1, @RequestParam("address2") String
+	 * address2,
+	 * 
+	 * @RequestParam("page") int page, @ModelAttribute Files f,
+	 * 
+	 * @RequestParam("thumbnailImg1") MultipartFile reloadFile, HttpServletRequest
+	 * request) {
+	 * 
+	 * String intro = intro1 + " / " + intro2; group.setgIntro(intro);
+	 * 
+	 * String address = post + "/" + address1 + "/" + address2;
+	 * group.setgPlace(address);
+	 * 
+	 * if(reloadFile != null && !reloadFile.isEmpty()) { if(f.getChangeName() !=
+	 * null) { deleteFile(f.getChangeName(), request); }
+	 * 
+	 * String renameFileName = saveFile(reloadFile, request);
+	 * 
+	 * if(renameFileName != null) {
+	 * f.setOriginName(reloadFile.getOriginalFilename());
+	 * f.setChangeName(renameFileName); }
+	 * 
+	 * }
+	 * 
+	 * int result = gService.updateGroup(group); int result2 =
+	 * gService.updateFile(f);
+	 * 
+	 * 
+	 * 
+	 * if(result > 0 && result2 > 0) { return "redirect:gDetail.bg?gNo=" +
+	 * group.getgNo() + "&page=" + page; } else { throw new
+	 * BookGroupException("독서 모임 게시글 수정을 실패하였습니다."); }
+	 * 
+	 * 
+	 * }
+	 */
+
 	@RequestMapping("bkgroupUpdate.bg")
-	public String updateGroup(@ModelAttribute BookGroup group, @RequestParam("mainIntro") String intro1,
-							  @RequestParam("subIntro") String intro2, @RequestParam("post") String post,
-			  				  @RequestParam("address1") String address1, @RequestParam("address2") String address2,	
+	public String updateGroup(@ModelAttribute BookGroup group, @RequestParam("mainIntro") String intro1, @RequestParam("subIntro") String intro2,
+							  @RequestParam("address2") String address2, @RequestParam("resultX") double resultX, @RequestParam("resultY") double resultY,
 							  @RequestParam("page") int page, @ModelAttribute Files f,
 							  @RequestParam("thumbnailImg1") MultipartFile reloadFile,
 							  HttpServletRequest request) {
@@ -190,8 +272,9 @@ public class BookGroupController {
 		String intro = intro1 + " / " + intro2;
 		group.setgIntro(intro);
 		
-		String address = post + "/" + address1 + "/" + address2;
+		String address = group.getgPlace() + "/" + address2 + "/" + resultX + "/" + resultY;
 		group.setgPlace(address);
+		
 		
 		if(reloadFile != null && !reloadFile.isEmpty()) {
 			if(f.getChangeName() != null) {
@@ -221,7 +304,7 @@ public class BookGroupController {
 	
 	}
 
-
+	
 	private void deleteFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		String savePath = root + "guploadFiles";
@@ -520,7 +603,35 @@ public class BookGroupController {
 	}
 	
 	
+	@RequestMapping("deadline.bg")
+	public String updateDeadLine(@RequestParam("gNo") int gNo) {
+		
+		int result = gService.updateDeadLine(gNo);
+		
+		System.out.println("result : " + result);
+		
+		if(result > 0) {
+			return "redirect:bkGroupMyWrite.bg";
+		} else {
+			throw new BookGroupException("독서모임 마감을 실패하였습니다.");
+		}
+		
+	}
 	
+	@RequestMapping("noDeadline.bg")
+	public String updateNoDeadLine(@RequestParam("gNo") int gNo) {
+		
+		int result = gService.updateNoDeadLine(gNo);
+		
+		System.out.println("result : " + result);
+		
+		if(result > 0) {
+			return "redirect:bkGroupMyWrite.bg";
+		} else {
+			throw new BookGroupException("독서모임 마감 취소를 실패하였습니다.");
+		}
+		
+	}
 	
 	
 	

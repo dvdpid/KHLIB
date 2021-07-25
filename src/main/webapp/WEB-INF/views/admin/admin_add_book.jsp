@@ -44,6 +44,16 @@
 					<td><input type="date" name="bDate"></td>
 				</tr>
 				<tr>
+					<td style="font-size: 20px;"><b>형태 사항</b></td>
+					<td><input type="text" name="bForm"></td>
+					<td style="font-size: 20px;"><b>표준 번호</b></td>
+					<td><input type="text" name="bStandardNo"></td>
+				</tr>
+				<tr>
+					<td style="font-size: 20px;"><b>분류 기호</b></td>
+					<td><input type="text" name="bCallNo"></td>
+				</tr>
+				<tr>
 					<td style="font-size: 20px;"><b>책 줄거리</b></td>
 					<td><textarea name="bContent" rows="15" cols="90"></textarea></td>
 				</tr>

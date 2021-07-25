@@ -15,25 +15,15 @@ public class Books {
 	private String bStatus;		// 도서 상태
 	private String bRecommend;	// 추천
 	private Date entryDate;		// 입고 일자
+	private String bForm;		// 형태상항
+	private String bStandardNo; // 표준 번호
+	private String bCallNo;		// 분류 기호
 	
 	public Books() {}
 
-	public Books(int bNo, String bTitle, String bWriter, String bCompany, Date bDate, String bContent, String bStatus,
-			String bRecommend, Date entryDate) {
-		super();
-		this.bNo = bNo;
-		this.bTitle = bTitle;
-		this.bWriter = bWriter;
-		this.bCompany = bCompany;
-		this.bDate = bDate;
-		this.bContent = bContent;
-		this.bStatus = bStatus;
-		this.bRecommend = bRecommend;
-		this.entryDate = entryDate;
-	}
-
 	public Books(int bNo, String originFileName, String renameFileName, String bTitle, String bWriter, String bCompany,
-			Date bDate, String bContent, String bStatus, String bRecommend, Date entryDate) {
+			Date bDate, String bContent, String bStatus, String bRecommend, Date entryDate, String bForm,
+			String bStandardNo, String bCallNo) {
 		super();
 		this.bNo = bNo;
 		this.originFileName = originFileName;
@@ -46,6 +36,9 @@ public class Books {
 		this.bStatus = bStatus;
 		this.bRecommend = bRecommend;
 		this.entryDate = entryDate;
+		this.bForm = bForm;
+		this.bStandardNo = bStandardNo;
+		this.bCallNo = bCallNo;
 	}
 
 	public int getbNo() {
@@ -54,6 +47,22 @@ public class Books {
 
 	public void setbNo(int bNo) {
 		this.bNo = bNo;
+	}
+
+	public String getOriginFileName() {
+		return originFileName;
+	}
+
+	public void setOriginFileName(String originFileName) {
+		this.originFileName = originFileName;
+	}
+
+	public String getRenameFileName() {
+		return renameFileName;
+	}
+
+	public void setRenameFileName(String renameFileName) {
+		this.renameFileName = renameFileName;
 	}
 
 	public String getbTitle() {
@@ -119,23 +128,29 @@ public class Books {
 	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
-	
-	
 
-	public String getOriginFileName() {
-		return originFileName;
+	public String getbForm() {
+		return bForm;
 	}
 
-	public void setOriginFileName(String originFileName) {
-		this.originFileName = originFileName;
+	public void setbForm(String bForm) {
+		this.bForm = bForm;
 	}
 
-	public String getRenameFileName() {
-		return renameFileName;
+	public String getbStandardNo() {
+		return bStandardNo;
 	}
 
-	public void setRenameFileName(String renameFileName) {
-		this.renameFileName = renameFileName;
+	public void setbStandardNo(String bStandardNo) {
+		this.bStandardNo = bStandardNo;
+	}
+
+	public String getbCallNo() {
+		return bCallNo;
+	}
+
+	public void setbCallNo(String bCallNo) {
+		this.bCallNo = bCallNo;
 	}
 
 	@Override
@@ -143,7 +158,7 @@ public class Books {
 		return "Books [bNo=" + bNo + ", originFileName=" + originFileName + ", renameFileName=" + renameFileName
 				+ ", bTitle=" + bTitle + ", bWriter=" + bWriter + ", bCompany=" + bCompany + ", bDate=" + bDate
 				+ ", bContent=" + bContent + ", bStatus=" + bStatus + ", bRecommend=" + bRecommend + ", entryDate="
-				+ entryDate + "]";
+				+ entryDate + ", bForm=" + bForm + ", bStandardNo=" + bStandardNo + ", bCallNo=" + bCallNo + "]";
 	}
 
 	

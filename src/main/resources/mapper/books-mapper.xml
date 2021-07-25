@@ -89,5 +89,8 @@
 		<result column="ENTRY_DATE" property="entryDate" />
 		<result column="ORIGIN_NAME" property="originFileName" />
 		<result column="CHANGE_NAME" property="renameFileName" />
+		<result column="BOOKS_FORM" property="bForm" />
+		<result column="BOOKS_STANDARD_NO" property="bStandardNo" />
+		<result column="BOOKS_CALL_NO" property="bCallNo" />
 	</resultMap>
 </mapper>

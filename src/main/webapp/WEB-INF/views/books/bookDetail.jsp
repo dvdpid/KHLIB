@@ -49,11 +49,14 @@
 			</div>
 			<div class="infoArea">
 			<div class="titleArea">
+				<div class="formArea">
 				<div id="bookCategory">도서</div>
-				<div id="bookTitle">${ book.bTitle }</div>
-				<c:if test="${ b.bRecommend eq 'Y' }">
+				<c:if test="${ book.bRecommend eq 'Y' }">
 				<div class="recommend">추천도서</div>
 				</c:if>
+				</div>
+				<div id="bookTitle">${ book.bTitle }</div>
+				
 			</div>
 			<div>
 				<table>

@@ -62,7 +62,7 @@
 	
 	<insert id="insertBook">
 		insert into books
-		values(seq_bkno.nextval, #{bTitle}, #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate)
+		values(seq_bkno.nextval, #{bTitle}, #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate, #{bForm}, #{bStandardNo}, #{bCallNo})
 	</insert>
 	<insert id="insertAttachment">
 		insert into files
@@ -604,6 +604,9 @@
 		<result column="ENTRY_DATE" property="entryDate" />
 		<result column="ORIGIN_NAME" property="originFileName" />
 		<result column="CHANGE_NAME" property="renameFileName" />
+		<result column="BOOKS_FORM" property="bForm" />
+		<result column="BOOKS_STANDARD_NO" property="bStandardNo" />
+		<result column="BOOKS_CALL_NO" property="bCallNo" />
 	</resultMap>
 	
 	<select id="searchCultureListCount" parameterType="CultureSearchCondition" resultType="_int">

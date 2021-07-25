@@ -105,48 +105,56 @@
 	
 	<script type="text/javascript">
 		$('#cancelBtn').on('click', function(){
-			var bool = confirm('수강을 취소하시겠습니까?');
-			if(bool){
-				var cNo = $('input:radio[id="cancelCheck"]:checked').val();
-				var uNo = $('#uNo').val();
-				console.log(cNo);
-				 $.ajax({
-					url: 'cancel.cu',
-					data: {cNo:cNo, uNo:uNo},
-					success: function(data){
-						alert('정상적으로 수강 취소되었습니다.');
-					},
-					fail: function(data){
-						alert('수강 취소 실패');
-					},
-					error: function(data){
-						alert('수강이 취소되었거나 완료된 프로그램입니다.\n내역 삭제 버튼을 클릭해주세요.');
-					}
-				});
+			var uNo = $('#uNo').val();
+			
+			if(uNo == null || uNo == ''){
+				alert('로그인 후 이용 가능합니다.');
 			} else{
+				var bool = confirm('수강을 취소하시겠습니까?');
+				if(bool){
+					var cNo = $('input:radio[id="cancelCheck"]:checked').val();
+					console.log(cNo);
+					 $.ajax({
+						url: 'cancel.cu',
+						data: {cNo:cNo, uNo:uNo},
+						success: function(data){
+							alert('정상적으로 수강 취소되었습니다.');
+						},
+						fail: function(data){
+							alert('수강 취소 실패');
+						},
+						error: function(data){
+							alert('수강이 취소되었거나 완료된 프로그램입니다.\n내역 삭제 버튼을 클릭해주세요.');
+						}
+					});
+				}
 			}
 		});
 		
 		$('#deleteBtn').on('click', function(){
-			var bool = confirm('내역을 삭제하시겠습니까?');
-			if(bool){
-				var cNo = $('input:radio[id="deleteCheck"]:checked').val();
-				var uNo = $('#uNo').val();
-				console.log(cNo);
-				 $.ajax({
-					url: 'delete.cu',
-					data: {cNo:cNo, uNo:uNo},
-					success: function(data){
-						alert('정상적으로 내역이 삭제되었습니다.');
-					},
-					fail: function(data){
-						alert('내역 삭제 실패');
-					},
-					error: function(data){
-						alert('수강 취소 후 내역 삭제가 가능합니다.');
-					}
-				});
-			} else{
+			var uNo = $('#uNo').val();
+			
+			if(uNo == null || uNo == ''){
+				alert('로그인 후 이용 가능합니다.');
+			}else{
+				var bool = confirm('내역을 삭제하시겠습니까?');
+				if(bool){
+					var cNo = $('input:radio[id="deleteCheck"]:checked').val();
+					console.log(cNo);
+					 $.ajax({
+						url: 'delete.cu',
+						data: {cNo:cNo, uNo:uNo},
+						success: function(data){
+							alert('정상적으로 내역이 삭제되었습니다.');
+						},
+						fail: function(data){
+							alert('내역 삭제 실패');
+						},
+						error: function(data){
+							alert('수강 취소 후 내역 삭제가 가능합니다.');
+						}
+					});
+				}
 			}
 		});
 	</script>

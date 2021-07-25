@@ -36,7 +36,6 @@ public class BooksController {
 		PageInfo pi = Pagination.getBookPageInfo(currentPage, listCount, limit);
 		ArrayList<Books> list = bService.getBookNewList(pi);
 		
-		System.out.println(list);
 		if(list != null && !list.isEmpty()) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("bList", list);			
@@ -73,6 +72,8 @@ public class BooksController {
 	@RequestMapping("detail.bk")
 	public String bookDetail(@RequestParam("bNo") int bno, Model model) {
 		Books book = bService.getBook(bno);
+		
+		System.out.println(book);
 		
 		if(book != null) {
 			model.addAttribute("book", book);

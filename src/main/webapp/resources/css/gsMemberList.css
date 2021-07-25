@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+	
+	.left{ float: left; width: 25%; }
+	
+	.sideTitle{
+		background: rgb(212, 129, 91);
+		color: white;
+		align-items: center;
+		margin: 30px 30px 15px 30px;
+		padding: 30px 30px;
+	} 
+	
+	.sideButton{
+		background: lightgray;
+		color: black;
+		text-align: center;
+		margin: 15px 30px 15px 30px;
+		padding: 10px 25px;
+	}
+	
+	.main{float: right; width: 75%;}
+	
+	.mainTitle{
+		font-weight: 900;
+		border-bottom: 2px solid lightgray;
+		font-size: 30px;
+		margin: 25px 60px 0px 60px;
+		padding: 0px 0px 13px 0px;
+	}
+	
+	.mainTitle p{ text-align: left; width: 70%; margin: 0;}
+
+	.infoSpace{ margin: 0px 60px 0px 60px; }
+	
+	#infoTable{
+		border-top: 2px solid lightgray;
+		border-bottom: 2px solid lightgray;
+		border-left: none;
+		border-right: none;
+		border-collapse: collapse;
+		width: 100%;
+		font-size:10px;
+	}
+	
+	
+	.sideButton{
+		text-align: left;
+		padding-left : 30px;
+		cursor: pointer;
+	}
+	
+	.sideButton a{ color: black; }
+	
+	#infoImg1 { width: 100%; height: auto; }
+	
+	.sideButton img{
+		width: auto; height: 30px; vertical-align:middle;
+		padding-bottom: 7px;
+		margin-right: 5px;
+	}
+	
+	.sideButton a{
+		display:block;
+		color: black;
+		padding: 17px 20px;
+	}
+	
+	.sideButton:hover{
+		background: gray;
+	}
+	
+	#titleImg1{ 
+		width: auto; height: 30px; vertical-align:middle;
+		padding-bottom: 7px;
+		margin-right: 10px;
+	}
+	.count{	margin: 0px 60px;}
+	
+	#signTable{
+		border-collapse: collapse; text-align: center;
+		line-height: 1.5; width: 90%; margin: 0px 60px;
+	}
+	
+	#signTable tr{
+		padding: 5px; border: 1px solid lightgray;
+	}
+	
+	#signTable th{
+		padding: 5px; border: 1px solid lightgray; background: rgb(224, 224, 224);
+	}
+	
+	#signTable td{
+		padding: 5px; border: 1px solid lightgray;
+	}
+	
+	button {
+ 		font-size: 15px; background: rgb(212, 129, 91); color: white; 
+		padding: 5px 10px 5px 10px; margin:5px;  
+		border: 0;  border-radius: 7px;
+ 	}
+ 	
+ 	.btn{margin-left: auto; margin-right: auto; width: 250px;}
+	
+	
+
+		

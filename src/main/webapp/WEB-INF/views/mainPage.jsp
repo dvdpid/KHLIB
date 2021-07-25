@@ -127,7 +127,7 @@
 						$(this).parent().css('background', 'none');
 					}, 'click':function(){
 						var nNo = $(this).parent().children().eq(0).val();
-						location.href='nDetail.ad?nNo=' + nNo + '&page=' + 1;
+						location.href='ndetail.nt?nNo=' + nNo + '&page=' + 1;
 					}});
 				},
 				error: function(data){

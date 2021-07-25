@@ -11,7 +11,11 @@
 	href="${contextPath}/resources/css/customerService.css" type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
 </head>
-
+<style>
+	.qnatable{
+		margin: auto;
+	}
+</style>
 <body>
 	<c:import url="../common/menubar.jsp"></c:import>
 
@@ -39,10 +43,10 @@
 
 	<!-- 메인 부분 -->
 	<div class="main">
-		<div class="wrapper">
+		<div class="boardwrapper">
 			<div class="boardTitle"
-				style="font-weight: bold; font-size: 2rem; text-align: left;">묻고답하기</div>
-			<table>
+				style="font-weight: bold; font-size: 2rem; text-align: left; padding-left: 4em; ">묻고답하기</div>
+			<table class="qnatable">
 				<thead>
 					<tr>
 						<td class="numberColumn">번호</td>
@@ -74,64 +78,59 @@
 					</c:choose>
 				</tbody>
 			</table>
-			<c:if test="${loginUser != null }">
-			<div id="writequestion" style="position:relative;"><button style=" width: 6em; position: absolute; left: 378px;" onclick="location.href='questionForm.cm'">질문등록</button></div>
-			</c:if>
 			<c:if test="${!empty qList }">
 				<div id="pagination">
-				<!-- 이전 -->
-					<c:if test="${ pi.currentPage <= 1 }"><a href="${ qListBack }"><div class="arrow pageButton">&lt;</div></a></c:if>
-						<c:if test="${ pi.currentPage > 1 }">
-							<c:url value="${ loc }" var="qListBack"> <!-- loc : 현재 내 주소 -->
-            					<c:param name="page" value="${ pi.currentPage - 1 }"/>
-            						<c:if test="${ searchValue ne null }">
-            							<c:param name="searchCondition" value="${ searchCondition }"/>
-            							<c:param name="searchValue" value="${ searchValue }"/>
-            						</c:if>
-            				</c:url>
-            	<a href="${ qListBack }"><div class="arrow pageButton">&lt;</div></a>
-			</c:if>	
-			<!-- 이전 -->
-			<!-- 페이지 -->
-			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-				<c:if test="${ p eq pi.currentPage }">
-					<div class="pageNumber activeNumber pageButton">${ p }</div>
-				</c:if>
-				
-				<c:if test="${ p ne pi.currentPage}">
-					<c:url var="qListCheck" value="${ loc }">
-						<c:param name="page" value="${ p }" />
-						<c:if test="${ searchValue ne null }">
-							<c:param name="searchCondition" value="${ searchCondition }" />
-							<c:param name="searchValue" value="${ searchValue }" />
-						</c:if>
-					</c:url>
-					<a href="${ qListCheck }"><div class="pageNumber pageButon">${ p }</div></a>
-				</c:if>
-			</c:forEach>	
-				
-			<!-- 페이지 -->
-			<!-- 다음 -->
-			<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="arrow  pageButton">&gt;</div></c:if>
-			<c:if test="${ pi.currentPage < pi.maxPage }">
-				<c:url value="${ loc }" var="qListNext"> <!-- loc : 현재 내 주소 -->
-            		<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
-            		<c:if test="${ searchValue ne null }">
-            			<c:param name="searchCondition" value="${ searchCondition }"/>
-            			<c:param name="searchValue" value="${ searchValue }"/>
-            		</c:if>
-            	</c:url>
-            	<div class="arrow pageButton"><a href="${ qListNext }">&gt;</a></div>
-			</c:if>
-			
-			<!-- 다음 -->
-				
-				<%-- <div class="arrow pageButton">&lt;</div>
-				<div class="pageNumber activeNumber  pageButton">1</div>
-				<div class="pageNumber  pageButton">2</div>
-				<div class="pageNumber  pageButton">3</div>
-				<div class="arrow  pageButton">&gt;</div> --%>
+					<c:if test="${ !empty qList }">
+						<!-- 페이징 부분 -->
+						<div class="pagingArea" align="center">
+							<!-- [이전] -->
+							<c:if test="${ pi.currentPage <= 1 }">[이전]&nbsp;</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url value="${ loc }" var="qlistBack">
+									<!-- loc : 현재 내 주소 -->
+									<c:param name="page" value="${ pi.currentPage - 1 }" />
+									<c:if test="${ searchValue ne null }">
+										<c:param name="searchCondition" value="${ searchCondition }" />
+										<c:param name="searchValue" value="${ searchValue }" />
+									</c:if>
+								</c:url>
+								<a href="${ qlistBack }">[이전]&nbsp;</a>
+							</c:if>
+
+							<!-- 페이지 -->
+							<c:forEach var="p" begin="${ pi.startPage }"
+								end="${ pi.endPage }">
+								<c:if test="${ p eq pi.currentPage }">
+									<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
+								</c:if>
+
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="qlistCheck" value="${ loc }">
+										<c:param name="page" value="${ p }" />
+									</c:url>
+									<a href="${ qlistCheck }">${ p }</a>
+								</c:if>
+							</c:forEach>
+
+							<!-- [다음] -->
+							<c:if test="${ pi.currentPage >= pi.maxPage }">&nbsp;[다음]</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url value="${ loc }" var="bListNext">
+									<!-- loc : 현재 내 주소 -->
+									<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+									<c:if test="${ searchValue ne null }">
+										<c:param name="searchCondition" value="${ searchCondition }" />
+										<c:param name="searchValue" value="${ searchValue }" />
+									</c:if>
+								</c:url>
+								<a href="${ bListNext }">&nbsp;[다음]</a>
+							</c:if>
+						</div>
+					</c:if>
 				</div>
+			</c:if>
+			<c:if test="${loginUser != null }">
+			<div id="writequestion"><button style=" width: 6em; position: absolute; left: 378px;" onclick="location.href='questionForm.cm'">질문등록</button></div>
 			</c:if>
 		</div>
 	</div>

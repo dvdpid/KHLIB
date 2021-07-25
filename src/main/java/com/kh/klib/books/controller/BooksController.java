@@ -22,7 +22,7 @@ public class BooksController {
 	private BooksService bService;
 	
 	@RequestMapping("book.bk")
-	public String bookMain(@RequestParam(value="currentPage", required=false) Integer page, Model model) {
+	public String bookMain(@RequestParam(value="page", required=false) Integer page, Model model) {
 		
 		int listCount = bService.getBookCount();
 		
@@ -35,6 +35,8 @@ public class BooksController {
 		
 		PageInfo pi = Pagination.getBookPageInfo(currentPage, listCount, limit);
 		ArrayList<Books> list = bService.getBookNewList(pi);
+		
+		System.out.println(list);
 		if(list != null && !list.isEmpty()) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("bList", list);			
@@ -84,7 +86,7 @@ public class BooksController {
 	@RequestMapping("bookSearch.bk")
 	public String bookSearch(@RequestParam(value="searchCondition", required=false) String condition, 
 							 @RequestParam(value="searchValue", required=false) String value, 
-							 @RequestParam(value="currentPage", required=false) Integer page, 
+							 @RequestParam(value="page", required=false) Integer page, 
 							 Model model) {
 		
 		

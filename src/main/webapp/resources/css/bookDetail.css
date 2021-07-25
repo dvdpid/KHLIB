@@ -225,6 +225,15 @@
 		padding: 0px 0.5em;
 		margin-right: 10px;
 	}
+	
+	div.reccomend {
+		background-color: rgb(212, 129, 91);
+		color: white;
+		font-weight: bold;
+		border-radius: 3px;
+		padding: 0px 0.5em;
+		margin-right: 10px;
+	}
 
 	#bookCategory #bookTitle {
 		display: inline;

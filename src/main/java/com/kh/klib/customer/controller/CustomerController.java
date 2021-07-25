@@ -58,7 +58,7 @@ public class CustomerController {
 	}
 
 	@RequestMapping("qna.cm")
-	public String CustomerService(@RequestParam(value = "currentPage", required = false) Integer page,
+	public String CustomerService(@RequestParam(value = "page", required = false) Integer page,
 			@RequestParam(value = "title", required = false) String title,
 			@RequestParam(value = "content", required = false) String content, Model model) {
 

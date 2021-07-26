@@ -237,6 +237,18 @@ a{
 		padding: 3px 0px; text-overflow: ellipsis;
 	}
 	
+	#viewArea1 {
+		visibility: visible;
+	}
+	
+	#viewArea2 {
+		visibility: hidden;
+	}
+	
+	#viewArea2 {
+		visibility: hidden;
+	}
+	
 
 @media screen and (max-width: 1035px){
 	.leftArea{ width: 100%; }

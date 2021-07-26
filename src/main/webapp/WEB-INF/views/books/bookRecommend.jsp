@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>열람실 상세설명</title>
+<title>추천도서</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/bookMain.css"
 	type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
@@ -58,10 +58,21 @@
 						<c:url var="bDetail" value="detail.bk">
 							<c:param name="bNo" value="${ book.bNo}"></c:param>
 						</c:url>
-						<a href="${bDetail}"> <img
+						<div class="imageContainer">
+						<img
 							src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}"
 							class="bookImage" />
+						
+						<a href="${bDetail}">
+						<div class="over">
+							<br>
+							<strong>${book.bTitle }</strong>
+							<p>${ book.bWriter }</p>
+							<p>${ book.bCompany }</p>
+							<p><fmt:formatDate value="${ book.bDate }" pattern="yyyy"/></p>
+						</div>
 						</a>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

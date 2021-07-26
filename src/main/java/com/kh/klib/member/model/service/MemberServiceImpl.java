@@ -68,8 +68,8 @@ public class MemberServiceImpl implements MemberService {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
-		String hostSMTPid = "tjsdk011216@gmail.com"; // 보내는 사람(해당 프로젝트 사용자 본인) 이메일 주소 입력
-		String hostSMTPpwd = "ywkk21214!"; // 보내는 사람(해당 프로젝트 사용자 본인) 비밀번호 입력
+		String hostSMTPid = "chws900@gmail.com"; // 보내는 사람(해당 프로젝트 사용자 본인) 이메일 주소 입력
+		String hostSMTPpwd = ""; // 보내는 사람(해당 프로젝트 사용자 본인) 비밀번호 입력
 		
 		// 보내는 사람 Email, 제목, 내용
 		String fromEmail = "KLIB@naver.com"; // 수신자 이메일에 기록되는 발신자 이메일 주소(없는 이메일인 경우, 전송은 hoswtSMTPid로 이루어짐)

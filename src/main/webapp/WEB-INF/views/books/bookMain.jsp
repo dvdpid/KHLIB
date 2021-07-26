@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>열람실 상세설명</title>
+<title>신착도서</title>
 <link rel="stylesheet" href="${contextPath}/resources/css/bookMain.css"
 	type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
@@ -47,7 +48,8 @@
 		<div id="toggleBooks">
 			<a href="${contextPath}/book.bk">
 				<div id="toggle-newarrival" class="toggle-size toggle-active">신착도서</div>
-			</a> <span class="line"></span> <a href="${contextPath}/recommend.bk">
+			</a> <span class="line"></span> 
+			<a href="${contextPath}/recommend.bk">
 				<div id="toggle-recommend" class="toggle-size">추천도서</div>
 			</a>
 		</div>
@@ -59,10 +61,21 @@
 						<c:url var="bDetail" value="detail.bk">
 							<c:param name="bNo" value="${ book.bNo}"></c:param>
 						</c:url>
-						<a href="${bDetail}"> <img
+						<div class="imageContainer">
+						<img
 							src="${contextPath}/resources/bkuploadFiles/${book.renameFileName}"
 							class="bookImage" />
+						
+						<a href="${bDetail}">
+						<div class="over">
+							<br>
+							<strong>${book.bTitle }</strong>
+							<p>${ book.bWriter }</p>
+							<p>${ book.bCompany }</p>
+							<p><fmt:formatDate value="${ book.bDate }" pattern="yyyy"/></p>
+						</div>
 						</a>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

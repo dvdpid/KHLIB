@@ -22,7 +22,6 @@
 			<ul class="lists">
 				<li><a><c:out value="${ loginUser.name } 관리자님  환영합니다."/></a>
 				<li><a href="logout.ad">로그아웃</a></li>
-				<li><a href="mypageForm.me">내 정보보기</a></li>						
 			</ul>		
 		</c:if>
 		</div>

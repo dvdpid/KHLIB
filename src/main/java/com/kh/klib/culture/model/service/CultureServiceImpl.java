@@ -12,6 +12,7 @@ import com.kh.klib.culture.model.dao.CultureDAO;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.culture.model.vo.CultureSign;
+import com.kh.klib.member.model.vo.Member;
 
 @Service("cService")
 public class CultureServiceImpl implements CultureService{
@@ -109,6 +110,21 @@ public class CultureServiceImpl implements CultureService{
 	@Override
 	public int deleteCS(CultureSign cs) {
 		return cDAO.deleteCS(sqlSession, cs);
+	}
+
+	@Override
+	public Member selectMember(int uNo) {
+		return cDAO.selectMember(sqlSession, uNo);
+	}
+
+	@Override
+	public int updateCsMemberApply(CultureSign cs) {
+		return cDAO.updateCsMemberApply(sqlSession, cs);
+	}
+
+	@Override
+	public int updateCsMemberNoApply(CultureSign cs) {
+		return cDAO.updateCsMemberNoApply(sqlSession, cs);
 	}
 
 	

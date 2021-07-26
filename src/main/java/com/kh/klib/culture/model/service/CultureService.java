@@ -7,6 +7,7 @@ import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.culture.model.vo.CultureSign;
+import com.kh.klib.member.model.vo.Member;
 
 public interface CultureService {
 
@@ -35,6 +36,12 @@ public interface CultureService {
 	int cancelCulture(CultureSign cs);
 
 	int deleteCS(CultureSign cs);
+
+	Member selectMember(int uNo);
+
+	int updateCsMemberApply(CultureSign cs);
+
+	int updateCsMemberNoApply(CultureSign cs);
 
 
 }

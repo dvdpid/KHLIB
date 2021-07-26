@@ -68,9 +68,17 @@
 			<c:if test="${ !empty cList || !empty fList }">
 					<c:forEach var="c" items="${ cList }">
 				<div class="thumbList" align="center" onclick="location.href='${ contextPath }/cDetail.cu?cNo=' + ${c.cNo} + '&page=' + ${ pi.currentPage }">
+						<fmt:parseDate value="${ c.cStartDate }" var="cSDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:parseDate value="${ c.cEndDate }" var="cEDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" var="sd" value="${ cSDate }"/>
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" var="ed" value="${ cEDate }"/>
+						<fmt:parseDate value="${ c.lDate }" var="clDate" pattern="yyyy-MM-dd'T'HH:mm"/>
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" var="ld" value="${ clDate }"/>
+						<jsp:useBean id="toDay" class="java.util.Date"/>
+						<fmt:formatDate var="now" value="${ toDay }" pattern="yyyy-MM-dd HH:mm:ss"/>
 					<div class="cultureListIMG">
 						<c:forEach var="cs" items="${ csList }">
-							<c:if test="${ ((c.cNo eq cs.cNo) && (c.cTotal eq cs.approvalCount)) || ((c.cNo eq cs.cNo) && c.cDeadLine == 'Y') }">
+							<c:if test="${ ((c.cNo eq cs.cNo) && (c.cTotal eq cs.approvalCount)) || ((c.cNo eq cs.cNo) && c.cDeadLine == 'Y') || (c.cNo eq cs.cNo) && (ed < now && now < ld ) || (c.cNo eq cs.cNo) && (ld < now) }">
                                  <em>마감</em>
                             </c:if>
                         </c:forEach>
@@ -81,8 +89,7 @@
 						</c:forEach>
 						<p class="thumbTitle">${ c.cTitle }</p>
 							<p class="thumbInfo">
-								<span>일시 :</span> <fmt:parseDate value="${ c.lDate }" var="clDate" pattern="yyyy-MM-dd'T'HH:mm"/>
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ clDate }"/><br>
+								<span>일시 :</span> ${ ld }<br>
 								<span>장소 :</span> ${ c.cPlace }
 							</p>					
 					</div>

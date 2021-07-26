@@ -45,7 +45,7 @@
 			<div id="title">${ culture.cTitle }</div>
 			<div class="titleSub">일시 : 
 				<fmt:parseDate value="${ culture.lDate }" var="cLDate" pattern="yyyy-MM-dd'T'HH:mm"/>
-				<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ cLDate }"/>
+				<fmt:formatDate pattern="yyyy-MM-dd HH:mm" var="ld" value="${ cLDate }"/>${ ld }
 			</div>
 			<div class="titleSub">장소 : ${ culture.cPlace }</div>
 			<table id="programDetailTable">
@@ -54,8 +54,8 @@
 					<td>
 						<fmt:parseDate value="${ culture.cStartDate }" var="cSDate" pattern="yyyy-MM-dd'T'HH:mm"/>
 						<fmt:parseDate value="${ culture.cEndDate }" var="cEDate" pattern="yyyy-MM-dd'T'HH:mm"/>
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ cSDate }"/>
-						 ~ <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${ cEDate }"/>
+						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" var="sd"  value="${ cSDate }"/> ${ sd }
+						 ~ <fmt:formatDate pattern="yyyy-MM-dd HH:mm" var="ed"  value="${ cEDate }"/> ${ ed }
 					</td>
 				</tr>
 				<tr>
@@ -86,10 +86,10 @@
 					<td>마감 여부</td>
 					<td>
 						<jsp:useBean id="toDay" class="java.util.Date"/>
-						<fmt:formatDate var="now" value="${ toDay }" pattern="E MMM dd HH:mm:ss z yyyy"/>
+						<fmt:formatDate var="now" value="${ toDay }" pattern="yyyy-MM-dd HH:mm:ss"/>
 						<c:if test="${ toDay < cLDate && toDay < cSDate && culture.cDeadLine == 'N' && toDay < cEDate  }">진행 전</c:if>
-						<c:if test="${ (toDay < cLDate && cSDate < toDay && toDay < cEDate) || cSDate < toDay && culture.cDeadLine == 'N' && toDay < cEDate }">진행 중</c:if>
-						<c:if test="${ cLDate < toDay || cEDate < toDay || culture.cDeadLine == 'Y' || approvalCount == culture.cTotal }">마감</c:if>
+						<c:if test="${ (toDay < cLDate && cSDate < toDay && toDay < cEDate && culture.cDeadLine == 'N' && (approvalCount != culture.cTotal)) || (cSDate < toDay && culture.cDeadLine == 'N' && toDay < cEDate && (approvalCount != culture.cTotal)) }">진행 중</c:if>
+						<c:if test="${ cLDate < toDay || cEDate < toDay || culture.cDeadLine == 'Y' || approvalCount == culture.cTotal || (toDay < cEDate && culture.cDeadLine == 'Y') }">마감</c:if>
 					</td>
 				</tr>
 				<tr>
@@ -141,10 +141,10 @@
 	<input type="hidden" id="cDeadLine" name="cDeadLine" value="${ culture.cDeadLine }">
 	<input type="hidden" id="uNo" name="uNo" value="${ loginUser.no }">
 	<input type="hidden" id="cTotal" name="cTotal" value="${ culture.cTotal }">
-	<input type="hidden" id="sd" name="sd" value="${ cSDate }">
-	<input type="hidden" id="ed" name="ed" value="${ cEDate }">
-	<input type="hidden" id="ld" name="ld" value="${ cLDate }">
-	<input type="hidden" id="now" name="now" value="${ toDay }">
+	<input type="hidden" id="sd" name="sd" value="${ sd }">
+	<input type="hidden" id="ed" name="ed" value="${ ed }">
+	<input type="hidden" id="ld" name="ld" value="${ ld }">
+	<input type="hidden" id="now" name="now" value="${ now }">
 	<input type="hidden" id="approvalCount" name="approvalCount" value="${ approvalCount }">
 
 	<c:forEach var="cs" items="${ csList }">
@@ -165,43 +165,31 @@
 	<c:if test="${ !empty loginUser }">
 		<script type="text/javascript">
 		
-			$('#signBtn').click(function(){
-				var csListcNo = $('#csListcNo').val();
-				var cNo = $('#CNO').val();
-				var csListuNo = $('#csListuNo').val();
-				var uNo = $('#uNo').val();
-				var csListStatus = $('#csListStatus').val();
-				var cTotal = $('#cTotal').val();
-				var approvalCount = $('#approvalCount').val();
-				var cDeadLine = $('#cDeadLine').val();
-				var sd = $('#sd').val();
-				var ed = $('#ed').val();
-				var ld = $('#ld').val();
-				var now = $('#now').val(); 
-				
-				console.log(ld);
-				console.log(ed);
-				console.log(now);
-				console.log('마감 됐니? ' + ed < now);
-				console.log('끝났니? ' + ld < now)
-				
-				/* if(csListcNo == cNo && csListuNo == uNo && csListStatus=='Y'){
-					alert('중복 신청은 불가능합니다.');
-				} else if( (now < ld && ed < now) || cDeadLine == 'Y' || approvalCount == cTotal){
-					alert('마감된 프로그램은 신청이 불가능합니다.');
-				} else if(now < ld && now < sd && cDeadLine =='N' && now < ed){
-					alert('프로그램 신청 기간이 아닙니다.');
-				} else{
-					window.open('cSign.cu?cNo='+cNo, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
-				} */
-				if(csListcNo == cNo && csListuNo == uNo && csListStatus=='Y'){
-					alert('중복 신청은 불가능합니다.');
-				} else if(cDeadLine == 'Y' || approvalCount == cTotal){
-					alert('마감된 프로그램은 신청이 불가능합니다.');
-				} else{
-					window.open('cSign.cu?cNo='+cNo, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
-				}
-			});
+		$('#signBtn').click(function(){
+			var csListcNo = $('#csListcNo').val();
+			var cNo = $('#CNO').val();
+			var csListuNo = $('#csListuNo').val();
+			var uNo = $('#uNo').val();
+			var csListStatus = $('#csListStatus').val();
+			var cTotal = $('#cTotal').val();
+			var approvalCount = $('#approvalCount').val();
+			var cDeadLine = $('#cDeadLine').val();
+			var sd = $('#sd').val();
+			var ed = $('#ed').val();
+			var ld = $('#ld').val();
+			var now = $('#now').val(); 
+			console.log(now);
+			
+			if(csListcNo == cNo && csListuNo == uNo && csListStatus=='Y'){
+				alert('중복 신청은 불가능합니다.');
+			} else if( (now < ld && ed < now) || cDeadLine == 'Y' || approvalCount == cTotal || (now < ed && cDeadLine=='Y')){
+				alert('마감된 프로그램은 신청이 불가능합니다.');
+			} else if((now < ld && now < sd) && (cDeadLine =='N' && now < ld)){
+				alert('프로그램 신청 기간이 아닙니다.');
+			} else{
+				window.open('cSign.cu?cNo='+cNo, 'programSignPage', 'width=800, height=500, top=100, left=300,location=no');
+			}
+		});
 		</script>
 	</c:if>
 </body>

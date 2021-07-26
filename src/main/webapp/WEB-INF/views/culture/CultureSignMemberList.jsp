@@ -144,7 +144,7 @@
 				var csApproval =  check.parent().parent().children().eq(6).find('input[name="csApproval"]').val();
 				// 체크 된 행의 수락 여부 Y/N 가져오기
 				
-				if(csApproval != 'Y'){
+				if(csApproval == 'N'){
 					smc = smc + 1;
 				}
 				

@@ -74,10 +74,12 @@ public class CultureSign {
 	public void setApprovalCount(int approvalCount) {
 		this.approvalCount = approvalCount;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "CultureSign [uNo=" + uNo + ", cNo=" + cNo + ", csStatus=" + csStatus + ", csDate=" + csDate
 				+ ", csApproval=" + csApproval + ", approvalCount=" + approvalCount + "]";
 	}
+
+	
 }

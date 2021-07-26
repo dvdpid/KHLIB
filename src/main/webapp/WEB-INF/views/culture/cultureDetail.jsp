@@ -117,6 +117,7 @@
 				<c:param name="approvalCount" value="${ approvalCount }" />
 			</c:url>
 			
+			<!-- 관리자만 리스트 조회 가능 -->
 			<c:if test="${ sessionScope.loginUser.admin == 'Y' }">
 				<button class="btn" id="signBtn" onclick="location.href='${signList}'">신청자 리스트</button>
 			</c:if>

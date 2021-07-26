@@ -45,7 +45,7 @@
 			<p><img id="titleImg1" src="resources/images/info/goodbye.png"/>
 			인사말</p>
 		</div>
-		<div class="empty" style="height:140px;"></div>
+		<div class="empty" style="height:90px;"></div>
 		<div class="infoSpace">
 			<table id="infoTable">
 				  <b>이런 말이 있습니다.<br>
@@ -66,7 +66,7 @@
 
 						시민여러분의 많은 관심과 사랑 부탁드립니다.<br><br><br>
 						
-						도서관장 XXX
+						도서관장 이규진
 						</b>
 			</table>
 			<br>

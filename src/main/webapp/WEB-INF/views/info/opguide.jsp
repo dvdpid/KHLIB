@@ -45,7 +45,7 @@
 			<p><img id="titleImg1" src="resources/images/info/time.png"/>
 			이용 안내</p>
 		</div>
-		<div class="empty" style="height:140px;"></div>
+		<div class="empty" style="height:50px;"></div>
 		<div class="infoSpace">
 		
 				<table id="infoTable" style="width: 100%;border: 1px solid #444444;">

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="customerMapper">
+  <select id="getListCount" resultType="_int">
+  	select count(*)
+  	from QNA
+  	where q_status = 'Y'
+  </select>
+  
+  <select id="selectQuestionList" resultMap="questionResultSet">
+  	select * 
+  	from QNA
+  	where q_status = 'Y'
+  	order by q_no desc
+  </select>
+  
+  <insert id="insertQuestion" parameterType="Question">
+  	<selectKey keyProperty="qNo" resultType="_int" order="BEFORE">
+  		select seq_qno.nextval from dual
+  	</selectKey>
+  	insert into QNA values(#{qNo}, #{qTitle}, #{qContent}, #{writer}, sysdate, default, default, ${userNo})
+  	
+  </insert>
+  
+  <select id="selectQuestion" parameterType="_int" resultMap="questionResultSet">
+  	select *
+  	from QNA
+  	where q_status = 'Y' and q_no = #{qNo}
+  </select>
+  
+  <resultMap type="Question" id="questionResultSet"  >
+  	<id column="Q_NO" property="qNo" />
+  	<result column="Q_TITLE" property="qTitle" />
+  	<result column="Q_CONTENT" property="qContent" />
+  	<result column="WRITER" property="writer" />
+  	<result column="Q_DATE" property="qDate" />
+  	<result column="Q_COUNT" property="qCount" />
+  	<result column="Q_STATUS" property="qStatus" />
+  	<result column="USER_NO" property="userNo" />
+  </resultMap>
+  
+  <insert id="insertAnswer" >
+  	<selectKey keyProperty="aNo" resultType="_int" order="BEFORE" >
+  		select seq_ans.nextval from dual
+  	</selectKey>
+  	insert into
+  	answer
+  	values (#{aNo}, #{aTitle}, #{aContent}, #{writer}, sysdate, 'Y', #{qNo}, #{userNo})
+  </insert>
+  
+  <select id="selectAnswer" parameterType="_int" resultMap="answerResultSet">
+  	select *
+  	from answer
+  	where a_status = 'Y'
+  	and q_no = #{qNo}
+  </select>
+  
+  <resultMap type="Answer" id="answerResultSet">
+  	<id column="A_NO" property="aNo" />
+  	<result column="A_TITLE" property="aTitle" />
+  	<result column="A_CONTENT" property="aContent" />
+  	<result column="WRITER" property="writer" />
+  	<result column="A_DATE" property="aDate" />
+  	<result column="A_STATUS" property="aStatus" />
+  	<result column="Q_NO" property="qNo" />
+  	<result column="USER_NO" property="userNo" />
+  </resultMap>
+  
+  <update id="deleteAnswer" parameterType="_int">
+  	update answer
+  	set a_status = 'N'
+  	where q_no = #{qNo}
+  </update>
+  
+ <update id="updateAnswer">
+ 	update answer
+ 	set a_title = #{aTitle}, a_content = #{aContent}, writer = #{writer}
+ 	where a_no = #{aNo} and a_status = 'Y'
+ </update>
+ 
+ <update id="deleteQuestion" parameterType="_int">
+  	update qna
+  	set q_status = 'N'
+  	where q_no = #{qNo}
+  </update>
+  
+ <update id="updateQuestion">
+ 	update qna
+ 	set q_title = #{qTitle}, q_content = #{qContent}
+ 	where q_no = #{qNo} and q_status = 'Y'
+ </update>
+</mapper>

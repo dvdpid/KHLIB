@@ -9,19 +9,22 @@
 <style>
 	.loginArea{margin-top: 3%;}
 	#loginBtn {
-		width: 99%; height: 70%; font-size: 15px; border: 0; 
+width: 99%; height: 70%; font-size: 15px; border: 0; 
 		background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:2px;
+=======
 	}
 	td {height: 50px;}
 	input { width:300px; height: 70%;}
-	a {text-decoration: none; font-size: 15px; color: black;}
+	#loginTable a {text-decoration: none; font-size: 15px; color: black;}
+	/* footer{ position: absolute; bottom:0; width: 100%;} */
+	footer{ position: fixed; bottom: 0;}
 </style>
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
 	
 	<div align="center" class="loginArea">
-		<h1 >로그인</h1>
+<h1 >로그인</h1>
 		<hr align="center" style="background: black; width: 19.5%;">
 		<form action="login.me" method="post">
 			<table id="loginTable" style="text-align:center;">
@@ -44,10 +47,12 @@
 				</tr>
 			</table>
 		</form>
+	<br>
+	</div>
 	</div>
 	
-	<br>
-	
+	<footer>
 	<c:import url="../common/footer.jsp"/>
+	</footer>
 </body>
 </html>

@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>문화마당 신청내역</title>
-<link rel="stylesheet" href="resources/css/cultureMypage.css" type="text/css">
+<link rel="stylesheet" href="resources/css/cultureMypage.css?ver=1.0" type="text/css">
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<c:import url="../common/menubar.jsp"/>
@@ -45,47 +46,111 @@
 		</div>
 		<div class="empty" style="height:140px;"></div>
 		<div class="infoSpace">
-			<table id="mpTable">
+		<div class="btn" align="right" style="margin-bottom:5px;">
+			<button class="cancelBtn" id="cancelBtn">수강 취소</button>
+			<button class="cancelBtn" id="deleteBtn">내역 삭제</button>
+		</div>
+			<table id="mpTable" style="margin-bottom: 50px;">
 				<tr>
+					<th> </th>
 					<th>프로그램 이름</th>
 					<th>강연자</th>
 					<th>완료 여부</th>
-					<th>취소</th>
+					<th>수강 확정</th>
 				</tr>
 				
-				<%-- <c:if test="${ empty loginUser }">
-					<td colspan="4" style="font-size:15px;">로그인 후 이용 가능합니다.</td>
+				<c:if test="${ empty loginUser }">
+					<tr>
+						<td colspan="5" style="font-size:15px;">로그인 후 이용 가능합니다.</td>
+					</tr>
+				</c:if>
+				<c:if test="${ !empty loginUser && empty csList }">
+					<tr>
+						<td colspan="5" style="font-size:15px;">신청한 프로그램이 없습니다.</td>
+					</tr>
 				</c:if>
 				<c:if test="${ !empty loginUser }">
-					<c:forEach var="b" items="${ list }">
-						<tr>
-							<td align="center">${ b.bId }</td>
-							<td align="left">
-								<c:url var="bdetail" value="bdetail.bo">
-									<c:param name="bId" value="${ b.bId }"/>
-									<c:param name="page" value="${ pi.currentPage }"/>
-								</c:url>
-									<a href="${ bdetail }">${ b.bTitle }</a>
-							</td>
-							<td align="center">${ b.bWriter }</td>
-							<td align="center">${ b.bCreateDate }</td>
-							<td align="center">${ b.bCount }</td>
-							<td align="center">
-								<c:if test="${ ! empty b.originalFileName }">
-									◎
+					<c:forEach var="cs" items="${ csList }">
+						<c:forEach var="c" items="${ cList }">
+								<c:if test="${ (cs.uNo == loginUser.no) && (cs.cNo == c.cNo) }">
+									<tr>
+										<td>
+											<c:if test="${ ((cs.csApproval == 'Y' || cs.csStatus == 'Y') && cs.csApproval != 'N') && c.cDeadLine == 'N' }">
+												<input type="radio" id="cancelCheck" name="check" value="${ cs.cNo }">
+											</c:if>
+											<c:if test="${ c.cDeadLine == 'Y' || cs.csStatus=='N' || ((cs.csApproval == 'Y' || cs.csStatus == 'Y') && cs.csApproval == 'N') }">
+												<input type="radio" id="deleteCheck" name="check" value="${ cs.cNo }">
+											</c:if>
+										</td>
+										<td align="center">${ c.cTitle }</td>
+										<td align="center">${ c.cInstructor }</td>
+										<td align="center">
+											<c:if test="${ c.cDeadLine == 'N' }">진행중</c:if>
+											<c:if test="${ c.cDeadLine == 'Y' }"><span style="color: red;">완료</span></c:if>
+										</td>
+										<td align="center">
+											<c:if test="${ cs.csApproval == 'W' }">수락 대기</c:if>
+											<c:if test="${ cs.csApproval ==  'N' }"><span style="color: red;">수강 취소</span></c:if>
+											<c:if test="${ cs.csApproval == 'Y' }"><span style="color: blue;">수락 완료</span></c:if>
+										</td>
+									</tr>
 								</c:if>
-							</td>
-						</tr>
+						</c:forEach>
 					</c:forEach>
-				</c:if> --%>
-						<tr>
-							<td>도서공간 상상하기</td>
-							<td>박신우</td>
-							<td>진행중</td>
-							<td><button id="cancelBtn">수강 취소</button></td>
-						</tr>
+				</c:if>
 			</table>
 		</div>
 	</div>
+	<input type="hidden" id="uNo" value="${ loginUser.no }">
+	<c:import url="../common/footer.jsp"/>
+	
+	<script type="text/javascript">
+		$('#cancelBtn').on('click', function(){
+			var bool = confirm('수강을 취소하시겠습니까?');
+			if(bool){
+				var cNo = $('input:radio[id="cancelCheck"]:checked').val();
+				var uNo = $('#uNo').val();
+				console.log(cNo);
+				 $.ajax({
+					url: 'cancel.cu',
+					data: {cNo:cNo, uNo:uNo},
+					success: function(data){
+						alert('정상적으로 수강 취소되었습니다.');
+					},
+					fail: function(data){
+						alert('수강 취소 실패');
+					},
+					error: function(data){
+						alert('수강이 취소되었거나 완료된 프로그램입니다.\n내역 삭제 버튼을 클릭해주세요.');
+					}
+				});
+			} else{
+			}
+		});
+		
+		$('#deleteBtn').on('click', function(){
+			var bool = confirm('내역을 삭제하시겠습니까?');
+			if(bool){
+				var cNo = $('input:radio[id="deleteCheck"]:checked').val();
+				var uNo = $('#uNo').val();
+				console.log(cNo);
+				 $.ajax({
+					url: 'delete.cu',
+					data: {cNo:cNo, uNo:uNo},
+					success: function(data){
+						alert('정상적으로 내역이 삭제되었습니다.');
+					},
+					fail: function(data){
+						alert('내역 삭제 실패');
+					},
+					error: function(data){
+						alert('수강 취소 후 내역 삭제가 가능합니다.');
+					}
+				});
+			} else{
+			}
+		});
+	</script>
+
 </body>
 </html>

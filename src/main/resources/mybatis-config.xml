@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-	<settings>
-		<setting name="jdbcTypeForNull" value="NULL"/> <!-- 비어있는 값이 들어오면 널로 사용할 것 -->
-	</settings>
-	
-	<typeAliases>
-<!-- 		<typeAlias type="com.kh.klib.board.model.vo.Board" alias="Board"/> -->
-<!-- 		<typeAlias type="com.kh.klib.bkgroup.model.vo.BookGroup" alias="BookGroup"/> -->
-		<typeAlias type="com.kh.klib.books.model.vo.Books" alias="Books"/>
-		<typeAlias type="com.kh.klib.culture.model.vo.Culture" alias="Culture"/>
-<!-- 		<typeAlias type="com.kh.klib.customer.model.vo.Customer" alias="Customer"/> -->
-<!-- 		<typeAlias type="com.kh.klib.info.model.vo.Info" alias="Info"/> -->
-		<typeAlias type="com.kh.klib.room.model.vo.Room" alias="Room"/>
- 		<typeAlias type="com.kh.klib.room.model.vo.RoomSign" alias="RoomSign"/>
-<!-- 		<typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/> -->
-	</typeAliases>
-	
-	<mappers>
-<!-- 		<mapper resource="mapper/group-mapper.xml"/> -->
- 		<mapper resource="mapper/room-mapper.xml"/>
-<!-- 		<mapper resource="mapper/culture-mapper.xml"/> -->
-		<mapper resource="mapper/admin-mapper.xml"/>
-		<mapper resource="mapper/member-mapper.xml"/>
-		<mapper resource="mapper/books-mapper.xml" />
-<!--  	<mapper resource="mapper/customer-mapper.xml" />   -->
-	</mappers>
-	
+   <settings>
+      <setting name="jdbcTypeForNull" value="NULL"/> <!-- 비어있는 값이 들어오면 널로 사용할 것 -->
+   </settings>
+    
+   <typeAliases>
+       <typeAlias type="com.kh.klib.board.model.vo.Board" alias="Board"/> 
+       <typeAlias type="com.kh.klib.bkgroup.model.vo.BookGroup" alias="BookGroup"/>
+      <typeAlias type="com.kh.klib.books.model.vo.Books" alias="Books"/>
+      <typeAlias type="com.kh.klib.culture.model.vo.Culture" alias="Culture"/>
+      <typeAlias type="com.kh.klib.culture.model.vo.CultureSign" alias="CultureSign"/>
+      <typeAlias type="com.kh.klib.culture.model.vo.CultureSearchCondition" alias="CultureSearchCondition"/>
+<!--       <typeAlias type="com.kh.klib.info.model.vo.Info" alias="Info"/> -->
+      <typeAlias type="com.kh.klib.room.model.vo.Room" alias="Room"/>
+       <typeAlias type="com.kh.klib.room.model.vo.RoomSign" alias="RoomSign"/>
+       <typeAlias type="com.kh.klib.common.model.vo.Files" alias="Files"/>
+       <typeAlias type="com.kh.klib.member.model.vo.Member" alias="Member"/>
+       <typeAlias type="com.kh.klib.notice.model.vo.Notice" alias="Notice"/>
+       <typeAlias type="com.kh.klib.customer.model.vo.Question" alias="Question"/>
+       <typeAlias type="com.kh.klib.customer.model.vo.Answer" alias="Answer"/>
+        <typeAlias type="com.kh.klib.comments.model.vo.Comments" alias="Comments"/>
+        <typeAlias type="com.kh.klib.notice.model.vo.Notice" alias="Notice"/>
+   </typeAliases>
+   
+   <mappers>
+       <mapper resource="mapper/group-mapper.xml"/>
+       <mapper resource="mapper/room-mapper.xml"/>
+       <mapper resource="mapper/culture-mapper.xml"/>
+       <mapper resource="mapper/mainpage-mapper.xml"/>
+      <mapper resource="mapper/admin-mapper.xml"/>
+      <mapper resource="mapper/member-mapper.xml"/>
+      <mapper resource="mapper/books-mapper.xml" />
+     <mapper resource="mapper/customer-mapper.xml" />
+	<mapper resource="mapper/board-mapper.xml" />
+	<mapper resource="mapper/notice-mapper.xml" />
+   </mappers>
+   
 </configuration>

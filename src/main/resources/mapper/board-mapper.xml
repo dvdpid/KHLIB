@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from board
+		where b_status = 'Y'
+	</select>
+	
+	<select id="selectList" resultMap="boardResultSet">
+		select *
+		from board
+		where b_status = 'Y'
+		order by board_no desc
+	</select>
+	
+	<resultMap type="Board" id="boardResultSet">
+		<id column="BOARD_NO" property="bNo" />
+		<result column="BOARD_TITLE" property="bTitle" />
+		<result column="BOARD_CONTENT" property="bContent" />
+		<result column="BOARD_WRITER" property="bWriter" />
+		<result column="BOARD_DATE" property="bDate" />
+		<result column="BOARD_COUNT" property="bCount" />
+		<result column="B_STATUS" property="bStatus" />
+	</resultMap>
+	
+	<insert id="insertBoard">
+		insert into board
+		values(seq_bno.nextval, #{bTitle}, #{bContent}, #{bWriter}, sysdate, default, default)
+	</insert>
+	
+	<insert id="insertFile">
+		insert into files 
+		values (seq_fno.nextval, #{originName}, #{changeName}, sysdate, 2, default, seq_bno.currval, 0, 0, 0, 0)
+	</insert>
+
+	<insert id="insertNFile">
+		insert into files 
+		values (seq_fno.nextval, #{originName}, #{changeName}, sysdate, 2, 'N', seq_bno.currval, 0, 0, 0, 0)
+	</insert>
+	
+	
+	<resultMap type="Files" id="fileResultSet">
+		<id column="FILE_NO" property="fNo" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+		<result column="FILE_PATH" property="filePath" />
+		<result column="UPLOAD_DATE" property="uploadDate" />
+		<result column="FILE_LEVEL" property="fileLevel" />
+		<result column="F_STATUS" property="fStatus" />
+		<result column="BOARD_NO" property="bNo" />
+		<result column="GROUP_NO" property="gNo" />
+		<result column="CULTURE_NO" property="cNo" />
+		<result column="BOOKS_NO" property="bkNo" />
+		<result column="Q_NO" property="qNo" />
+	</resultMap>
+	
+	<select id="selectBoard" resultMap="boardResultSet">
+		select *
+		from board
+		where board_no = #{bNo}
+	</select>
+	
+	<select id="selectFile" resultMap="fileResultSet">
+		select *
+		from files
+			 join board using(board_no)
+		where board_no = #{bNo}
+	</select>
+
+	<update id="updateBoard">
+		update board
+		set board_title = #{bTitle}, board_content = #{bContent},
+			board_writer = #{bWriter}, board_date = sysdate
+		where board_no = #{bNo} 
+	</update>
+	
+	<update id="updateFile">
+		update files
+		set origin_name = #{originName}, change_name = #{changeName}, upload_date = sysdate, f_status='Y'
+		where board_no = #{bNo}
+	</update>
+	
+	<update id="deleteBoard">
+		update board
+		set b_status = 'N'
+		where board_no = #{bNo}
+	</update>
+	
+	<update id="deleteFiles">
+		update files
+		set f_status = 'N'
+		where board_no = #{bNo}
+	</update>
+	
+	<update id="addReadCount">
+		update board
+		set board_count = board_count + 1
+		where board_no = #{bNo}
+	</update>
+	
+	<select id="searchListCount" parameterType="com.kh.klib.board.model.vo.BoardSearchValue" resultType="_int">
+		select count(*)
+		from board
+		where b_status='Y'
+		<if test="title != null">
+			and board_title like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and board_writer like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchResultList" parameterType="com.kh.klib.board.model.vo.BoardSearchValue" resultMap="boardResultSet">
+		select *
+		from board
+		where b_status = 'Y'
+		<if test="title != null">
+			and board_title like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and board_writer like '%' || #{writer} || '%'
+		</if>
+		order by board_no desc
+	</select>
+	
+	<insert id="insertComments">
+		insert into comments
+		values(seq_cono.nextval, #{cContent}, #{cWriter}, sysdate, default, #{bNo})
+	</insert>
+	
+	<select id="selectCommentsList" resultMap="commentsResultSet">	
+		select * 
+		from comments
+		where board_no = #{bNo}
+		order by comment_no desc
+	</select>
+	
+	<resultMap type="Comments" id="commentsResultSet">
+		<id column="COMMENT_NO" property="cNo" />
+		<result column="COMMENT_CONTENT" property="cContent" />
+		<result column="COMMENT_WRITER" property="cWriter" />
+		<result column="COMMENT_DATE" property="cDate" />
+		<result column="COMMENT_STATUS" property="cStatus" />
+		<result column="BOARD_NO" property="bNo" />
+	</resultMap>
+
+
+</mapper>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 / 비밀번호 찾기</title>
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 <style>
 	#memberFindDiv{padding-top: 2%;}
 	#idFindDiv, #pwdFindDiv, #point {display: inline-block; text-align: center;}
@@ -34,15 +35,15 @@
 					<table id="idFindTable">
 						<tr>
 							<th width="80">이름</th>
-							<td width="200"><input type="text" required style="width: 100%;"></td>
+							<td width="200"><input type="text" id="nameID" required style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" required style="width: 100%;"></td>
+							<td><input type="text" id="emailID" required style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td><input type="text" placeholder="(-)제외한 숫자만 입력해주세요." required style="width: 100%;"></td>
+							<td><input type="text" id="telID" placeholder="(-)제외한 숫자만 입력해주세요." required style="width: 100%;"></td>
 						</tr>
 						<tr></tr>
 					</table>
@@ -59,24 +60,24 @@
 					<table id="pwdFindTable">
 						<tr>
 							<th width="80">아이디</th>
-							<td width="200"><input type="text" required style="width: 100%;"></td>
+							<td width="200"><input type="text" id="id" required style="width: 100%;"></td>
 							<td></td>
 						</tr>
 						<tr>
 							<th>이름</th>
-							<td><input type="text" required style="width: 100%;"></td>
+							<td><input type="text" id="name" required style="width: 100%;"></td>
 							<td></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" required style="width: 100%;"></td>
+							<td><input type="text" id="email" required style="width: 100%;"></td>
 							<td></td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>인증번호</th>
 							<td><input type="text" required style="width: 100%;"></td>
 							<td width="80" align="center"><button>확인</button></td>
-						</tr>
+						</tr> -->
 					</table>
 					<input type="submit" value="비밀번호 찾기" id="pwdFindBtn">
 				</form>
@@ -86,6 +87,45 @@
 	
 	<br><br>
 	
-	<c:import url="common/footer.jsp"/>
+	<c:import url="../common/footer.jsp"/>
+	
+	<script type="text/javascript">
+		$(function(){
+			$('#idFindBtn').click(function(){
+				var name = $("#nameID").val();
+				var email = $("#emailID").val();
+				var tel = $("#telID").val();
+				$.ajax({
+					url: "findId.me",
+					type: "POST",
+					data: {name:name, email:email, tel:tel},
+					success: function(result){
+						console.log(result);
+						alert('귀하의 아이디는 '+result+'입니다.'); // 결과가 controller에는 출력이 되는데 ajax로는 안넘어옴. 왜?
+					}, fail: function(result){
+						alert('해당하는 아이디가 없습니다.');
+					}, error: function(result){
+						alert('실패');
+					}
+				})
+			});
+			
+			$('#pwdFindBtn').click(function(){
+				var id = $("#id").val();
+				var name = $("#name").val();
+				var email = $("#email").val();
+				$.ajax({
+					url: "findPwd.me",
+					type: "POST",
+					data: {id:id, name:name, email:email},
+					success: function(result){
+						alert(result);
+					}, error: function(result){
+						alert('이메일 발송 실패');
+					}
+				})
+			});
+		})
+	</script>
 </body>
 </html>

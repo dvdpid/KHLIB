@@ -208,6 +208,10 @@
 	}
 
 	.titleArea {
+		display: block;
+	}
+	
+	.formArea {
 		display: flex;
 	}
 
@@ -219,6 +223,15 @@
 
 	#bookCategory {
 		background-color: lightgray;
+		color: white;
+		font-weight: bold;
+		border-radius: 3px;
+		padding: 0px 0.5em;
+		margin-right: 10px;
+	}
+	
+	div.recommend {
+		background-color: rgb(212, 129, 91);
 		color: white;
 		font-weight: bold;
 		border-radius: 3px;
@@ -239,6 +252,7 @@
 		text-align: left;
 		font-size: 1.5em;
 		font-weight: bold;
+		white-space: pre;
 	}
 
 	#bookDetail {

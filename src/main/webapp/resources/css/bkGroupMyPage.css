@@ -1,14 +1,5 @@
 @charset "UTF-8";
 
-	#bkMyPageTable{
-		text-align: center;  width: 80%;
-		margin-right: auto; margin-left: 65px;
-	}
-	#cancleBtn{
-		font-size: 15px; background: black; color: white; 
-		padding: 5px 10px 5px 10px; margin:5px; 
-		border: 0;  border-radius: 7px;
-	}
 	
 	.left{ float: left; width: 25%; }
 	
@@ -28,7 +19,7 @@
 		padding: 10px 25px;
 	}
 	
-	.main{ float: right; width: 75%; text-align: center; }
+	.main{float: right; width: 75%;}
 	
 	.mainTitle{
 		font-weight: 900;
@@ -40,12 +31,6 @@
 	
 	.mainTitle p{ text-align: left; width: 70%; margin: 0;}
 
-	#titleImg1{ 
-		width: 25px; height: auto; vertical-align:middle;
-		padding-bottom: 7px;
-		margin-right: 10px;
-	}
-	
 	.infoSpace{ margin: 0px 60px 0px 60px; }
 	
 	#infoTable{
@@ -84,3 +69,38 @@
 	.sideButton:hover{
 		background: gray;
 	}
+	
+	#titleImg1{ 
+		width: auto; height: 30px; vertical-align:middle;
+		padding-bottom: 7px;
+		margin-right: 10px;
+	}
+	.count{	margin: 0px 60px;}
+	
+	#bkMyPageTable{
+		border-collapse: collapse; text-align: center;
+		line-height: 1.5; width: 90%; margin: 0px 60px;
+	}
+	
+	#bkMyPageTable tr{
+		padding: 5px; border: 1px solid lightgray;
+	}
+	
+	#bkMyPageTable th{
+		padding: 5px; border: 1px solid lightgray; background: rgb(224, 224, 224);
+	}
+	
+	#bkMyPageTable td{
+		padding: 5px; border: 1px solid lightgray;
+	}
+	
+	#cancelBtn{
+		font-size: 15px; background: rgb(212, 129, 91); color: white; 
+		padding: 5px 10px 5px 10px; width: 200px; float: right;
+		border: 0;  border-radius: 7px; margin: 0px 60px;
+	}
+	
+	
+	
+
+		

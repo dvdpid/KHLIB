@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="groupMapper">
+
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from bkgroup
+		where g_status = 'Y'
+	</select>
+	
+	<select id="selectBList" resultMap="groupResultSet">
+			select *
+			from bkgroup
+				 join files using (group_no)
+			where g_status = 'Y' and file_level = 0
+			order by group_no desc
+	</select>
+	
+	<resultMap type="BookGroup" id="groupResultSet">
+		<id column="GROUP_NO" property="gNo" />
+		<result column="GROUP_NAME" property="gName" />
+		<result column="GROUP_INTRO" property="gIntro" />
+		<result column="GROUP_TOTAL" property="gTotal" />
+		<result column="GROUP_CONTENT" property="gContent" />
+		<result column="GB_TITLE" property="gbTitle" />
+		<result column="GB_CONTENT" property="gbContent" />
+		<result column="GROUP_DATE" property="gDate" />
+		<result column="GROUP_PLACE" property="gPlace" />
+		<result column="G_DEADLINE" property="gDeadline" />
+		<result column="G_STATUS" property="gStatus" />
+		<result column="GROUP_WRITER" property="gWriter" />
+	</resultMap>
+	
+	<select id="selectFList" resultMap="fileResultSet">
+		select *
+		from files 
+			 join bkgroup using(group_no)
+		where f_status = 'Y' and file_level = 0
+		order by file_no desc
+	</select>
+	
+	<resultMap type="Files" id="fileResultSet">
+		<id column="FILE_NO" property="fNo" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+		<result column="FILE_PATH" property="filePath" />
+		<result column="UPLOAD_DATE" property="uploadDate" />
+		<result column="FILE_LEVEL" property="fileLevel" />
+		<result column="F_STATUS" property="fStatus" />
+		<result column="BOARD_NO" property="bNo" />
+		<result column="GROUP_NO" property="gNo" />
+		<result column="CULTURE_NO" property="cNo" />
+		<result column="BOOKS_NO" property="bkNo" />
+		<result column="Q_NO" property="qNo" />
+	</resultMap>
+	
+	<insert id="insertGroup">
+		insert into bkgroup
+		values (seq_gno.nextval, #{gName}, #{gIntro}, #{gTotal}, #{gContent}, #{gbTitle}, #{gbContent}, #{gDate}, #{gPlace}, default, default, #{gWriter})
+				
+	</insert>
+	
+	<insert id="insertFile">
+		insert into files 
+		values (seq_fno.nextval, #{originName}, #{changeName}, sysdate, 0, default, 0, seq_gno.currval, 0, 0, 0)
+	</insert>
+
+	<select id="selectGroup" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where group_no = #{ gNo }
+	</select>
+	
+	<select id="selectFile" resultMap="fileResultSet">
+		select *
+		from files
+			 join bkgroup using(group_no)
+		where group_no = #{ gNo }
+	</select>
+	
+	<update id="deleteGroup">
+		update bkgroup
+		set g_status = 'N'
+		where group_no = #{ gNo }
+	</update>
+	
+	<update id="deleteFiles">
+		update files
+		set f_status = 'N'
+		where group_no = #{ gNo }
+	</update>
+
+	
+	<select id="selectMember" resultMap="memberResultSet">
+		select *
+		from users
+		where user_no = #{uNo} and u_status='Y'
+	</select>
+	
+	<resultMap type="com.kh.klib.member.model.vo.Member" id="memberResultSet">
+		<id column="USER_NO" property="no"/>
+		<result column="USER_ID" property="id"/>
+		<result column="USER_PWD" property="pwd"/>
+		<result column="USER_NAME" property="name"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="BIRTHDAY" property="birthday"/>
+		<result column="GENDER" property="gender"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="U_STATUS" property="uStatus"/>
+		<result column="ADMIN_YN" property="admin"/>
+	</resultMap>
+	
+	<select id="selectBookGroup" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where group_no = #{gNo}
+	</select>
+
+	<update id="updateGroup">
+		update bkgroup
+		set group_name = #{gName}, group_intro = #{gIntro}, group_total = #{gTotal},
+			group_content = #{gContent}, gb_title = #{gbTitle}, gb_content = #{gbContent},
+			group_date = #{gDate}, group_place = #{gPlace}  
+		where group_no = #{gNo}
+	</update>
+	
+	<update id="updateFile">
+		update files
+		set origin_name = #{originName}, change_name = #{changeName}, upload_date = sysdate
+		where group_no = #{gNo}
+	</update>
+	
+	<select id="searchListCount" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultType="_int">
+		select count(*)
+		from bkgroup
+		where g_status='Y'
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="place != null">
+			and group_place like '%' || #{place} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchGList" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultMap="groupResultSet">
+		select *
+		from bkgroup
+			 join files using (group_no)
+		where g_status = 'Y' and file_level = 0
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="place != null">
+			and group_place like '%' || #{place} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if> 
+		order by group_no desc
+	</select>
+	
+	<select id="selectSearchFList" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultMap="fileResultSet">
+		select *
+		from files 
+			 join bkgroup using(group_no)
+		where f_status = 'Y' and file_level = 0
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="place != null">
+			and group_place like '%' || #{place} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if> 
+		order by file_no desc
+	</select>
+	
+	<insert id="inserGroupSign">
+		insert into group_sign
+		values(#{gNo}, #{uNo}, default, default, sysdate)
+	</insert>
+	
+	<select id="selectGroupSignListCount" resultType="_int">
+		select count(*)
+		from group_sign
+		where user_no = #{uNo} and gs_status='Y'
+	</select>
+	
+	
+	<select id="selectGroupSign" resultMap="groupSignResultSet">
+		select *
+		from group_sign
+		where user_no = #{uNo} and gs_status='Y'
+	</select>
+	
+	<resultMap type="com.kh.klib.bkgroup.model.vo.GroupSign" id="groupSignResultSet">
+		<id column="GROUP_NO" property="gNo" />
+		<id column="USER_NO" property="uNo" />
+		<result column="GS_STATUS" property="gsStatus" />
+		<result column="GS_APPROVAL" property="gsApproval" />
+		<result column="GS_DATE" property="gsDate" />
+	</resultMap>
+	
+	<select id="selectBookGroupList" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where g_status = 'Y'
+	</select>
+	
+	<select id="getSignMemberCount" resultType="_int">
+		select count(*)
+		from group_sign
+		where group_no = #{gNo} and gs_status='Y' and gs_approval = 'Y'
+	</select>
+	
+	<select id="selectMyBookGroupList" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where g_status = 'Y' and GROUP_WRITER = #{ nickname }
+		order by group_no desc
+	</select>
+	
+	<select id="selectgroupSignGno" resultMap="groupSignResultSet">
+		select *
+		from group_sign
+		where group_no = #{gNo} and gs_status='Y'
+	</select>
+	
+	<delete id="deleteGsCancle">
+		delete from group_sign
+		where group_no = #{gNo} and user_no = #{uNo} and gs_status='Y'
+	</delete>
+	
+	<select id="selectSignMemberList" resultMap="memberResultSet">
+		select *
+		from users
+		where user_no = #{ signUno }
+	</select>
+	
+	<update id="updateGsMemberApply">
+		update group_sign
+		set gs_approval = 'Y'
+		where group_no = #{ gNo } and user_no = #{ uNo }
+	</update>
+	
+	<update id="updateGsMemberNoApply">
+		update group_sign
+		set gs_approval = 'N'
+		where group_no = #{ gNo } and user_no = #{ uNo }
+	</update>
+	
+	<update id="updateDeadLine">
+		update bkgroup
+		set g_deadline = 'Y'
+		where group_no = #{gNo}
+	</update>
+	
+	<update id="updateNoDeadLine">
+		update bkgroup
+		set g_deadline = 'N'
+		where group_no = #{gNo}
+	</update>
+	
+	
+</mapper>

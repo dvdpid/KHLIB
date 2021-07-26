@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mainpageMapper">
+	<select id="selectrList" resultMap="roomResultSet">
+		select *
+		from room
+		order by room_no
+	</select>
+	
+	<resultMap type="Room" id="roomResultSet">
+		<id column="ROOM_NO" property="rNo"/>
+		<result column="ROOM_STATUS" property="rStatus"/>
+	</resultMap>
+	
+	<select id="getAllListCount" resultType="_int">
+		select count(*)
+		from room
+	</select>
+	
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from room
+		where room_status='Y'
+	</select>
+	
+	<select id="selectcList" resultMap="cultureResultSet">
+		<![CDATA[
+			select *
+			from (select *
+				from culture
+				order by culture_no desc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<resultMap type="Culture" id="cultureResultSet">
+		<id column="CULTURE_NO" property="cNo"/>
+		<result column="CULTURE_TITLE" property="cTitle"/>
+		<result column="CULTURE_CONTENT" property="cContent"/>
+		<result column="CULTURE_TOTAL" property="cTotal"/>
+		<result column="CULTURE_START_DATE" property="cStartDate"/>
+		<result column="CULTURE_END_DATE" property="cEndDate"/>
+		<result column="LECTURE_DATE" property="lDate"/>
+		<result column="LECTURE_TIME" property="lTime"/>
+		<result column="CULTURE_PLACE" property="cPlace"/>
+		<result column="CULTURE_INSTRUCTOR" property="cInstructor"/>
+		<result column="CULTURE_TARGET" property="cTarget"/>
+		<result column="C_DEADLINE" property="cDeadLine"/>
+		<result column="C_STATUS" property="cStatus"/>
+		<result column="USER_NO" property="uNo"/>
+	</resultMap>
+	
+	<select id="selectbgList" resultMap="groupResultSet">
+		<![CDATA[
+			select *
+			from (select *
+				from bkgroup
+				order by group_no desc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<resultMap type="BookGroup" id="groupResultSet">
+		<id column="GROUP_NO" property="gNo" />
+		<result column="GROUP_NAME" property="gName" />
+		<result column="GROUP_INTRO" property="gIntro" />
+		<result column="GROUP_TOTAL" property="gTotal" />
+		<result column="GROUP_CONTENT" property="gContent" />
+		<result column="GB_TITLE" property="gbTitle" />
+		<result column="GB_CONTENT" property="gbContent" />
+		<result column="GROUP_DATE" property="gDate" />
+		<result column="GROUP_PLACE" property="gPlace" />
+		<result column="G_DEADLINE" property="gDeadline" />
+		<result column="G_STATUS" property="gStatus" />
+		<result column="GROUP_WRITER" property="gWriter" />
+	</resultMap>
+	
+	<select id="selectNoticeList" resultMap="NoticeResultSet">
+		<![CDATA[
+			select *
+			from(select *
+				from notice
+				where NOTICE_STATUS='Y'
+				order by NOTICE_NO desc)
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<resultMap type="Notice" id="NoticeResultSet">
+		<id column="NOTICE_NO" property="nNo" />
+		<result column="NOTICE_TITLE" property="nTitle" />
+		<result column="NOTICE_CONTENT" property="nContent" />
+		<result column="NOTICE_DATE" property="nDate" />
+		<result column="NOTICE_WRITER" property="nWriter" />
+		<result column="NOTICE_COUNT" property="nCount" />
+		<result column="NOTICE_STATUS" property="nStatus" />
+	</resultMap>
+	
+	<select id="selectBookList" resultMap="bookResultSet">
+		<![CDATA[
+			select *
+			from(select *
+				from books
+				join files using(books_no)
+				where b_status='Y' and b_recommend='Y')
+			where rownum <= 5
+		]]>
+	</select>
+	
+	<resultMap type="Books" id="bookResultSet">
+		<id column="BOOKS_NO" property="bNo" />
+		<result column="BOOK_TITLE" property="bTitle" />
+		<result column="BOOKS_WRITER" property="bWriter" />
+		<result column="BOOKS_COMPANY" property="bCompany" />
+		<result column="BOOKS_DATE" property="bDate" />
+		<result column="BOOKS_CONTENT" property="bContent" />
+		<result column="B_RECOMMEND" property="bRecommend" />
+		<result column="ENTRY_DATE" property="entryDate" />
+		<result column="ORIGIN_NAME" property="originFileName" />
+		<result column="CHANGE_NAME" property="renameFileName" />
+	</resultMap>
+</mapper>

@@ -63,7 +63,7 @@
 				<td><textarea name="cContent" rows="15" cols="90"></textarea></td>
 			</tr>
 		<tr>
-			<td style="font-size: 20px;"><b>책 표지</b></td>
+			<td style="font-size: 20px;"><b>문화 표지</b></td>
 			<td colspan="3">
 				<div id="titleImgArea" style="width: 350px; height: 200px;">
 					<img id="titleImg" width="350" height="200">

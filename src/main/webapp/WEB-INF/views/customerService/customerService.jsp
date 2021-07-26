@@ -11,7 +11,11 @@
 	href="${contextPath}/resources/css/customerService.css" type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
 </head>
-
+<style>
+	.qnatable{
+		margin: auto;
+	}
+</style>
 <body>
 	<c:import url="../common/menubar.jsp"></c:import>
 
@@ -39,10 +43,10 @@
 
 	<!-- 메인 부분 -->
 	<div class="main">
-		<div class="wrapper">
+		<div class="boardwrapper">
 			<div class="boardTitle"
-				style="font-weight: bold; font-size: 2rem; text-align: left;">묻고답하기</div>
-			<table>
+				style="font-weight: bold; font-size: 2rem; text-align: left; padding-left: 4em; ">묻고답하기</div>
+			<table class="qnatable">
 				<thead>
 					<tr>
 						<td class="numberColumn">번호</td>
@@ -52,77 +56,87 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="numberColumn">30</td>
-						<td class="titleColumn">KH도서관 이름 공모 결과</td>
-						<td class="authorColumn">관리자</td>
-						<td class="dateColumn">2021-05-31</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">29</td>
-						<td class="titleColumn">전자책 문의</td>
-						<td class="authorColumn">MANGO</td>
-						<td>2021-05-30</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">28</td>
-						<td class="titleColumn">방역시간</td>
-						<td class="authorColumn">짱절미</td>
-						<td>2021-05-28</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">27</td>
-						<td class="titleColumn">큐레이션 추천</td>
-						<td class="authorColumn">남나눔</td>
-						<td>2021-05-28</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">26</td>
-						<td class="titleColumn">정회원 문의</td>
-						<td class="authorColumn">강건강</td>
-						<td>2021-05-27</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">25</td>
-						<td class="titleColumn">오픈 시간 문의</td>
-						<td class="authorColumn">담다디</td>
-						<td>2021-05-10</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">24</td>
-						<td class="titleColumn">열람실 기계음 소리</td>
-						<td class="authorColumn">문미미</td>
-						<td>2021-05-01</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">23</td>
-						<td class="titleColumn">도서 반납 문의</td>
-						<td class="authorColumn">박병부</td>
-						<td>2021-04-31</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">22</td>
-						<td class="titleColumn">4월 신착 도서 대출</td>
-						<td class="authorColumn">신수수</td>
-						<td>2021-04-23</td>
-					</tr>
-					<tr>
-						<td class="numberColumn">21</td>
-						<td class="titleColumn">도서관에서 만난 후기 대출 지연</td>
-						<td class="authorColumn">양원영</td>
-						<td>2021-04-19</td>
-					</tr>
+					<c:choose>
+						<c:when test="${ qList != null }">
+							<c:forEach items="${ qList }" var="q">
+								<c:url value="detail.cm" var="qDetail">
+									<c:param name="qNo" value="${ q.qNo }" />
+								</c:url>
+								<tr onclick="location.href='${qDetail}'">
+									<td class="numberColumn">${ q.qNo }</td>
+									<td class="titleColumn">${ q.qTitle} </td>
+									<td class="authorColumn">${ q.writer }</td>
+									<td>${ q.qDate }</td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:when test="${ qList == null}">
+							<tr>
+								<td col="4" text-align="center">등록 된 질문이 없습니다.</td>
+							</tr>
+						</c:when>
+					</c:choose>
 				</tbody>
 			</table>
-			<div id="pagination">
-				<div class="arrow pageButton">&lt;</div>
-				<div class="pageNumber activeNumber  pageButton">1</div>
-				<div class="pageNumber  pageButton">2</div>
-				<div class="pageNumber  pageButton">3</div>
-				<div class="arrow  pageButton">&gt;</div>
-			</div>
+			<c:if test="${!empty qList }">
+				<div id="pagination">
+					<c:if test="${ !empty qList }">
+						<!-- 페이징 부분 -->
+						<div class="pagingArea" align="center">
+							<!-- [이전] -->
+							<c:if test="${ pi.currentPage <= 1 }">[이전]&nbsp;</c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url value="${ loc }" var="qlistBack">
+									<!-- loc : 현재 내 주소 -->
+									<c:param name="page" value="${ pi.currentPage - 1 }" />
+									<c:if test="${ searchValue ne null }">
+										<c:param name="searchCondition" value="${ searchCondition }" />
+										<c:param name="searchValue" value="${ searchValue }" />
+									</c:if>
+								</c:url>
+								<a href="${ qlistBack }">[이전]&nbsp;</a>
+							</c:if>
+
+							<!-- 페이지 -->
+							<c:forEach var="p" begin="${ pi.startPage }"
+								end="${ pi.endPage }">
+								<c:if test="${ p eq pi.currentPage }">
+									<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
+								</c:if>
+
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="qlistCheck" value="${ loc }">
+										<c:param name="page" value="${ p }" />
+									</c:url>
+									<a href="${ qlistCheck }">${ p }</a>
+								</c:if>
+							</c:forEach>
+
+							<!-- [다음] -->
+							<c:if test="${ pi.currentPage >= pi.maxPage }">&nbsp;[다음]</c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url value="${ loc }" var="bListNext">
+									<!-- loc : 현재 내 주소 -->
+									<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+									<c:if test="${ searchValue ne null }">
+										<c:param name="searchCondition" value="${ searchCondition }" />
+										<c:param name="searchValue" value="${ searchValue }" />
+									</c:if>
+								</c:url>
+								<a href="${ bListNext }">&nbsp;[다음]</a>
+							</c:if>
+						</div>
+					</c:if>
+				</div>
+			</c:if>
+			<c:if test="${loginUser != null }">
+			<div id="writequestion"><button style=" width: 6em; position: absolute; left: 378px;" onclick="location.href='questionForm.cm'">질문등록</button></div>
+			</c:if>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+
+</script>
 
 </html>

@@ -8,6 +8,12 @@
 		from books
 		where b_Status='Y'
 	</select>
+	<select id="getReListCount" resultType="_int">
+		select count(*)
+		from books
+		where b_Status='Y' and B_RECOMMEND = 'Y'
+	</select>
+	
 	
 	<select id="selectList" resultMap="booksResultSet">
 		select *
@@ -15,6 +21,26 @@
 		where b_status='Y'
 		order by books_no desc
 	</select>
+	
+	<select id="selectReList" resultMap="booksResultSet">
+		select *
+		from books
+		where b_status='Y' and B_RECOMMEND = 'Y'
+		order by books_no desc
+	</select>
+	
+	<update id="bkRecommend">
+		update books
+		set B_RECOMMEND = 'Y'
+		where BOOKS_NO = #{bNo}
+	</update>
+	<update id="bkCancelRecommend">
+		update books
+		set B_RECOMMEND = 'N'
+		where BOOKS_NO = #{bNo}
+	</update>
+	
+	
 	<resultMap type="Books" id="booksResultSet">
 		<id column="BOOKS_NO" property="bNo"/>
 		<result column="BOOK_TITLE" property="bTitle"/>
@@ -27,9 +53,16 @@
 		<result column="ENTRY_DATE" property="entryDate"/>
 	</resultMap>
 	
+	<select id="selectBlist" resultMap="booksResultSet">
+		select *
+		from books
+		where books_no = #{bNo}
+	</select>
+	
+	
 	<insert id="insertBook">
 		insert into books
-		values(seq_bkno.nextval, #{bTitle}, #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate)
+		values(seq_bkno.nextval, #{bTitle}, #{bWriter}, #{bCompany}, #{bDate}, #{bContent}, default, default, sysdate, #{bForm}, #{bStandardNo}, #{bCallNo})
 	</insert>
 	<insert id="insertAttachment">
 		insert into files
@@ -61,7 +94,7 @@
 		<result column="CULTURE_PLACE" property="cPlace"/>
 		<result column="CULTURE_INSTRUCTOR" property="cInstructor"/>
 		<result column="CULTURE_TARGET" property="cTarget"/>
-		<result column="C_DEADLINE" property="cDateLine"/>
+		<result column="C_DEADLINE" property="cDeadLine"/>
 		<result column="C_STATUS" property="cStatus"/>
 		<result column="USER_NO" property="uNo"/>
 	</resultMap>
@@ -78,6 +111,34 @@
 		insert into files
 		values(seq_fno.nextval, #{originName}, #{changeName}, sysdate, 2, default, 0, 0, seq_cno.CURRVAL, 0, 0)
 	</insert>
+	<select id="cDeleteList" resultMap="cultureResultSet">
+		select *
+		from culture
+		where CULTURE_NO = #{cNo}
+	</select>
+	<update id="cultureDelete">
+		update culture
+		set C_STATUS='N'
+		where CULTURE_NO = #{cNo}
+	</update>
+	<select id="selectClist" resultMap="cultureResultSet">
+		select *
+		from culture
+		where CULTURE_NO = #{cNo}
+	</select>
+	<select id="selectCFileName" resultMap="FilesResultSet">
+		select *
+		from files
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 0
+	</select>
+	<select id="selectCFileName2" resultMap="FilesResultSet">
+		select *
+		from files
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 2
+	</select>
+	
+	
+	
 	
 	<!-- 관리자 로그인 -->
 	<select id="adminLogin" resultMap="memberResultSet">
@@ -111,6 +172,501 @@
 		from users
 		where user_id = #{id}
 	</select>
+	
+	<!-- 유저 관련 -->
+	<select id="getListUserCount" resultType="_int">
+		select count(*)
+		from users
+		where u_Status='Y' and ADMIN_YN = 'N'
+	</select>
+	<select id="getListadminUserCount" resultType="_int">
+		select count(*)
+		from users
+		where u_Status='Y' and ADMIN_YN = 'Y'
+	</select>
+	
+	<select id="selectUserList" resultMap="MemberResultSet">
+		select *
+		from users
+		where u_status='Y' and ADMIN_YN = 'N'
+		order by USER_NO desc
+	</select>
+	<select id="selectadminUserList" resultMap="MemberResultSet">
+		select *
+		from users
+		where u_status='Y' and ADMIN_YN = 'Y'
+		order by USER_NO desc
+	</select>
+	
+	<resultMap type="Member" id="MemberResultSet">
+		<id column="USER_NO" property="no"/>
+		<result column="USER_ID" property="id"/>
+		<result column="USER_PWD" property="pwd"/>
+		<result column="USER_NAME" property="name"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="BIRTHDAY" property="birthday"/>
+		<result column="GENDER" property="gender"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="U_STATUS" property="uStatus"/>
+		<result column="ADMIN_YN" property="admin"/>
+	</resultMap>
+	
+	<select id="deleteUserList" resultMap="MemberResultSet">
+		select *
+		from users
+		where USER_NO = #{no}
+	</select>
+	
+	
+	
+	
+	<update id="deleteUser">
+		update users
+		set u_status='N'
+		where user_no = #{no}
+	</update>
+	<update id="deleteAdmin">
+		update users
+		set u_status='N'
+		where user_no = #{no}
+	</update>
+	
+	
+	<!-- 열람실 -->
+	<select id="selectrList" resultMap="roomResultSet">
+		select *
+		from room
+		order by room_no
+	</select>
+	<resultMap type="Room" id="roomResultSet">
+		<id column="ROOM_NO" property="rNo"/>
+		<result column="ROOM_STATUS" property="rStatus"/>
+	</resultMap>
+	
+	<select id="getAllListCount" resultType="_int">
+		select count(*)
+		from room
+	</select>
+	
+	<select id="getrlistCount" resultType="_int">
+		select count(*)
+		from room
+		where room_status='Y'
+	</select>
+	
+	<select id="getChk" resultType="_int">
+		select count(*) 
+		from room_sign
+		    join room using(room_no)
+		where user_no=#{uNo} and ((room_status='Y' and out_time is not null) or room_status='Y')
+	</select>
+	
+	<select id="selectNick" resultMap="roomSignResultSet">
+		select *
+		from room_sign
+		where room_no = #{rNo} and OUT_TIME is null
+	</select>
+	<resultMap type="RoomSign" id="roomSignResultSet">
+		<id column="RS_NO" property="rsNo"/>
+		<result column="IN_TIME" property="inTime"/>
+		<result column="OUT_TIME" property="outTime"/>
+		<result column="NICKNAME" property="nickName"/>
+		<result column="ROOM_NO" property="rNo"/>
+		<result column="USER_NO" property="uNo"/>
+	</resultMap>
+	
+	<update id="cancelRoom">
+		update room
+		set room_status = 'N'
+		where room_no = #{rNo}
+	</update>
+	<update id="outTime">
+		update room_sign
+		set out_time = sysdate
+		where rs_no = #{rsNo}
+	</update>
+	
+	<update id="deleteBook">
+		update books	
+		set b_status = 'N'
+		where books_no = #{bNo}
+	</update>
+	
+	<select id="selectBFileName" resultMap="FilesResultSet" >
+		select *
+		from files
+		where BOOKS_NO = #{bNo}
+	</select>
+		<resultMap type="Files" id="FilesResultSet">
+		<id column="FILE_NO" property="fNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="UPLOAD_DATE" property="uploadDate"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
+		<result column="F_STATUS" property="fStatus"/>
+		<result column="BOARD_NO" property="bNo"/>
+		<result column="GROUP_NO" property="gNo"/>
+		<result column="CULTURE_NO" property="cNo"/>
+		<result column="BOOKS_NO" property="bkNo"/>
+		<result column="Q_NO" property="qNo"/>
+	</resultMap>
+	
+	<update id="updateBook">
+		update books
+		set BOOK_TITLE = #{bTitle}, BOOKS_WRITER = #{bWriter}, BOOKS_COMPANY=#{bCompany}, BOOKS_DATE = #{bDate}
+						 , BOOKS_CONTENT = #{bContent}
+		where books_no = #{bNo}
+	</update>
+	<update id="updateBAttachment">
+		update files
+		set ORIGIN_NAME= #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
+		where books_no = #{bkNo}
+	</update>
+	
+	<update id="updateCulture">
+		update culture
+		set CULTURE_TITLE = #{cTitle}, CULTURE_CONTENT = #{cContent}, CULTURE_TOTAL = #{cTotal}, CULTURE_START_DATE = #{cStartDate},
+			CULTURE_END_DATE = #{cEndDate}, LECTURE_DATE = #{lDate}, LECTURE_TIME = #{lTime}, CULTURE_PLACE = #{cPlace},
+			CULTURE_INSTRUCTOR = #{cInstructor}, CULTURE_TARGET = #{cTarget}
+		where CULTURE_NO = #{cNo}
+	</update>
+	
+	<update id="updateCAttachment">
+		update files
+		set ORIGIN_NAME = #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 0
+	</update>
+	
+	<update id="updateCFile">
+		update files
+		set ORIGIN_NAME= #{originName}, CHANGE_NAME=#{changeName}, UPLOAD_DATE = sysdate
+		where CULTURE_NO = #{cNo} and FILE_LEVEL = 2
+	</update>
+	<select id="getbgListCount" resultType="_int">
+		select count(*)
+		from bkgroup
+		where G_STATUS = 'Y'
+	</select>
+	
+	<select id="selectbgList" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where g_status='Y'
+		order by GROUP_NO desc
+	</select>
+	<select id="gDeleteList" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where GROUP_NO = #{gNo}
+	</select>
+	<update id="bgDelete">
+		update bkgroup
+		set G_STATUS = 'N'
+		where GROUP_NO = #{gNo}
+	</update>
+	
+	<resultMap type="BookGroup" id="groupResultSet">
+		<id column="GROUP_NO" property="gNo" />
+		<result column="GROUP_NAME" property="gName" />
+		<result column="GROUP_INTRO" property="gIntro" />
+		<result column="GROUP_TOTAL" property="gTotal" />
+		<result column="GROUP_CONTENT" property="gContent" />
+		<result column="GB_TITLE" property="gbTitle" />
+		<result column="GB_CONTENT" property="gbContent" />
+		<result column="GROUP_DATE" property="gDate" />
+		<result column="GROUP_PLACE" property="gPlace" />
+		<result column="G_DEADLINE" property="gDeadline" />
+		<result column="G_STATUS" property="gStatus" />
+		<result column="GROUP_WRITER" property="gWriter" />
+	</resultMap>
+	
+	<select id="getNoticeListCount" resultType="_int">
+		select count(*)
+		from notice
+		where NOTICE_STATUS = 'Y'
+	</select>
+	
+	<select id="selectNoticeList" resultMap="NoticeResultSet">
+		select *
+		from notice
+		where NOTICE_STATUS='Y'
+		order by NOTICE_NO desc
+	</select>
+	
+	<insert id="InsertNotice">
+		insert into notice
+ 		values( seq_nno.nextval, #{nTitle}, #{nContent}, sysdate, #{ nWriter}, default, default )
+	</insert>
+	
+	<resultMap type="Notice" id="NoticeResultSet">
+		<id column="NOTICE_NO" property="nNo" />
+		<result column="NOTICE_TITLE" property="nTitle" />
+		<result column="NOTICE_CONTENT" property="nContent" />
+		<result column="NOTICE_DATE" property="nDate" />
+		<result column="NOTICE_WRITER" property="nWriter" />
+		<result column="NOTICE_COUNT" property="nCount" />
+		<result column="NOTICE_STATUS" property="nStatus" />
+	</resultMap>
+	
+	<select id="searchUListCount" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultType="_int">
+		select count(*)
+		from users
+		where U_STATUS = 'Y'  and ADMIN_YN = 'N'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="searchAUListCount" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultType="_int">
+		select count(*)
+		from users
+		where U_STATUS = 'Y' and ADMIN_YN = 'Y'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchResultUList" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultMap="memberResultSet">
+		select *
+		from users
+		where U_STATUS='Y' and ADMIN_YN = 'N'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+		order by USER_NO desc
+	</select>
+	
+	<select id="selectSearchResultAUList" parameterType="com.kh.klib.admin.model.vo.AdminSearchValue" resultMap="memberResultSet">
+		select *
+		from users
+		where U_STATUS='Y' and ADMIN_YN = 'Y'
+		<if test="writer != null">
+			and USER_ID like '%' || #{writer} || '%'
+		</if>
+		order by USER_NO desc
+	</select>
+	
+	
+	
+	<select id="bListCount" resultType="_int">
+		select count(*)
+		from board
+		where B_STATUS = 'Y'
+	</select>
+	
+	<select id="selectBoardList" resultMap="boardResultSet">
+		select *
+		from board
+		where b_status = 'Y'
+		order by board_no desc
+	</select>
+	
+	<select id="selectDetailBoard" resultMap="boardResultSet">
+		select *
+		from board
+		where board_no = #{bNo}
+	</select>
+	
+	<select id="selectBFile" resultMap="fileResultSet">
+		select *
+		from files
+			 join board using(board_no)
+		where board_no = #{bNo}
+	</select>
+	
+	<resultMap type="Files" id="fileResultSet">
+		<id column="FILE_NO" property="fNo" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+		<result column="FILE_PATH" property="filePath" />
+		<result column="UPLOAD_DATE" property="uploadDate" />
+		<result column="FILE_LEVEL" property="fileLevel" />
+		<result column="F_STATUS" property="fStatus" />
+		<result column="BOARD_NO" property="bNo" />
+		<result column="GROUP_NO" property="gNo" />
+		<result column="CULTURE_NO" property="cNo" />
+		<result column="BOOKS_NO" property="bkNo" />
+		<result column="Q_NO" property="qNo" />
+	</resultMap>
+	
+	<resultMap type="Board" id="boardResultSet">
+		<id column="BOARD_NO" property="bNo" />
+		<result column="BOARD_TITLE" property="bTitle" />
+		<result column="BOARD_CONTENT" property="bContent" />
+		<result column="BOARD_WRITER" property="bWriter" />
+		<result column="BOARD_DATE" property="bDate" />
+		<result column="BOARD_COUNT" property="bCount" />
+		<result column="B_STATUS" property="bStatus" />
+	</resultMap>
+	
+	<select id="CMListCount" resultType="_int">
+		select count(*)
+		from comments
+		where COMMENT_STATUS = 'Y'
+	</select>
+	<select id="selectCommentsList" resultMap="commentsResultSet">
+		select * 
+		from comments
+		where COMMENT_STATUS = 'Y'
+		order by comment_no desc
+	</select>
+		<resultMap type="Comments" id="commentsResultSet">
+		<id column="COMMENT_NO" property="cNo" />
+		<result column="COMMENT_CONTENT" property="cContent" />
+		<result column="COMMENT_WRITER" property="cWriter" />
+		<result column="COMMENT_DATE" property="cDate" />
+		<result column="COMMENT_STATUS" property="cStatus" />
+		<result column="BOARD_NO" property="bNo" />
+	</resultMap>
+	
+	
+	<update id="boardDelete">
+		update board
+		set B_STATUS = 'N'
+		where BOARD_NO = #{bNo}
+	</update>
+	<update id="commentDelete">
+		update comments
+		set COMMENT_STATUS = 'N'
+		where COMMENT_NO = #{cNo}
+	</update>
+	
+	
+	<select id="searchBoardListCount" parameterType="com.kh.klib.board.model.vo.BoardSearchValue" resultType="_int">
+		select count(*)
+		from board
+		where b_status='Y'
+		<if test="title != null">
+			and board_title like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and board_writer like '%' || #{writer} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchBoardResultList" parameterType="com.kh.klib.board.model.vo.BoardSearchValue" resultMap="boardResultSet">
+		select *
+		from board
+		where b_status = 'Y'
+		<if test="title != null">
+			and board_title like '%' || #{title} || '%'
+		</if>
+		<if test="writer != null">
+			and board_writer like '%' || #{writer} || '%'
+		</if>
+		order by board_no desc
+	</select>
+	
+	<select id="searchBookListCount" parameterType="com.kh.klib.books.model.vo.SearchCondition" resultType="_int" >
+		select count(*) 
+		from books
+		<where>
+		b_status= 'Y'
+		<if test="writer != null" >
+		and books_writer like '%' || #{writer} || '%'
+		</if>
+		<if test="title != null" >
+		and book_title like '%' || #{title} || '%' 
+		</if>
+		<if test="company !=null" >
+		and books_company = #{company}
+		</if>
+		</where>
+	</select>
+	
+	<select id="selectSearchBookResultList"  parameterType="com.kh.klib.books.model.vo.SearchCondition" resultMap="bookResultSet">
+		select * 
+		from books
+		<where>
+		b_status= 'Y'
+		<if test="writer != null" >
+		and books_writer like '%' || #{writer} || '%'
+		</if>
+		<if test="title != null" >
+		and book_title like '%' || #{title} || '%' 
+		</if>
+		<if test="company !=null" >
+		and books_company = #{company}
+		</if>
+		</where>
+		order by books_no desc	
+	</select>
+		<resultMap type="Books" id="bookResultSet">
+		<id column="BOOKS_NO" property="bNo" />
+		<result column="BOOK_TITLE" property="bTitle" />
+		<result column="BOOKS_WRITER" property="bWriter" />
+		<result column="BOOKS_COMPANY" property="bCompany" />
+		<result column="BOOKS_DATE" property="bDate" />
+		<result column="BOOKS_CONTENT" property="bContent" />
+		<result column="B_RECOMMEND" property="bRecommend" />
+		<result column="ENTRY_DATE" property="entryDate" />
+		<result column="ORIGIN_NAME" property="originFileName" />
+		<result column="CHANGE_NAME" property="renameFileName" />
+		<result column="BOOKS_FORM" property="bForm" />
+		<result column="BOOKS_STANDARD_NO" property="bStandardNo" />
+		<result column="BOOKS_CALL_NO" property="bCallNo" />
+	</resultMap>
+	
+	<select id="searchCultureListCount" parameterType="CultureSearchCondition" resultType="_int">
+		select count(*)
+		from culture
+		where c_status='Y'
+		<if test="title != null">
+			and culture_title like '%' || #{title} || '%'
+		</if>
+		<if test="instructor != null">
+			and culture_instructor like '%' || #{instructor} || '%'
+		</if>
+		<if test="target != null">
+			and culture_target like '%' || #{target} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchCultureResultList" parameterType="CultureSearchCondition" resultMap="cultureResultSet">
+		select *
+		from culture
+		where c_status='Y'
+		<choose>
+			<when test="title != null">
+				and culture_Title like '%' || #{title} || '%'
+			</when>
+			<when test="instructor != null">
+				and culture_Instructor like '%' || #{instructor} || '%'
+			</when>
+			<otherwise>
+				and culture_Target like '%' || #{target} || '%'
+			</otherwise>
+		</choose>
+		order by culture_No desc
+	</select>
+	
+	<select id="searchBGroupListCount" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultType="_int">
+		select count(*)
+		from bkgroup
+		where g_status='Y'
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchBGroupResultList" parameterType="com.kh.klib.bkgroup.model.vo.BookGroupSearchValue" resultMap="groupResultSet">
+		select *
+		from bkgroup
+		where g_status = 'Y'
+		<if test="name != null">
+			and group_name like '%' || #{name} || '%'
+		</if>
+		<if test="book != null">
+			and gb_title like '%' || #{book} || '%'
+		</if> 
+		order by group_no desc
+	</select>
+		
 	
 	
 </mapper>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cultureMapper">
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from culture
+		where c_status='Y'
+	</select>
+	
+	<select id="selectBList" resultMap="cultureResultSet">
+		select *
+		from culture
+            join files using(culture_no)
+		where c_status='Y' and file_level=0
+		order by culture_no desc
+	</select>
+	<resultMap type="Culture" id="cultureResultSet">
+		<id column="CULTURE_NO" property="cNo"/>
+		<result column="CULTURE_TITLE" property="cTitle"/>
+		<result column="CULTURE_CONTENT" property="cContent"/>
+		<result column="CULTURE_TOTAL" property="cTotal"/>
+		<result column="CULTURE_START_DATE" property="cStartDate"/>
+		<result column="CULTURE_END_DATE" property="cEndDate"/>
+		<result column="LECTURE_DATE" property="lDate"/>
+		<result column="LECTURE_TIME" property="lTime"/>
+		<result column="CULTURE_PLACE" property="cPlace"/>
+		<result column="CULTURE_INSTRUCTOR" property="cInstructor"/>
+		<result column="CULTURE_TARGET" property="cTarget"/>
+		<result column="C_DEADLINE" property="cDeadLine"/>
+		<result column="C_STATUS" property="cStatus"/>
+		<result column="USER_NO" property="uNo"/>
+	</resultMap>
+	
+	<select id="selectFList" resultMap="filesResultSet">
+		select *
+		from files
+			join culture using(culture_no)
+		where f_status='Y' and file_level=0
+		order by file_no desc
+	</select>
+	<resultMap type="Files" id="filesResultSet">
+		<id column="FILE_NO" property="fNo"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="CHANGE_NAME" property="changeName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="UPLOAD_DATE" property="uploadDate"/>
+		<result column="FILE_LEVEL" property="fileLevel"/>
+		<result column="F_STATUS" property="fStatus"/>
+		<result column="BOARD_NO" property="bNo"/>
+		<result column="GROUP_NO" property="gNo"/>
+		<result column="CULTURE_NO" property="cNo"/>
+		<result column="BOOKS_NO" property="bkNo"/>
+		<result column="Q_NO" property="qNo"/>
+	</resultMap>
+	
+	<select id="getSearchResultListCount" parameterType="CultureSearchCondition" resultType="_int">
+		select count(*)
+		from culture
+		where c_status='Y'
+		
+		<if test="title != null">
+			and culture_title like '%' || #{title} || '%'
+		</if>
+		<if test="instructor != null">
+			and culture_instructor like '%' || #{instructor} || '%'
+		</if>
+		<if test="place != null">
+			and culture_place like '%' || #{place} || '%'
+		</if>
+		<if test="target != null">
+			and culture_target like '%' || #{target} || '%'
+		</if>
+	</select>
+	
+	<select id="selectSearchResultBList" parameterType="CultureSearchCondition" resultMap="cultureResultSet">
+		select *
+		from culture
+            join files using(culture_no)
+		where c_status='Y' and file_level=0
+		<choose>
+			<when test="title != null">
+				and culture_Title like '%' || #{title} || '%'
+			</when>
+			<when test="instructor != null">
+				and culture_Instructor like '%' || #{instructor} || '%'
+			</when>
+			<when test="place != null">
+				and culture_Place like '%' || #{place} || '%'
+			</when>
+			<otherwise>
+				and culture_Target like '%' || #{target} || '%'
+			</otherwise>
+		</choose>
+		order by culture_No desc
+	</select>
+	
+	<select id="selectSearchResultFList" parameterType="CultureSearchCondition" resultMap="filesResultSet">
+		select *
+		from files
+			join culture using(culture_no)
+		where f_status='Y' and file_level=0
+			<if test="title != null">
+				and culture_Title like '%' || #{title} || '%'
+			</if>
+			<if test="instructor != null">
+				and culture_Instructor like '%' || #{instructor} || '%'
+			</if>
+			<if test="place != null">
+				and culture_Place like '%' || #{place} || '%'
+			</if>
+			<if test="target != null">
+				and culture_Target like '%' || #{target} || '%'
+			</if>
+		order by file_no desc
+	</select>
+	
+	<select id="selectCulture" resultMap="cultureResultSet">
+		select *
+		from culture
+		where culture_no=#{cNo}
+	</select>	
+	
+	<select id="selectFiles" resultMap="filesResultSet">
+		select *
+		from files
+			join culture using(culture_no)
+		where culture_no=#{cNo}
+	</select>
+	<select id="getApprovalCount" resultType="_int">
+		select count(*)
+		from culture_sign
+		where culture_no=#{cNo} and cs_approval!='N'
+	</select>
+	
+	<resultMap type="CultureSign" id="cultureSignResultSet">
+		<id column="USER_NO" property="uNo"/>
+		<id column="CULTURE_NO" property="cNo"/>
+		<result column="CS_STATUS" property="csStatus"/>
+		<result column="CS_DATE" property="csDate"/>
+		<result column="CS_APPROVAL" property="csApproval"/>
+	</resultMap>
+	
+	<insert id="insertCultureSign">
+		insert into culture_sign
+		values (#{uNo}, #{cNo}, default, sysdate, default)
+	</insert>
+
+	<select id="selectcsList" resultMap="cultureSignResultSet">
+		select *
+		from culture_sign
+		where culture_no=#{cNo} 
+	</select>
+	
+	<select id="selectList" resultMap="cultureSignResultSet">
+		select *
+		from culture_sign
+		    join culture using(culture_no)
+		where user_no=#{uNo}
+		order by cs_date desc
+	</select>
+	
+	<select id="selectcList" resultMap="cultureResultSet">
+		select * 
+		from culture
+	</select>
+	
+	<update id="cancelCulture">
+		update culture_sign
+		set cs_approval='N', cs_status='N'
+		where culture_no=#{cNo} and user_no=#{uNo}
+	</update>
+	
+	<delete id="deleteCS">
+		delete from culture_sign
+		where culture_no=#{cNo} and user_no=#{uNo}
+	</delete>
+	<select id="selectMember" resultMap="memberResultSet">
+		select *
+		from users
+		where user_no = #{uNo} and u_status='Y'
+	</select>
+	<resultMap type="com.kh.klib.member.model.vo.Member" id="memberResultSet">
+		<id column="USER_NO" property="no"/>
+		<result column="USER_ID" property="id"/>
+		<result column="USER_PWD" property="pwd"/>
+		<result column="USER_NAME" property="name"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="BIRTHDAY" property="birthday"/>
+		<result column="GENDER" property="gender"/>
+		<result column="PHONE" property="phone"/>
+		<result column="EMAIL" property="email"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="U_STATUS" property="uStatus"/>
+		<result column="ADMIN_YN" property="admin"/>
+	</resultMap>
+	
+	<update id="updateCsMemberApply">
+		update culture_sign
+		set CS_APPROVAL = 'Y'
+		where CULTURE_NO = #{cNo} and user_no = #{uNo}
+	</update>
+	<update id="updateCsMemberNoApply">
+		update culture_sign
+		set CS_APPROVAL = 'N'
+		where CULTURE_NO = #{cNo} and user_no = #{uNo}
+	</update>
+	
+</mapper>

@@ -89,7 +89,7 @@ public class RoomController {
 							 @RequestParam("rNo") Integer rNo,
 							 HttpSession session,
 							 Model model) {
-		int listResult = rService.updateRoom(r);
+		int listResult = rService.updateRoom(r); // rNo를 받아 status가 N인 좌석 Y로 변경
 		
 		int uNo = ((Member)session.getAttribute("loginUser")).getNo();
 		String nickName = ((Member)session.getAttribute("loginUser")).getNickname();
@@ -101,6 +101,7 @@ public class RoomController {
 		
 		if(listResult > 0) {
 			int result = rService.insertRoomSign(rs);
+			// 신청 내역 뽑아야되기 때문에 좌석 업데이트 시, 해당 rNo와 uNo를 받아 신청 내역 삽입
 			System.out.println("rs2 : "+rs);
 			if(result > 0) {
 				return "ok";
@@ -118,15 +119,14 @@ public class RoomController {
 								   @RequestParam("uNo") Integer uNo,
 								   @RequestParam("rNo") Integer rNo) {
 		
-		System.out.println("rs" + rs);
-		System.out.println("rNo : "+ rNo);
-		System.out.println("uNo : "+ uNo);
 		int result = 0;
 		int updateStatus = 0;
 		if(rs.getOutTime() == null) {
 			result = rService.cancelRoom(uNo);
+			// 신청 내역 db에서 uNo의 신청 내역 중 out_time이 null값인 것을 찾아 sysdate 넣어 업데이트 = 좌석 반납 
 			if(result > 0) {
-				updateStatus = rService.updateStatus(rNo); 
+				updateStatus = rService.updateStatus(rNo);
+				// 좌석 반납 시, 해당 좌석 status를 N으로 만들어 리스트에서 반납된 좌석 업데이트
 			} else {
 				throw new RoomException("좌석 반납에 실패하였습니다.");
 			}

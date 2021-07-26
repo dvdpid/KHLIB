@@ -22,17 +22,19 @@
 			<ul class="lists">
 				<li><a><c:out value="${ loginUser.name } 관리자님  환영합니다."/></a>
 				<li><a href="logout.ad">로그아웃</a></li>
-				<li><a href="mypageForm.me">내 정보보기</a></li>						
 			</ul>		
 		</c:if>
 		</div>
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
-			<div class="logo"><h2><b style="color:rgb(212, 129, 91);">KH&nbsp;</b><b>도서관</b></h2> </div>
+			<div class="logo" onclick="location.href='user.ad'"><h2><b style="color:rgb(212, 129, 91);">KH&nbsp;</b><b>도서관</b></h2></div>
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>
+			<ul class="topLists">
+				<li><a href="home.do">사용자 화면</a></li>
+			</ul>
 		</div>
 	</section>
 </body>

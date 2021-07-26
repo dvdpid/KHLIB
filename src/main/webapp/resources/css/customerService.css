@@ -227,7 +227,7 @@
 		display: inline;
 	}
 
-    table {
+    table.qnatable {
         width: 80%;
     }
 
@@ -248,7 +248,7 @@
         width: 20%;
     }
 
-    .wrapper {
+    .boardwrapper {
       display: flex;
       flex-direction: column;
       padding-bottom: 2em;

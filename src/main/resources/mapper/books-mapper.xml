@@ -10,7 +10,7 @@
 	<select id="getBookList" resultMap="bookResultSet">
 		select * 
 		from books
-		join files using(books_no)
+		left join files using(books_no)
 		where b_status= 'Y' and file_level = 0 and entry_date >= ADD_MONTHS(SYSDATE, -1)
 		order by books_no desc
 	</select>
@@ -74,7 +74,7 @@
 	<select id="selectRecommendResultList" resultMap="bookResultSet">
 		select * 
 		from books
-		join files using(books_no)
+		left join files using(books_no)
 		where  b_status= 'Y' and b_recommend = 'Y'
 	</select>
 	
@@ -89,5 +89,8 @@
 		<result column="ENTRY_DATE" property="entryDate" />
 		<result column="ORIGIN_NAME" property="originFileName" />
 		<result column="CHANGE_NAME" property="renameFileName" />
+		<result column="BOOKS_FORM" property="bForm" />
+		<result column="BOOKS_STANDARD_NO" property="bStandardNo" />
+		<result column="BOOKS_CALL_NO" property="bCallNo" />
 	</resultMap>
 </mapper>

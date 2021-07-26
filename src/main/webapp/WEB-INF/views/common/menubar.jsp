@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>열람실 상세설명</title>
-<link rel="stylesheet" href="resources/css/common/menubar.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/common/menubar.css" type="text/css">
 <script src="resources/js/menubar.js" defer></script>
 </head>
 <body>
@@ -44,7 +44,7 @@
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
-			<div class="logo"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </div>
+			<div class="logo"><a href="home.do" style="color: black;"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </a></div>
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>

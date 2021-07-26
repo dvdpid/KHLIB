@@ -82,7 +82,7 @@
 				from notice
 				where NOTICE_STATUS='Y'
 				order by NOTICE_NO desc)
-			where rownum <= 4
+			where rownum <= 5
 		]]>
 	</select>
 	

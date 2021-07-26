@@ -274,11 +274,6 @@ public class MemberController {
 		return "memberFind";
 	}
 	
-	@RequestMapping(value="findPwd.me", method = RequestMethod.GET)
-	public void findPwdGET() throws Exception{
-		
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="findPwd.me", method = RequestMethod.POST)
 	public String findPwdPOST(@ModelAttribute Member member, HttpServletResponse response) throws Exception{
@@ -288,12 +283,32 @@ public class MemberController {
 		member.setPwd(encPwd);
 		
 		int result = mService.updatePwd(member);
-		
+		System.out.println("result: " + result);
 		if(result > 0) {
-			return "memberLogin";
+			System.out.println("result: " + result);
+			return "memberFind";
 		} else {
 			return "../common/errorPage";
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="findId.me", method = RequestMethod.POST)
+	public String findIDPOST(@ModelAttribute Member member, @RequestParam("email") String email, 
+							 @RequestParam("name") String name, @RequestParam("tel") String phone){
+		Member m = new Member();
+		m.setEmail(email);
+		m.setName(name);
+		m.setPhone(phone);
+		
+		String result = mService.findId(m);
+		if(result != null) {
+			return result;
+		} else {
+			return null;
+		}
+		
+		
 	}
 
 }

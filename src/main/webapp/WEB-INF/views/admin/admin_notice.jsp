@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=2.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <script src="resources/js/admin.js" defer></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
@@ -30,6 +30,7 @@
 			<p><img id="titleImg1" src="resources/images/icon7.png"/>
 			공지사항 관리</p>
 		</div>
+		<div class="con">
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">공지사항 목록</h3><br>
 		<div>
@@ -48,8 +49,8 @@
 				<c:forEach var="n" items="${list }">
 				<tr class="list"  onclick="location.href='${ contextPath }/ndetail.nt?nNo=' + ${n.nNo} + '&page=' + ${ pi.currentPage }">
 					<td>${n.nNo }</td>
-					<td class="subject"><a href="#a">${n.nTitle }</a></td>
-					<td><a href="#a">${ n.nDate }</a></td>
+					<td>${n.nTitle }</td>
+					<td>${ n.nDate }</td>
 					<td>${n.nWriter }</td>
 					<td>${n.nCount }</td>
 					<td onclick="event.cancelBubble=true"><input type="radio" name="nNo" value="${n.nNo  }"></td>
@@ -103,6 +104,7 @@
 			<input type="button" class="btn2" value="공지사항 삭제"  style="float:right; margin-right: 75px;" >
 			<input type="button" class="btn3" value="공지사항 수정"  style="float:right; margin-right: 75px;" >
 			<input type="button" class="btn1" value="공지사항 추가"  onclick="location.href='noticeInsertForm.ad'" style="float:right; margin-right: 75px;">
+		</div>
 		</div>
 	</div>
 	<script>

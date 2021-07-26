@@ -69,7 +69,7 @@
 	<select id="selectrList" resultMap="roomSignResultSet">
 		select *
 		from room_sign
-		where USER_NO = #{no}
+		where USER_NO = #{no} and out_Time is null
 	</select>
 	
 	<resultMap type="RoomSign" id="roomSignResultSet">

@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=3.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -29,6 +29,7 @@
 			<p><img id="titleImg1" src="resources/images/icon6.png"/>
 			독서모임 관리</p>
 		</div>
+		<div class="con">
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">독서 모임</h3><br>
 		
@@ -67,7 +68,7 @@
 				<c:forEach var="g" items="${list }">
 					<tr class="list" onclick="location.href='${ contextPath }/gDetail.bg?gNo='+ ${ g.gNo } + '&page=' + ${ pi.currentPage }">
 						<td>${g.gNo }</td>
-						<td class="subject">${g.gName }</td>
+						<td>${g.gName }</td>
 						<td>${g.gbTitle }</td>
 						<td>${ g.gWriter }</td>
 						<td>${g.gDate }</td>
@@ -118,6 +119,7 @@
 			</table>
 			<br>
 			<input type="button" class="btn1" value="모임 삭제" style="float:right; margin-right: 75px;">
+		</div>
 		</div>
 	</div>
 		<script>

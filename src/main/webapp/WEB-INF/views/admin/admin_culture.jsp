@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=2.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -29,6 +29,7 @@
 			<p><img id="titleImg1" src="resources/images/icon5.png"/>
 			문화마당 관리</p>
 		</div>
+		<div class="con">
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">문화마당 목록</h3><br>
 		<div class="search-box" style="float:right; margin-right: 75px;">
@@ -70,8 +71,8 @@
 				<c:forEach var="c" items="${list }">
 				<tr class="list" onclick="location.href='${ contextPath }/cDetail.cu?cNo=' + ${c.cNo} + '&page=' + ${ pi.currentPage }">
 					<td>${c.cNo }</td>
-					<td class="subject"><a href="#a">${c.cTitle }</a></td>
-					<td><a href="#a">${ c.cTotal }</a></td>
+					<td>${c.cTitle }</td>
+					<td>${ c.cTotal }</td>
 					<td>${c.cStartDate }</td>
 					<td>${c.cEndDate }</td>
 					<td>${c.cInstructor }</td>
@@ -127,6 +128,7 @@
 			<input type="button" class="btn2" value="문화마당 수정" style="float:right; margin-right: 75px;">
 			<input type="button" class="btn1" value="문화마당 등록" onclick="location.href='cultureInsertForm.ad'"  style="float:right; margin-right: 75px;">
 			<br><br>
+		</div>
 		</div>
 	</div>
 	<script>

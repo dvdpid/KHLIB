@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=3.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/admin_search.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -34,6 +34,7 @@
 			<p><img id="titleImg1" src="resources/images/icon1.png"/>
 			회원 관리</p>
 		</div>
+		<div class="con">
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">회원 목록</h3><br>
 		<div class="search-box" style="float:right; margin-right: 75px;">
@@ -51,7 +52,7 @@
 			location.href="searchUser.ad?searchContent=" + searchContent;
 		}
 	</script>
-		<div>
+		<div class="dd">
 			<table class="type1">
 				<thead>
 				<tr>
@@ -78,8 +79,8 @@
 				<c:forEach var="u" items="${list }">
 				<tr class="list">
 					<td>${u.no }</td>
-					<td class="subject"><a href="#a">${u.id }</a></td>
-					<td><a href="#a">${u.name }</a></td>
+					<td>${u.id }</td>
+					<td>${u.name }</td>
 					<td>${u.nickname }</td>
 					<td>${u.birthday }</td>
 					<td>${u.gender }</td>
@@ -180,8 +181,8 @@
 				<c:forEach var="au" items="${alist }">
 				<tr class="list2">
 					<td>${au.no }</td>
-					<td class="subject"><a href="#a">${au.id }</a></td>
-					<td><a href="#a">${au.name }</a></td>
+					<td>${au.id }</td>
+					<td>${au.name }</td>
 					<td>${au.nickname }</td>
 					<td>${au.birthday }</td>
 					<td>${au.gender }</td>
@@ -238,6 +239,7 @@
 		</div>
 		<div class="ubtn">
 				<input type="submit" class="btn2" value="관리자 삭제" style="float:right; margin-right: 75px;">
+		</div>
 		</div>
 	</div>
 		<script>

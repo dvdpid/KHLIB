@@ -47,6 +47,8 @@ public interface MemberService {
 
 	ArrayList<Culture> selectcList();
 
+	String findId(Member m);
+
 	
 
 	

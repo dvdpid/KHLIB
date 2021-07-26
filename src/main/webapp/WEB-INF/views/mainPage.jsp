@@ -127,7 +127,7 @@
 						$(this).parent().css('background', 'none');
 					}, 'click':function(){
 						var nNo = $(this).parent().children().eq(0).val();
-						location.href='ndetail.nt?nNo=' + nNo + '&page=' + 1;
+						location.href='nDetail.ad?nNo=' + nNo + '&page=' + 1;
 					}});
 				},
 				error: function(data){
@@ -160,6 +160,48 @@
 			});
 		}
 		
+	});
+	
+	$(document).ready(function(){
+		$('#viewArea1').show();
+		$('#viewArea2').hide();
+		$('#viewArea3').hide();
+		$.ajax({
+			url: 'room.mp',
+			dataType:'json',
+			success: function(data){
+				var str1 = "";
+				var str2 = "";
+				$seatView1 = $('#seatView1').html('');
+				$seatView2 = $('#seatView2').html('');
+				
+				for(var i = 0; i < 24; i++){
+					if(data[i].rStatus == 'N'){
+						str1 += '<div class="empty">'
+						+ data[i].rNo + '</div>';
+					} else if(data[i].rStatus == 'Y'){
+						str1 += '<div class="full">'
+						+ data[i].rNo + '</div>';
+					}
+				}
+				$seatView1.append(str1);
+				
+				for(var i = 24; i < 48; i++){
+					if(data[i].rStatus == 'N'){
+						str2 += '<div class="empty">'
+						+ data[i].rNo + '</div>';
+					} else if(data[i].rStatus == 'Y'){
+						str2 += '<div class="full">'
+						+ data[i].rNo + '</div>';
+					}
+				}
+				$seatView2.append(str2);
+			},
+			error: function(){
+				alert("room 에러");
+			}
+			
+		});
 	});
 
 	$('#button1').click(function(){

@@ -9,8 +9,9 @@
 <style>
 	.loginArea{margin-top: 3%;}
 	#loginBtn {
-	   width: 99%; height: 70%; font-size: 15px; border: 0; 
-	   background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:5px;
+width: 99%; height: 70%; font-size: 15px; border: 0; 
+		background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:2px;
+=======
 	}
 	td {height: 50px;}
 	input { width:300px; height: 70%;}
@@ -23,16 +24,16 @@
 	<c:import url="../common/menubar.jsp"/>
 	
 	<div align="center" class="loginArea">
-	<div id="formArea" style="">
-		<h1><span  style="color:rgb(212, 129, 91);">KH</span> 도서관</h1>
+<h1 >로그인</h1>
+		<hr align="center" style="background: black; width: 19.5%;">
 		<form action="login.me" method="post">
 			<table id="loginTable" style="text-align:center;">
 				<tr>
-					<th width="100px">아이디</th>
+					
 					<td colspan="2"><input type="text" name="id" placeholder="아이디"></td>
 				</tr>			
 				<tr>
-					<th>비밀번호</th>
+					
 					<td colspan="2"><input type="password" name="pwd" placeholder="비밀번호"></td>
 				</tr>
 				<tr>

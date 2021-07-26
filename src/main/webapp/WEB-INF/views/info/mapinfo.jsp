@@ -82,7 +82,7 @@
 			<p><img id="titleImg1" src="resources/images/info/maps.png"/>
 			오시는 길</p>
 		</div>
-		<div class="empty" style="height:140px;"></div>
+		<div class="empty" style="height:50px;"></div>
 		<div class="infoSpace">
 			<table id="infoTable">
 				

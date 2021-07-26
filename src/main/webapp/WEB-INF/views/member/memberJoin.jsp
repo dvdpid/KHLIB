@@ -31,10 +31,10 @@
 		background: rgb(212, 129, 91); color: white; padding: 5px; margin:5px;
 		border: 0; border-radius: 7px; font-size: 12px;
 	}
-	span.guide{display: none; font-size: 12px; top:12px; right: 10px;}
+	span.guide{display: none; font-size: 12px; top:12px; right: 10px; margin: 9px 0 -2px;}
 	span.ok{color: green;}
 	span.error{color: red;}
-	span.guide2{display: none; font-size: 12px; top:12px; right: 10px;}
+	span.guide2{display: none; font-size: 12px; top:12px; right: 10px; margin: 9px 0 -2px;}
 	span.ok2{color: green;}
 	span.error2{color: red;}
 	
@@ -54,6 +54,7 @@
 					<tr>
 						<th><label class="must">*</label> 아이디 </th>
 						<td width="200px"><input type="text" id="userId" name="id" placeholder="아이디" required style="width: 100%;">
+							
 							<span class="guide ok">사용 가능합니다.</span>
 							<span class="guide error">사용 불가능합니다.</span>
 							<input type="hidden" name="idDUplicateCheck" id="idDUplicateCheck" value="0">
@@ -68,7 +69,7 @@
 					<tr>
 						<th><label class="must">*</label> 비밀번호 확인 </th>
 						<td><input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;">
-						<font id="chkNotice" size="2"></font>
+						<span style="height:10px;margin: 9px 0 -2px;"><font id="chkNotice" size="2"></font></span>
 						</td>
 						
 					</tr>

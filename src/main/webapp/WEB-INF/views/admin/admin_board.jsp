@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=2.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -29,6 +29,7 @@
 			<p><img id="titleImg1" src="resources/images/icon2.png"/>
 			게시글 관리</p>
 		</div>
+		<div class="con">
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">자유게시판 목록</h3><br>
 		<div class="search-box" style="float:right; margin-right: 75px;">
@@ -66,8 +67,8 @@
 				<c:forEach var="b" items="${bList }">
 				<tr class="bList" onclick="location.href='${ contextPath }/bDetail.ad?bNo=' + ${b.bNo} + '&page=' + ${ pi.currentPage }">
 					<td>${b.bNo }</td>
-					<td class="subject"><a href="#a">${b.bTitle }</a></td>
-					<td><a href="#a">${ b.bWriter }</a></td>
+					<td>${b.bTitle }</td>
+					<td>${ b.bWriter }</td>
 					<td>${b.bCount }</td>
 					<td>${b.bDate }</td>
 					<td onclick="event.cancelBubble=true"><input type="radio" name="bNo" value="${b.bNo }"></td>
@@ -194,7 +195,7 @@
 			<input type="button" class="btn2" value="댓글 삭제" style="float:right; margin-right: 75px;">
 			<br><br>
 		</div>
-		
+		</div>
 		
 	</div>
 	<script>

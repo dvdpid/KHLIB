@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=2.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -32,6 +32,7 @@
 			<p><img id="titleImg1" src="resources/images/icon3.png"/>
 			도서 관리</p>
 		</div>
+		<div class="con">
 		<div class="empty" style="height:50px;"></div>
 		<h3 align="left">도서 목록</h3><br>
 		
@@ -81,8 +82,8 @@
 				<c:forEach var="b" items="${list }">
 				<tr class="list"  onclick="location.href='${ contextPath }/detail.bk?bNo=' + ${b.bNo} + '&page=' + ${ pi.currentPage }">
 					<td>${b.bNo }</td>
-					<td class="subject"><a href="#a">${b.bTitle }</a></td>
-					<td><a href="#a">${ b.bWriter }</a></td>
+					<td>${b.bTitle }</td>
+					<td>${ b.bWriter }</a></td>
 					<td>${b.bCompany }</td>
 					<td>${b.bDate }</td>
 					<td>${b.bStatus }</td>
@@ -169,7 +170,7 @@
 				<c:forEach var="rb" items="${rlist }">
 				<tr class="list"  onclick="location.href='${ contextPath }/detail.bk?bNo=' + ${rb.bNo} + '&page=' + ${ pi.currentPage }">
 					<td>${rb.bNo }</td>
-					<td class="subject">${b.bTitle }</td>
+					<td>${b.bTitle }</td>
 					<td>${ rb.bWriter }</td>
 					<td>${rb.bCompany }</td>
 					<td>${rb.bDate }</td>
@@ -225,6 +226,7 @@
 			</table>
 			<br>
 			<input type="button" class="btn5" value="추천 취소"  style="float:right; margin-right: 75px;" >
+		</div>
 		</div>
 	</div>
 	<script>

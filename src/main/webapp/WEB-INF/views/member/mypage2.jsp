@@ -93,7 +93,7 @@
 			</tbody>
 			
 			</table>
-			<table style="margin-left: 70px;">
+			<table id="searchTable" style="margin-left: 70px;">
 			<tbody>
 			<tr>
 					<td id="infoname">성명</td>
@@ -131,21 +131,23 @@
 				<table id="myPage_myComment_table" class="myTable headerH">
 				<c:if test="${ empty rlist }">
 					<tr>
-						<td colspan="2" id="nullTd">예약한 열람실이 없습니다..</td>
+						<td colspan="4" id="nullTd">예약한 열람실이 없습니다..</td>
 					</tr>
 				</c:if>
 				<c:if test="${ not rlist.isEmpty() }">
 					<tr> 
 						<th>열람실</th>
 						<th>예약 좌석</th>
+						<th>입실 시간</th>
 						<th>퇴실여부</th>
 					</tr>
 				<c:forEach var="r" items="${rlist }">
 				<c:if test="${ empty r.outTime }">
-					<tr>
+					<tr onclick="location.href='${ contextPath }/roomMypage.ro'">
 						<td>${r.rNo }</td>
 						<td>제1 열람실</td>
-						<td>아직 퇴실처리를 하지 않았습니다.</td>
+						<td><fmt:formatDate value="${r.inTime }" pattern="yyyy/MM/dd/H:mm"/></td>
+						<td>X</td>
 					</tr>
 				</c:if>
 				</c:forEach>

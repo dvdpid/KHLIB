@@ -5,6 +5,10 @@
 	
 	a{ text-decoration: none; }
 	
+	.con{
+		margin: 25px 0px 0px 60px;
+	}
+	
 	#header{
 		font-weight: bold;
 		background-color: rgb(212, 129, 91);
@@ -13,7 +17,7 @@
 	}
 	
 	.wrapper{
-		width: 95%;
+		width: 100%;
 		min-height: 35px;
 		display: flex;
 		justify-content: space-between;
@@ -34,7 +38,7 @@
 	.lists li a{
 		color: white;
 		padding: 10px 20px;
-		font-size: 15px;
+		font-size: 10px;
 	}
 	
 	.lists li a:hover{ background: rgb(159, 101, 74); }
@@ -44,6 +48,7 @@
 		border-bottom: 2px solid lightgray;
 		font-size: 13px;
 	}
+	
 	
 	#topWrapper{ min-height: 70px; }
 	
@@ -66,7 +71,7 @@
 		display:none;
 	}
 	
-	.left{ float: left; width: 20%; }
+	.left{ float: left; width: 25%; }
 	
 	.sideTitle{
 		background: rgb(212, 129, 91);
@@ -84,7 +89,7 @@
 		padding: 10px 25px;
 	}
 	
-	.main{ float: right; width: 75%; text-align: center; }
+	.main{ float: right; width: 75%; text-align: center;}
 	
 	.mainTitle{
 		font-weight: 900;

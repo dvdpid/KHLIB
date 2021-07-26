@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>독서모임 상세보기</title>
-<link rel="stylesheet" href="resources/css/gsMemberList.css?ver=1.0" type="text/css"> 
+<link rel="stylesheet" href="resources/css/gsMemberList.css?ver=3.0" type="text/css"> 
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>

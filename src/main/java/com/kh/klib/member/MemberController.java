@@ -62,6 +62,8 @@ public class MemberController {
 		ArrayList<RoomSign> rlist = mService.selectrList(no);
 		ArrayList<Board> blist = mService.selectbList(name);
 		
+		System.out.println(rlist);
+		
 		ArrayList<GroupSign> gsList = mService.selectgsList(no);
 		ArrayList<BookGroup> gList = mService.selectgList();
 		

@@ -8,7 +8,7 @@
 
 <title> 회원 </title>
 
-<link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/admin.js" defer></script>
 </head>

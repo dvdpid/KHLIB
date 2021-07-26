@@ -11,6 +11,7 @@ import com.kh.klib.common.model.vo.PageInfo;
 import com.kh.klib.culture.model.vo.Culture;
 import com.kh.klib.culture.model.vo.CultureSearchCondition;
 import com.kh.klib.culture.model.vo.CultureSign;
+import com.kh.klib.member.model.vo.Member;
 
 @Repository("cDAO")
 public class CultureDAO {
@@ -87,6 +88,18 @@ public class CultureDAO {
 
 	public int deleteCS(SqlSessionTemplate sqlSession, CultureSign cs) {
 		return sqlSession.delete("cultureMapper.deleteCS", cs);
+	}
+
+	public Member selectMember(SqlSessionTemplate sqlSession, int uNo) {
+		return sqlSession.selectOne("cultureMapper.selectMember", uNo);
+	}
+
+	public int updateCsMemberApply(SqlSessionTemplate sqlSession, CultureSign cs) {
+		return sqlSession.update("cultureMapper.updateCsMemberApply", cs);
+	}
+
+	public int updateCsMemberNoApply(SqlSessionTemplate sqlSession, CultureSign cs) {
+		return sqlSession.update("cultureMapper.updateCsMemberNoApply", cs);
 	}
 
 

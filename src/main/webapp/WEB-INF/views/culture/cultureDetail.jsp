@@ -110,6 +110,18 @@
 			</table>
 			<button id="signBtn">프로그램 신청</button>
 			<button id="listBtn" onclick="location.href='${contextPath}/culture.cu?page='+${page}">목록으로</button>
+			
+			
+			<c:url var="signList" value="csMemberList.cu">
+				<c:param name="cNo" value="${ culture.cNo }"/>
+				<c:param name="approvalCount" value="${ approvalCount }" />
+			</c:url>
+			
+			<c:if test="${ sessionScope.loginUser.admin == 'Y' }">
+				<button class="btn" id="signBtn" onclick="location.href='${signList}'">신청자 리스트</button>
+			</c:if>
+			
+			
 		</div>
 		<div class="programImageTable">
 		 	<c:if test="${ files[0].fileLevel == 0 }">  

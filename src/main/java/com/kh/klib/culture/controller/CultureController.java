@@ -6,10 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.Model;import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.klib.bkgroup.model.vo.GroupSign;
@@ -209,4 +210,64 @@ public class CultureController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("csMemberList.cu")
+	public ModelAndView CultureSignMemberList(@RequestParam("cNo") Integer cNo,
+												@RequestParam("approvalCount") Integer approvalCount,
+												HttpSession session, ModelAndView mv) {
+		
+		Culture culture = cService.selectCulture(cNo);
+		ArrayList<CultureSign> csList = cService.selectcsList(cNo);
+		
+		Member memInfo = new Member();
+		ArrayList<Member> memInfoList = new ArrayList<Member>();
+		
+		int csUno = 0;
+		
+		for(int i = 0; i < csList.size(); i++) {
+			csUno= csList.get(i).getuNo();
+			memInfo = cService.selectMember(csUno);
+			memInfoList.add(memInfo);
+		}
+		mv.addObject("csList", csList).addObject("culture", culture);
+		mv.addObject("memInfoList", memInfoList).addObject("approvalCount", approvalCount);
+		mv.setViewName("CultureSignMemberList");
+		
+		
+		return mv;
+	}
+	
+	@RequestMapping("csMemberApply.cu")
+	@ResponseBody
+	public String csMemberApply(@RequestParam("cNo") Integer cNo, @RequestParam("uNo") Integer uNo ) {
+		
+		
+		CultureSign cs = new CultureSign();
+		cs.setcNo(cNo);
+		cs.setuNo(uNo);
+		
+		int result = cService.updateCsMemberApply(cs);
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new CultureException("문화마당 신청 승인 실패!");
+		}
+	}
+	@RequestMapping("csMemberNoApply.cu")
+	@ResponseBody
+	public String csMemberNoApply(@RequestParam("cNo") Integer cNo, @RequestParam("uNo") Integer uNo ) {
+		
+		CultureSign cs = new CultureSign();
+		cs.setcNo(cNo);
+		cs.setuNo(uNo);
+		
+		int result = cService.updateCsMemberNoApply(cs);
+		if(result > 0) {
+			return "success";
+		} else {
+			throw new CultureException("문화마당 신청 거절 실패!");
+		}
+		
+	}
+	
 }

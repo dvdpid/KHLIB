@@ -35,15 +35,15 @@
 					<table id="idFindTable">
 						<tr>
 							<th width="80">이름</th>
-							<td width="200"><input type="text" required style="width: 100%;"></td>
+							<td width="200"><input type="text" id="nameID" required style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-							<td><input type="text" required style="width: 100%;"></td>
+							<td><input type="text" id="emailID" required style="width: 100%;"></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td><input type="text" placeholder="(-)제외한 숫자만 입력해주세요." required style="width: 100%;"></td>
+							<td><input type="text" id="telID" placeholder="(-)제외한 숫자만 입력해주세요." required style="width: 100%;"></td>
 						</tr>
 						<tr></tr>
 					</table>
@@ -91,6 +91,25 @@
 	
 	<script type="text/javascript">
 		$(function(){
+			$('#idFindBtn').click(function(){
+				var name = $("#nameID").val();
+				var email = $("#emailID").val();
+				var tel = $("#telID").val();
+				$.ajax({
+					url: "findId.me",
+					type: "POST",
+					data: {name:name, email:email, tel:tel},
+					success: function(result){
+						console.log(result);
+						alert('귀하의 아이디는 '+result+'입니다.'); // 결과가 controller에는 출력이 되는데 ajax로는 안넘어옴. 왜?
+					}, fail: function(result){
+						alert('해당하는 아이디가 없습니다.');
+					}, error: function(result){
+						alert('실패');
+					}
+				})
+			});
+			
 			$('#pwdFindBtn').click(function(){
 				var id = $("#id").val();
 				var name = $("#name").val();
@@ -101,6 +120,8 @@
 					data: {id:id, name:name, email:email},
 					success: function(result){
 						alert(result);
+					}, error: function(result){
+						alert('이메일 발송 실패');
 					}
 				})
 			});

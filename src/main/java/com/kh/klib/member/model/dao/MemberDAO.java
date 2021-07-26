@@ -2,6 +2,7 @@ package com.kh.klib.member.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -83,6 +84,10 @@ public class MemberDAO {
 
 	public ArrayList<Culture> selectcList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectcList");
+	}
+
+	public String findId(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.selectOne("memberMapper.findId", m);
 	}
 
 

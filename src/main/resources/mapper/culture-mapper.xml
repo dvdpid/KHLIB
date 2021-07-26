@@ -126,11 +126,10 @@
 			join culture using(culture_no)
 		where culture_no=#{cNo}
 	</select>
-	
 	<select id="getApprovalCount" resultType="_int">
 		select count(*)
 		from culture_sign
-		where culture_no=#{cNo} and cs_approval='Y'
+		where culture_no=#{cNo} and cs_approval!='N'
 	</select>
 	
 	<resultMap type="CultureSign" id="cultureSignResultSet">

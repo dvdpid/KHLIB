@@ -89,8 +89,22 @@ public class CultureController {
 		
 		int listCount = cService.getSearchResultListCount(csc);
 		
+		int cNo = 0;
+		int approvalCount = 0;
+		
 		ArrayList<Culture> cList = null;
 		ArrayList<Files> fList = null;		
+		
+		ArrayList<CultureSign> csList = new ArrayList<CultureSign>();
+		
+		for(int i = 0; i < cList.size(); i++) {
+			cNo = cList.get(i).getcNo();
+			
+			approvalCount = cService.getApprovalCount(cNo);
+			
+			csList.add(i, new CultureSign(cNo, approvalCount));
+			
+		}
 		
 		if(listCount != 0) {
 			PageInfo pi = ThumbnailPagination.getPageInfo(currentPage, listCount);
@@ -98,12 +112,12 @@ public class CultureController {
 			cList = cService.selectSearchResultTList(csc, pi, 1); // 게시판 리스트 가져오기
 			fList = cService.selectSearchResultTList(csc, pi, 2); // 파일 리스트 가져오기
 			if(cList != null && fList != null) {
-				mv.addObject("cList", cList).addObject("fList", fList).addObject("searchCondition", condition).addObject("pi", pi).addObject("searchValue", value).setViewName("cultureList");
+				mv.addObject("cList", cList).addObject("fList", fList).addObject("csList", csList).addObject("searchCondition", condition).addObject("pi", pi).addObject("searchValue", value).setViewName("cultureList");
 			} else {
 				throw new CultureException("프로그램 전체 조회에 실패하였습니다.");
 			}
 		} else {
-			mv.addObject("cList", cList).addObject("fList", fList).addObject("searchCondition", condition).addObject("searchValue", value).setViewName("cultureList");
+			mv.addObject("cList", cList).addObject("fList", fList).addObject("csList", csList).addObject("searchCondition", condition).addObject("searchValue", value).setViewName("cultureList");
 		}
 		return mv;
 	}
@@ -136,6 +150,7 @@ public class CultureController {
 		Culture culture = cService.selectCulture(cNo);
 		ArrayList <Files> files = cService.selectFiles(cNo);
 		int approvalCount = cService.getApprovalCount(cNo);
+		
 		ArrayList<CultureSign> csList = cService.selectcsList(cNo);
 		
 		model.addAttribute("culture", culture).addAttribute("files", files).addAttribute("page", page);
@@ -200,12 +215,15 @@ public class CultureController {
 									  @RequestParam("cNo") Integer cNo) {
 		cs.setuNo(uNo);
 		cs.setcNo(cNo);
+		int result = cService.cancelCulture(cs);
 		int deleteCS = cService.deleteCS(cs);
 		// mypage에 있는 내역 삭제 시, 해당 프로그램과 유저 번호가 있는 명단 삭제 (삭제 안하면 같은 프로그램 수강 신청 불가능)
 		// view단에서 수강 취소하지 않으면 삭제 불가능하게 설정함
 		
-		if(deleteCS > 0) {
-		mv.addObject("deleteCS", deleteCS).setViewName("cultureMypage");
+		if(result > 0) {
+			if(deleteCS > 0) {
+				mv.addObject("deleteCS", deleteCS).setViewName("cultureMypage");
+			}
 		}
 		
 		return mv;

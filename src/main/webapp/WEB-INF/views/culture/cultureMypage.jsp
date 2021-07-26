@@ -75,10 +75,10 @@
 								<c:if test="${ (cs.uNo == loginUser.no) && (cs.cNo == c.cNo) }">
 									<tr>
 										<td>
-											<c:if test="${ (cs.csApproval == 'Y' || cs.csStatus == 'Y') && c.cDeadLine == 'N' }">
+											<c:if test="${ ((cs.csApproval == 'Y' || cs.csStatus == 'Y') && cs.csApproval != 'N') && c.cDeadLine == 'N' }">
 												<input type="radio" id="cancelCheck" name="check" value="${ cs.cNo }">
 											</c:if>
-											<c:if test="${ c.cDeadLine == 'Y' || cs.csStatus=='N' }">
+											<c:if test="${ c.cDeadLine == 'Y' || cs.csStatus=='N' || ((cs.csApproval == 'Y' || cs.csStatus == 'Y') && cs.csApproval == 'N') }">
 												<input type="radio" id="deleteCheck" name="check" value="${ cs.cNo }">
 											</c:if>
 										</td>

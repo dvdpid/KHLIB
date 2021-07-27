@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="resources/css/bkGroupDetail.css?ver=3.0" type="text/css"> 
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body> 
 	<c:import url="../common/menubar.jsp"/>
 	<div class="left">
 		<div class="sideTitle">

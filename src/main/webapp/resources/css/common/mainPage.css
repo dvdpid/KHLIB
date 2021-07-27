@@ -69,10 +69,16 @@ a{
 	color: white; font-weight: 700; padding: 6px 25px; border-radius: 3px;
 }
 
-.noticeArea, .bookArea, .groupArea{
+.noticeArea, .groupArea{
 	display: flex; justify-content: center;
 	flex-direction: column;
 	margin: 40px 40px 25px 40px;
+}
+
+.bookArea{
+	display: flex; justify-content: center;
+	flex-direction: column;
+	margin: 55px 40px 25px 40px;
 }
 
 #noticeTitle, #bookTitle, #groupTitle{ 
@@ -237,19 +243,6 @@ a{
 		padding: 3px 0px; text-overflow: ellipsis;
 	}
 	
-	#viewArea1 {
-		visibility: visible;
-	}
-	
-	#viewArea2 {
-		visibility: hidden;
-	}
-	
-	#viewArea2 {
-		visibility: hidden;
-	}
-	
-
 @media screen and (max-width: 1035px){
 	.leftArea{ width: 100%; }
 	.rightArea{ width: 100%; }

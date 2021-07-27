@@ -12,7 +12,7 @@
 	.fc-day-sat{ color:#0000FF; } 
     .fc-day-sun { color:#FF0000; } 
     </style>
-    <link rel="stylesheet" href="resources/css/main.css"/>
+    <link rel="stylesheet" href="resources/css/main.css?ver=1.0"/>
     <script src="resources/js/main.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {

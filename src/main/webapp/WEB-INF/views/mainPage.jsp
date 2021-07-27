@@ -7,7 +7,7 @@
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>홈페이지</title>
-<link rel="stylesheet" href="resources/css/common/mainPage.css?ver=3.0" type="text/css">
+<link rel="stylesheet" href="resources/css/common/mainPage.css" type="text/css">
 <link rel="stylesheet" href="resources/css/common/lightslider.css" type="text/css">
 </head>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
@@ -271,8 +271,6 @@
 				$cultureArea.append($thtr);
 				
 				for(var key in data){
-					console.log(data);
-
 					var $tr = $('<tr>');
 					var txt = '<input type="hidden" id="cNo" value="'+data[key].cNo+'">';
 					var $titleTd = $('<td>').text(data[key].cTitle);
@@ -296,8 +294,9 @@
 					var cNo = $(this).parent().children().eq(0).val();
 					location.href='cDetail.cu?cNo=' + cNo + '&page=' + 1;
 				}});
-			},
-			error: function(){
+			}, fail:function(){
+				alert("cu 에러");
+			}, error: function(){
 				alert("cu 에러");
 			}
 		});

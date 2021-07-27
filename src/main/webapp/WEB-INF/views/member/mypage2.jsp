@@ -35,6 +35,11 @@
 
   	.myTable { table-layout: auto; width: 100%; min-width: 320px; max-width: 100%; overflow: hidden; border: 0; border-collapse: collapse; background-color: #FAFAFA; margin: auto; margin-bottom: 20px; text-align: center; font-size: 0.6em } .wiDe { min-width: 640px; } .nArrow { max-width: 480px } .myTable tr { height: 40px; } .myTable td, th { border: 1px white solid; padding: 8px; } .myTable th { background-color: #ffa775; color: whitesmoke; } .headerOrange th { background-color: #F5F5F5; } .headerGreen th { background-color: #81e281; } .headerBlue th { background-color: #7799ff; } .myTable.headerH tr:nth-Child(odd) { background-color: #F0F0F0; } .myTable.headerH td, .myTable.headerH th { border-width: 0 1px; } .myTable.headerH tr:hover td { border-color: transparent; background-color: #E6E6E6; } .myTable.headerH tr:hover td:first-Child { border-left-color: white; } .myTable.headerH tr:hover td:last-Child { border-right-color: white; } .myTable.headerV { width: 50%; } .myTable.headerV td:nth-Child(odd) { background-color: #F0F0F0; } .myTable.headerHybrid tr:first-Child th:first-Child { background-color: transparent; } /* 복합 형식 1번 셀 */ .myTable.headerHybrid td:hover { background-color: #E6E6E6; } .myTable caption { margin: 4px 0; }
 	.detailBtn { background-color: #ffa775; color: whitesmoke; border:none; float:right;}
+	#titleImg2{
+		width: 20px; height: 20px; vertical-align: top;
+
+
+	}
 </style>
 </head>
 <body>
@@ -76,35 +81,41 @@
 		</div>
 			<div id="myinfo">
 			
-			<table id="searchTable" style="margin-left: 70px;">
+			<table id="searchTable" style="margin-left: 50px;">
 				<tbody><tr>
-				
-					<td id="infoname">아이디</td>
+					
+					<td id="infoname">
+					<img id="titleImg2" src="resources/images/info/edit.png"/>아이디</td>
 					<td class="userinfot">${ loginUser.id }</td>
 				</tr>
 				<tr>
-					<td id="infoname">이메일</td>
+					<td id="infoname">
+					<img id="titleImg2" src="resources/images/info/edit.png"/>이메일</td>
 					<td class="userinfot">${ loginUser.email }</td>
 				</tr>
 				<tr>
-					<td id="infoname">닉네임</td>
+					<td id="infoname">
+					<img id="titleImg2" src="resources/images/info/edit.png"/>닉네임</td>
 					<td class="userinfot">${ loginUser.nickname }</td>
 				</tr>				
 			</tbody>
 			
 			</table>
-			<table id="searchTable" style="margin-left: 70px;">
+			<table id="searchTable" style="margin-left: -160px;">
 			<tbody>
 			<tr>
-					<td id="infoname">성명</td>
+					<td id="infoname">
+					<img id="titleImg2" src="resources/images/info/edit.png"/>성명</td>
 					<td class="userinfot">${ loginUser.name }</td>
 				</tr>
 				<tr>
-					<td id="infoname">휴대전화</td>
+					<td id="infoname">
+					<img id="titleImg2" src="resources/images/info/edit.png"/>휴대전화</td>
 					<td class="userinfot">${ loginUser.phone }</td>
 				</tr>
 				<tr>
-					<td id="infoname">주소</td>
+					<td id="infoname">
+					<img id="titleImg2" src="resources/images/info/edit.png"/>주소</td>
 					<td class="userinfot"><c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
 						<c:if test="${ status.index eq 0 && addr >= '0' && addr <= '99999' }">
 							(${ addr })

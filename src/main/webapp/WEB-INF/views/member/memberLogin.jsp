@@ -24,7 +24,7 @@ width: 99%; height: 70%; font-size: 15px; border: 0;
 	<c:import url="../common/menubar.jsp"/>
 	
 	<div align="center" class="loginArea">
-<h1 >로그인</h1>
+		<a style="color: black;font-size:28px;font-weight:bold;"><b style="color:rgb(212, 129, 91); font-size:28px;">KH</b>도서관 </a>
 		<hr align="center" style="background: black; width: 19.5%;">
 		<form action="login.me" method="post">
 			<table id="loginTable" style="text-align:center;">
@@ -49,7 +49,7 @@ width: 99%; height: 70%; font-size: 15px; border: 0;
 		</form>
 	<br>
 	</div>
-	</div>
+	
 	
 	<footer>
 	<c:import url="../common/footer.jsp"/>

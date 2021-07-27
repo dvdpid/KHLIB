@@ -54,7 +54,9 @@
 					<tr>
 						<th><label class="must">*</label> 아이디 </th>
 						<td width="200px"><input type="text" id="userId" name="id" placeholder="아이디" required style="width: 100%;">
-							
+											
+						</td>
+						<td width="200px">
 							<span class="guide ok">사용 가능합니다.</span>
 							<span class="guide error">사용 불가능합니다.</span>
 							<input type="hidden" name="idDUplicateCheck" id="idDUplicateCheck" value="0">
@@ -64,12 +66,13 @@
 					<tr>
 						<th><label class="must">*</label> 비밀번호 </th>
 						<td><input type="password" name="pwd" id="userpwd1" placeholder="비밀번호" required style="width: 100%;"></td>
-						<td></td>
+						
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 확인 </th>
-						<td><input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;">
-						<span style="height:10px;margin: 9px 0 -2px;"><font id="chkNotice" size="2"></font></span>
+						<td><input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;"></td>
+						<td width="200px" style="vertical-align: middle;margin-top:5px;">
+							<span style="height:10px;margin: 9px 0 -2px;"><font id="chkNotice" size="2"></font></span>
 						</td>
 						
 					</tr>

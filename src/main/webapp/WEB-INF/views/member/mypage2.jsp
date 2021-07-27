@@ -166,6 +166,8 @@
 				</table>
 		</div>				
 			</div>
+			
+			
 			<div id="boardinfo">
 				<p id="infop"><a href="board.bo"><img id="titleImg1" src="resources/images/info/add.png"/></a>내가 작성한 글</p>
 				
@@ -181,7 +183,7 @@
 						<th>제목</th>
 						<th>작성일</th>
 					</tr>
-				<c:forEach var="b" items="${blist }">
+				<c:forEach var="b" items="${blist }" begin="0" end="2">
 					<tr onclick="location.href='${ contextPath }/bDetail.ad?bNo=' + ${b.bNo}">
 						<td>${b.bNo }</td>
 						<td>${b.bTitle }</td>
@@ -192,7 +194,7 @@
 				</table>
 					
 			</div>
-			
+				<div class="empty" style="height:50px;"></div>
 			<div id="bookinfo">
 				<p id="infop"><a href="bkgroup.bg"><img id="titleImg1" src="resources/images/info/add.png"/></a>독서모임 신청 확인</p>	
 				
@@ -209,7 +211,7 @@
 						<th>책 제목</th>
 						<th>그룹 작성자</th>
 					</tr>
-				<c:forEach var="gs" items="${ gsList }">
+				<c:forEach var="gs" items="${ gsList }" begin="0" end="2">
 					<c:forEach var="g" items="${ gList }">
 					<c:if test="${gs.gNo == g.gNo }">
 					<tr onclick="location.href='${ contextPath }/gDetail.bg?gNo=' + ${g.gNo}">
@@ -240,7 +242,7 @@
 						<th>강사 명</th>
 						<th>대상</th>
 					</tr>
-				<c:forEach var="cs" items="${ csList }">
+				<c:forEach var="cs" items="${ csList }" begin="0" end="2">
 					<c:forEach var="c" items="${ cList }">
 					<c:if test="${cs.cNo == c.cNo }">
 					<tr onclick="location.href='${ contextPath }/cDetail.cu?cNo=' + ${c.cNo}">

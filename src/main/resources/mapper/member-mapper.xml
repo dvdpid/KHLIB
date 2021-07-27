@@ -70,6 +70,7 @@
 		select *
 		from room_sign
 		where USER_NO = #{no} and out_Time is null
+		order by rs_no desc
 	</select>
 	
 	<resultMap type="RoomSign" id="roomSignResultSet">
@@ -86,6 +87,7 @@
 		select *
 		from board
 		where BOARD_WRITER = #{name} and b_status = 'Y'
+		order by board_no desc
 	</select>
 	
 		<resultMap type="Board" id="boardResultSet">
@@ -103,6 +105,7 @@
 		select *
 		from group_sign
 		where user_no = #{no}
+		order by group_no desc
 	</select>
 	<select id="selectgList" resultMap="groupResultSet">
 		select *

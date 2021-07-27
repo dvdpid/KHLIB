@@ -83,7 +83,7 @@
 			</tr>
 			<c:if test="${ empty gsList }">
 				<tr>
-					<td colspan="5"><div align="center">신청한 프로그램이 없습니다.</div></td>
+					<td colspan="7"><div align="center">신청한 프로그램이 없습니다.</div></td>
 				</tr>
 			</c:if>
 			

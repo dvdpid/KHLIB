@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=2.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -116,7 +116,7 @@
 		               </td>
 		            </tr>
 		            <tr>
-		               <td width="165px;" height="220px;" align="center">
+		               <td height="220px;" align="center">
 		               		<c:forEach var="gs" items="${ gsList }">
 					           	<c:if test="${ ((g.gNo eq gs.gNo) && (g.gTotal eq gs.memberCount)) || ((g.gNo eq gs.gNo) && g.gDeadline == 'Y') || (g.gNo eq gs.gNo) && (g.gDate < sysDate)}">
 				               		<em>마감</em>
@@ -134,13 +134,11 @@
 		            </tr>
 		            <tr>
 		               <td colspan="2" height="80">
-		            		<p>
 		            			<c:forTokens var="intro" items="${ g.gIntro }" delims="/" varStatus="s">
 		            				<c:if test="${ s.index eq 0 }">
 		            					${ intro }
 		            				</c:if>
 		            			</c:forTokens>
-		            		</p>
 		               </td>
 		            </tr>
 		            <tr>
@@ -161,52 +159,6 @@
 		</div>		
 		</c:if>
 		
-		<!-- 여기 반복해서 리스트 보여주기 
-		<div class="bkgroupListDiv">
-			<table class="list">
-            <tr>
-               <td style="vertical-align: bottom;">모임명(AA)</td>
-               <td width="165px;" height="220px;">
-                  <div class="img">
-                     <img class="bkImg" src="resources/images/book1.jpg" >
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="2"><p>모임설명</p></td>
-            </tr>
-            <tr>
-               <td colspan="2">
-                  <strong>장소 | 날짜</strong>
-               </td>
-            </tr>
-         </table>
-      </div>
-      
-      <div class="bkgroupListDiv">
-         
-         <table class="list">
-            <tr>
-               <td style="vertical-align: bottom;">모임명(AA)</td>
-               <td width="165px;" height="220px;">
-               <em>마감</em>
-                  <div class="img">
-                     <img class="bkImg" src="resources/images/book1.jpg" >
-                  </div>
-               </td>
-            </tr>
-            <tr>
-               <td colspan="2"><p>모임설명</p></td>
-            </tr>
-            <tr>
-               <td colspan="2">
-                  <strong>장소 | 날짜</strong>
-               </td>
-            </tr>
-         </table>
-		</div>
-		
-		-->
 		<table id="boTab">
 			<tr>
 				<td colspan="6" align="right">
@@ -223,38 +175,38 @@
 				<td colspan="6">
 					<!-- [이전] -->
 					<c:if test="${ pi.currentPage <= 1 }">
-						[이전] &nbsp;
+						<div class="pageBtn">&lt;</div>
 					</c:if>
 					<c:if test="${ pi.currentPage > 1 }">
 						<c:url var="before" value="bkgroup.bg">
 							<c:param name="page" value="${ pi.currentPage - 1 }"/>
 						</c:url>
-						<a href="${ before }">[이전]</a> &nbsp;
+						<div class="pageBtn"><a href="${ before }">&lt;</a></div>
 					</c:if>
 					
 					<!-- 페이지 -->
 					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						<c:if test="${ p eq pi.currentPage }">
-							<font color="red" size="4"><b>[${ p }]</b></font>
+							<div class="currentpageBtn"><b>${ p }</b></div>
 						</c:if>
 						
 						<c:if test="${ p ne pi.currentPage }">
 							<c:url var="pagination" value="bkgroup.bg">
 								<c:param name="page" value="${ p }"/>
 							</c:url>
-							<a href="${ pagination }">${ p }</a> &nbsp;
+							<div class="pageBtn"><a href="${ pagination }">${ p }</a></div>
 						</c:if>
 					</c:forEach>
 					
 					<!-- [다음] -->
 					<c:if test="${ pi.currentPage >= pi.maxPage }">
-						[다음]
+						<div class="pageBtn">&gt;</div>
 					</c:if>
 					<c:if test="${ pi.currentPage < pi.maxPage }">
 						<c:url var="after" value="bkgroup.bg">
 							<c:param name="page" value="${ pi.currentPage + 1 }"/>
 						</c:url> 
-						<a href="${ after }">[다음]</a>
+						<div class="pageBtn"><a href="${ after }">&gt;</a></div>
 					</c:if>
 					
 				</td>
@@ -262,6 +214,8 @@
 		
 			</c:if>		
 		</table>
+		
+		<br><br><br><br>
 		
 		<input type="hidden" id="currentPage" value="${ pi.currentPage }">
 		<input type="hidden" id="loginUser" value="${ loginUser }">

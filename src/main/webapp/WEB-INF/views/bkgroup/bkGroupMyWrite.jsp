@@ -83,7 +83,7 @@
 					
 					<c:if test="${ empty gList }">
 						<tr>
-							<td colspan="4"><div align="center">작성한 게시글이 없습니다.</div></td>
+							<td colspan="6"><div align="center">작성한 게시글이 없습니다.</div></td>
 						</tr>
 					</c:if>	
 					

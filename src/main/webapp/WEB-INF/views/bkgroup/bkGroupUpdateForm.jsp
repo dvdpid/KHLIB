@@ -112,10 +112,8 @@
 				<tr>
 					<th>책 표지</th>
 					<td width="200">
-						<a href="${ contextPath }/resources/guploadFiles/${ file.changeName }">
-						 	<img id="bookImage1" width="178" height="240" src="${ contextPath }/resources/guploadFiles/${ file.changeName }">
-							<input type="hidden" value="${ file.originName }" name="originName">
-						 </a>
+						<img id="bookImage1" width="178" height="240" src="${ contextPath }/resources/guploadFiles/${ file.changeName }">
+						<input type="hidden" value="${ file.originName }" name="originName">
 					</td>
 					<th width="100">책 줄거리</th>
 					<td colspan="3">

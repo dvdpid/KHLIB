@@ -18,27 +18,6 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <style>
-    .clickme {
-      text-align: left;
-      padding: 1em 0em;
-    }
-    .answer {
-      text-align: left;
-    }
-    .qHead {
-      width: 40px;
-      height: 40px;
-      display: inline-block;
-      text-align: center;
-      vertical-align: middle;
-      color: white;
-      border-radius: 50%;
-      background-color: rgb(212, 129, 91);
-      line-height: 40px;
-    }
-  </style>
-
   <body>
     <!-- 헤더부분 -->
 <c:import url="../common/menubar.jsp"></c:import>
@@ -69,8 +48,8 @@
         <span class="mainTitle">자주 하는 질문</span>
       </div>
       <div class="clickme">
-        <span class="qHead">Q</span> 코로나19 관련 임시휴관 기간 중 도서 대출
-        방법
+        <span class="qHead">Q</span>
+        <span class="questionTitle">코로나19 관련 임시휴관 기간 중 도서 대출 방법</span>
       </div>
       <div class="answer" style="white-space: pre-wrap; display: none">
         ○ 도서 예약 시간은 어떻게 되나요? ☞ 예약 : 화~토 9:00 ~ 마감시 ※

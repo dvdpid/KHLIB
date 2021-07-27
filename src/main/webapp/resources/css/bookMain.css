@@ -1,241 +1,312 @@
 @charset "UTF-8";
 
-	body{ margin: 0; }
-	
-	a{ text-decoration: none; }
-	
-	#header{
-		font-weight: bold;
-		background-color: rgb(212, 129, 91);
-		font-size: 10px;
-		color: white;
-	}
-	
-	.wrapper{
-		width: 100%;
-		min-height: 30px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	
-	.logo{
-		font-size: 15px;
-		font-weight: 900;
-		margin-left: 60px;
-		color: black;
-	}
-	
-	.lists{ display: flex; margin-right: 60px; }
-	
-	.lists li{ list-style-type:none; }
-	
-	.lists li a{
-		color: white;
-		padding: 10px 20px;
-	}
-	
-	.lists li a:hover{ background: rgb(159, 101, 74); }
-	
-	#top{
-		font-weight: bold;
-		border-bottom: 2px solid lightgray;
-		font-size: 13px;
-	}
-	
-	#topWrapper{ min-height: 50px; }
-	
-	.topLists{ display: flex; margin-right: 60px; margin-top: 0; margin-bottom: 0;}
-	
-	.topLists li{ list-style-type:none;}
-	
-	.topLists li a{
-		display:block;
-		color: black;
-		padding: 17px 20px;
-	}
-	
-	.topLists li a:hover{
-		background: rgba(212, 129, 91, 0.5);
-		color:white;
-	}
-	
-	.toggleBtn{
-		display:none;
-	}
-	
-	.left{ float: left; width: 25%; }
-	
-	.sideTitle{
-		background: rgb(212, 129, 91);
-		color: white;
-		align-items: center;
-		margin: 30px 30px 15px 30px;
-		padding: 30px 30px;
-	}
-	
-	.sideButton{
-		background: lightgray;
-		color: black;
-		text-align: center;
-		margin: 15px 30px 15px 30px;
-		padding: 10px 25px;
-	}
-	
-	.main{ float: right; width: 75%; text-align: center; }
-	
-	.mainTitle{
-		font-weight: 900;
-		border-bottom: 2px solid lightgray;
-		font-size: 30px;
-		margin: 25px 60px 0px 60px;
-		padding: 0px 0px 13px 0px;
-	}
-	
-	.mainTitle p{ text-align: left; width: 70%; margin: 0;}
+body {
+	margin: 0;
+}
 
-	#titleImg1{ 
-		width: 25px; height: auto; vertical-align:middle;
-		padding-bottom: 7px;
-		margin-right: 10px;
-	}
-	
-	.infoSpace{ margin: 0px 60px 0px 60px; }
-	
-	#infoTable{
-		border-top: 2px solid lightgray;
-		border-bottom: 2px solid lightgray;
-		border-left: none;
-		border-right: none;
-		border-collapse: collapse;
-		width: 100%;
-		font-size:10px;
-	}
-	
-	td{
-		border: 1px solid lightgray;
-		border-left: none;
-		border-right: none;
-		border-collapse: collapse;
-		padding: 10px 25px;
-	}
-	
-	.sideButton{
-		text-align: left;
-		padding-left : 30px;
-		cursor: pointer;
-	}
-	
-	.sideButton a{ color: black; }
-	
-	#infoImg1 { width: 100%; height: auto; }
-	
-	.sideButton img{
-		width: auto; height: 30px; vertical-align:middle;
-		padding-bottom: 7px;
-		margin-right: 5px;
-	}
-	
-	.sideButton a{
-		display:block;
-		color: black;
-		padding: 17px 20px;
-	}
-	
-	.sideButton:hover{
-		background: gray;
-	}
+a {
+	text-decoration: none;
+}
 
-	.toggle-size {
-		display: flex;
-		color: white;
-		background-color:rgb(224, 224, 224);
-		width: 200px;
-		height: 60px;
-		align-items: center;
-		justify-content: center;
-		font-weight: bolder;
-	}
-	
-	.toggle-active{
-		background-color:rgb(212, 129, 91);
-	}
+#header {
+	font-weight: bold;
+	background-color: rgb(212, 129, 91);
+	font-size: 10px;
+	color: white;
+}
 
-	#toggleBooks {
-		display: flex;
-		justify-content: center;
-		padding-top: 50px;
-		padding-bottom: 50px;
-		
-	}
+.wrapper {
+	width: 100%;
+	min-height: 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 
-	#bookList {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		margin-left: 2em;
-		margin-right: 2em;
-		padding-bottom: 50px;
-		width: 100%;
-		justify-content: center;
-		align-items: center;
-		row-gap: 10px;
-		column-gap: 10px;
-	}
+.logo {
+	font-size: 15px;
+	font-weight: 900;
+	margin-left: 60px;
+	color: black;
+}
 
-	.bookItem{
-		width: 100%;
-		height: auto;
-	}
-	
-	.bookImage {
-		width: 120px;
-		height: auto;
-	}
+.lists {
+	display: flex;
+	margin-right: 60px;
+}
 
-	#searchArea {
-		padding: 30px;
-	}
+.lists li {
+	list-style-type: none;
+}
 
+.lists li a {
+	color: white;
+	padding: 10px 20px;
+}
 
-	
-	
-	
-@media screen and (max-width: 1035px){
-	#topWrapper{
+.lists li a:hover {
+	background: rgb(159, 101, 74);
+}
+
+#top {
+	font-weight: bold;
+	border-bottom: 2px solid lightgray;
+	font-size: 13px;
+}
+
+#topWrapper {
+	min-height: 50px;
+}
+
+.topLists {
+	display: flex;
+	margin-right: 60px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.topLists li {
+	list-style-type: none;
+}
+
+.topLists li a {
+	display: block;
+	color: black;
+	padding: 17px 20px;
+}
+
+.topLists li a:hover {
+	background: rgba(212, 129, 91, 0.5);
+	color: white;
+}
+
+.toggleBtn {
+	display: none;
+}
+
+.left {
+	float: left;
+	width: 25%;
+}
+
+.sideTitle {
+	background: rgb(212, 129, 91);
+	color: white;
+	align-items: center;
+	margin: 30px 30px 15px 30px;
+	padding: 30px 30px;
+}
+
+.sideButton {
+	background: lightgray;
+	color: black;
+	text-align: center;
+	margin: 15px 30px 15px 30px;
+	padding: 10px 25px;
+}
+
+.main {
+	float: right;
+	width: 75%;
+	text-align: center;
+}
+
+.mainTitle {
+	font-weight: 900;
+	border-bottom: 2px solid lightgray;
+	font-size: 30px;
+	margin: 25px 60px 0px 60px;
+	padding: 0px 0px 13px 0px;
+}
+
+.mainTitle p {
+	text-align: left;
+	width: 70%;
+	margin: 0;
+}
+
+#titleImg1 {
+	width: 25px;
+	height: auto;
+	vertical-align: middle;
+	padding-bottom: 7px;
+	margin-right: 10px;
+}
+
+.infoSpace {
+	margin: 0px 60px 0px 60px;
+}
+
+#infoTable {
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
+	border-left: none;
+	border-right: none;
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 10px;
+}
+
+td {
+	border: 1px solid lightgray;
+	border-left: none;
+	border-right: none;
+	border-collapse: collapse;
+	padding: 10px 25px;
+}
+
+.sideButton {
+	text-align: left;
+	padding-left: 30px;
+	cursor: pointer;
+}
+
+.sideButton a {
+	color: black;
+}
+
+#infoImg1 {
+	width: 100%;
+	height: auto;
+}
+
+.sideButton img {
+	width: auto;
+	height: 30px;
+	vertical-align: middle;
+	padding-bottom: 7px;
+	margin-right: 5px;
+}
+
+.sideButton a {
+	display: block;
+	color: black;
+	padding: 17px 20px;
+}
+
+.sideButton:hover {
+	background: gray;
+}
+
+.toggle-size {
+	display: flex;
+	color: white;
+	background-color: rgb(224, 224, 224);
+	width: 200px;
+	height: 60px;
+	align-items: center;
+	justify-content: center;
+	font-weight: bolder;
+}
+
+.toggle-active {
+	background-color: rgb(212, 129, 91);
+}
+
+#toggleBooks {
+	display: flex;
+	justify-content: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+#bookList {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	margin-left: 2em;
+	margin-right: 2em;
+	padding-bottom: 50px;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	row-gap: 2em;
+	column-gap: 1em;
+}
+
+.bookItem {
+	width: 170px;
+	height: auto;
+	transition: transform .3s;
+}
+
+.bookImage {
+	width: 170px;
+	height: auto;
+}
+
+.bookItem:hover {
+	transform: scale(1.1);
+}
+
+#searchArea {
+	padding: 30px;
+}
+
+.over {
+	position: absolute;
+	left: 20px;
+	font-size: 1em;
+}
+
+.imageContainer {
+	width: 170px;
+	position: relative
+}
+
+.imageContainer .over {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	color: #FFF;
+}
+
+.imageContainer:hover .over {
+    display: block;
+    background: rgba(0, 0, 0, .6);
+}
+
+@media screen and (max-width: 1035px) {
+	#topWrapper {
 		align-items: flex-start;
 		padding: 8px 24px;
 		min-height: 20px;
 	}
-	
-	.topLists{
-		display:none;
+	.topLists {
+		display: none;
 		flex-direction: column;
-		align-items:center;
+		align-items: center;
 		width: 100%;
 	}
-	
-	.logo { white-space: nowrap;}
-	
-	.topLists li, .topLists li a{ text-align:center; width: 100%; margin-right: 150px;}
-	
-	.toggleBtn{
-		display:block;
+	.logo {
+		white-space: nowrap;
+	}
+	.topLists li, .topLists li a {
+		text-align: center;
+		width: 100%;
+		margin-right: 150px;
+	}
+	.toggleBtn {
+		display: block;
 		position: absolute;
 		right: 45px;
 		border: none;
 		background: none;
 		align-items: center;
 	}
-	
-	.topLists.active{ 
+	.topLists.active {
 		display: flex;
 		flex-direction: column;
-		align-items:center;
+		align-items: center;
 		width: 100%;
 		margin: 26px 60px 0px 0px;
 	}
-	
-	.left{ display: none; }
-	.main{ width: 100%; }
-	
+	.left {
+		display: none;
+	}
+	.main {
+		width: 100%;
+	}
 }

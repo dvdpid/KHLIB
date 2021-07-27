@@ -238,13 +238,13 @@
 		</div>
 		<div class="sideButton" onclick="location.href='memberCheck.me';">
 			<h3 id="sideButton1">
-				<img id="sideImg1" />
+				<img id="sideImg1" src="resources/images/info/notes.png"/>
 				회원정보 수정
 			</h3>
 		</div>
 		<div class="sideButton" onclick="location.href='memberdelete.me';">
 			<h3 id="sideButton2">
-				<img id="sideImg2" />
+				<img id="sideImg2" src="resources/images/info/scissors.png"/>
 				회원 탈퇴
 			</h3>
 		</div>		

@@ -186,7 +186,7 @@
 	        	if(bNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-					location.href="bkRecommend.ad?bNo="+bNo;
+	        		window.open("bkRecommend.ad?bNo="+bNo, 'bkRecommend_ok', 'width=800, height=500, top=100, left=300,location=no');
 	        	}
 			});
      </script>

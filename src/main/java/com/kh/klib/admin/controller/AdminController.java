@@ -828,6 +828,55 @@ public class AdminController {
 		}
 		
 	}
+	@RequestMapping("noticeDeleteForm.ad")
+	public String noticeDeleteForm(@RequestParam("nNo") Integer nNo, Model model) {
+		
+		Notice notice = aService.selectDetailNotice(nNo);
+		if(notice != null) {
+			model.addAttribute("notice", notice);
+			return "noticeSign";
+		} else {
+			throw new BoardException("공지사항 삭제 실패!");
+		}
+	}
+	@RequestMapping("noticeDelete.ad")
+	public String noticeDelete(@RequestParam("nNo") Integer nNo) {
+		int result = aService.noticeDelete(nNo);
+		if(result > 0 ) {
+			return "notice_ok";
+		} else {
+			throw new BoardException("공지사항 삭제 실패!");
+		}
+	}
+	@RequestMapping("noticeUpdateForm.ad")
+	public String noticeUpdateForm(@RequestParam("nNo") Integer nNo, Model model) {
+		
+		Notice notice = aService.selectDetailNotice(nNo);
+		if(notice != null) {
+			model.addAttribute("notice", notice);
+			
+			return "admin_update_notice";
+		} else {
+			throw new BoardException("공지사항 수정 실패!");
+		}
+		
+	}
+	@RequestMapping("noticeUpdate.ad")
+	public String noticeUpdate(@ModelAttribute Notice n) {
+		
+		int result = aService.updateNotice(n);
+		if(result > 0) {
+			return "redirect:notice.ad";
+		}else {
+			throw new BoardException("공지사항 수정 실패!");
+		}
+		
+	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping("searchUser.ad")
 	public ModelAndView searchUser(@RequestParam(value="searchContent", required=false) String content,

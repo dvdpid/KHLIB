@@ -114,7 +114,7 @@
 			
 			
 			<br>
-			<input type="button" class="btn1" id="inBtn" value="게시글 삭제" style="float:right; margin-right: 75px;">
+			<input type="button" class="btn2" id="inBtn" value="댓글 삭제" style="float:right; margin-right: 75px;">
 			<br><br>
 		</div>
 		

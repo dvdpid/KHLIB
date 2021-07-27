@@ -34,5 +34,8 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	opener.parent.parent.location.reload();
+	</script>
 </body>
 </html>

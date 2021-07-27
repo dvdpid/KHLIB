@@ -669,7 +669,22 @@
 		</if> 
 		order by group_no desc
 	</select>
-		
+	
+	<select id="selectDetailNotice" resultMap="NoticeResultSet">
+		select *
+		from notice
+		where NOTICE_NO = #{nNo}
+	</select>
+	<update id="noticeDelete">
+		update notice
+		set NOTICE_STATUS = 'N'
+		where NOTICE_NO = #{nNo}
+	</update>
+	<update id="updateNotice">
+		update notice
+		set NOTICE_TITLE = #{nTitle}, NOTICE_CONTENT=#{nContent}, NOTICE_DATE = sysdate
+		where NOTICE_NO =#{nNo}
+	</update>
 	
 	
 </mapper>

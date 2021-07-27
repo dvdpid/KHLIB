@@ -83,7 +83,7 @@
 						data: {uNo : uNo, gNo : gNo},
 						success : function(data){
 							console.log(data);
-							if( data == 'success' ){
+							if(data == 'success'){
 								alert('신청 완료');
 								location.href="${contextPath}/bkgroupMyPage.bg";
 							} 

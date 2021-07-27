@@ -103,13 +103,13 @@
 						<td>
 							<input type="hidden" name="gsApproval" value="${ gs.gsApproval }">
 							<c:if test="${ gs.gsApproval == 'Y' }">
-								승인 완료
+								<span style="color: blue;">승인 완료</span>
 							</c:if>
 							<c:if test="${ gs.gsApproval == 'W' }">
 								승인 대기
 							</c:if>
 							<c:if test="${ gs.gsApproval == 'N' }">
-								승인 거절
+								<span style="color: red;">승인 거절</span>
 							</c:if>
 						</td>
 					</tr>

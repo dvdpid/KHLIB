@@ -193,7 +193,7 @@
 		<c:set var="now" value="<%= new java.util.Date() %>" />
 		<c:set var="sysDate"><fmt:formatDate value="${ now }" pattern="yyyy-MM-dd" /></c:set>
 		<input type="hidden" id="sysdate" value="${ sysDate }">
-		<input type="hidden" id="gDate" value="${ gDate }">
+		<input type="hidden" id="gDate" value="${ group.gDate }">
 	
 	<br>
 	
@@ -230,6 +230,9 @@
 				var sysdate = document.getElementById('sysdate').value;
 				var gDate = document.getElementById('gDate').value;
 				
+				console.log(gDate);
+				console.log(gDate < sysdate);
+				
 				if(!loginUser){
 					alert('로그인 후 이용 가능합니다.');
 					location.href="${contextPath}/loginForm.me";
@@ -237,8 +240,10 @@
 					alert('마감된 모임은 신청이 불가능합니다.');
 				} else if(gDate < sysdate){
 					alert('모임 날짜가 지나 신청이 불가능합니다.');
-				}else {
-					location.href="${groupApply}";
+				}else if(gDeadline == 'N'){
+					if(gDate >= sysdate){
+						location.href="${groupApply}";
+					}
 				}
 				
 			});

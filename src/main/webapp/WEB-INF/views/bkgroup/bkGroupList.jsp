@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=2.0" type="text/css">
+<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=1.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -103,20 +103,21 @@
 		          	<c:forEach var="gs" items="${ gsList }">
 			           	<c:if test="${ g.gNo eq gs.gNo }">
 				           	<tr>
-				           		<td colspan="2">
+				           		<td colspan="3">
 				           			모집인원 현황 : ${ gs.memberCount } / ${ g.gTotal}
 				           		</td>
 				           	</tr>
 			           	</c:if>
 		          	</c:forEach>
 		            <tr>
+		            	<td style="border-right: 1px solid lightgray;" width="60px">모임명</td>
 		               <td style="vertical-align: middle;">
 						<input id="gNo" type="hidden" value="${ g.gNo }">
-		               		<b>${ g.gName }</b> 
+		               		<b>&nbsp;${ g.gName }</b> 
 		               </td>
 		            </tr>
 		            <tr>
-		               <td height="220px;" align="center">
+		               <td colspan="2" height="220px;" align="center">
 		               		<c:forEach var="gs" items="${ gsList }">
 					           	<c:if test="${ ((g.gNo eq gs.gNo) && (g.gTotal eq gs.memberCount)) || ((g.gNo eq gs.gNo) && g.gDeadline == 'Y') || (g.gNo eq gs.gNo) && (g.gDate < sysDate)}">
 				               		<em>마감</em>
@@ -133,7 +134,7 @@
 		               </td>
 		            </tr>
 		            <tr>
-		               <td colspan="2" height="80">
+		               <td colspan="3" height="80">
 		            			<c:forTokens var="intro" items="${ g.gIntro }" delims="/" varStatus="s">
 		            				<c:if test="${ s.index eq 0 }">
 		            					${ intro }
@@ -142,7 +143,7 @@
 		               </td>
 		            </tr>
 		            <tr>
-		               <td colspan="2" height="80">
+		               <td colspan="3" height="80">
 		                  <c:forTokens var="addr" items="${ g.gPlace }" delims="/" varStatus="status">
 						 <c:if test="${ status.index eq 0 }">
 							${ addr }

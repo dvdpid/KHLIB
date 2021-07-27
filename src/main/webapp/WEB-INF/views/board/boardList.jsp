@@ -39,6 +39,8 @@
 				자유 게시판
 			</p>
 		</div>
+
+  	
 		<div id="searchDiv">
 			<table id="searchTable">
 				<tr>
@@ -52,23 +54,10 @@
 				</tr>
 			</table>
 			<button id="searchBtn" onclick="searchBoard();">조회</button>
-		</div>/*
-  	</div>
+		</div>  	
   	
-  	<script>
-		function searchBoard(){
-			var search = $('#searchCondition').val();
-			var searchContent = $('#searchValue').val();
-			
-			console.log(search);
-			console.log(searchContent);
-			
-			location.href="search.bo?search=" + search + "&searchContent=" + searchContent;
-		}
-	</script>
-  	
-  	<div class="boardList">
-  		<table id="boardListTable">
+  	<div id="boardList">
+  		<table id="boardListTable" >
   			<tr>
   				<th>제목</th>
   				<th>작성자</th>
@@ -90,62 +79,80 @@
 		  			<td>${ b.bCount }</td>
 		  		</tr>
   			</c:forEach>
-  			
-  			<tr>
+  		</table>
+  		
+  		<table id="btntable">
+  		<tr>
 				<td colspan="4" align="right">
 					<c:if test="${ !empty loginUser }">
 						&nbsp; &nbsp; &nbsp;
-						<button onclick="location.href='boardWriteForm.bo';">글쓰기</button>
+						<button id="write" onclick="location.href='boardWriteForm.bo';">글쓰기</button>
 					</c:if>
 				</td>
 			</tr>
-  			
-  			<!-- 페이징 처리 -->
-			<tr align="center" height="20">
-				<td colspan="6">
-				
-					<!-- [이전] -->
-					<c:if test="${ pi.currentPage <= 1 }">
-						[이전] &nbsp;
-					</c:if>
-					<c:if test="${ pi.currentPage > 1 }">
-						<c:url var="before" value="board.bo">
-							<c:param name="page" value="${ pi.currentPage - 1 }"/>
-						</c:url>
-						<a href="${ before }">[이전]</a> &nbsp;
-					</c:if>
-					
-					<!-- 페이지 -->
-					<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-						<c:if test="${ p eq pi.currentPage }">
-							<font color="red" size="4"><b>[${ p }]</b></font>
-						</c:if>
-						
-						<c:if test="${ p ne pi.currentPage }">
-							<c:url var="pagination" value="board.bo">
-								<c:param name="page" value="${ p }"/>
-							</c:url>
-							<a href="${ pagination }">${ p }</a> &nbsp;
-						</c:if>
-					</c:forEach>
-					
-					<!-- [다음] -->
-					<c:if test="${ pi.currentPage >= pi.maxPage }">
-						[다음]
-					</c:if>
-					<c:if test="${ pi.currentPage < pi.maxPage }">
-						<c:url var="after" value="board.bo">
-							<c:param name="page" value="${ pi.currentPage + 1 }"/>
-						</c:url> 
-						<a href="${ after }">[다음]</a>
-					</c:if>
-				</td>
-			</tr>
-  		
   		</table>
+  			
+		<!-- 페이징 부분 -->
+		<div class="pagingArea" align="center">
+			<!-- [이전] -->
+			<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
+			<c:if test="${ pi.currentPage > 1 }">
+				<c:url value="${ loc }" var="blistBack"> <!-- loc : 현재 내 주소 -->
+            		<c:param name="page" value="${ pi.currentPage - 1 }"/>
+            		<c:if test="${ searchValue ne null }">
+            			<c:param name="searchCondition" value="${ searchCondition }"/>
+            			<c:param name="searchValue" value="${ searchValue }"/>
+            		</c:if>
+            	</c:url>
+            	<div class="pageBtn"><a href="${ blistBack }">&lt;</a></div>
+			</c:if>
+			
+			<!-- 페이지 -->
+			<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+				<c:if test="${ p eq pi.currentPage }">
+					<div class="currentpageBtn"><b>${ p }</b></div>
+				</c:if>
+				
+				<c:if test="${ p ne pi.currentPage }">
+					<c:url var="blistCheck" value="${ loc }">
+            			<c:param name="page" value="${ p }"/>
+            			<c:if test="${ searchValue ne null }">
+	            			<c:param name="searchCondition" value="${ searchCondition }"/>
+	            			<c:param name="searchValue" value="${ searchValue }"/>
+	            		</c:if>
+            		</c:url>
+            		<div class="pageBtn"><a href="${ blistCheck }">${ p }</a></div>
+				</c:if>
+			</c:forEach>
+			
+			<!-- [다음] -->
+			<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
+			<c:if test="${ pi.currentPage < pi.maxPage }">
+				<c:url value="${ loc }" var="blistNext"> <!-- loc : 현재 내 주소 -->
+            		<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+            		<c:if test="${ searchValue ne null }">
+            			<c:param name="searchCondition" value="${ searchCondition }"/>
+            			<c:param name="searchValue" value="${ searchValue }"/>
+            		</c:if>
+            	</c:url>
+            	<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
+			</c:if>
+		</div>
+	</div>
   		
-  	</div>
-  		
+  	
+  	<script>
+		function searchBoard(){
+			var search = $('#searchCondition').val();
+			var searchContent = $('#searchValue').val();
+			
+			console.log(search);
+			console.log(searchContent);
+			
+			location.href="search.bo?search=" + search + "&searchContent=" + searchContent;
+		}
+	</script>
+	
   		
   	<c:import url="../common/footer.jsp"/>
 	

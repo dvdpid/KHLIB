@@ -169,6 +169,10 @@
 		width: 30px; line-height: 30px;  border-radius: 2px;
 	}
 	
+  	a{
+  		text-decoration: none;
+  		color: black;
+  	}
     
 @media screen and (max-width: 1035px){
 	#topWrapper{

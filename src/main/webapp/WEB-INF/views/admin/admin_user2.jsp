@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 
 <title> 회원 </title>
-<link href="<c:url value="/resources/css/admin/admin.css?ver=6.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css?ver=5.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
 <link rel="stylesheet" href="resources/css/bkGroupInsert.css?ver=3.0" type="text/css">
@@ -38,12 +38,12 @@
 		<div>
 			<ul class="topLists" style="float:right; margin-right: 75px;">
 				<li><h4><a href="user.ad">회원 목록</a></h4></li>
-				<li><h4><a href="user2.ad">관리자 목록</a></h4></li>
+				<li><h4><a href="home.do">관리자 목록</a></h4></li>
 			</ul>
 		</div>
 		<div class="con">
 		<div class="empty" style="height:50px;"></div>
-		<h3 align="left">회원 목록</h3><br>
+		<h3 align="left">관리자 목록</h3><br>
 		<div class="search-box" style="float:right; margin-right: 75px;">
     	  <input type="text" class="search-txt" id="searchValue" name="" placeholder="아이디 검색">
      		 <a class="search-btn" onclick="searchUser();">
@@ -76,14 +76,14 @@
 				</tr>
 				</thead>
 				<tbody>
-				<c:if test="${ empty list }">
+				<c:if test="${ empty alist }">
 					<tr>
 						<td colspan="10"> 회원이 없습니다. </td>
 					</tr>
 				</c:if>
 				
-				<c:if test="${ not list.isEmpty() }">
-				<c:forEach var="u" items="${list }">
+				<c:if test="${ not alist.isEmpty() }">
+				<c:forEach var="u" items="${alist }">
 				<tr class="list">
 					<td>${u.no }</td>
 					<td>${u.id }</td>
@@ -100,13 +100,13 @@
 				</c:if>
 				</tbody>
 			</table>
-				<c:if test="${ !empty list }">
+				<c:if test="${ !empty alist }">
 						<!-- 페이징 부분 -->
 						<div class="pagingArea" align="center">
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
-							<c:if test="${ pi.currentPage > 1 }">
-								<c:url value="user.ad" var="blistBack"> <!-- loc : 현재 내 주소 -->
+							<c:if test="${ api.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
+							<c:if test="${ api.currentPage > 1 }">
+								<c:url value="user2.ad" var="blistBack"> <!-- loc : 현재 내 주소 -->
 				            		<c:param name="page" value="${ pi.currentPage - 1 }"/>
 				            		<c:if test="${ searchValue ne null }">
 				            			<c:param name="searchContent" value="${ searchValue }"/>
@@ -116,13 +116,13 @@
 							</c:if>
 							
 							<!-- 페이지 -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ api.startPage }" end="${ api.endPage }">
+								<c:if test="${ p eq api.currentPage }">
 									<div class="currentpageBtn"><b>${ p }</b></div>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="blistCheck" value="user.ad">
+								<c:if test="${ p ne api.currentPage }">
+									<c:url var="blistCheck" value="user2.ad">
 				            			<c:param name="page" value="${ p }"/>
 				            			<c:if test="${ searchValue ne null }">
 					            			<c:param name="searchContent" value="${ searchValue }"/>
@@ -133,10 +133,10 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
-							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url value="user.ad" var="blistNext"> <!-- loc : 현재 내 주소 -->
-				            		<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+							<c:if test="${ api.currentPage >= api.maxPage }"><div class="pageBtn">&gt;</div></c:if>
+							<c:if test="${ api.currentPage < api.maxPage }">
+								<c:url value="user2.ad" var="blistNext"> <!-- loc : 현재 내 주소 -->
+				            		<c:param name="page" value="${ api.currentPage + 1 }"></c:param>
 				            		<c:if test="${ searchValue ne null }">
 				            			<c:param name="searchContent" value="${ searchContent }"/>
 				            		</c:if>
@@ -146,7 +146,7 @@
 						</div>
 					</c:if>
 			<div class="ubtn">
-				<input type="submit" class="btn1" id="inBtn" value="회원 삭제" style="float:right; margin-right: 75px;">
+				<input type="submit" class="btn1"  id="inBtn"  value="회원 삭제" style="float:right; margin-right: 75px;">
 			</div>
 			<div class="empty" style="height:50px;"></div>
 			<div class="empty" style="height:50px;"></div>

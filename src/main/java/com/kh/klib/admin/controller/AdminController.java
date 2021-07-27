@@ -126,23 +126,43 @@ public class AdminController {
 			currentPage = page;
 		}
 		int listCount = aService.getListUserCount();
-		int alistCount = aService.getListadminUserCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		PageInfo api = Pagination.getPageInfo(currentPage, alistCount);
 		
 		
 		ArrayList<Member> list = aService.selectUserList(pi);
-		ArrayList<Member> alist = aService.selectadminUserList(api);
 		
 		
 		if(list != null) {
-			mv.addObject("list", list).addObject("pi", pi).addObject("alist", alist).addObject("api", api).setViewName("admin_user");
+			mv.addObject("list", list).addObject("pi", pi).setViewName("admin_user");
 		} else {
 			throw new BooksException("회원 조회 실패!");
 		}
 		return mv;
 	}
+	@RequestMapping("user2.ad")
+	public ModelAndView adminUser2Form(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int alistCount = aService.getListadminUserCount();
+		
+		PageInfo api = Pagination.getPageInfo(currentPage, alistCount);
+		
+		
+		ArrayList<Member> alist = aService.selectadminUserList(api);
+		
+		
+		if(alist != null) {
+			mv.addObject("alist", alist).addObject("api", api).setViewName("admin_user2");
+		} else {
+			throw new BooksException("회원 조회 실패!");
+		}
+		return mv;
+	}
+	
+	
 	
 	@RequestMapping("userDeleteForm.ad")
 	public ModelAndView userDeleteForm(@RequestParam(value="no") Integer no, ModelAndView mv) {
@@ -223,6 +243,30 @@ public class AdminController {
 		
 		return mv;
 	}
+	@RequestMapping("comment.ad")
+	public ModelAndView adminCommentList(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int cmlistCount = aService.CMListCount();
+		
+		PageInfo cmpi = Pagination.getPageInfo(currentPage, cmlistCount);
+		
+		
+		
+		ArrayList<Comments> cmList = aService.selectCommentsList(cmpi);
+		
+		
+		if(cmList != null) {
+			mv.addObject("cmList", cmList).addObject("cmpi", cmpi).setViewName("admin_comment");
+		} else {
+			throw new BoardException("댓글 조회 실패!");
+		}
+		
+		return mv;
+	}
 	
 	
 	
@@ -281,23 +325,48 @@ public class AdminController {
 			currentPage = page;
 		}
 		int listCount = aService.getListCount();
-		int relistCount = aService.getReListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		PageInfo rpi = Pagination.getPageInfo(currentPage, relistCount);
 		
 		
 		ArrayList<Books> list = aService.selectList(pi);
-		ArrayList<Books> rlist = aService.selectReList(rpi);
 		
 		
 		if(list != null) {
-			mv.addObject("list", list).addObject("pi", pi).addObject("rlist", rlist).addObject("rpi", rpi).setViewName("admin_book");
+			mv.addObject("list", list).addObject("pi", pi).setViewName("admin_book");
 		} else {
 			throw new BooksException("도서 조회 실패!");
 		}
 		return mv;
 	}
+	
+	@RequestMapping("book2.ad")
+	public ModelAndView adminBookList2(@RequestParam(value="page", required = false) Integer page, ModelAndView mv) {
+		
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = page;
+		}
+		int relistCount = aService.getReListCount();
+		
+		PageInfo rpi = Pagination.getPageInfo(currentPage, relistCount);
+		
+		
+		ArrayList<Books> rlist = aService.selectReList(rpi);
+		
+		
+		if(rlist != null) {
+			mv.addObject("rlist", rlist).addObject("rpi", rpi).setViewName("admin_book2");
+		} else {
+			throw new BooksException("도서 조회 실패!");
+		}
+		return mv;
+	}
+	
+	
+	
+	
+	
 	@RequestMapping("bookInsertForm.ad")
 	public String bookInsertForm() {
 		return "admin_add_book";

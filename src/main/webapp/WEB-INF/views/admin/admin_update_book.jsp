@@ -8,7 +8,8 @@
 
 <title> 회원 </title>
 
-<link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
+<link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="resources/css/bkGroupInsert.css?ver=3.0" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/admin.js" defer></script>
 </head>
@@ -23,31 +24,56 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p><img id="titleImg1" src="resources/images/icon3.png"/>
-			도서 등록</p>
+			<p>
+				<img id="titleImg1" src="resources/images/clipboard-list-solid.svg"/>
+				도서 등록
+			</p>
 		</div>
-		<div class="empty" style="height:50px;"></div>
-		
-		<div>
+		<br>
 		<form action="bkUpdate.ad" method="post" encType="multipart/form-data">
 			<input type="hidden" name="bNo" value="${bList[0].bNo }">
 			<input type="hidden" name="img" value="${fList[0].changeName }">
-			<table style="width: 80%; border-spacing: 5px 30px;">
+			<table id="bkInsertTable">
 				<tr>
-					<td style=" font-size: 20px;"><b>책 제목</b></td>
-					<td><input type="text" name="bTitle" value="${bList[0].bTitle }"></td>
-					<td style="font-size: 20px;"><b>저자</b></td>
-					<td><input type="text" name="bWriter" value="${bList[0].bWriter }" ></td>
+					<th width="100">책제목</th>
+					<td colspan="3" height="40px">
+						<input type="text" name="bTitle" value="${bList[0].bTitle }" size="40" required style="height:25px;">
+					</td>
+					<th>저자</th>
+					<td>
+						<input type="text" name="bWriter" value="${bList[0].bWriter }" size="40" required style="height:25px;">
+					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px;"><b>출판사</b></td>
-					<td><input type="text" name="bCompany" value="${bList[0].bCompany }" ></td>
-					<td style="font-size: 20px;"><b>출판년도</b></td>
-					<td><input type="date" name="bDate" value="${bList[0].bDate }"></td>
+					<th>출판사</th>
+					<td colspan="3">
+						<input type="text" name="bCompany" value="${bList[0].bCompany }" size="40" required style="height:25px;">
+					</td>
+					<th>출판 년도</th>
+					<td><input type="date" name="bDate" value="${bList[0].bDate }" required></td>
+				</tr>
+					<tr>
+					<th>형태 사항</th>
+					<td colspan="3">
+						<input type="text" name="bForm" size="40" value="${bList[0].bForm }" required style="height:25px;">
+					</td>
+					<th>표준 번호</th>
+					<td><input type="text" size="40" name="bStandardNo" value="${bList[0].bStandardNo }" required style="height:25px;"></td>
+				</tr>
+					<tr>
+					<th>분류 기호</th>
+					<td colspan="3">
+						<input type="text" name="bCallNo" size="40" value="${bList[0].bCallNo }"  required style="height:25px;">
+					</td>
 				</tr>
 				<tr>
-					<td style="font-size: 20px;"><b>책 줄거리</b></td>
-					<td><textarea name="bContent" rows="15" cols="90" ><c:out value="${bList[0].bContent }"></c:out></textarea></td>
+					<th rowspan="2">책 줄거리</th>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<textarea rows="20" cols="103" name="bContent" id="subIntro" value="" class="intro" placeholder=""><c:out value="${bList[0].bContent }"></c:out>
+						</textarea>
+					</td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;"><b>책 표지</b></td>
@@ -57,11 +83,15 @@
 						</div>
 					</td>
 					</tr>
-				<tr class="btn">
-					<td><input type="submit" id="add_btn" value="도서 수정">	</td>
-					<td><input type="reset" value="새로 입력" onclick="resetInsertData()"></td>
-				</tr>
+				
 			</table>
+				<div class="empty" style="height:50px;"></div>
+				<div style="margin: 0px 60px;">
+					<input type="submit" id="inBtn" value="도서 수정" class="btn"> &nbsp;
+					<input type="reset" id="inBtn" value="새로 입력" onclick="resetInsertData()">
+				</div>
+			
+			
 				<div id="fileArea">
 					<input type="file" id="thumbnailImg1" multiple="multiple" name="thumbnailImg1" value="${fList[0].changeName }" onchange="LoadImg(this,1)">
 				</div>
@@ -93,6 +123,5 @@
 			</script>
 		</form>
 		</div>
-	</div>
 </body>
 </html>

@@ -10,7 +10,10 @@
 <link href="<c:url value="/resources/css/admin/admin.css?ver=4.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/style.css?ver=3.0"/>" rel='stylesheet' />
 <link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="resources/css/bkGroupInsert.css?ver=3.0" type="text/css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
+
 <script src="resources/js/admin.js" defer></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 
@@ -75,50 +78,58 @@
 						<td onclick="event.cancelBubble=true"><input type="radio" name="gNo" value="${g.gNo  }"></td>
 					</tr>
 				</c:forEach>
-						<tr align="center" height="20" id="buttonTab">
-						<td colspan="5">
-					
-						<!-- [이전] -->
-						<c:if test="${ pi.currentPage <= 1 }">
-							[이전] &nbsp;
-						</c:if>
-						<c:if test="${ pi.currentPage > 1 }">
-							<c:url var="before" value="bkgroup.ad">
-								<c:param name="page" value="${ pi.currentPage - 1 }"/>
-							</c:url>
-							<a href="${ before }">[이전]</a> &nbsp;
-						</c:if>
-				
-				<!-- 페이지 -->
-						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<c:if test="${ p eq pi.currentPage }">
-								<font color="red" size="4"><b>[${ p }]</b></font>
-							</c:if>
-							
-							<c:if test="${ p ne pi.currentPage }">
-								<c:url var="pagination" value="bkgroup.ad">
-									<c:param name="page" value="${ p }"/>
-								</c:url>
-								<a href="${ pagination }">${ p }</a> &nbsp;
-							</c:if>
-						</c:forEach>
-				
-						<!-- [다음] -->
-						<c:if test="${ pi.currentPage >= pi.maxPage }">
-							[다음]
-						</c:if>
-						<c:if test="${ pi.currentPage < pi.maxPage }">
-							<c:url var="after" value="bkgroup.ad">
-								<c:param name="page" value="${ pi.currentPage + 1 }"/>
-							</c:url> 
-							<a href="${ after }">[다음]</a>
-						</c:if>
-					</td>
-				</tr>
 				</tbody>
 			</table>
+			<c:if test="${ !empty list }">
+						<!-- 페이징 부분 -->
+						<div class="pagingArea" align="center">
+							<!-- [이전] -->
+							<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
+							<c:if test="${ pi.currentPage > 1 }">
+								<c:url value="bkgroup.ad" var="blistBack"> <!-- loc : 현재 내 주소 -->
+				            		<c:param name="page" value="${ pi.currentPage - 1 }"/>
+				            		<c:if test="${ searchValue ne null }">
+				            			<c:param name="searchContent" value="${ searchValue }"/>
+				            		</c:if>
+				            	</c:url>
+				            	<div class="pageBtn"><a href="${ blistBack }">&lt;</a></div>
+							</c:if>
+							
+							<!-- 페이지 -->
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<c:if test="${ p eq pi.currentPage }">
+									<div class="currentpageBtn"><b>${ p }</b></div>
+								</c:if>
+								
+								<c:if test="${ p ne pi.currentPage }">
+									<c:url var="blistCheck" value="bkgroup.ad">
+				            			<c:param name="page" value="${ p }"/>
+				            			<c:if test="${ searchValue ne null }">
+					            			<c:param name="searchContent" value="${ searchValue }"/>
+					            		</c:if>
+				            		</c:url>
+				            		<div class="pageBtn"><a href="${ blistCheck }">${ p }</a></div>
+								</c:if>
+							</c:forEach>
+							
+							<!-- [다음] -->
+							<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
+							<c:if test="${ pi.currentPage < pi.maxPage }">
+								<c:url value="bkgroup.ad" var="blistNext"> <!-- loc : 현재 내 주소 -->
+				            		<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+				            		<c:if test="${ searchValue ne null }">
+				            			<c:param name="searchContent" value="${ searchContent }"/>
+				            		</c:if>
+				            	</c:url>
+				            	<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
+							</c:if>
+						</div>
+					</c:if>
+			
+			
+			
 			<br>
-			<input type="button" class="btn1" value="모임 삭제" style="float:right; margin-right: 75px;">
+			<input type="button" class="btn1" id="inBtn" value="모임 삭제" style="float:right; margin-right: 75px;">
 		</div>
 		</div>
 	</div>

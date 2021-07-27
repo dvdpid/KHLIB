@@ -12,11 +12,13 @@
 <link href="<c:url value="/resources/css/admin/admin_searchd.css"/>" rel='stylesheet' />
 <link rel="stylesheet" href="resources/css/bkGroupInsert.css?ver=3.0" type="text/css">
 <link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
 <script src="resources/js/admin.js" defer></script>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 
+<style>
+	#buttonTab{border-left: hidden; border-right: hidden;}
+</style>
 </head>
 <body>
 <!-- 헤더부분 -->
@@ -29,70 +31,65 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p><img id="titleImg1" src="resources/images/icon2.png"/>
-			게시글 관리</p>
-		</div>
-		<div>
-			<ul class="topLists" style="float:right; margin-right: 75px;">
-				<li><h4><a href="board.ad">게시판 목록</a></h4></li>
-				<li><h4><a href="comment.ad">댓글 목록</a></h4></li>
-			</ul>
+			<p><img id="titleImg1" src="resources/images/icon3.png"/>
+			도서 관리</p>
 		</div>
 		<div class="con">
+		<div>
+			<ul class="topLists" style="float:right; margin-right: 75px;">
+				<li><h4><a href="book.ad">도서 목록</a></h4></li>
+				<li><h4><a href="book2.ad">추천 도서 목록</a></h4></li>
+			</ul>
+		</div>
+				
 		<div class="empty" style="height:50px;"></div>
-		<h3 align="left">자유게시판 목록</h3><br>
-		<div class="search-box" style="float:right; margin-right: 75px;">
-    	  	<select id="searchCondition" class="search-txt" name="searchCondition">
-				<option value="title">제목</option>
-				<option value="writer">작성자</option>
-			</select>
-    	  <input type="text" class="search-txt" id="searchValue" name="" placeholder="검색">
-     		 <a class="search-btn" onclick="searchBoard();">
-        		<i class="fas fa-search"></i>
-    		  </a>
-  		</div>
-	<script type="text/javascript">
-		function searchBoard(){
-			var search = $('#searchCondition').val();
-			var searchContent = $('#searchValue').val();
-			
-			location.href="searchBoard.ad?search=" + search + "&searchContent=" + searchContent;
-		}
-	</script>
-	
+		<h3 align="left">이달의 추천 도서 목록</h3><br>
 		<div>
 			<table class="type1">
 				<thead>
 				<tr>
 					<th>번호</th>
-					<th>게시글 제목</th>
-					<th>게시글 작성자</th>
-					<th>조회수</th>
-					<th>작성일</th>
+					<th>책 제목</th>
+					<th>저자</th>
+					<th>출판사</th>
+					<th>출판년도</th>
+					<th>상태</th>
+					<th>입고일</th>
 					<th>체크</th>
+
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="b" items="${bList }">
-				<tr class="bList" onclick="location.href='${ contextPath }/bDetail.ad?bNo=' + ${b.bNo} + '&page=' + ${ pi.currentPage }">
-					<td>${b.bNo }</td>
+				<c:if test="${ empty rlist }">
+					<tr>
+						<td colspan="8"> 등록된 도서가 없습니다. </td>
+					</tr>
+				</c:if>
+				<c:if test="${ not rlist.isEmpty() }">
+				<c:forEach var="rb" items="${rlist }">
+				<tr class="list"  onclick="location.href='${ contextPath }/detail.bk?bNo=' + ${rb.bNo} + '&page=' + ${ pi.currentPage }">
+					<td>${rb.bNo }</td>
 					<td>${b.bTitle }</td>
-					<td>${ b.bWriter }</td>
-					<td>${b.bCount }</td>
-					<td>${b.bDate }</td>
-					<td onclick="event.cancelBubble=true"><input type="radio" name="bNo" value="${b.bNo }"></td>
+					<td>${ rb.bWriter }</td>
+					<td>${rb.bCompany }</td>
+					<td>${rb.bDate }</td>
+					<td>${rb.bStatus }</td>
+					<td>${rb.entryDate }</td>
+					<td onclick="event.cancelBubble=true"><input type="radio" name="rbNo" value="${rb.bNo  }"></td>
 				</tr>
 				</c:forEach>
+				</c:if>
 				</tbody>
 			</table>
-			<c:if test="${ !empty bList }">
+			
+			<c:if test="${ !empty rlist }">
 						<!-- 페이징 부분 -->
 						<div class="pagingArea" align="center">
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
-							<c:if test="${ pi.currentPage > 1 }">
-								<c:url value="board.ad" var="blistBack"> <!-- loc : 현재 내 주소 -->
-				            		<c:param name="page" value="${ pi.currentPage - 1 }"/>
+							<c:if test="${ rpi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
+							<c:if test="${ rpi.currentPage > 1 }">
+								<c:url value="book2.ad" var="blistBack"> <!-- loc : 현재 내 주소 -->
+				            		<c:param name="page" value="${ rpi.currentPage - 1 }"/>
 				            		<c:if test="${ searchValue ne null }">
 				            			<c:param name="searchContent" value="${ searchValue }"/>
 				            		</c:if>
@@ -101,13 +98,13 @@
 							</c:if>
 							
 							<!-- 페이지 -->
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
+							<c:forEach var="p" begin="${ rpi.startPage }" end="${ rpi.endPage }">
+								<c:if test="${ p eq rpi.currentPage }">
 									<div class="currentpageBtn"><b>${ p }</b></div>
 								</c:if>
 								
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="blistCheck" value="board.ad">
+								<c:if test="${ p ne rpi.currentPage }">
+									<c:url var="blistCheck" value="book2.ad">
 				            			<c:param name="page" value="${ p }"/>
 				            			<c:if test="${ searchValue ne null }">
 					            			<c:param name="searchContent" value="${ searchValue }"/>
@@ -118,9 +115,9 @@
 							</c:forEach>
 							
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
-							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url value="board.ad" var="blistNext"> <!-- loc : 현재 내 주소 -->
+							<c:if test="${ rpi.currentPage >= rpi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
+							<c:if test="${ rpi.currentPage < rpi.maxPage }">
+								<c:url value="book2.ad" var="blistNext"> <!-- loc : 현재 내 주소 -->
 				            		<c:param name="page" value="${ rpi.currentPage + 1 }"></c:param>
 				            		<c:if test="${ searchValue ne null }">
 				            			<c:param name="searchContent" value="${ searchContent }"/>
@@ -131,41 +128,64 @@
 						</div>
 					</c:if>
 			
+			
 			<br>
-			<input type="button" class="btn1" id="inBtn" value="게시글 삭제" style="float:right; margin-right: 75px;">
-			<br><br>
+			<input type="button" class="btn5" value="추천 취소" id="inBtn" style="float:right; margin-right: 75px;" >
 		</div>
-		
 		</div>
+				<div class="empty" style="height:70px;"></div>
 	</div>
 	<script>
-	        $('.btn1').on('click', function () {
+	        $('.btn2').on('click', function () {
 	        	var bNo = $('input:radio[name=bNo]:checked').val();
 	        	if(bNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-	        	window.open("boardDeleteForm.ad?bNo="+bNo, 'boardSignPage', 'width=800, height=500, top=100, left=300,location=bNo');
+	        	window.open("bkDelete.ad?bNo="+bNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
 	        	}
 	        });
      </script>
-     <script>
-	        $('.btn2').on('click', function () {
-	        	var cNo = $('input:radio[name=cNo]:checked').val();
-	        	if(cNo == undefined){
+	<script>
+	        $('.btn3').on('click', function () {
+	        	var bNo = $('input:radio[name=bNo]:checked').val();
+	        	if(bNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-	        	window.open("cmDeleteForm.ad?cNo="+cNo, 'commentsSignPage', 'width=800, height=500, top=100, left=300,location=cNo');
+					location.href="bkUpdateForm.ad?bNo="+bNo;
 	        	}
-	        });
+			});
      </script>
-      <script>
+    <script>
+	        $('.btn4').on('click', function () {
+	        	var bNo = $('input:radio[name=bNo]:checked').val();
+	        	if(bNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+					location.href="bkRecommend.ad?bNo="+bNo;
+	        	}
+			});
+     </script>
+       <script>
+	        $('.btn5').on('click', function () {
+	        	var bNo = $('input:radio[name=rbNo]:checked').val();
+	        	if(bNo == undefined){
+					alert("체크를 해주세요");    		
+	        	} else{
+					location.href="bkCancelRecommend.ad?bNo="+bNo;
+	        	}
+			});
+     </script>
+     
+     
+	 <script>
 		$(function(){
-			$('.bList').mouseover(function(){
+			$('.list').mouseover(function(){
 				$(this).css({"background":"#EEEEEE", "color":"white", "cursor":"pointer"});
 			}).mouseout(function(){
 				$(this).css({"background":"none", "color":"black"});
 			});
 		});
 	</script>
+	
 </body>
 </html>

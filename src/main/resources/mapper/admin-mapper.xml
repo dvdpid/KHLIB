@@ -51,6 +51,9 @@
 		<result column="B_STATUS" property="bStatus"/>
 		<result column="B_RECOMMEND" property="bRecommend"/>
 		<result column="ENTRY_DATE" property="entryDate"/>
+		<result column="BOOKS_FORM" property="bForm"/>
+		<result column="BOOKS_STANDARD_NO" property="bStandardNo"/>
+		<result column="BOOKS_CALL_NO" property="bCallNo"/>
 	</resultMap>
 	
 	<select id="selectBlist" resultMap="booksResultSet">

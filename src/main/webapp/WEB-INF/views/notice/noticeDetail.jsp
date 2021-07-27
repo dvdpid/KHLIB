@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
-<link rel="stylesheet" href="resources/css/board/boardDetail.css" type="text/css">
+<link rel="stylesheet" href="resources/css/board/boardDetail.css?ver=4.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -37,21 +37,20 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p>공지사항</p>
+			<p>${nList[0].nTitle }</p>
 		</div>
 		
 		<br>
 		 
-	<div class="outer">
 		<div class="tableArea">
-		<input type="hidden" name="nNo" value=" ${nList[0].nNo } ">
-		<table>
+		<input type="hidden" name="bNo" value="${nList[0].nNo }">
+		<table id="dtable" >
 			<tr>
-				<th>제목</th>
-				<td colspan="5">${ nList[0].nTitle }</td>
+				<th width="100" height="30">제목</th>
+				<td colspan="5">${nList[0].nTitle }</td>
 			</tr>
 			<tr>
-				<th>작성자</th>
+				<th height="30">작성자</th>
 				<td>${ nList[0].nWriter }</td>
 				<th>조회수</th>
 				<td>${ nList[0].nCount }</td>
@@ -62,23 +61,17 @@
 				<th colspan="6">내용</th>
 			</tr>
 			<tr>
-				<td colspan="6">
+				<td colspan="6" height="300">
 					<% pageContext.setAttribute("newLineChar", "\r\n"); %> 
 					${ fn:replace( nList[0].nContent, newLineChar, "<br>") }
 				</td>
 			</tr>
-			<c:url var="nList" value="noticeList.nt">
-				<c:param name="page" value="${ page }"/>
-			</c:url>
+		</table>
+		
 			
-			<tr>
-				<td colspan="6" align="center">
-					<button id="listBtn" onclick="location.href='${contextPath}/noticeList.nt?page='+${page}">목록으로</button>
-				</td>
-			</tr>
-			
-			</table>
 		</div>
+		
+	</div>	
 
 	
 </body>

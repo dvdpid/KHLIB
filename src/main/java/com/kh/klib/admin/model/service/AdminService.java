@@ -162,6 +162,12 @@ public interface AdminService {
 
 	int bkCancelRecommend(Integer bNo);
 
+	Notice selectDetailNotice(Integer nNo);
+
+	int noticeDelete(Integer nNo);
+
+	int updateNotice(Notice n);
+
 
 
 

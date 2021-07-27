@@ -385,6 +385,21 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.bkCancelRecommend(sqlSession, bNo);
 	}
 
+	@Override
+	public Notice selectDetailNotice(Integer nNo) {
+		return aDAO.selectDetailNotice(sqlSession, nNo);
+	}
+
+	@Override
+	public int noticeDelete(Integer nNo) {
+		return aDAO.noticeDelete(sqlSession, nNo);
+	}
+
+	@Override
+	public int updateNotice(Notice n) {
+		return aDAO.updateNotice(sqlSession, n);
+	}
+
 
 
 	

@@ -15,17 +15,16 @@
 
 	<div class="mainArea">
 		<div class="popup">
-			<div id="title"><h1>도서 관리</h1></div>
+			<div id="title"><h1>공지사항 관리</h1></div>
 			<div class="form">
 				<table class="formTable">
 					<tbody>
 						<tr>
-							<td style="font-size: 20px; font-weight: 600; text-align:center;">도서삭제 완료</td>
+							<td style="font-size: 20px; font-weight: 600; text-align:center;">공지사항 삭제 완료</td>
 						</tr>
 					</tbody>
 				</table>
 				<div class="agree">
-					<!-- <input type="checkbox" id="check"><span>[필수]</span>좌석을 예약하시겠습니까?</label> -->
 					<p></p>
 				</div>
 				<div id="btnArea">

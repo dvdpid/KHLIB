@@ -362,6 +362,18 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.bkCancelRecommend", bNo);
 	}
 
+	public Notice selectDetailNotice(SqlSessionTemplate sqlSession, Integer nNo) {
+		return sqlSession.selectOne("adminMapper.selectDetailNotice", nNo);
+	}
+
+	public int noticeDelete(SqlSessionTemplate sqlSession, Integer nNo) {
+		return sqlSession.update("adminMapper.noticeDelete", nNo);
+	}
+
+	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.update("adminMapper.updateNotice", n);
+	}
+
 
 
 	

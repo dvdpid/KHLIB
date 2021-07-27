@@ -116,21 +116,21 @@
 	</div>
 	<script>
 	        $('.btn2').on('click', function () {
-	        	var bNo = $('input:radio[name=nNo]:checked').val();
-	        	if(bNo == undefined){
+	        	var nNo = $('input:radio[name=nNo]:checked').val();
+	        	if(nNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-	        	window.open("noticeDelete.ad?nNo="+nNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
+	        	window.open("noticeDeleteForm.ad?nNo="+nNo, 'booksSignPage', 'width=800, height=500, top=100, left=300,location=no');
 	        	}
 	        });
      </script>
 	<script>
 	        $('.btn3').on('click', function () {
-	        	var bNo = $('input:radio[name=bNo]:checked').val();
-	        	if(bNo == undefined){
+	        	var nNo = $('input:radio[name=nNo]:checked').val();
+	        	if(nNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-					location.href="bkUpdateForm.ad?bNo="+bNo;
+					location.href="noticeUpdateForm.ad?nNo="+nNo;
 	        	}
 			});
      </script>

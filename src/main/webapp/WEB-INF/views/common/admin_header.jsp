@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/common/menubar.css" type="text/css">
+<script src="resources/js/menubar.js" defer></script>
+
 </head>
 <body>
 <c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope="application"/>
@@ -28,7 +31,7 @@
 	</section>
 	<section id="top">
 		<div class="wrapper" id="topWrapper">
-			<div class="logo" onclick="location.href='user.ad'"><h2><b style="color:rgb(212, 129, 91);">KH&nbsp;</b><b>도서관</b></h2></div>
+			<div class="logo"><a href="user.ad" style="color: black;"><b style="color:rgb(212, 129, 91);">KH</b>도서관 </a></div>
 			<button type="button" class="toggleBtn">
 				<img src="resources/images/bars-solid.svg" style="width: 20px; height: 20px"/>
 			</button>
@@ -37,5 +40,8 @@
 			</ul>
 		</div>
 	</section>
+	
+	
+	
 </body>
 </html>

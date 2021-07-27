@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +85,7 @@
 			</tr>
 		</table>
 		
-		
+		<hr>
 		<br>
 		
 		<table id="bookTable">   
@@ -189,6 +190,11 @@
 		
 	</div>	
 	
+		<c:set var="now" value="<%= new java.util.Date() %>" />
+		<c:set var="sysDate"><fmt:formatDate value="${ now }" pattern="yyyy-MM-dd" /></c:set>
+		<input type="hidden" id="sysdate" value="${ sysDate }">
+		<input type="hidden" id="gDate" value="${ gDate }">
+	
 	<br>
 	
 	<c:import url="../common/footer.jsp"/>
@@ -221,13 +227,17 @@
 				var signMemberCount = document.getElementById('signMemberCount').value;
 				var gTotal = document.getElementById('gTotal').value;
 				var gDeadline = document.getElementById('gDeadline').value;
+				var sysdate = document.getElementById('sysdate').value;
+				var gDate = document.getElementById('gDate').value;
 				
 				if(!loginUser){
 					alert('로그인 후 이용 가능합니다.');
 					location.href="${contextPath}/loginForm.me";
 				} else if(signMemberCount == gTotal || gDeadline == 'Y'){
 					alert('마감된 모임은 신청이 불가능합니다.');
-				} else {
+				} else if(gDate < sysdate){
+					alert('모임 날짜가 지나 신청이 불가능합니다.');
+				}else {
 					location.href="${groupApply}";
 				}
 				

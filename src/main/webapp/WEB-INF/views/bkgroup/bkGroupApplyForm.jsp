@@ -7,16 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#signArea{margin-right: auto; margin-left: auto; width: 450px; text-align: center;}
+	#signArea{ width: 450px; text-align: center; margin: 0 auto; margin-top: 3%;}
 	#signTable{text-align: center; border: 1px solid lightgray; height: 150px; width: 450px; border-collapse: collapse;}
 	#signTable td{padding: 5px; border: 1px solid lightgray; padding: 5px;}
 	#signTable th{padding: 5px; border: 1px solid lightgray;}
 	#signTable tr{padding: 5px; border: 1px solid lightgray;}
-	button {
+	.btn {
  		font-size: 15px; background: rgb(212, 129, 91); color: white; 
 		padding: 5px 10px 5px 10px; margin:5px; width: 80px;
 		border: 0;  border-radius: 7px;
  	}
+ 	footer{ position: fixed; bottom: 0;}
 </style>
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
@@ -26,6 +27,7 @@
 	<br>
 	
 	<div id="signArea">
+		<h2>${ group.gName } 신청</h2>
 		<table id="signTable">
 			<tr>
 				<th>글 번호</th>
@@ -52,8 +54,8 @@
 		
 		<br><br>
 		
-		<button id="yesBtn">네</button>
-		<button id="noBtn">아니오</button>
+		<button id="yesBtn" class="btn">네</button>
+		<button id="noBtn" class="btn">아니오</button>
 	</div>
 	
 	
@@ -61,7 +63,11 @@
 	
 	<br>
 	
+	<footer>
 	<c:import url="../common/footer.jsp"/>
+	</footer>
+	
+	
 	<script>
 		var yes = $('input:checkbox[name="yes"]');
 		var uNo = $('#uNo').val();

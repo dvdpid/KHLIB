@@ -69,8 +69,8 @@
 				<c:forEach var="rb" items="${rlist }">
 				<tr class="list"  onclick="location.href='${ contextPath }/detail.bk?bNo=' + ${rb.bNo} + '&page=' + ${ pi.currentPage }">
 					<td>${rb.bNo }</td>
-					<td>${b.bTitle }</td>
-					<td>${ rb.bWriter }</td>
+					<td>${rb.bTitle }</td>
+					<td>${rb.bWriter }</td>
 					<td>${rb.bCompany }</td>
 					<td>${rb.bDate }</td>
 					<td>${rb.bStatus }</td>
@@ -171,7 +171,8 @@
 	        	if(bNo == undefined){
 					alert("체크를 해주세요");    		
 	        	} else{
-					location.href="bkCancelRecommend.ad?bNo="+bNo;
+	        		window.open("bkCancelRecommend.ad?bNo="+bNo, 'booksSignPage', 'width=800, height=600, top=150, left=400,location=no');
+	        		window.opener.location.reload();
 	        	}
 			});
      </script>

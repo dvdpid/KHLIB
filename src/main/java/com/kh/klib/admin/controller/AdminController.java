@@ -1151,7 +1151,7 @@ public class AdminController {
 		
 		int result = aService.bkRecommend(bNo);
 		if(result > 0) {
-			return "redirect:book.ad";
+			return "bkRecommend_ok";
 		} else {
 			throw new BooksException("추천도서 등록 실패!");
 		}
@@ -1163,7 +1163,7 @@ public class AdminController {
 		
 		int result = aService.bkCancelRecommend(bNo);
 		if(result > 0) {
-			return "redirect:book.ad";
+			return "bkRecommend_cancel";
 		} else {
 			throw new BooksException("추천도서 취소 실패!");
 		}

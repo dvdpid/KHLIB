@@ -10,6 +10,7 @@
 	}
 	
 	.list td{padding: 5px; border-bottom: 1px solid black;}
+	.list th{padding: 5px; border-bottom: 1px solid black;}
 	.bkgroupListDiv{display: inline-block; padding: 20px; margin: auto; width: 270px; }
 	
 	textarea{resize: none; background: none;}

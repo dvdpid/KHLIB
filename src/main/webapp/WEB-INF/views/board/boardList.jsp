@@ -59,6 +59,7 @@
   	<div id="boardList">
   		<table id="boardListTable" >
   			<tr>
+  				<th>글번호</th>
   				<th>제목</th>
   				<th>작성자</th>
   				<th>작성일</th>
@@ -73,7 +74,8 @@
   			
   			<c:forEach var="b" items="${ list }">
 		  		<tr onclick="location.href='${ contextPath }/bdetail.bo?bNo='+ ${ b.bNo } + '&page=' + ${ pi.currentPage }">
-		  			<td>${ b.bTitle }</td>
+		  			<td>${ b.bNo }</td>
+		  			<td align="left" width="400">${ b.bTitle }</td>
 		  			<td>${ b.bWriter }</td>
 		  			<td>${ b.bDate }</td>
 		  			<td>${ b.bCount }</td>
@@ -138,9 +140,13 @@
             	<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
 			</c:if>
 		</div>
+	</div>	
+
+
 	</div>
-  		
-  	
+			<br>
+			<br>
+  		  	<c:import url="../common/footer.jsp"/>
   	<script>
 		function searchBoard(){
 			var search = $('#searchCondition').val();
@@ -153,8 +159,6 @@
 		}
 	</script>
 	
-  		
-  	<c:import url="../common/footer.jsp"/>
 	
 	<script>
 		$(function(){
@@ -167,8 +171,6 @@
 			
 			
 		});
-		
-		
 	</script>
   	
   	

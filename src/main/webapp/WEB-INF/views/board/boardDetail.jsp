@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
-<link rel="stylesheet" href="resources/css/board/boardDetail.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/board/boardDetail.css?ver=3.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -60,7 +60,7 @@
 				<th colspan="6">내용</th>
 			</tr>
 			<tr>
-				<td colspan="6">
+				<td colspan="6" height="300">
 					<% pageContext.setAttribute("newLineChar", "\r\n"); %> 
 					${ fn:replace(board.bContent, newLineChar, "<br>") }
 				</td>
@@ -111,18 +111,18 @@
 			<div class="replyWriterArea"> <!-- 댓글 작성 부분 -->
 				<table id="replytable">
 					<tr>
-						<td width="100">댓글</td>
-						<td><textarea rows="2" cols="60" id="cContent" style="resize:none;"></textarea>
-						<td width="100"><button id="cSubmit">댓글 등록</button></td>
+						<th width="140">댓글</th>
+						<td><textarea rows="2" cols="70" id="cContent" style="resize:none;"></textarea>
+						<td width="140"><button id="cSubmit">댓글 등록</button></td>
 					</tr>
 				</table>
 			</div>
-			
+			<br>
 			<div id="replySelectArea"><!-- 댓글 조회 부분 -->
-				<table id="rtb">
+				<table id="rtb" >
 					<thead>
 						<tr>
-							<td><b id="cCount"></b></td>
+							<td colspan="3"><b id="cCount"></b></td>
 						</tr>
 					</thead>
 					<tbody></tbody>

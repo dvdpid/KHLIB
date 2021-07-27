@@ -127,16 +127,15 @@
 }
 	
 	#rtb{
-			width: 60%; 
-			border: 1px solid lightgray;
+			width: 73%; 
 			border-collapse: collapse;
 			margin-left: auto;
 			margin-right: auto;
+		
 }
 
 	#replytable{
-			width: 70%; 
-			border: 1px solid lightgray;
+			width: 73%; 
 			border-collapse: collapse;
 			margin-left: auto;
 			margin-right: auto;
@@ -144,8 +143,12 @@
 	}
 
 	#replytable td{
-			padding: 5px;
+			
 		
+	}
+	
+	#rtb td{
+		padding: 5px;
 	}
 	
 
@@ -160,7 +163,7 @@
 
 
 	#dtable{
-			width: 60%; 
+			width: 80%; 
 			border: 1px solid lightgray;
 			border-collapse: collapse;
 			margin-left: auto;

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=2.0" type="text/css">
+<link rel="stylesheet" href="resources/css/bkGroupList.css?ver=1.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -90,6 +91,10 @@
 			<div align="center">등록된 프로그램이 없습니다.</div>
 		</c:if>
 		
+		<c:set var="now" value="<%= new java.util.Date() %>" />
+		<c:set var="sysDate"><fmt:formatDate value="${ now }" pattern="yyyy-MM-dd" /></c:set>
+		
+		
 		<c:if test="${ !empty gList || !empty fList}">
 		<div id="listDiv">
 			<c:forEach var="g" items="${ gList }" >
@@ -105,13 +110,15 @@
 			           	</c:if>
 		          	</c:forEach>
 		            <tr>
-		               <td style="vertical-align: bottom;">
+		               <td style="vertical-align: middle;">
 						<input id="gNo" type="hidden" value="${ g.gNo }">
-		               		${ g.gNo } <br> ${ g.gName }
+		               		<b>${ g.gName }</b> 
 		               </td>
-		               <td width="165px;" height="220px;">
+		            </tr>
+		            <tr>
+		               <td width="165px;" height="220px;" align="center">
 		               		<c:forEach var="gs" items="${ gsList }">
-					           	<c:if test="${ ((g.gNo eq gs.gNo) && (g.gTotal eq gs.memberCount)) || ((g.gNo eq gs.gNo) && g.gDeadline == 'Y') }">
+					           	<c:if test="${ ((g.gNo eq gs.gNo) && (g.gTotal eq gs.memberCount)) || ((g.gNo eq gs.gNo) && g.gDeadline == 'Y') || (g.gNo eq gs.gNo) && (g.gDate < sysDate)}">
 				               		<em>마감</em>
 					           	</c:if>
 				          	</c:forEach>
@@ -138,7 +145,6 @@
 		            </tr>
 		            <tr>
 		               <td colspan="2" height="80">
-		                  <strong>
 		                  <c:forTokens var="addr" items="${ g.gPlace }" delims="/" varStatus="status">
 						 <c:if test="${ status.index eq 0 }">
 							${ addr }
@@ -146,7 +152,7 @@
 						 <c:if test="${ status.index eq 1 }">
 							${ addr }
 						 </c:if>
-						 </c:forTokens> | ${ g.gDate }</strong>
+						 </c:forTokens> | ${ g.gDate }
 		               </td>
 		            </tr>
 		         </table>

@@ -154,9 +154,9 @@
 				var gsApproval =  check.parent().parent().children().eq(6).find('input[name="gsApproval"]').val();
 				// 체크 된 행의 수락 여부 Y/N 가져오기
 				
-				if(gsApproval != 'Y'){
-					smc = smc + 1;
-				}
+				if(gsApproval == 'N'){
+					smc = smc + 1;		// N인경우 count + 1, W인 경우 숫자 유지
+				} 
 				
 				$.ajax({
 					url : 'gsMemberApply.bg',

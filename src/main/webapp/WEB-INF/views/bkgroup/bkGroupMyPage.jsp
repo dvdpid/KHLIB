@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="resources/css/bkGroupMyPage.css?ver=2.0" type="text/css">
+<link rel="stylesheet" href="resources/css/bkGroupMyPage.css?ver=1.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -29,7 +30,6 @@
 				신청 내역
 			</h3>
 		</div>
-		
 		
 		<c:if test="${ !empty loginUser }">
 		
@@ -58,12 +58,17 @@
 		<br>
 		
 		<div class="count">
-			신청 내역 개수 : ${ gsListCount }
+			신청 내역 개수 : ${ gsListCount } 
+			<div style="display: inline-block; float:right; text-align: center;">※  모임명 클릭 시, 해당 게시글로 이동합니다.</div>
 		</div>
 		
 		<br>
 		
 		<input type="hidden" name="uNo" id="uNo" value="${ loginUser.no }">
+		
+		<c:set var="now" value="<%= new java.util.Date() %>" />
+		<c:set var="sysDate"><fmt:formatDate value="${ now }" pattern="yyyy-MM-dd" /></c:set>
+		<input type="hidden" id="sysdate" value="${ sysDate }">
 		
 		<table id="bkMyPageTable">
 			
@@ -71,8 +76,9 @@
 				<th></th>
 				<th width="100">글 번호</th>
 				<th width="200">독서 모임명</th>
-				<th width="400">장소 및 시간</th>
-				<th width="150">모집 인원 현황</th>
+				<th width="350">장소</th>
+				<th width="150">날짜</th>
+				<th width="150">모집 현황</th>
 				<th width="150">승인 여부</th>
 			</tr>
 			<c:if test="${ empty gsList }">
@@ -87,39 +93,52 @@
 						<tr>
 							<td><input type="radio" name="cancelCheck" value="${ bg.gNo }"></td>
 							<td><input type="hidden" name="gNo" value="${ bg.gNo }">${ bg.gNo }</td>
-							<td>${ bg.gName }</td>
+							<td>
+								<c:url var="gdetail" value="gDetail.bg">
+									<c:param name="gNo" value="${ bg.gNo }"/>
+									<c:param name="page" value="0"/>
+								</c:url>
+								<a href="${gdetail}">${ bg.gName }</a>
+							</td>
 							<td>
 								<c:forTokens var="addr" items="${ bg.gPlace } " delims="/" varStatus="status">
 									<c:if test="${ status.index eq 1 }">
-										${ addr }
+										${ addr }<br>
 									</c:if>
+									
 									<c:if test="${ status.index eq 2 }">
 										${ addr } <br>
 									</c:if>
 								</c:forTokens>
-								
-								/ ${ bg.gDate }
-							
 							</td>
+							<td>${ bg.gDate }</td>
 							<td>
 								${ gs.memberCount } / ${ bg.gTotal } 
+								<br>
+								<input type="hidden" id="gDate" name="gDate" value="${ bg.gDate }">
+								<%-- <c:if test="${ gs.memberCount >= bg.gTotal || bg.gDate < sysDate }">
+									<sapn style="color: red;">(모집 마감)</sapn>
+								</c:if>
 								<c:if test="${ gs.memberCount < bg.gTotal }">
-									(모집중)
-								</c:if>
-								<c:if test="${ gs.memberCount >= bg.gTotal }">
-									(모집 마감)
-								</c:if>
+									(모집 중)
+								</c:if> --%>
+								
+								<c:choose>
+									<c:when test="${ gs.memberCount < bg.gTotal && bg.gDate > sysDate }">(모집 중)</c:when>
+									<c:when test="${ gs.memberCount >= bg.gTotal }"><sapn style="color: red;">(모집 마감)</sapn></c:when>
+									<c:when test="${ bg.gDate < sysDate }"><sapn style="color: red;">(모집 마감)</sapn></c:when>
+								</c:choose>
 							</td>
 							<td>
 							<input type="hidden" name="gsApproval" value="${ gs.gsApproval }">
 							<c:if test="${ gs.gsApproval == 'Y' }">
-								승인 완료
+								<span style="color: blue;">승인 완료</span>
 							</c:if>
 							<c:if test="${ gs.gsApproval == 'W' }">
 								승인 대기
 							</c:if>
 							<c:if test="${ gs.gsApproval == 'N' }">
-								승인 거절
+								<span style="color: red;">승인 거절</span>
 							</c:if>
 						</td>
 						</tr>
@@ -131,6 +150,8 @@
 		<br><br>
 		
 		<button id="cancelBtn">신청 취소 및 내역 삭제</button>
+		
+		<br><br>
 		
 		<input type="hidden" id="loginUser" value="${ loginUser }">
 	</div>

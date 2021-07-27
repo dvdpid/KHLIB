@@ -1,68 +1,5 @@
 @charset "UTF-8";
 
-	body{ margin: 0; }
-	
-	a{ text-decoration: none; }
-	 
-	#header{
-		font-weight: bold;
-		background-color: rgb(212, 129, 91);
-		font-size: 10px;
-		color: white;
-	}
-	
-	.wrapper{
-		width: 100%;
-		min-height: 30px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	
-	.logo{
-		font-size: 15px;
-		font-weight: 900;
-		margin-left: 60px;
-		color: black;
-	}
-	
-	.lists{ display: flex; margin-right: 60px; }
-	
-	.lists li{ list-style-type:none; }
-	
-	.lists li a{
-		color: white;
-		padding: 10px 20px;
-	}
-	
-	.lists li a:hover{ background: rgb(159, 101, 74); }
-	
-	#top{
-		font-weight: bold;
-		border-bottom: 2px solid lightgray;
-		font-size: 13px;
-	}
-	
-	#topWrapper{ min-height: 50px; }
-	
-	.topLists{ display: flex; margin-right: 60px; margin-top: 0; margin-bottom: 0;}
-	
-	.topLists li{ list-style-type:none;}
-	
-	.topLists li a{
-		display:block;
-		color: black;
-		padding: 17px 20px;
-	}
-	
-	.topLists li a:hover{
-		background: rgba(212, 129, 91, 0.5);
-		color:white;
-	}
-	
-	.toggleBtn{
-		display:none;
-	}
 	
 	.left{ float: left; width: 25%; }
 	
@@ -99,6 +36,22 @@
 		padding-bottom: 7px;
 		margin-right: 10px;
 	}
+	
+	#boardList{
+		align-items: center;
+		justify-content: center;
+		margin: 25px 60px 0px 60px;
+		text-align: center;
+	}
+
+	#boardListTable{
+	margin: 10px; width: 99%; 
+	}
+
+	#btntable{
+	margin: 10px; width: 99%; 
+	}	
+	
 	
 	#searchDiv{
 		display: flex;
@@ -153,7 +106,7 @@
 		font-size:10px;
 	}
 	
-	td{
+	#boardListTable td{
 		border: 1px solid lightgray;
 		border-left: none;
 		border-right: none;
@@ -188,8 +141,35 @@
 	}
 	
 	
+	#write{
+        font-size: 15px; background: rgb(212, 129, 91); color: white; 
+        padding: 5px 10px 5px 10px; margin:5px; width: 100px;
+        border: 0;  border-radius: 7px;
+    }
+    
+    
+	.pagingArea { 
+		display: inline-block; width: 100%;
+		font-size: 13px; margin-top: 20px; margin-bottom: 20px;
+	}
 	
+	.pageBtn{ 
+		display: inline-block;
+		background: rgb(244, 244, 244); width: 30px; line-height: 30px;	
+		text-align: center; border-radius: 2px; 
+	}
 	
+	.pageBtn:hover{ 
+		background: lightgray;
+	}
+	
+	.currentpageBtn{ 
+		display: inline-block;
+		background: rgb(212, 129, 91); color: white; text-align: center; 
+		width: 30px; line-height: 30px;  border-radius: 2px;
+	}
+	
+    
 @media screen and (max-width: 1035px){
 	#topWrapper{
 		align-items: flex-start;
@@ -230,105 +210,16 @@
 	
 }
 
-
-/* 페이징 */
-.pagination {
-  text-align: cente;
-  display: inline-block;
-  
-}
-
-.pagination a {
-  text-align: cente;
-  color: black;
-  float: center;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-
-/*게시판*/
-   body{
-        line-height:2em;        
-}
-    ul, li{ 
-        list-style:none;
-        text-align:center;
-        padding:0;
-        margin:0;
-}
-
-    #mainWrapper{
-        width: 200px;
-        margin: 0 auto; /*가운데 정렬*/
-    }
-
-    #mainWrapper > ul > li:first-child {
-        text-align: center;
-        font-size:14pt;
-        height:40px;
-        vertical-align:middle;
-        line-height:30px;
-}
-
-    #ulTable {margin-top:10px;}
-    
-
-    #ulTable > li:first-child > ul > li {
-        font-weight:bold;
-        text-align:center;
-}
-
-    #ulTable > li > ul {
-        clear:both;
-        padding:0px auto;
-        position:relative;
-        min-width:40px;
-}
-    #ulTable > li > ul > li { 
-        float:left;
-        font-size:10pt;
-        border-bottom:1px solid silver;
-        vertical-align:baseline;
-}    
-
-    #ulTable > li > ul > li:first-child               {width:10%;} /*번호 열 크기*/
-    #ulTable > li > ul > li:first-child +li           {width:45%;} /*제목 열 크기*/
-    #ulTable > li > ul > li:first-child +li+li        {width:20%;} /*작성자 열 크기*/
-    #ulTable > li > ul > li:first-child +li+li+li     {width:15%;} /*작성일 열 크기*/
-
-
-    #divPaging {
-          clear:both; 
-        margin:0 auto; 
-        width:220px; 
-        height:50px;
-}
-
-    #divPaging > div {
-        float:left;
-        width: 30px;
-        margin:0 auto;
-        text-align:center;
-}
-
-    #liSearchOption {clear:both;}
-    #liSearchOption > div {
-        margin:0 auto; 
-        margin-top: 30px; 
-        width:auto; 
-        height:100px;
-
-}
-
     .left {
         text-align : left;
 }
 
-/*검색창*/
-.search { padding: 20px 0;border-top:1px solid #ccc; border-bottom: 1px solid #ccc; text-align: center; font-size: 0;}
-.search * { margin: 0 5px; height: 53px; border: 1px solid #ccc;}
-.search select { width: 148px;}
-.search input { width:258px;}
-.search button { width:150px; border: none; background: rgb(212, 129, 91); color:#fff;}
+	#write{	
+			background: rgb(212, 129, 91); 
+			color: white; 
+			font-weight: bold; 
+			padding: 5px; margin:5px;
+			border: 0; border-radius: 7px; 
+			width: 80px;
+}
 

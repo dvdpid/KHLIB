@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>`
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
-<link rel="stylesheet" href="resources/css/board/boardDetail.css" type="text/css">
+<link rel="stylesheet" href="resources/css/board/boardDetail.css?ver=1.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<!-- 헤더부분 -->
 	<c:import url="../common/menubar.jsp"/>
 	
 <!-- 사이드 부분 -->
@@ -37,21 +36,20 @@
 <!-- 메인 부분 -->	
 	<div class="main">
 		<div class="mainTitle">
-			<p>자유게시판</p>
+			<p>${ board.bTitle }</p>
 		</div>
 		
 		<br>
 		 
-	<div class="outer">
 		<div class="tableArea">
 		<input type="hidden" name="bNo" value="${ board.bNo }">
-		<table>
+		<table id="dtable" >
 			<tr>
-				<th>제목</th>
+				<th width="100" height="30">제목</th>
 				<td colspan="5">${ board.bTitle }</td>
 			</tr>
 			<tr>
-				<th>작성자</th>
+				<th height="30">작성자</th>
 				<td>${ board.bWriter }</td>
 				<th>조회수</th>
 				<td>${ board.bCount }</td>
@@ -79,7 +77,9 @@
 					<td colspan="5">첨부 파일이 없습니다.</td>
 				</c:if>
 			</tr>
+		</table>
 		
+			<table id="btntable">
 			<c:url var="bupdateForm" value="bupdateForm.bo">
 				<c:param name="bNo" value="${ board.bNo }"/>
 				<c:param name="page" value="${ page }"/>
@@ -92,25 +92,28 @@
 			</c:url>
 			
 			<c:if test="${ loginUser.nickname == board.bWriter }">
+			
+			<br>
 			<tr>
 				<td colspan="6" align="center">
 					<button id="button1" onclick="location.href='${ bupdateForm }'">수정</button>
 					<button id="button2">삭제</button>
-					<button id="button3">목록으로</button>
+					<button id="button3" onclick="location.href='${ blist }'">목록으로</button>
 				</td>
 			</tr>
 			</c:if>
-			
 			</table>
+			
 		</div>
 		
+		<br>
 		<div class="replyArea">
-			<div class="replyWriterArea"><!-- 댓글 작성 부분 -->
-				<table>
+			<div class="replyWriterArea"> <!-- 댓글 작성 부분 -->
+				<table id="replytable">
 					<tr>
-						<td>댓글 작성</td>
-						<td><textarea rows="3" cols="60" id="cContent" style="resize:none;"></textarea>
-						<td><button id="cSubmit">댓글 등록</button></td>
+						<td width="100">댓글</td>
+						<td><textarea rows="2" cols="60" id="cContent" style="resize:none;"></textarea>
+						<td width="100"><button id="cSubmit">댓글 등록</button></td>
 					</tr>
 				</table>
 			</div>
@@ -119,15 +122,17 @@
 				<table id="rtb">
 					<thead>
 						<tr>
-							<td colspan="2"><b id="cCount"></b></td>
+							<td><b id="cCount"></b></td>
 						</tr>
 					</thead>
 					<tbody></tbody>
 				</table>
+				<br>
 			</div>
 		</div>	
-		
+	</div>	
 
+	<input type="hidden" id="loginuser" value="${loginUser}" >
 	<script>
 		$(function(){
 			$('#button2').on('click', function(){
@@ -150,7 +155,9 @@
 			 
 			$('#cSubmit').on('click', function(){
 				
-				if(${ empty loginUser }){
+				var loginuser=document.getElementById("loginuser").value;
+				console.log(loginuser);
+				if(!loginuser){
 					alert('로그인 후 이용 가능합니다.');
 					location.href="${contextPath}/loginForm.me";
 				} 
@@ -194,7 +201,7 @@
 						for(var i in data){
 							var $tr = $('<tr>');
 							var $cWriter = $('<td width=100>').text(data[i].cWriter);
-							var $cContent = $('<td>').text(data[i].cContent);
+							var $cContent = $('<td width=460>').text(data[i].cContent);
 							var $cDate = $('<td width=100>').text(data[i].cDate);
 							
 							$tr.append($cWriter);

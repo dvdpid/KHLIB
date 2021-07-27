@@ -112,13 +112,6 @@
 		font-size:10px;
 	}
 	
-	td{
-		border: 1px solid lightgray;
-		border-left: none;
-		border-right: none;
-		border-collapse: collapse;
-		padding: 10px 25px;
-	}
 	
 	.sideButton{
 		text-align: left;
@@ -145,7 +138,39 @@
 	.sideButton:hover{
 		background: gray;
 	}
+
 	
+	#button1 {
+		background-color: rgb(212, 129, 91);
+		border: none;
+		color: #fff;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		margin-top: 20px;
+		cursor: pointer;
+		border-radius: 5px;
+		align: center;
+	}
+		
+
+	#button2 {
+		background-color: rgb(153, 153, 153);
+		border: none;
+		color: #fff;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		margin-top: 20px;
+		cursor: pointer;
+		border-radius: 5px;
+		align: center;
+	}
+		
 	
 @media screen and (max-width: 1035px){
 	#topWrapper{
@@ -208,28 +233,21 @@
 	text-align: left;
 }
 
-.board-upload2 {
-	border-spacing: 15px;
-	border-collapse: collapse;
+#writeTable td{
+	padding: 5px;
 }
 
-.board-upload2 tr {
-	border-bottom: 1px solid #ccc;
-	height: 40px;
-	font-size: 18px;
-}
-
-#btn {
+.buttons {
 	background-color: rgb(212, 129, 91);
 	border: none;
 	color: #fff;
 	padding: 5px 10px;
 	text-align: center;
 	text-decoration: none;
-	display: inline-block;
 	font-size: 15px;
 	margin-top: 20px;
 	cursor: pointer;
 	border-radius: 5px;
 	align: center;
 }
+

@@ -91,17 +91,19 @@
 				<c:param name="page" value="${ page }"/>
 			</c:url>
 			
-			<c:if test="${ loginUser.nickname == board.bWriter }">
+			
 			
 			<br>
 			<tr>
 				<td colspan="6" align="center">
+				<c:if test="${ loginUser.nickname == board.bWriter }">
 					<button id="button1" onclick="location.href='${ bupdateForm }'">수정</button>
 					<button id="button2">삭제</button>
+				</c:if>	
 					<button id="button3" onclick="location.href='${ blist }'">목록으로</button>
 				</td>
 			</tr>
-			</c:if>
+			
 			</table>
 			
 		</div>

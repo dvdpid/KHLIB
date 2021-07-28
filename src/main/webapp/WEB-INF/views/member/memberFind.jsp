@@ -19,6 +19,7 @@
 		font-size: 15px; background: rgb(212, 129, 91); color: white; 
 		padding: 5px 10px 5px 10px; margin:5px; width: 92%;
 		border: 0;  border-radius: 7px;
+		margin-left:27px;
 	}
 </style>
 </head>
@@ -26,7 +27,7 @@
 	<c:import url="../common/menubar.jsp"/>
 	
 	<div id="memberFindDiv">
-		<h2 align="center">아이디 / 비밀번호 찾기</h2>
+		<h2 align="center"><b style="color:rgb(212, 129, 91); font-size:28px;">KH</b>도서관</h2>
 		
 		<div id="findDiv">
 			<div id="idFindDiv">
@@ -57,7 +58,7 @@
 			<div id="pwdFindDiv">
 				<form action="">
 					<h3>비밀번호 찾기</h3>
-					<table id="pwdFindTable">
+					<table id="pwdFindTable" style="margin-bottom:32px;">
 						<tr>
 							<th width="80">아이디</th>
 							<td width="200"><input type="text" id="id" required style="width: 100%;"></td>
@@ -68,7 +69,7 @@
 							<td><input type="text" id="name" required style="width: 100%;"></td>
 							<td></td>
 						</tr>
-						<tr>
+						<tr >
 							<th>이메일</th>
 							<td><input type="text" id="email" required style="width: 100%;"></td>
 							<td></td>

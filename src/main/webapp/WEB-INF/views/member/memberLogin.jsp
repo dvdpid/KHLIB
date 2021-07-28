@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <style>
-	.loginArea{margin-top: 3%;}
+	.loginArea{margin-top: 8%;}
 	#loginBtn {
 width: 99%; height: 70%; font-size: 15px; border: 0; 
 		background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:2px;

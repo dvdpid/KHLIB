@@ -118,17 +118,17 @@
 		border-bottom: 2px solid lightgray;
 		border-left: none;
 		border-right: none;
+		border-bottom: none;
 		border-collapse: collapse;
 		width: 100%;
 		font-size:10px;
 	}
 	
 	td{
-		border: 1px solid lightgray;
-		border-left: none;
-		border-right: none;
+		
 		border-collapse: collapse;
 		padding: 10px 25px;
+		
 	}
 	
 	.sideButton{
@@ -198,11 +198,11 @@
 	
 }
 
-
+	
 
 	.joinArea{margin-top: 3%;}
 	th {text-align: right;}
-	td {padding: 5px 10px;}
+	 {padding: 5px 10px;}
 	.must {color: red;}
 	#updateBtn {
 		background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:5px;
@@ -224,7 +224,7 @@
 
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
-<link rel="stylesheet" href="resources/css/roomInfo.css" type="text/css">
+<link rel="stylesheet" href="resources/css/mypageUpdate.css" type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
 </head>
 <body>
@@ -240,13 +240,13 @@
 		</div>
 		<div class="sideButton" onclick="location.href='memberCheck.me';">
 			<h3 id="sideButton1">
-				<img id="sideImg1" />
+				<img id="sideImg1" src="resources/images/info/notes.png"/>
 				회원정보 수정
 			</h3>
 		</div>
 		<div class="sideButton" onclick="location.href='memberdelete.me';">
 			<h3 id="sideButton2">
-				<img id="sideImg2" />
+				<img id="sideImg2" src="resources/images/info/scissors.png"/>
 				회원 탈퇴
 			</h3>
 		</div>		
@@ -261,21 +261,24 @@
 			<h1>회원정보 수정</h1>
 			<form action="mupdate.me" method="post">
 			<input type="hidden" name="id" value="${ loginUser.id }">
-				<table id="joinMemberTable">
+				<table id="joinMemberTable" style="margin-right:-220px;">
 					<tr>
 						<th><label class="must">*</label> 아이디 </th>
 						<td width="200px">${ loginUser.id }</td>
-						<td width="100px"><label id="idResult"></label></td>
+						
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 </th>
 						<td><input type="password" name="pwd"  id="userpwd1" placeholder="변경 할 비밀번호" required style="width: 100%;"></td>
-						<td></td>
+						
 					</tr>
 					<tr>
 						<th><label class="must">*</label> 비밀번호 확인 </th>
 						<td><input type="password" name="pwd2" id="userpwd2" placeholder="비밀번호 확인" required style="width: 100%;">
-						<font id="chkNotice" size="2"></font>
+						
+						</td>
+						<td width="200px" style="vertical-align: middle;margin-top:5px;">
+							<span style="height:10px;margin: 20px 0 -8px;"><font id="chkNotice" size="2"></font></span>
 						</td>
 						
 					</tr>

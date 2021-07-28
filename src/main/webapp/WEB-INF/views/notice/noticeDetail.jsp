@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 리스트</title>
-<link rel="stylesheet" href="resources/css/board/boardDetail.css?ver=4.0" type="text/css">
+<link rel="stylesheet" href="resources/css/board/boardDetail.css?ver=5.0" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -47,32 +47,27 @@
 		<table id="dtable" >
 			<tr>
 				<th width="100" height="30">제목</th>
-				<td colspan="5">${nList[0].nTitle }</td>
+				<td colspan="5" align="center">${nList[0].nTitle }</td>
 			</tr>
 			<tr>
 				<th height="30">작성자</th>
-				<td>${ nList[0].nWriter }</td>
+				<td align="center">${ nList[0].nWriter }</td>
 				<th>조회수</th>
-				<td>${ nList[0].nCount }</td>
+				<td align="center">${ nList[0].nCount }</td>
 				<th>작성일</th>
-				<td>${ nList[0].nDate }</td>
+				<td align="center">${ nList[0].nDate }</td>
 			</tr>
 			<tr>
 				<th colspan="6">내용</th>
 			</tr>
 			<tr>
-				<td colspan="6" height="300">
+				<td colspan="6" height="300" align="center">
 					<% pageContext.setAttribute("newLineChar", "\r\n"); %> 
 					${ fn:replace( nList[0].nContent, newLineChar, "<br>") }
 				</td>
 			</tr>
 		</table>
-		
-			
 		</div>
-		
-	</div>	
-
-	
+	</div>
 </body>
 </html>

@@ -93,13 +93,13 @@
 						<td>
 							<input type="hidden" name="csApproval" value="${ cs.csApproval }">
 							<c:if test="${  cs.csApproval == 'Y' }">
-								승인 완료
+								<span style="color: blue;">승인 완료</span>
 							</c:if>
 							<c:if test="${  cs.csApproval == 'W' }">
 								승인 대기
 							</c:if>
 							<c:if test="${  cs.csApproval == 'N' }">
-								승인 거절
+								<span style="color: red;">승인 거절</span>
 							</c:if>
 						</td>
 					</tr>

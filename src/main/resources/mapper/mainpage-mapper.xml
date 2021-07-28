@@ -97,14 +97,11 @@
 	</resultMap>
 	
 	<select id="selectBookList" resultMap="bookResultSet">
-		<![CDATA[
-			select *
-			from(select *
-				from books
-				join files using(books_no)
-				where b_status='Y' and b_recommend='Y')
-			where rownum <= 5
-		]]>
+		select *
+		from(select *
+			from books
+			join files using(books_no)
+			where b_status='Y' and b_recommend='Y')
 	</select>
 	
 	<resultMap type="Books" id="bookResultSet">

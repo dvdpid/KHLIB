@@ -67,6 +67,7 @@
 				</td>
 			</tr>
 		</table>
+		<div class="empty" style="height:80px;"></div>
 		</div>
 	</div>
 </body>

@@ -34,7 +34,7 @@
 			<table style="width: 80%; border-spacing: 5px 30px;">
 				<tr>
 					<td style="font-size: 20px;"><b>공지사항 제목</b></td>
-					<td><input type="text" name="nTitle" value="${notice.nTitle }"></td>
+					<td><input type="text" name="nTitle" value="${notice.nTitle }" size="90" required style="height:25px;"></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;"><b>내용</b></td>

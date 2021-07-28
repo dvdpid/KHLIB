@@ -75,7 +75,7 @@
 					<th>저자</th>
 					<th>출판사</th>
 					<th>출판년도</th>
-					<th>상태</th>
+					<th>추천 상태</th>
 					<th>입고일</th>
 					<th>체크</th>
 				</tr>
@@ -92,10 +92,10 @@
 				<tr class="list"  onclick="location.href='${ contextPath }/detail.bk?bNo=' + ${b.bNo} + '&page=' + ${ pi.currentPage }">
 					<td>${b.bNo }</td>
 					<td>${b.bTitle }</td>
-					<td>${ b.bWriter }</a></td>
+					<td>${ b.bWriter }</td>
 					<td>${b.bCompany }</td>
 					<td>${b.bDate }</td>
-					<td>${b.bStatus }</td>
+					<td>${b.bRecommend }</td>
 					<td>${b.entryDate }</td>
 					<td onclick="event.cancelBubble=true"><input type="radio" name="bNo" value="${b.bNo  }"></td>
 				</tr>

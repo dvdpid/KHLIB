@@ -8,6 +8,7 @@
 
 
 <link href="<c:url value="/resources/css/admin/admin.css"/>" rel='stylesheet' />
+<link rel="stylesheet" href="resources/css/bkGroupInsert.css?ver=3.0" type="text/css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="resources/js/admin.js" defer></script>
 </head>
@@ -32,18 +33,20 @@
 			<table style="width: 80%; border-spacing: 5px 30px;">
 				<tr>
 					<td style="font-size: 20px;"><b>공지사항 제목</b></td>
-					<td><input type="text" name="nTitle" ></td>
+					<td><input type="text" name="nTitle" size="90" required style="height:25px;"></td>
 				</tr>
 				<tr>
 					<td style="font-size: 20px;"><b>내용</b></td>
 					<td><textarea name="nContent" rows="15" cols="90"></textarea></td>
 				</tr>
-				<tr class="btn">
-					<td><input type="submit" id="add_btn" value="공지사항 등록"></td>
-					<td><input type="reset" value="새로 입력" onclick="resetInsertData()"></td>
-				</tr>
 			</table>
+			<div class="empty" style="height:50px;"></div>
+				<div style="margin: 0px 60px;">
+					<input type="submit" id="inBtn" value="공지사항 등록" class="btn"> &nbsp;
+					<input type="reset" id="inBtn" value="새로 입력" onclick="resetInsertData()">
+			</div>
 		</form>
+		
 		</div>
 	</div>
 </body>

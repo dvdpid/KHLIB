@@ -40,6 +40,16 @@
 
 
 	}
+	#infoname{
+	font-size:14px;
+	font-weight: bold;
+	width: 30px;
+	
+	text-align: left;
+}
+td{
+	text-align:center;
+}
 </style>
 </head>
 <body>

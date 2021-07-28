@@ -26,7 +26,7 @@ td{
 		border-collapse: collapse;
 		padding: 10px 35px;
 		width: 30px;
-		text-align: left;
+		text-align:center;
 	}
 #roominfo {
    
@@ -114,6 +114,8 @@ table {
 	font-size:14px;
 	font-weight: bold;
 	width: 30px;
+	
+	text-align: left;
 }
 #infop{
 	font-size:13px;

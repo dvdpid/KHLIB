@@ -49,7 +49,7 @@
 		<div class="infoSpace">
 		
 				<table id="infoTable" style="width: 100%;border: 1px solid #444444;">
-						<caption style="text-align: left; font-size:28px;"><b>도서관 이용시간 안내표-자료실, 평일 (월~금), 주말 (토, 일)</b></caption>
+						<caption style="text-align: left; font-size:28px; margin-bottom:30px;"><b>도서관 이용시간 안내표-자료실, 평일 (월~금), 주말 (토, 일)</b></caption>
 						
 						<colgroup>
 						<col>

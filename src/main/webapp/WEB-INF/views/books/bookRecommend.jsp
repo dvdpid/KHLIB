@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,45 +84,44 @@
 		<c:if test="${ bList ne null }">
 			<!-- 페이징 영역 -->
 			<div class="pages">
-				<!-- 페이징 영역 -->
-					<c:if test="${ !empty bList }">
-						<!-- 페이징 부분 -->
-						<div class="pagingArea" align="center">
-							<!-- [이전] -->
-							<c:if test="${ pi.currentPage <= 1 }">[이전] &nbsp;</c:if>
-							<c:if test="${ pi.currentPage > 1 }">
-								<c:url value="${ loc }" var="blistBack">
-									<!-- loc : 현재 내 주소 -->
-									<c:param name="page" value="${ pi.currentPage - 1 }" />
-								</c:url>
-								<a href="${ blistBack }">[이전]</a>
+				<c:if test="${ !empty bList }">
+					<!-- 페이징 부분 -->
+					<div class="pagingArea" align="center">
+						<!-- [이전] -->
+						<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
+						<c:if test="${ pi.currentPage > 1 }">
+							<c:url value="${ loc }" var="blistBack">
+								<!-- loc : 현재 내 주소 -->
+								<c:param name="page" value="${ pi.currentPage - 1 }" />
+							</c:url>
+							<div class="pageBtn"><a href="${ blistBack }">&lt;</a></div>
+						</c:if>
+
+						<!-- 페이지 -->
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:if test="${ p eq pi.currentPage }">
+								<div class="currentpageBtn"><b>${ p }</b></div>
 							</c:if>
 
-							<!-- 페이지 -->
-							<c:forEach var="p" begin="${ pi.startPage }"
-								end="${ pi.endPage }">
-								<c:if test="${ p eq pi.currentPage }">
-									<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
-								</c:if>
-								<c:if test="${ p ne pi.currentPage }">
-									<c:url var="blistCheck" value="${ loc }">
-										<c:param name="page" value="${ p }" />
-									</c:url>
-									<a href="${ blistCheck }">${ p }</a>
-								</c:if>
-							</c:forEach>
-
-							<!-- [다음] -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }">&nbsp;[다음]</c:if>
-							<c:if test="${ pi.currentPage < pi.maxPage }">
-								<c:url value="${ loc }" var="bListNext">
-									<!-- loc : 현재 내 주소 -->
-									<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+							<c:if test="${ p ne pi.currentPage }">
+								<c:url var="blistCheck" value="${ loc }">
+									<c:param name="page" value="${ p }" />
 								</c:url>
-								<a href="${ bListNext }">&nbsp;[다음]</a>
+								<div class="pageBtn"><a href="${ blistCheck }">${ p }</a></div>
 							</c:if>
-						</div>
-					</c:if>
+						</c:forEach>
+
+						<!-- [다음] -->
+						<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
+						<c:if test="${ pi.currentPage < pi.maxPage }">
+							<c:url value="${ loc }" var="bListNext">
+								<!-- loc : 현재 내 주소 -->
+								<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
+							</c:url>
+							<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
+						</c:if>
+					</div>
+				</c:if>
 			</div>
 		</c:if>
 	</div>

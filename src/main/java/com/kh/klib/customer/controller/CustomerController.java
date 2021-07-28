@@ -92,7 +92,6 @@ public class CustomerController {
 	public String CustomerInsertAnswer(@ModelAttribute Answer answer, 
 									   @SessionAttribute("loginUser") Member m,
 									   HttpServletResponse response) {
-		System.out.println("insert invoked!");
 //		작성자 정보 입력
 		answer.setWriter(m.getNickname());
 		answer.setUserNo(m.getNo());
@@ -101,7 +100,7 @@ public class CustomerController {
 			cuService.insertAnswer(answer);
 		}
 
-		return "redirect:detail?qNo=" + answer.getqNo();
+		return "redirect:detail.cm?qNo=" + answer.getqNo();
 	}
 
 	@RequestMapping("detail.cm")
@@ -172,7 +171,6 @@ public class CustomerController {
 		if(m.getNo() == q.getUserNo()) {
 			model.addAttribute("q", q);
 			
-			System.out.println("???");
 			return "questionUpdateForm";
 		}
 		

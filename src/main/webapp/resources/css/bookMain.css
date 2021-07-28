@@ -106,8 +106,9 @@ a {
 }
 
 .main {
-	float: right;
-	width: 75%;
+	margin-left: 77px;
+	float: left;
+	width: 65%;
 	text-align: center;
 }
 
@@ -212,7 +213,7 @@ td {
 
 #bookList {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
 	margin-left: 2em;
 	margin-right: 2em;
 	padding-bottom: 50px;
@@ -230,8 +231,16 @@ td {
 }
 
 .bookImage {
-	width: 170px;
-	height: auto;
+	width: 165px;
+	height: 250px;
+}
+
+.over strong {
+	padding-top: 10px;
+}
+
+.over p {
+	padding-top: 10px;
 }
 
 .bookItem:hover {
@@ -264,9 +273,56 @@ td {
 }
 
 .imageContainer:hover .over {
-    display: block;
-    background: rgba(0, 0, 0, .6);
+	width: 165px;
+	height: 250px;
+	display: block;
+	left: 2px;
+	background: rgba(0, 0, 0, .6);
 }
+
+.searchBtn {
+	position:relative;
+	top: 1px;
+    font-size: 15px;
+    background: rgb(94, 94, 94);
+    color: white;
+    padding: 5px 10px 5px 10px;
+    margin: 5px;
+    width: 100px;
+    border: 0;
+    border-radius: 7px;
+}
+
+.pagingArea { 
+		display: inline-block; width: 100%;
+		font-size: 13px; margin-top: 20px; margin-bottom: 20px;
+	}
+	
+	.pageBtn{ 
+		display: inline-block;
+		background: rgb(244, 244, 244); width: 30px; line-height: 30px;	
+		text-align: center; border-radius: 2px; 
+	}
+	
+	.pageBtn:hover{ 
+		background: lightgray;
+	}
+	
+	.currentpageBtn{ 
+		display: inline-block;
+		background: rgb(212, 129, 91); color: white; text-align: center; 
+		width: 30px; line-height: 30px;  border-radius: 2px;
+	}
+	
+#searchType {
+	margin-right: 10px;
+	height: 1.7em;
+}
+
+#searchText {
+	height: 1.7em;
+}
+
 
 @media screen and (max-width: 1035px) {
 	#topWrapper {
@@ -308,5 +364,8 @@ td {
 	}
 	.main {
 		width: 100%;
+		padding-left: 5em;
 	}
+}
+}
 }

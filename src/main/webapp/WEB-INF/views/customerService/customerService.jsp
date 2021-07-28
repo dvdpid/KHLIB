@@ -15,6 +15,17 @@
 	.qnatable{
 		margin: auto;
 	}
+	
+	.btn {
+    font-size: 15px;
+    background: rgb(212, 129, 91);
+    color: white;
+    padding: 5px 10px 5px 10px;
+    margin: 5px;
+    width: 100px;
+    border: 0;
+    border-radius: 7px;
+	}
 </style>
 <body>
 	<c:import url="../common/menubar.jsp"></c:import>
@@ -49,10 +60,10 @@
 			<table class="qnatable">
 				<thead>
 					<tr>
-						<td class="numberColumn">번호</td>
-						<td class="titleColumn">제목</td>
-						<td class="authorColumn">작성자</td>
-						<td class="dateColumn">작성일</td>
+						<th class="numberColumn">번호</td>
+						<th class="titleColumn">제목</td>
+						<th class="authorColumn">작성자</td>
+						<th class="dateColumn">작성일</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,7 +73,7 @@
 								<c:url value="detail.cm" var="qDetail">
 									<c:param name="qNo" value="${ q.qNo }" />
 								</c:url>
-								<tr onclick="location.href='${qDetail}'">
+								<tr class="board" onclick="location.href='${qDetail}'">
 									<td class="numberColumn">${ q.qNo }</td>
 									<td class="titleColumn">${ q.qTitle} </td>
 									<td class="authorColumn">${ q.writer }</td>
@@ -84,7 +95,7 @@
 						<!-- 페이징 부분 -->
 						<div class="pagingArea" align="center">
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage <= 1 }">[이전]&nbsp;</c:if>
+							<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
 							<c:if test="${ pi.currentPage > 1 }">
 								<c:url value="${ loc }" var="qlistBack">
 									<!-- loc : 현재 내 주소 -->
@@ -94,26 +105,26 @@
 										<c:param name="searchValue" value="${ searchValue }" />
 									</c:if>
 								</c:url>
-								<a href="${ qlistBack }">[이전]&nbsp;</a>
+								<div class="pageBtn"><a href="${ qlistBack }">&lt;</a></div>
 							</c:if>
 
 							<!-- 페이지 -->
 							<c:forEach var="p" begin="${ pi.startPage }"
 								end="${ pi.endPage }">
 								<c:if test="${ p eq pi.currentPage }">
-									<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
+									<div class="currentpageBtn"><b>${ p }</b></div>
 								</c:if>
 
 								<c:if test="${ p ne pi.currentPage }">
 									<c:url var="qlistCheck" value="${ loc }">
 										<c:param name="page" value="${ p }" />
 									</c:url>
-									<a href="${ qlistCheck }">${ p }</a>
+									<div class="pageBtn"><a href="${ qlistCheck }">${ p }</a></div>
 								</c:if>
 							</c:forEach>
 
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }">&nbsp;[다음]</c:if>
+							<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
 								<c:url value="${ loc }" var="bListNext">
 									<!-- loc : 현재 내 주소 -->
@@ -123,20 +134,20 @@
 										<c:param name="searchValue" value="${ searchValue }" />
 									</c:if>
 								</c:url>
-								<a href="${ bListNext }">&nbsp;[다음]</a>
+								<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
 							</c:if>
 						</div>
 					</c:if>
 				</div>
 			</c:if>
 			<c:if test="${loginUser != null }">
-			<div id="writequestion"><button style=" width: 6em; position: absolute; left: 378px;" onclick="location.href='questionForm.cm'">질문등록</button></div>
+			<div id="writequestion"><button class="btn" id="questionRegister" onclick="location.href='questionForm.cm'">질문등록</button></div>
 			</c:if>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
-
+	
 </script>
 
 </html>

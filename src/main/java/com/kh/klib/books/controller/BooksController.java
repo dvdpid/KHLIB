@@ -26,7 +26,7 @@ public class BooksController {
 		
 		int listCount = bService.getBookCount();
 		
-		int limit = 9;
+		int limit = 8; // 클래스 변수로 바꿀 예정
 		
 		int currentPage = 1;
 		if(page != null) {
@@ -47,7 +47,7 @@ public class BooksController {
 	@RequestMapping("recommend.bk")
 	public String bookRecommend(@RequestParam(value="page", required=false) Integer page, Model model) {
 		
-		int limit = 9;
+		int limit = 8; // 클래스 변수로 바꿀 예정
 		
 		int currentPage = 1;
 		if(page != null) {

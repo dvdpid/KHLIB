@@ -57,7 +57,7 @@ table {
 	color: #333;
 }
 
-td {
+.board-view td, .board-view th {
 	display: table-cell;
 	vertical-align: inherit;
 }
@@ -66,6 +66,7 @@ td {
 	text-align: center;
 	font-weight: normal;
 	background-color: #f4f5f8;
+	border-top: 1px solid #d9d9d9;
 }
 
 .board-view th, .board-view td {
@@ -73,6 +74,18 @@ td {
 	text-align: left;
 	border-bottom: 1px solid #d9d9d9;
 	border-left: 1px solid #d9d9d9;
+	border-righ: 1px solid #d9d9d9;
+}
+
+.btn {
+    font-size: 15px;
+    background: rgb(212, 129, 91);
+    color: white;
+    padding: 5px 10px 5px 10px;
+    margin: 5px;
+    width: 100px;
+    border: 0;
+    border-radius: 7px;
 }
 </style>
 
@@ -124,10 +137,11 @@ td {
 				</tr>
 			</table>
 			<c:if test="${ loginUser.no eq q.userNo }">
-				<div>
-					<button
+				<br>
+				<div id="questionButtons" style="text-align: right; padding-right: 2em;">
+					<button class="btn"
 						onclick="location.href='${contextPath }/updateQuestionForm.cm?qNo=${q.qNo}'">수정</button>
-					<button
+					<button class="btn"
 						onclick="location.href='${contextPath}/deleteQuestion.cm?qNo=${q.qNo}'">삭제</button>
 				</div>
 			</c:if>
@@ -151,18 +165,19 @@ td {
 					</tr>
 				</table>
 				<c:if test="${ loginUser.admin eq 'Y' }">
-					<div>
-						<button
+					<br>
+					<div class="btns" style="text-align: right; padding-right: 2em;">
+						<button class="btn"
 							onclick="location.href='${contextPath}/updateAnswer.cm?qNo=${q.qNo}'">수정하기</button>
-						<button
-							onclick="location.href='${contextPath}/deleteQuestion.cm?qNo=${q.qNo}'">답변
-							삭제하기</button>
+						<button class="btn"
+							onclick="location.href='${contextPath}/deleteQuestion.cm?qNo=${q.qNo}'">답변삭제</button>
 					</div>
 				</c:if>
 			</c:if>
 			<c:if test="${ a eq null && loginUser.admin eq 'Y' }">
 				<div class="title">답변</div>
 				<form action="${contextPath }/insertAnswer.cm" method="post">
+					<input type="hidden" name="qNo" value="${q.qNo}">
 					<table class="board-view">
 						<tr>
 							<th>제목</th>
@@ -173,11 +188,12 @@ td {
 							<td>${ loginUser.nickname }</td>
 						</tr>
 						<tr>
-							<td colspan="2"><textarea cols="80" rows="20" id="aContent"></textarea></td>
+							<td colspan="2"><textarea cols="80" rows="20" id="aContent" name="aContent"></textarea></td>
 						</tr>
 					</table>
-					<div style="text-align: center;">
-						<input type="submit" value="등록" id="aSubmit"> <input
+					<br>
+					<div id="answerButtons" style="text-align: right;">
+						<input class="btn" type="submit" value="등록" id="aSubmit"> <input class="btn"
 							type="reset" value="초기화">
 					</div>
 				</form>

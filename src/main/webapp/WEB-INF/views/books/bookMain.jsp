@@ -90,37 +90,37 @@
 					<!-- 페이징 부분 -->
 					<div class="pagingArea" align="center">
 						<!-- [이전] -->
-						<c:if test="${ pi.currentPage <= 1 }">[이전] &nbsp;</c:if>
+						<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
 						<c:if test="${ pi.currentPage > 1 }">
 							<c:url value="${ loc }" var="blistBack">
 								<!-- loc : 현재 내 주소 -->
 								<c:param name="page" value="${ pi.currentPage - 1 }" />
 							</c:url>
-							<a href="${ blistBack }">[이전]</a>
+							<div class="pageBtn"><a href="${ blistBack }">&lt;</a></div>
 						</c:if>
 
 						<!-- 페이지 -->
 						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 							<c:if test="${ p eq pi.currentPage }">
-								<font color="rgb(212, 129, 91)" size="4"><b>[${ p }]</b></font>
+								<div class="currentpageBtn"><b>${ p }</b></div>
 							</c:if>
 
 							<c:if test="${ p ne pi.currentPage }">
 								<c:url var="blistCheck" value="${ loc }">
 									<c:param name="page" value="${ p }" />
 								</c:url>
-								<a href="${ blistCheck }">${ p }</a>
+								<div class="pageBtn"><a href="${ blistCheck }">${ p }</a></div>
 							</c:if>
 						</c:forEach>
 
 						<!-- [다음] -->
-						<c:if test="${ pi.currentPage >= pi.maxPage }">&nbsp;[다음]</c:if>
+						<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
 						<c:if test="${ pi.currentPage < pi.maxPage }">
 							<c:url value="${ loc }" var="bListNext">
 								<!-- loc : 현재 내 주소 -->
 								<c:param name="page" value="${ pi.currentPage + 1 }"></c:param>
 							</c:url>
-							<a href="${ bListNext }">&nbsp;[다음]</a>
+							<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
 						</c:if>
 					</div>
 				</c:if>
@@ -128,12 +128,12 @@
 			<!-- 검색 -->
 			<div id="searchArea">
 				<form action="bookSearch.bk">
-					<select name="searchType">
+					<select id="searchType" name="searchType">
 						<option value="title">도서명</option>
 						<option value="author">저자</option>
 						<option value="publisher">출판사</option>
-					</select><input type="text" name="searchText" />
-					<button style="position: relative">검색</button>
+					</select><input id="searchText" type="text" name="searchText" />
+					<button class="searchBtn" style="position: relative">검색</button>
 				</form>
 			</div>
 		</c:if>

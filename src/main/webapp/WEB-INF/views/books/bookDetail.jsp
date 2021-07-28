@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>도서상세</title>
-<link rel="stylesheet" href="${contextPath}/resources/css/bookDetail.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/bookDetail.css?ver=1.0" type="text/css">
 <script src="resources/js/roomInfo.js" defer></script>
 </head>
 <body>

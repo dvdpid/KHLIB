@@ -96,7 +96,6 @@
 							<td>
 								<c:url var="gdetail" value="gDetail.bg">
 									<c:param name="gNo" value="${ bg.gNo }"/>
-									<c:param name="page" value="0"/>
 								</c:url>
 								<a href="${gdetail}">${ bg.gName }</a>
 							</td>

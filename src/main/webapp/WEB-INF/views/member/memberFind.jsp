@@ -101,8 +101,11 @@
 					type: "POST",
 					data: {name:name, email:email, tel:tel},
 					success: function(result){
-						console.log(result);
-						alert('귀하의 아이디는 '+result+'입니다.'); // 결과가 controller에는 출력이 되는데 ajax로는 안넘어옴. 왜?
+						if(result == null || result == ""){
+							alert("해당하는 아이디가 없습니다.");
+						} else{
+							alert('귀하의 아이디는 '+result+'입니다.'); // 결과가 controller에는 출력이 되는데 ajax로는 안넘어옴. 왜?
+						}
 					}, fail: function(result){
 						alert('해당하는 아이디가 없습니다.');
 					}, error: function(result){

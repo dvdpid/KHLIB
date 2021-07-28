@@ -115,7 +115,7 @@
 				<tr>
 					<th>진행 방식</th>
 					<td colspan="5">
-						<span id="contentCounter">0</span>/1500<br>
+						<span id="contentCounter">0</span>/400<br>
 						<textarea rows="20" cols="103" name="gContent" id="gContent"></textarea>
 					</td>
 				</tr>
@@ -281,12 +281,12 @@
 						
 						$('#contentCounter').html('<b>' + inputLength + '<b>');
 						
-						if(inputLength <= 1500){
+						if(inputLength <= 400){
 							$('#contentCounter').css('color','black');
 						} else {
 							$('#contentCounter').css('color', 'red');
 							
-							var pieceStr = input.substr(0, 1500); 
+							var pieceStr = input.substr(0, 400); 
 							$(this).val(pieceStr); // 나한테 값을 집어넣으면 끝
 							console.log(this);		
 						}

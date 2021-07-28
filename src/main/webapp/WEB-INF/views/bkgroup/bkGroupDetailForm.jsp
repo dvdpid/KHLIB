@@ -111,39 +111,38 @@
 		<br>
 		<hr>
 		
-		<h3>진행 방식</h3>
-		<div style="margin: 0px 60px;">
-		<% pageContext.setAttribute("newLineChar", "\r\n"); %> 
-		${ fn:replace(group.gContent, newLineChar, "<br>") }
-		</div>
-	
+			<div style="margin: 0px 60px; float: left; width: 40%; height: 300px;">
+			<h3>진행 방식</h3>
+			<% pageContext.setAttribute("newLineChar", "\r\n"); %> 
+			${ fn:replace(group.gContent, newLineChar, "<br>") }
+			</div>
+		
+			<div class="div" style="margin-left: 5px;">
+				<h3>모임 장소</h3>
+				<c:forTokens var="addr" items="${ group.gPlace }" delims="/" varStatus="status">
+					<c:if test="${ status.index eq 0 }">
+						<input type="hidden" id="addr1" value="${ addr }">
+						${ addr }
+					</c:if>
+					<c:if test="${ status.index eq 1 }">
+						<input type="hidden" id="addr2" value="${ addr }">
+						${ addr }
+					</c:if>
+					<c:if test="${ status.index eq 2 }">
+						<input type="hidden" id="resultX" value="${ addr }">
+					</c:if>
+					<c:if test="${ status.index eq 3 }">
+						<input type="hidden" id="resultY" value="${ addr }">
+					</c:if>
+				</c:forTokens>
+				
+				<br><br>
+				
+				<div id="map" style="margin: 0px 60px; width: 400px; height:350px;"></div>
+				
+			</div>
 		<br>
-		<hr>
 		
-		<div class="div">
-			<strong>모임 장소 </strong> <br>
-			<c:forTokens var="addr" items="${ group.gPlace }" delims="/" varStatus="status">
-				<c:if test="${ status.index eq 0 }">
-					<input type="hidden" id="addr1" value="${ addr }">
-					${ addr }
-				</c:if>
-				<c:if test="${ status.index eq 1 }">
-					<input type="hidden" id="addr2" value="${ addr }">
-					${ addr }
-				</c:if>
-				<c:if test="${ status.index eq 2 }">
-					<input type="hidden" id="resultX" value="${ addr }">
-				</c:if>
-				<c:if test="${ status.index eq 3 }">
-					<input type="hidden" id="resultY" value="${ addr }">
-				</c:if>
-			</c:forTokens>
-			
-			<br>
-			
-		</div>
-		
-		<div id="map" style="margin: 0px 60px; width: 500px; height:350px;"></div>
 		
 		
 		<br><br>
@@ -198,6 +197,7 @@
 	<br>
 	
 	<c:import url="../common/footer.jsp"/>
+	
 	
 	<script>
 			

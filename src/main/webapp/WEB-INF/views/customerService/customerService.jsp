@@ -12,20 +12,20 @@
 <script src="resources/js/roomInfo.js" defer></script>
 </head>
 <style>
-	.qnatable{
-		margin: auto;
-	}
-	
-	.btn {
-    font-size: 15px;
-    background: rgb(212, 129, 91);
-    color: white;
-    padding: 5px 10px 5px 10px;
-    margin: 5px;
-    width: 100px;
-    border: 0;
-    border-radius: 7px;
-	}
+.qnatable {
+	margin: auto;
+}
+
+.btn {
+	font-size: 15px;
+	background: rgb(212, 129, 91);
+	color: white;
+	padding: 5px 10px 5px 10px;
+	margin: 5px;
+	width: 100px;
+	border: 0;
+	border-radius: 7px;
+}
 </style>
 <body>
 	<c:import url="../common/menubar.jsp"></c:import>
@@ -55,39 +55,40 @@
 	<!-- 메인 부분 -->
 	<div class="main">
 		<div class="boardwrapper">
-			<div class="boardTitle"
-				style="font-weight: bold; font-size: 2rem; text-align: left; padding-left: 4em; ">묻고답하기</div>
-			<table class="qnatable" id="qnaListTable">
-				<thead>
+			<div class="mainTitle">
+			<p>
+				<img id="titleImg1" src="resources/images/user-check-solid.svg"/>
+				묻고 답하기
+			</p>
+			</div>
+			<br>
+			<br>
+			<div id="boardList">
+			<table id="boardListTable">
+				<tr>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+				</tr>
+
+				<c:if test="${ empty qList }">
 					<tr>
-						<th class="numberColumn">번호</td>
-						<th class="titleColumn">제목</td>
-						<th class="authorColumn">작성자</td>
-						<th class="dateColumn">작성일</td>
+						<td colspan="4">등록된 게시글이 없습니다.</td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:choose>
-						<c:when test="${ qList != null }">
-							<c:forEach items="${ qList }" var="q">
-								<c:url value="detail.cm" var="qDetail">
-									<c:param name="qNo" value="${ q.qNo }" />
-								</c:url>
-								<tr class="board" onclick="location.href='${qDetail}'">
-									<td class="numberColumn">${ q.qNo }</td>
-									<td class="titleColumn">${ q.qTitle} </td>
-									<td class="authorColumn">${ q.writer }</td>
-									<td>${ q.qDate }</td>
-								</tr>
-							</c:forEach>
-						</c:when>
-						<c:when test="${ qList == null}">
-							<tr>
-								<td col="4" text-align="center">등록 된 질문이 없습니다.</td>
-							</tr>
-						</c:when>
-					</c:choose>
-				</tbody>
+				</c:if>
+
+				<c:forEach var="q" items="${ qList }">
+					<c:url value="detail.cm" var="qDetail">
+						<c:param name="qNo" value="${ q.qNo }" />
+					</c:url>
+					<tr class="board" onclick="location.href='${qDetail}'">
+						<td class="numberColumn">${ q.qNo }</td>
+						<td class="titleColumn">${ q.qTitle}</td>
+						<td class="authorColumn">${ q.writer }</td>
+						<td>${ q.qDate }</td>
+					</tr>
+				</c:forEach>
 			</table>
 			<c:if test="${!empty qList }">
 				<div id="pagination">
@@ -95,7 +96,9 @@
 						<!-- 페이징 부분 -->
 						<div class="pagingArea" align="center">
 							<!-- [이전] -->
-							<c:if test="${ pi.currentPage <= 1 }"><div class="pageBtn">&lt;</div></c:if>
+							<c:if test="${ pi.currentPage <= 1 }">
+								<div class="pageBtn">&lt;</div>
+							</c:if>
 							<c:if test="${ pi.currentPage > 1 }">
 								<c:url value="${ loc }" var="qlistBack">
 									<!-- loc : 현재 내 주소 -->
@@ -105,26 +108,34 @@
 										<c:param name="searchValue" value="${ searchValue }" />
 									</c:if>
 								</c:url>
-								<div class="pageBtn"><a href="${ qlistBack }">&lt;</a></div>
+								<div class="pageBtn">
+									<a href="${ qlistBack }">&lt;</a>
+								</div>
 							</c:if>
 
 							<!-- 페이지 -->
 							<c:forEach var="p" begin="${ pi.startPage }"
 								end="${ pi.endPage }">
 								<c:if test="${ p eq pi.currentPage }">
-									<div class="currentpageBtn"><b>${ p }</b></div>
+									<div class="currentpageBtn">
+										<b>${ p }</b>
+									</div>
 								</c:if>
 
 								<c:if test="${ p ne pi.currentPage }">
 									<c:url var="qlistCheck" value="${ loc }">
 										<c:param name="page" value="${ p }" />
 									</c:url>
-									<div class="pageBtn"><a href="${ qlistCheck }">${ p }</a></div>
+									<div class="pageBtn">
+										<a href="${ qlistCheck }">${ p }</a>
+									</div>
 								</c:if>
 							</c:forEach>
 
 							<!-- [다음] -->
-							<c:if test="${ pi.currentPage >= pi.maxPage }"><div class="pageBtn">&gt;</div></c:if>
+							<c:if test="${ pi.currentPage >= pi.maxPage }">
+								<div class="pageBtn">&gt;</div>
+							</c:if>
 							<c:if test="${ pi.currentPage < pi.maxPage }">
 								<c:url value="${ loc }" var="bListNext">
 									<!-- loc : 현재 내 주소 -->
@@ -134,14 +145,20 @@
 										<c:param name="searchValue" value="${ searchValue }" />
 									</c:if>
 								</c:url>
-								<div class="pageBtn"><a href="${ blistNext }">&gt;</a></div>
+								<div class="pageBtn">
+									<a href="${ blistNext }">&gt;</a>
+								</div>
 							</c:if>
 						</div>
 					</c:if>
 				</div>
+			</div>
 			</c:if>
 			<c:if test="${loginUser != null }">
-			<div id="writequestion"><button class="btn" id="questionRegister" onclick="location.href='questionForm.cm'">질문등록</button></div>
+				<div id="writequestion">
+					<button class="btn" id="questionRegister"
+						onclick="location.href='questionForm.cm'">질문등록</button>
+				</div>
 			</c:if>
 		</div>
 	</div>

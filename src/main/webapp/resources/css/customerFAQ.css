@@ -284,6 +284,7 @@ td {
 .clickme {
 	text-align: left;
 	padding: 2.5em 0em 0em 8em;
+	cursor: pointer;
 }
 
 .answer {
@@ -301,6 +302,11 @@ td {
 	border-radius: 50%;
 	background-color: rgb(212, 129, 91);
 	line-height: 38px;
+	cursor: pointer;
+}
+
+.qHead:hover {
+	cursor: pointer;
 }
 
 @media screen and (max-width: 1035px) {

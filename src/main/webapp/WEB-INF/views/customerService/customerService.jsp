@@ -57,7 +57,7 @@
 		<div class="boardwrapper">
 			<div class="boardTitle"
 				style="font-weight: bold; font-size: 2rem; text-align: left; padding-left: 4em; ">묻고답하기</div>
-			<table class="qnatable">
+			<table class="qnatable" id="qnaListTable">
 				<thead>
 					<tr>
 						<th class="numberColumn">번호</td>

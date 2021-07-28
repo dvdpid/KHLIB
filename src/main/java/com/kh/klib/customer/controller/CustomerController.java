@@ -122,8 +122,6 @@ public class CustomerController {
 			throws JsonIOException, IOException {
 		Answer answer = cuService.getAnswer(qNo);
 
-		System.out.println(answer);
-
 		Gson gson = new Gson();
 
 		response.setCharacterEncoding("utf-8");

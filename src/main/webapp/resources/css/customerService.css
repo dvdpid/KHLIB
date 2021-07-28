@@ -312,6 +312,25 @@
 		background: rgb(212, 129, 91); color: white; text-align: center; 
 		width: 30px; line-height: 30px;  border-radius: 2px;
 	}
+	
+	#boardListTable{
+	margin: 10px; width: 99%; 
+	}
+	
+	#boardListTable td{
+		border: 1px solid lightgray;
+		border-left: none;
+		border-right: none;
+		border-collapse: collapse;
+		padding: 10px 25px;
+	}
+	
+	#boardList{
+		align-items: center;
+		justify-content: center;
+		margin: 25px 60px 0px 60px;
+		text-align: center;
+	}
 
 
 
@@ -355,6 +374,6 @@
 	}
 	
 	.left{ display: none; }
-	.main{ width: 100%; }
+	.main{ width: 75%; }
 	
 }

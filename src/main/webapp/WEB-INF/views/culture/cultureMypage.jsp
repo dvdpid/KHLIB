@@ -116,6 +116,7 @@
 					data: {cNo:cNo, uNo:uNo},
 					success: function(data){
 						alert('정상적으로 수강 취소되었습니다.');
+						location.reload(true);
 					},
 					fail: function(data){
 						alert('수강 취소 실패');
@@ -139,6 +140,8 @@
 					data: {cNo:cNo, uNo:uNo},
 					success: function(data){
 						alert('정상적으로 내역이 삭제되었습니다.');
+						location.reload(true);
+						
 					},
 					fail: function(data){
 						alert('내역 삭제 실패');

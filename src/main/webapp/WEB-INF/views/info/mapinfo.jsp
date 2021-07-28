@@ -110,7 +110,7 @@
 					<div id="mapinfo1">주소</div>
 			    </div>
 			    <div class="child" style="float:right">
-					<div id="mapinfo1-2"><strong>서울특별시 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</strong></div>
+					<div id="mapinfo1-2" style="margin-left:35px;"><strong>서울특별시 강남구 테헤란로14길 6 남도빌딩 2층, 3층, 4층</strong></div>
 			    </div>
 			</div>
 			<div class="parent" style="width: 300px; height: 100px; margin:35px 30px 10px 10px;">

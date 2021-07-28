@@ -32,7 +32,7 @@
 		<div id="findDiv">
 			<div id="idFindDiv">
 				<form action="">
-					<h3 align="center">아이디 찾기</h3>
+					<h3 align="center" style="margin-left:53px;">아이디 찾기</h3>
 					<table id="idFindTable">
 						<tr>
 							<th width="80">이름</th>
@@ -57,7 +57,7 @@
 			
 			<div id="pwdFindDiv">
 				<form action="">
-					<h3>비밀번호 찾기</h3>
+					<h3 style="margin-left:53px;">비밀번호 찾기</h3>
 					<table id="pwdFindTable" style="margin-bottom:32px;">
 						<tr>
 							<th width="80">아이디</th>

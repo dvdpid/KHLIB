@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>문화마당 이용안내</title>
-<link rel="stylesheet" href="resources/css/cultureList.css?ver=1.0" type="text/css">
+<link rel="stylesheet" href="resources/css/cultureList.css" type="text/css">
 <script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>

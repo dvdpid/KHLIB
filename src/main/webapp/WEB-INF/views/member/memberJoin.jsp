@@ -9,7 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/mypageUpdate.css" type="text/css">
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script> 
+
 <style>
 	.joinArea{margin-top: 3%;}
 	th {text-align: right;}
@@ -37,6 +39,9 @@
 	span.guide2{display: none; font-size: 12px; top:12px; right: 10px; margin: 9px 0 -2px;}
 	span.ok2{color: green;}
 	span.error2{color: red;}
+	#joinMemberTable {
+    margin-left:120px;
+}
 	
 </style>
 </head>

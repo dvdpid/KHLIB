@@ -71,7 +71,7 @@
 				</c:if>
 				<c:if test="${ !empty loginUser }">
 					<c:forEach var="cs" items="${ csList }">
-						<c:forEach var="c" items="${ cList }">
+						<c:forEach var="c" items="${ cList }"> 
 								<c:if test="${ (cs.uNo == loginUser.no) && (cs.cNo == c.cNo) }">
 									<tr>
 										<td>

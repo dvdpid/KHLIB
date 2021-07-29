@@ -309,6 +309,25 @@ td {
 	cursor: pointer;
 }
 
+#bContent {
+	resize: none;
+}
+
+.buttons {
+	background-color: rgb(212, 129, 91);
+	border: none;
+	color: #fff;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 20px;
+	cursor: pointer;
+	border-radius: 5px;
+	align: center;
+}
+
 @media screen and (max-width: 1035px) {
 	#topWrapper {
 		align-items: flex-start;

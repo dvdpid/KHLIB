@@ -165,7 +165,7 @@
 					<td colspan="2" align="center" style="margin-left:100px;">
 						<button id="updateBtn" onclick="return validate();">가입하기</button>
 						<input  id="reset" type="reset" value="취소하기">
-						<button id="homeBtn" type="button" onclick="location.href='home.do'">메인 페이지로 이동</button>
+						<button id="homeBtn" type="button" onclick="location.href='home.do'">메인 페이지 이동</button>
 					</td>
 				</tr>
 				</table>

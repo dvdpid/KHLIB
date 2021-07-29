@@ -27,7 +27,7 @@
 	}
 	#homeBtn {
 		background: rgb(26, 188, 156); color: white; font-weight: bold; padding: 5px; margin:5px;
-		border: 0; border-radius: 7px; width: 100px;
+		border: 0; border-radius: 7px; width: 120px;
 	}
 	#nickCheck{
 		background: rgb(212, 129, 91); color: white; padding: 5px; margin:5px;
@@ -177,7 +177,7 @@
 					<td colspan="2" align="center">
 						<button id="updateBtn" onclick="return validate();">가입하기</button>
 						<input  id="reset" type="reset" value="취소하기">
-						<button id="homeBtn" type="button" onclick="location.href='home.do'">메인 페이지</button>
+						<button id="homeBtn" type="button" onclick="location.href='home.do'">메인 페이지 </button>
 					</td>
 				</tr>
 				</table>

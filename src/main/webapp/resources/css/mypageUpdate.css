@@ -17,7 +17,13 @@
 		margin: 15px 30px 15px 30px;
 		padding: 10px 25px;
 	}
-	
+	.sideButton{
+		background: lightgray;
+		color: black;
+		text-align: center;
+		margin: 15px 30px 15px 30px;
+		padding: 10px 25px;
+	}
 	.main{ float: right; width: 75%; text-align: center; }
 	
 	.mainTitle{

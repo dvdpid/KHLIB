@@ -17,18 +17,7 @@
 	th {text-align: right;}
 	td {padding: 5px 10px;}
 	.must {color: red;}
-	#joinBtn {
-		background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:5px;
-		border: 0; border-radius: 7px; width: 80px;
-	}
-	#reset {
-		background: rgb(204, 65, 57); color: white; font-weight: bold; padding: 5px; margin:5px;
-		border: 0; border-radius: 7px; width: 80px;
-	}
-	#homeBtn {
-		background: rgb(26, 188, 156); color: white; font-weight: bold; padding: 5px; margin:5px;
-		border: 0; border-radius: 7px; width: 100px;
-	}
+	
 	#nickCheck{
 		background: rgb(212, 129, 91); color: white; padding: 5px; margin:5px;
 		border: 0; border-radius: 7px; font-size: 12px;
@@ -42,7 +31,18 @@
 	#joinMemberTable {
     margin-left:120px;
 }
-	
+	#updateBtn {
+		background: rgb(212, 129, 91); color: white; font-weight: bold; padding: 5px; margin:5px;
+		border: 0; border-radius: 7px; width: 80px;
+	}
+	#reset {
+		background: rgb(204, 65, 57); color: white; font-weight: bold; padding: 5px; margin:5px;
+		border: 0; border-radius: 7px; width: 80px;
+	}
+	#homeBtn {
+		background: rgb(26, 188, 156); color: white; font-weight: bold; padding: 5px; margin:5px;
+		border: 0; border-radius: 7px; width: 140px;
+	}
 </style>
 </head>
 <body>
@@ -89,10 +89,11 @@
 					
 					<tr>
 						<th><label class="must">*</label> 닉네임 </th>
-						<td><input type="text" id="nickname" name="nickname" placeholder="닉네임" required style="width: 100%;">
-							<span class="guide ok2">사용 가능합니다.</span>
+						<td><input type="text" id="nickname" name="nickname" placeholder="닉네임" required style="width: 100%;"></td>
+						<td>
+						<span class="guide ok2">사용 가능합니다.</span>
 							<span class="guide error2">사용 불가능합니다.</span>
-							<input type="hidden" name="nicknameDUplicateCheck" id="nicknameDUplicateCheck" value="0">		
+							<input type="hidden" name="nicknameDUplicateCheck" id="nicknameDUplicateCheck" value="0">
 						</td>
 					</tr>
 					
@@ -161,10 +162,10 @@
 					});
 				</script>
 				<tr>
-					<td colspan="2" align="center">
-						<button onclick="return validate();">가입하기</button>
-						<input type="reset" value="취소하기">
-						<button type="button" onclick="location.href='home.do'">시작 페이지로 이동</button>
+					<td colspan="2" align="center" style="margin-left:100px;">
+						<button id="updateBtn" onclick="return validate();">가입하기</button>
+						<input  id="reset" type="reset" value="취소하기">
+						<button id="homeBtn" type="button" onclick="location.href='home.do'">메인 페이지 이동</button>
 					</td>
 				</tr>
 				</table>

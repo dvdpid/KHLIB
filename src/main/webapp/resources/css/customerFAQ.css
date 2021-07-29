@@ -248,8 +248,12 @@ td {
 }
 
 .title {
-	font-size: 2em;
+	display: block;
+	margin: 1em 5em 0.9em 5em;
 	font-weight: bolder;
+	font-size: 1.563em;
+	line-height: 1.2;
+	color: #333;
 	text-align: left;
 }
 
@@ -313,6 +317,10 @@ td {
 	resize: none;
 }
 
+#contents {
+	padding-bottom: 5em;
+}
+
 .buttons {
 	background-color: rgb(212, 129, 91);
 	border: none;
@@ -326,6 +334,29 @@ td {
 	cursor: pointer;
 	border-radius: 5px;
 	align: center;
+}
+
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+
+.board-upload table th {
+	text-align: left;
+}
+
+#writeTable td{
+	padding: 5px;
+}
+
+#questionButtons, #answerButtons {
+	position:relative;
+	right: 50px;
+}
+
+#aTitle {
+	margin: 0px;
 }
 
 @media screen and (max-width: 1035px) {

@@ -8,7 +8,7 @@
     <title>묻고답하기</title>
     <link
       rel="stylesheet"
-      href="${contextPath}/resources/css/customerFAQ.css"
+      href="${contextPath}/resources/css/customerFAQ.css?ver=1.0"
       type="text/css"
     />
     <script src="resources/js/roomInfo.js" defer></script>
@@ -83,35 +83,50 @@
           묻고답하기
         </h3>
       </div>
-    </div>
-
-    <!-- 메인 부분 -->
-    <div class="main">
-      <form action="insertQuestion.cm" method="post">
-      	<table>
-      		<tr>
-      			<td>제목 : </td>
-      			<td><input type="text" name="qTitle" /></td>
-      		</tr>
-      		<tr>
-      			<td>내용</td>
-      		</tr>
-      		<tr>
-      			<td colspan="2">
-      				<textarea name="qContent" rows="30" cols="80"></textarea>
-      			</td>
-      		</tr>
-      		<tr>
-      			<td colspan="2">
-      				<div id="buttons">
-      				<input type="submit" value="등록"/>&nbsp;<input type="reset" value="초기화" />
-      				</div>
-      			</td>
-      		</tr>
-      	</table>
-      	
-      </form>
-    </div>
+    </div>    
+    <!-- 메인 부분 -->	
+	<div class="main">
+		<div class="mainTitle">
+			<p><img id="titleImg1" src="resources/images/user-check-solid.svg"/>질문게시판등록</p>
+		</div>
+		<br>
+		<!-- 게시판 작성 수정 부분 -->
+	<div class="board-list">
+		<div class="board-upload">
+			<div align="center">
+				<form action="insertQuestion.cm" method="post">
+					<table id="writeTable">
+						<tr>
+							<th height="40px">제목 </th>
+							<td>
+								<input type="text" height="40px" size="50" name="qTitle" required></td>  
+							<th>작성자</th>
+							<td>	
+								<input type="hidden" name="bWriter" value="${ loginUser.nickname }">
+								${ loginUser.nickname }
+							</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td colspan="3"><textarea name="qContent" id="qContent" rows="20" cols="80" required></textarea></td>
+						</tr>
+						
+						<tr>
+							<td colspan="4" style="border-top: 1px solid lightgray;"></td>
+						</tr>						
+						<tr>
+							<td colspan="4" style="text-align: center">
+								<input type="submit" class="buttons" value="등록 하기"> &nbsp;
+								<button class="buttons" onclick="location.href='qna.cm'">목록으로</button>
+							</td>
+						</tr>
+						
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
     <script>
       $(document).ready(function () {
         $(".clickme").each(function (i, el) {

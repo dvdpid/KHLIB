@@ -331,6 +331,23 @@
 		margin: 25px 60px 0px 60px;
 		text-align: center;
 	}
+	
+	#qContent {resize: none;}
+	
+	.buttons {
+		background-color: rgb(212, 129, 91);
+		border: none;
+		color: #fff;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		margin-top: 20px;
+		cursor: pointer;
+		border-radius: 5px;
+		align: center;
+	}
 
 
 

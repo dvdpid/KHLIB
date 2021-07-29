@@ -116,7 +116,7 @@
 
 	.thumbList{
 		display: inline-block;
-		width: 320px; float: left; padding-top: 1%; padding-bottom: 1%;
+		width: 33%; float: left; padding-top: 1%; padding-bottom: 1%;
 	}
 	
 	
@@ -173,11 +173,6 @@
    }
 	
 @media screen and (max-width: 1035px){
-
-	.thumbList{
-		display: inline-block;
-		width: 190px; float: left; padding-top: 1%; padding-bottom: 1%;
-	}
 }
 
 @media screen and (max-width: 720px){

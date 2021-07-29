@@ -93,24 +93,15 @@ public class CultureController {
 		int approvalCount = 0;
 		
 		ArrayList<Culture> cList = null;
-		ArrayList<Files> fList = null;		
-		
+		ArrayList<Files> fList = null;	
 		ArrayList<CultureSign> csList = new ArrayList<CultureSign>();
-		
-		for(int i = 0; i < cList.size(); i++) {
-			cNo = cList.get(i).getcNo();
-			
-			approvalCount = cService.getApprovalCount(cNo);
-			
-			csList.add(i, new CultureSign(cNo, approvalCount));
-			
-		}
 		
 		if(listCount != 0) {
 			PageInfo pi = ThumbnailPagination.getPageInfo(currentPage, listCount);
 			
 			cList = cService.selectSearchResultTList(csc, pi, 1); // 게시판 리스트 가져오기
 			fList = cService.selectSearchResultTList(csc, pi, 2); // 파일 리스트 가져오기
+			
 			if(cList != null && fList != null) {
 				mv.addObject("cList", cList).addObject("fList", fList).addObject("csList", csList).addObject("searchCondition", condition).addObject("pi", pi).addObject("searchValue", value).setViewName("cultureList");
 			} else {

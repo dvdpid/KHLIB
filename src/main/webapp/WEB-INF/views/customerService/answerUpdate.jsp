@@ -49,14 +49,7 @@ table {
 	margin: 0px 10em;
 }
 
-.title {
-	display: block;
-	margin: 1em 5em 0.9em 5em;
-	font-weight: normal;
-	font-size: 1.563em;
-	line-height: 1.2;
-	color: #333;
-}
+
 
 td {
 	display: table-cell;
@@ -64,7 +57,7 @@ td {
 }
 
 .board-view th {
-	text-align: center;
+	text-align: left;
 	font-weight: normal;
 	background-color: #f4f5f8;
 }
@@ -74,6 +67,21 @@ td {
 	text-align: left;
 	border-bottom: 1px solid #d9d9d9;
 	border-left: 1px solid #d9d9d9;
+}
+
+.buttons {
+	background-color: rgb(212, 129, 91);
+	border: none;
+	color: #fff;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin-top: 20px;
+	cursor: pointer;
+	border-radius: 5px;
+	align: center;
 }
 </style>
 
@@ -131,7 +139,7 @@ td {
 			<table class="board-view">
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="aTitle" id="aTitle" value="${a.aTitle}"></td>
+					<td><input type="text" name="aTitle" value="${a.aTitle}"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
@@ -142,7 +150,7 @@ td {
 				</tr>
 			</table>
 			<div style="text-align: center;">
-				<input type="submit" value="등록" id="aSubmit"> <input type="reset" value="초기화">
+				<input type="submit" class="buttons" value="등록" id="aSubmit"> <input type="reset" class="buttons" value="초기화">
 			</div>
 			</form>
 		</div>

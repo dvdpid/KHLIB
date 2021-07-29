@@ -138,7 +138,7 @@ table {
 			</table>
 			<c:if test="${ loginUser.no eq q.userNo }">
 				<br>
-				<div id="questionButtons" style="text-align: right; padding-right: 2em;">
+				<div id="questionButtons" style="text-align: right;">
 					<button class="btn"
 						onclick="location.href='${contextPath }/updateQuestionForm.cm?qNo=${q.qNo}'">수정</button>
 					<button class="btn"
@@ -200,5 +200,6 @@ table {
 			</c:if>
 		</div>
 	</div>
+	<div style="height: 100px;"></div>
 </body>
 </html>

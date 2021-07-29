@@ -170,7 +170,7 @@ table {
 						<button class="btn"
 							onclick="location.href='${contextPath}/updateAnswer.cm?qNo=${q.qNo}'">수정하기</button>
 						<button class="btn"
-							onclick="location.href='${contextPath}/deleteQuestion.cm?qNo=${q.qNo}'">답변삭제</button>
+							onclick="location.href='${contextPath}/delete.cm?qNo=${q.qNo}'">답변삭제</button>
 					</div>
 				</c:if>
 			</c:if>

@@ -45,7 +45,7 @@
 			열람실 현황</p>
 		</div>
 		<div class="level">
-			<div id="level1">제 1 열람실</div>
+			<div id="level1">KH 열람실</div>
 			<div class="seat">
 				<div id="seat1">
 					<div id="fullSeat"></div>
